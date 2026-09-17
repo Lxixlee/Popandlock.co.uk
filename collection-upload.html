@@ -1,346 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sell Your Funko Collection | Pop & Lock</title>
-  <meta name="description" content="Thinking of selling your Funko collection? Send Pop & Lock the details and we'll get back to you with an offer.">
-  <style>
-    :root {
-      --bg: #0b0b0f;
-      --panel: #14141a;
-      --panel-2: #1b1b23;
-      --text: #f7f7f8;
-      --muted: #a7a7b2;
-      --accent: #ff3b30;
-      --accent-hover: #ff5148;
-      --border: rgba(255,255,255,.10);
-      --radius: 18px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      background: radial-gradient(circle at top, #1c1013 0, var(--bg) 38%);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
-    }
-
-    a { color: inherit; }
-    .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
-
-    header {
-      border-bottom: 1px solid var(--border);
-      background: rgba(11,11,15,.88);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      text-decoration: none;
-      font-size: 1.35rem;
-      font-weight: 900;
-      letter-spacing: -.04em;
-    }
-
-    .brand span { color: var(--accent); }
-
-    .back {
-      text-decoration: none;
-      color: var(--muted);
-      font-weight: 700;
-      font-size: .95rem;
-    }
-    .back:hover { color: var(--text); }
-
-    .hero { padding: 72px 0 42px; text-align: center; }
-    .eyebrow {
-      display: inline-flex;
-      padding: 7px 12px;
-      border: 1px solid rgba(255,59,48,.35);
-      background: rgba(255,59,48,.08);
-      color: #ff8179;
-      border-radius: 999px;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      font-size: .72rem;
-      font-weight: 900;
-    }
-
-    h1 {
-      margin: 18px auto 12px;
-      max-width: 780px;
-      font-size: clamp(2.4rem, 6vw, 4.6rem);
-      line-height: .98;
-      letter-spacing: -.055em;
-    }
-
-    .hero p {
-      max-width: 680px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin: 26px 0 48px;
-    }
-
-    .step {
-      padding: 20px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      text-align: left;
-    }
-    .step strong { display: block; margin-bottom: 5px; }
-    .step span { color: var(--muted); font-size: .9rem; }
-    .number {
-      width: 30px; height: 30px; display: grid; place-items: center;
-      border-radius: 50%; background: var(--accent); font-weight: 900; margin-bottom: 12px;
-    }
-
-    .form-card {
-      max-width: 900px;
-      margin: 0 auto 80px;
-      padding: clamp(22px, 4vw, 42px);
-      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: 0 25px 80px rgba(0,0,0,.28);
-    }
-
-    .form-card h2 { margin: 0 0 8px; font-size: 1.7rem; }
-    .form-card .intro { margin: 0 0 28px; color: var(--muted); }
-
-    .section-title {
-      margin: 30px 0 15px;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: #dddde3;
-    }
-
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
-    .full { grid-column: 1 / -1; }
-
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-size: .88rem;
-      font-weight: 800;
-    }
-    .optional { color: #858590; font-weight: 600; }
-
-    input, select, textarea {
-      width: 100%;
-      border: 1px solid var(--border);
-      background: var(--panel-2);
-      color: var(--text);
-      border-radius: 11px;
-      padding: 13px 14px;
-      font: inherit;
-      outline: none;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: rgba(255,59,48,.7);
-      box-shadow: 0 0 0 3px rgba(255,59,48,.10);
-    }
-
-    textarea { min-height: 130px; resize: vertical; }
-    input::file-selector-button {
-      margin-right: 10px;
-      border: 0;
-      border-radius: 8px;
-      padding: 8px 11px;
-      background: #2b2b34;
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .hint { margin-top: 6px; color: #858590; font-size: .78rem; }
-
-    .price-box {
-      padding: 18px;
-      border: 1px solid rgba(255,59,48,.22);
-      background: rgba(255,59,48,.045);
-      border-radius: 14px;
-    }
-    .price-box label { margin-bottom: 8px; }
-    .price-box .hint { margin-top: 8px; }
-
-    .check {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      margin-top: 22px;
-      color: var(--muted);
-      font-size: .86rem;
-    }
-    .check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); flex: 0 0 auto; }
-
-    button {
-      width: 100%;
-      border: 0;
-      margin-top: 22px;
-      padding: 15px 20px;
-      border-radius: 12px;
-      background: var(--accent);
-      color: white;
-      font: inherit;
-      font-weight: 900;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform .15s ease, background .15s ease;
-    }
-    button:hover { background: var(--accent-hover); transform: translateY(-1px); }
-
-    .fine-print { margin: 13px 0 0; text-align: center; color: #777780; font-size: .78rem; }
-
-    footer { border-top: 1px solid var(--border); padding: 28px 0; color: #777780; text-align: center; font-size: .82rem; }
-
-    @media (max-width: 720px) {
-      .hero { padding-top: 48px; }
-      .steps, .grid { grid-template-columns: 1fr; }
-      .full { grid-column: auto; }
-      .nav { min-height: 64px; }
-      .back { font-size: .85rem; }
-      h1 { font-size: clamp(2.35rem, 12vw, 3.5rem); }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sell Your Collection | Pop & Lock</title>
+<meta name="description" content="Sell your Funko Pop collection to Pop & Lock. Tell us about your collection, upload photos and let us know your asking price if you have one.">
+<style>
+:root{--red:#e92727;--red2:#ff3434;--black:#070707;--panel:#111315;--field:#25282b;--white:#fff;--muted:#b7b7b7;--line:#383b3f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#050505;color:var(--white);font-family:Arial,Helvetica,sans-serif;line-height:1.45}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}
+header{height:76px;background:#050505;border-bottom:1px solid #252525;display:flex;align-items:center;position:sticky;top:0;z-index:20}.nav{display:flex;align-items:center;justify-content:space-between}.logo{height:62px;width:auto;display:block}.navlinks{display:flex;gap:30px;align-items:center}.navlinks a{color:#fff;text-decoration:none;font-weight:700;font-size:15px}.navlinks a:hover{color:#ff3131}.icons{display:flex;gap:22px;font-size:24px}.mobile-menu{display:none}
+.hero{min-height:430px;background:linear-gradient(90deg,rgba(0,0,0,.94) 0%,rgba(0,0,0,.72) 48%,rgba(0,0,0,.45)),url('IMG_2046.webp') center/cover;position:relative;overflow:hidden}.hero-inner{min-height:430px;display:flex;align-items:center}.hero-copy{width:58%;padding:54px 0}.hero h1{font-size:clamp(48px,6vw,86px);line-height:.92;margin:0 0 20px;text-transform:uppercase;letter-spacing:-3px}.hero h1 span{color:var(--red);font-style:italic}.hero h2{font-size:20px;text-transform:uppercase;margin:0 0 12px}.hero p{font-size:17px;color:#eee;max-width:620px;margin:0 0 25px}.benefits{display:flex;gap:28px;flex-wrap:wrap}.benefit{font-weight:800;font-size:13px;text-transform:uppercase}.benefit b{display:block;color:var(--red);font-size:27px;margin-bottom:3px}
+main{padding:28px 0 80px;background:radial-gradient(circle at 50% 0,#1b0c0c 0,#070707 42%,#050505 100%)}.form-card{max-width:1000px;margin:0 auto;background:linear-gradient(180deg,#151719,#0f1011);border:1px solid #383a3d;border-radius:18px;padding:40px 42px;box-shadow:0 30px 80px rgba(0,0,0,.45)}.section{margin-bottom:34px}.section h3{font-size:22px;text-transform:uppercase;margin:0 0 18px}.section h3:after{content:"";display:block;width:48px;height:5px;background:var(--red);border-radius:5px;margin-top:7px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 24px}.field.full{grid-column:1/-1}label{display:block;font-size:14px;font-weight:800;margin:0 0 7px}.optional{font-weight:500;color:#aaa}.required{color:#ff4545}input,select,textarea{width:100%;border:1px solid #505357;background:var(--field);color:#fff;border-radius:7px;padding:14px 15px;font:inherit;font-size:15px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(233,39,39,.12)}select{appearance:auto}textarea{min-height:125px;resize:vertical}.hint{font-size:12px;color:#aaa;margin-top:6px}.price{position:relative}.price input{padding-left:42px}.currency{position:absolute;left:15px;bottom:14px;font-weight:800;color:#fff}.upload{border:1px dashed #73767a;border-radius:9px;padding:28px;text-align:center;background:#191b1d}.upload input{border:0;background:transparent;padding:0}.upload strong{display:block;font-size:16px;margin-bottom:4px}.upload small{color:#aaa}.check{display:flex;gap:10px;align-items:flex-start;margin:8px 0 0}.check input{width:19px;height:19px;margin-top:2px;accent-color:var(--red)}.check label{font-weight:500;color:#ddd;font-size:13px}.submit{width:100%;border:0;background:var(--red);color:#fff;padding:17px;border-radius:8px;font-size:17px;font-weight:900;cursor:pointer;text-transform:none}.submit:hover{background:var(--red2)}.fine{text-align:center;color:#999;font-size:12px;margin:14px 0 0}
+footer{border-top:1px solid #252525;padding:35px 0;text-align:center;color:#999}footer img{height:60px;margin-bottom:12px}
+@media(max-width:850px){.navlinks{display:none}.mobile-menu{display:block;font-size:25px}.hero,.hero-inner{min-height:500px}.hero-copy{width:100%;padding:45px 0}.hero h1{font-size:52px}.form-card{padding:27px 20px}.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.benefits{gap:17px}.logo{height:58px}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <a class="brand" href="index.html">POP <span>&</span> LOCK</a>
-      <a class="back" href="index.html">← Back to shop</a>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <span class="eyebrow">Sell your collection</span>
-      <h1>Got Funkos to sell?</h1>
-      <p>Tell us what you've got. Send over your collection details and photos and Pop & Lock will take a look and get back to you.</p>
-    </section>
-
-    <section class="steps" aria-label="How it works">
-      <div class="step"><div class="number">1</div><strong>Tell us about it</strong><span>Give us the basics about your collection and where you're based.</span></div>
-      <div class="step"><div class="number">2</div><strong>Show us the Pops</strong><span>Upload photos so we can see the condition and what is included.</span></div>
-      <div class="step"><div class="number">3</div><strong>We'll get in touch</strong><span>We'll review the collection and contact you to discuss it.</span></div>
-    </section>
-
-    <section class="form-card">
-      <h2>Collection details</h2>
-      <p class="intro">The more information you give us, the easier it is for us to assess your collection.</p>
-
-      <!-- Replace the action URL below with your chosen form endpoint before going live. -->
-      <form action="YOUR_FORM_ENDPOINT" method="POST" enctype="multipart/form-data">
-        <div class="section-title">Your details</div>
-        <div class="grid">
-          <div>
-            <label for="name">Name *</label>
-            <input id="name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div>
-            <label for="email">Email address *</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
-          </div>
-          <div>
-            <label for="phone">Phone number <span class="optional">(optional)</span></label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel">
-          </div>
-          <div>
-            <label for="postcode">Postcode *</label>
-            <input id="postcode" name="postcode" type="text" autocomplete="postal-code" required>
-          </div>
-        </div>
-
-        <div class="section-title">Your collection</div>
-        <div class="grid">
-          <div>
-            <label for="quantity">Approx. number of Pops *</label>
-            <input id="quantity" name="quantity" type="number" min="1" inputmode="numeric" required>
-          </div>
-          <div>
-            <label for="boxed">Condition / format *</label>
-            <select id="boxed" name="boxed" required>
-              <option value="">Please select</option>
-              <option>Mostly boxed</option>
-              <option>Mostly out of box</option>
-              <option>Mix of boxed and out of box</option>
-              <option>Other / mixed collection</option>
-            </select>
-          </div>
-          <div>
-            <label for="type">Collection type *</label>
-            <select id="type" name="collection_type" required>
-              <option value="">Please select</option>
-              <option>Funko Pop figures</option>
-              <option>Signed / autographed Pops</option>
-              <option>Exclusives / vaulted Pops</option>
-              <option>Mixed Funko collection</option>
-              <option>Other collectibles</option>
-            </select>
-          </div>
-          <div>
-            <label for="sale">How would you like to sell? *</label>
-            <select id="sale" name="sale_method" required>
-              <option value="">Please select</option>
-              <option>Sell the whole collection</option>
-              <option>Open to selling part of the collection</option>
-              <option>Not sure yet</option>
-            </select>
-          </div>
-
-          <div class="full price-box">
-            <label for="asking_price">Your asking price <span class="optional">(optional)</span></label>
-            <input id="asking_price" name="asking_price" type="text" inputmode="decimal" placeholder="e.g. £500">
-            <div class="hint">If you have a price in mind, let us know. This is completely optional and leaving it blank will not affect your submission.</div>
-          </div>
-
-          <div class="full">
-            <label for="photos">Upload photos <span class="optional">(optional)</span></label>
-            <input id="photos" name="photos" type="file" accept="image/*" multiple>
-            <div class="hint">Photos of the whole collection and any valuable, signed, exclusive or damaged Pops are especially useful.</div>
-          </div>
-
-          <div class="full">
-            <label for="details">Tell us more <span class="optional">(optional)</span></label>
-            <textarea id="details" name="details" placeholder="Anything else we should know? For example, notable Pops, signatures, boxes with damage, collection history, or anything you think adds value."></textarea>
-          </div>
-        </div>
-
-        <div class="check">
-          <input id="contact" name="contact_consent" type="checkbox" required>
-          <label for="contact">I confirm that the information provided is accurate and I am happy for Pop & Lock to contact me about this collection. *</label>
-        </div>
-
-        <button type="submit">Send My Collection Details</button>
-        <p class="fine-print">Submitting this form does not commit you to selling your collection.</p>
-      </form>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">© Pop & Lock · Funko buying & collecting</div>
-  </footer>
-</body>
-</html>
+<header><div class="wrap nav">
+<a href="index.html"><img class="logo" src="IMG_2046.webp" alt="Pop & Lock"></a>
+<nav class="navlinks"><a href="index.html">Home</a><a href="index.html#shop">Shop</a><a href="index.html#new">New In</a><a href="index.html#categories">Categories</a><a href="collection-upload.html">Sell Your Collection</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a></nav><div class="icons"><span>⌕</span><span>♙</span><span>🛒</span></div><div class="mobile-menu">☰</div>
+</div></header>
+<section class="hero"><div class="wrap hero-inner"><div class="hero-copy"><h1><span>Sell Your</span><br>Collection</h1><h2>Looking to sell your Funko Pop! collection?</h2><p>Whether it's a few Pops or a full collection, fill in the details below and we'll be in touch to discuss. There's no obligation to sell — just give us some information and we'll take it from there.</p><div class="benefits"><div class="benefit"><b>▱</b>Fair offers</div><div class="benefit"><b>♢</b>Safe &amp; secure</div><div class="benefit"><b>•••</b>Quick response</div><div class="benefit"><b>♧</b>All collections welcome</div></div></div></div></section>
+<main><div class="wrap"><section class="form-card"><form action="https://form.jotform.com/262595092519062" method="post" enctype="multipart/form-data">
+<div class="section"><h3>Your Details</h3><div class="grid">
+<div class="field"><label for="name">Full Name <span class="required">*</span></label><input id="name" name="name" type="text" placeholder="Your full name" required></div>
+<div class="field"><label for="email">Email Address <span class="required">*</span></label><input id="email" name="email" type="email" placeholder="you@example.com" required></div>
+<div class="field"><label for="phone">Phone Number <span class="optional">(optional)</span></label><input id="phone" name="phone" type="tel" inputmode="tel" pattern="(?:\\+44\\s?7\\d{3}|07\\d{3})\\s?\d{3}\s?\d{3}" placeholder="07123 456789"><div class="hint">Please enter a UK phone number (optional).</div></div>
+<div class="field"><label for="postcode">Postcode <span class="required">*</span></label><input id="postcode" name="postcode" type="text" autocomplete="postal-code" placeholder="Your postcode" required></div>
+</div></div>
+<div class="section"><h3>About Your Collection</h3><div class="grid">
+<div class="field"><label for="quantity">Approximate Number of Pops <span class="required">*</span></label><input id="quantity" name="quantity" type="number" min="1" placeholder="e.g. 10, 50, 100+" required></div>
+<div class="field"><label for="condition">Condition <span class="required">*</span></label><select id="condition" name="condition" required><option value="">Please select...</option><option>Mostly boxed</option><option>Mostly out of box</option><option>Mix of boxed and out of box</option><option>Other / mixed collection</option></select></div>
+<div class="field"><label for="type">Collection Type <span class="required">*</span></label><select id="type" name="collection_type" required><option value="">Please select...</option><option>Funko Pop figures</option><option>Signed / autographed Pops</option><option>Exclusives / vaulted Pops</option><option>Mixed Funko collection</option><option>Other collectibles</option></select></div>
+<div class="field"><label for="sale">How would you like to sell? <span class="required">*</span></label><select id="sale" name="sale_method" required><option value="">Please select...</option><option>Sell the whole collection</option><option>Open to selling part of the collection</option><option>Not sure yet</option></select></div>
+<div class="field full price"><label for="asking_price">Asking Price <span class="optional">(Optional)</span></label><span class="currency">£</span><input id="asking_price" name="asking_price" type="text" inputmode="decimal" placeholder="Your asking price (optional)"><div class="hint">You can leave this blank if you're open to offers.</div></div>
+<div class="field full"><label for="photos">Upload Photos <span class="optional">(optional)</span></label><div class="upload"><strong>Click to upload photos</strong><input id="photos" name="photos" type="file" accept="image/jpeg,image/png,image/webp,image/heic" multiple><small>You can upload multiple photos. JPG, PNG, WEBP or HEIC.</small></div></div>
+<div class="field full"><label for="details">Additional Information <span class="optional">(optional)</span></label><textarea id="details" name="details" placeholder="Tell us anything else about your collection (e.g. rare items, exclusives, estimated value, etc.)"></textarea></div>
+</div></div>
+<div class="check"><input id="consent" name="consent" type="checkbox" required><label for="consent">I give permission for Pop &amp; Lock to contact me about my enquiry. <span class="required">*</span></label></div>
+<button class="submit" type="submit">➤ &nbsp; Submit Enquiry</button><p class="fine">By submitting this form, you are not committed to selling your collection. We'll review your details and get back to you as soon as possible.</p>
+</form></section></div></main>
+<footer><div class="wrap"><a href="index.html"><img src="IMG_2046.webp" alt="Pop & Lock"></a><div>© Pop &amp; Lock · Collect · Buy · Sell · Repeat</div></div></footer>
+</body></html>
