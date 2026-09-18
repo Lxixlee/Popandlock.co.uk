@@ -1,0 +1,72 @@
+[
+  {
+    "id": "marvel",
+    "name": "MARVEL",
+    "image": "MARVEL.jpg",
+    "link": "shop.html#marvel",
+    "visible": true
+  },
+  {
+    "id": "dc",
+    "name": "DC",
+    "image": "DC.jpg",
+    "link": "shop.html#dc",
+    "visible": true
+  },
+  {
+    "id": "disney",
+    "name": "DISNEY",
+    "image": "DISNEY.jfif",
+    "link": "shop.html#disney",
+    "visible": true
+  },
+  {
+    "id": "horror",
+    "name": "HORROR",
+    "image": "HORROR.jfif",
+    "link": "shop.html#horror",
+    "visible": true
+  },
+  {
+    "id": "tv-film",
+    "name": "TV & FILM",
+    "image": "TV & FILM.jpg",
+    "link": "shop.html#tv-film",
+    "visible": true
+  },
+  {
+    "id": "music",
+    "name": "MUSIC",
+    "image": "MUSIC.jpg",
+    "link": "shop.html#music",
+    "visible": true
+  },
+  {
+    "id": "anime",
+    "name": "ANIME",
+    "image": "ANIME.jpg",
+    "link": "shop.html#anime",
+    "visible": true
+  },
+  {
+    "id": "grails",
+    "name": "GRAILS",
+    "image": "GRAILS.jpg",
+    "link": "shop.html#grails",
+    "visible": true
+  },
+  {
+    "id": "signed",
+    "name": "SIGNED",
+    "image": "SIGNED.jpg",
+    "link": "shop.html#signed",
+    "visible": true
+  },
+  {
+    "id": "other",
+    "name": "OTHER",
+    "image": "OTHER.jpg",
+    "link": "shop.html#other",
+    "visible": true
+  }
+]
