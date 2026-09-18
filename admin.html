@@ -73,6 +73,7 @@
 <script>
 var API='https://popandlock-payments.popandlock31.workers.dev';
 var products=[];
+var homepageData=[];
 var form=document.getElementById('form');
 var file=document.getElementById('image');
 var status=document.getElementById('status');
@@ -131,7 +132,7 @@ async function loadHomepage(){
   el.innerHTML='<div class="empty">Loading homepage...</div>';
   try{
     var d=await api('/admin/list-homepage',{password:password()});
-    renderHomepage(d.items||[]);
+    homepageData=d.items||[];renderHomepage(homepageData);
   }catch(e){show(st,e.message,'error');el.innerHTML=''}
 }
 function renderHomepage(items){
@@ -153,8 +154,13 @@ function renderHomepage(items){
       btn.disabled=true;var st=document.getElementById('homepageStatus');st.className='status';
       try{
         var imageBase64='';if(file)imageBase64=await resizeImage(file);
-        await api('/admin/update-homepage',{password:password(),id:id,name:item.querySelector('[data-k="name"]').value.trim(),link:item.querySelector('[data-k="link"]').value.trim(),visible:item.querySelector('[data-k="visible"]').checked,imageBase64:imageBase64});
-        show(st,'Homepage updated successfully.','ok');await loadHomepage();
+        var updated=homepageData.map(function(x){
+          if(String(x.id)!==String(id))return x;
+          return {id:x.id,name:item.querySelector('[data-k="name"]').value.trim(),link:item.querySelector('[data-k="link"]').value.trim(),visible:item.querySelector('[data-k="visible"]').checked,image:x.image||'',imageBase64:imageBase64};
+        });
+        var d=await api('/admin/update-homepage',{password:password(),items:updated});
+        homepageData=d.items||updated;
+        show(st,'Homepage updated successfully.','ok');renderHomepage(homepageData);
       }catch(e){show(st,e.message,'error')}finally{btn.disabled=false}
     }
   });
