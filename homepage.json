@@ -65,7 +65,7 @@
   {
     "id": "other",
     "name": "OTHER",
-    "image": "OTHER.jpg",
+    "image": "homepage-images/other.jpg",
     "link": "shop.html#other",
     "visible": true
   }
