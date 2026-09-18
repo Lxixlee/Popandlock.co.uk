@@ -1,17 +1,5 @@
 [
   {
-    "id": "example-pop",
-    "name": "Your Funko Pop",
-    "category": "Marvel",
-    "price": 14.99,
-    "image": "",
-    "description": "Add your product description here.",
-    "condition": "New",
-    "boxCondition": "Mint",
-    "stock": 0,
-    "featured": true
-  },
-  {
     "id": "la-llorona-wb-mystery-horror-chase-2061",
     "name": "La Llorona WB Mystery Horror Chase #2061",
     "category": "Horror",
