@@ -8,7 +8,7 @@
     "description": "Add your product description here.",
     "condition": "New",
     "boxCondition": "Mint",
-    "stock": 1,
+    "stock": 0,
     "featured": true
   }
 ]
