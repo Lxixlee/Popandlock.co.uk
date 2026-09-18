@@ -6,6 +6,8 @@
 <title>Product Manager | Pop &amp; Lock</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f7f7f7;color:#111;font-family:Arial,Helvetica,sans-serif}.wrap{max-width:1000px;margin:auto;padding:25px 12px 60px}.top,.card{background:#fff;border:1px solid #ddd;padding:20px;margin-bottom:18px}.top{text-align:center}.top img{width:70px;height:70px;object-fit:contain}.top h1{margin:5px 0 0;font-size:25px;font-weight:500}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px}.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;background:#fff;font:inherit}textarea{min-height:100px;resize:vertical}.button,.small{border:0;background:#111;color:#fff;padding:13px;font-weight:700;cursor:pointer}.button{width:100%;margin-top:18px}.small{padding:9px 12px}.danger{background:#9b1c1c}.light{background:#eee;color:#111}.status{display:none;padding:12px;margin-top:14px;font-size:13px}.show{display:block}.ok{background:#edf8ef}.error{background:#fff0f0}.toolbar{display:flex;gap:10px;margin-bottom:15px}.toolbar input{flex:1}.products{display:grid;grid-template-columns:1fr 1fr;gap:12px}.product{border:1px solid #ddd;padding:12px;display:grid;grid-template-columns:80px 1fr;gap:12px}.product img{width:80px;height:80px;object-fit:contain;border:1px solid #eee}.product h3{font-size:15px;margin:0 0 5px}.meta{font-size:12px;color:#666;line-height:1.5}.actions{display:flex;gap:7px;margin-top:8px}.empty{text-align:center;color:#777;padding:20px;border:1px dashed #ccc}#editCard{display:none}@media(max-width:700px){.grid,.products{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{display:block}.toolbar input{margin-bottom:8px}}
+
+.homeitem{border:1px solid #ddd;padding:14px;margin:10px 0;display:grid;grid-template-columns:90px 1fr;gap:14px}.homeitem img{width:90px;height:90px;object-fit:cover;border:1px solid #eee}.homefields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.homefields .wide{grid-column:1/-1}.homeactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.check{display:flex;align-items:center;gap:7px;font-size:13px}.check input{width:auto}.preview{font-size:12px;color:#777;margin-top:4px}@media(max-width:700px){.homeitem{grid-template-columns:1fr}.homefields{grid-template-columns:1fr}.homefields .wide{grid-column:auto}.homeitem img{width:100%;height:150px}}
 </style>
 </head>
 <body>
@@ -30,6 +32,13 @@
 <button class="button" id="submit" type="submit">ADD PRODUCT TO SHOP</button>
 <div id="status" class="status"></div>
 </form>
+</div>
+
+<div class="card" id="homepageCard">
+<h2>Homepage</h2>
+<p style="font-size:13px;color:#666">Change the homepage category images, names, links and visibility without editing the site code.</p>
+<div id="homepageItems"></div>
+<div id="homepageStatus" class="status"></div>
 </div>
 
 <div class="card" id="editCard">
@@ -116,6 +125,41 @@ document.getElementById('editForm').onsubmit=async function(e){
   }catch(e){show(document.getElementById('editStatus'),e.message,'error')}finally{b.disabled=false}
 };
 
+async function loadHomepage(){
+  var el=document.getElementById('homepageItems'),st=document.getElementById('homepageStatus');
+  if(!password()){show(st,'Enter your admin password first.','error');return}
+  el.innerHTML='<div class="empty">Loading homepage...</div>';
+  try{
+    var d=await api('/admin/list-homepage',{password:password()});
+    renderHomepage(d.items||[]);
+  }catch(e){show(st,e.message,'error');el.innerHTML=''}
+}
+function renderHomepage(items){
+  var el=document.getElementById('homepageItems');
+  if(!items.length){el.innerHTML='<div class="empty">No homepage categories found.</div>';return}
+  el.innerHTML=items.map(function(x,i){
+    return '<div class="homeitem" data-id="'+esc(x.id)+'">'+
+      '<div><img id="homePreview'+i+'" src="'+esc(x.image||'')+'?v='+Date.now()+'" alt=""><div class="preview">Current image</div></div>'+
+      '<div><div class="homefields">'+
+      '<div class="field"><label>Name</label><input data-k="name" value="'+esc(x.name||'')+'"></div>'+
+      '<div class="field"><label>Link</label><input data-k="link" value="'+esc(x.link||'')+'"></div>'+
+      '<div class="field wide"><label>Replace image (optional)</label><input data-k="image" type="file" accept="image/*"></div>'+
+      '<label class="check"><input data-k="visible" type="checkbox" '+(x.visible!==false?'checked':'')+'> Visible on homepage</label>'+
+      '</div><div class="homeactions"><button class="small" type="button" data-save> SAVE CHANGES </button></div></div></div>'
+  }).join('');
+  el.querySelectorAll('[data-save]').forEach(function(btn){
+    btn.onclick=async function(){
+      var item=btn.closest('.homeitem'),id=item.getAttribute('data-id'),file=item.querySelector('[data-k="image"]').files[0];
+      btn.disabled=true;var st=document.getElementById('homepageStatus');st.className='status';
+      try{
+        var imageBase64='';if(file)imageBase64=await resizeImage(file);
+        await api('/admin/update-homepage',{password:password(),id:id,name:item.querySelector('[data-k="name"]').value.trim(),link:item.querySelector('[data-k="link"]').value.trim(),visible:item.querySelector('[data-k="visible"]').checked,imageBase64:imageBase64});
+        show(st,'Homepage updated successfully.','ok');await loadHomepage();
+      }catch(e){show(st,e.message,'error')}finally{btn.disabled=false}
+    }
+  });
+}
+document.getElementById('password').addEventListener('change',function(){loadHomepage()});
 form.onsubmit=async function(e){
   e.preventDefault();submit.disabled=true;status.className='status';status.textContent='Adding product...';
   try{
