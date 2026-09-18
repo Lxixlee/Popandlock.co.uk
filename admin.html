@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product Manager | Pop &amp; Lock</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f7f7f7;color:#111;font-family:Arial,Helvetica,sans-serif}.wrap{max-width:760px;margin:0 auto;padding:28px 16px 60px}.top{background:#fff;border:1px solid #ddd;padding:18px;margin-bottom:18px;text-align:center}.top img{width:70px;height:70px;object-fit:contain;margin:0 auto 8px}.top h1{font-size:25px;font-weight:500;margin:0}.card{background:#fff;border:1px solid #ddd;padding:22px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:flex;flex-direction:column;gap:7px}.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input,select,textarea{width:100%;border:1px solid #ccc;background:#fff;padding:12px;font:inherit}textarea{min-height:110px;resize:vertical}.hint{font-size:12px;color:#777}.button{width:100%;margin-top:20px;background:#111;color:#fff;border:0;padding:15px;font-weight:700;cursor:pointer}.button:disabled{background:#aaa}.status{display:none;margin-top:16px;padding:13px;font-size:13px;line-height:1.5}.status.show{display:block}.ok{background:#edf8ef}.error{background:#fff0f0}.preview{max-width:150px;max-height:150px;object-fit:contain;margin-top:8px;border:1px solid #ddd;display:none}@media(max-width:620px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.wrap{padding:18px 10px 50px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><img src="logo.png?v=4" alt="Pop &amp; Lock"><h1>Product Manager</h1></div>
+<div class="card">
+<form id="form">
+<div class="grid">
+<div class="field full"><label for="password">Admin password</label><input id="password" type="password" required autocomplete="off"><div class="hint">This is the password you will set as the Cloudflare Worker ADMIN_PASSWORD secret.</div></div>
+<div class="field full"><label for="name">Pop name</label><input id="name" required placeholder="e.g. Spider-Man #123"></div>
+<div class="field"><label for="category">Category</label><select id="category"><option>Marvel</option><option>DC</option><option>Disney</option><option>Horror</option><option>TV &amp; Film</option><option>Music</option><option>Signed</option><option>Grails</option><option>Anime</option><option>Other</option></select></div>
+<div class="field"><label for="price">Price (£)</label><input id="price" type="number" min="0" step="0.01" required placeholder="14.99"></div>
+<div class="field"><label for="stock">Stock</label><input id="stock" type="number" min="0" step="1" value="1" required></div>
+<div class="field"><label for="condition">Condition</label><select id="condition"><option>New</option><option>Used</option><option>Vaulted</option></select></div>
+<div class="field"><label for="boxCondition">Box condition</label><select id="boxCondition"><option>Mint</option><option>Near Mint</option><option>Good</option><option>Fair</option><option>Damaged</option><option>No Box</option></select></div>
+<div class="field full"><label for="image">Product photo</label><input id="image" type="file" accept="image/*" required><img id="preview" class="preview" alt="Preview"><div class="hint">The photo is automatically resized before upload.</div></div>
+<div class="field full"><label for="description">Description</label><textarea id="description" placeholder="Add a short description..."></textarea></div>
+<div class="field"><label for="featured">Featured?</label><select id="featured"><option value="false">No</option><option value="true">Yes</option></select></div>
+</div>
+<button class="button" id="submit" type="submit">ADD PRODUCT TO SHOP</button>
+<div id="status" class="status"></div>
+</form>
+</div>
+</div>
+<script>
+const form=document.getElementById('form'),file=document.getElementById('image'),preview=document.getElementById('preview'),status=document.getElementById('status'),submit=document.getElementById('submit');
+file.addEventListener('change',()=>{const f=file.files[0];if(!f)return;preview.src=URL.createObjectURL(f);preview.style.display='block'});
+function slug(s){return s.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,70)}
+function resizeImage(file){return new Promise((resolve,reject)=>{const img=new Image();const url=URL.createObjectURL(file);img.onload=()=>{const max=1200,scale=Math.min(1,max/img.width,max/img.height),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);canvas.toBlob(blob=>{URL.revokeObjectURL(url);if(!blob)return reject(new Error('Could not process image'));const reader=new FileReader();reader.onload=()=>resolve(reader.result.split(',')[1]);reader.onerror=reject;reader.readAsDataURL(blob)},'image/jpeg',.82)};img.onerror=reject;img.src=url})}
+form.addEventListener('submit',async e=>{e.preventDefault();status.className='status';status.textContent='Adding product...';submit.disabled=true;try{const imageBase64=await resizeImage(file.files[0]);const payload={password:document.getElementById('password').value,name:document.getElementById('name').value.trim(),category:document.getElementById('category').value,price:Number(document.getElementById('price').value),stock:Number(document.getElementById('stock').value),condition:document.getElementById('condition').value,boxCondition:document.getElementById('boxCondition').value,description:document.getElementById('description').value.trim(),featured:document.getElementById('featured').value==='true',imageBase64};const r=await fetch('https://popandlock-payments.popandlock31.workers.dev/admin/add-product',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Could not add product');status.className='status show ok';status.innerHTML='✓ Product added successfully.<br><br>GitHub Pages may take a minute or two to publish the change.';form.reset();preview.style.display='none'}catch(err){status.className='status show error';status.textContent='✕ '+err.message}finally{submit.disabled=false}});
+</script>
+</body>
+</html>
