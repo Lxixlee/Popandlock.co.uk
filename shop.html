@@ -50,11 +50,12 @@ footer{background:#fff;border-top:1px solid #eee;text-align:center;padding:45px 
 <footer><nav class="footer-nav"><a href="about.html">ABOUT</a><a href="shipping.html">SHIPPING</a><a href="returns.html">RETURNS</a><a href="contact.html">CONTACT</a></nav><div class="copy">© Pop &amp; Lock</div></footer>
 
 <script>
-const products=[];
+let products=[];
 let category=new URLSearchParams(location.search).get('category')||'All';
 const search=document.getElementById('search'),sort=document.getElementById('sort'),grid=document.getElementById('grid'),empty=document.getElementById('empty'),count=document.getElementById('count');
 document.querySelectorAll('.filter').forEach(b=>{if(b.dataset.category.toLowerCase()===category.toLowerCase()){document.querySelector('.filter.active')?.classList.remove('active');b.classList.add('active')}b.addEventListener('click',()=>{category=b.dataset.category;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render()})});
 function render(){let list=products.filter(p=>(category==='All'||p.category===category)&&(!search.value||p.name.toLowerCase().includes(search.value.toLowerCase())));if(sort.value==='az')list.sort((a,b)=>a.name.localeCompare(b.name));if(sort.value==='za')list.sort((a,b)=>b.name.localeCompare(a.name));if(sort.value==='low')list.sort((a,b)=>a.price-b.price);if(sort.value==='high')list.sort((a,b)=>b.price-a.price);grid.innerHTML=list.map(p=>'<article class="card"><div class="pic">'+(p.image?'<img src="'+p.image+'" alt="'+p.name.replace(/"/g,'&quot;')+'">':'<span class="placeholder">Product photo</span>')+'</div><div class="body"><div class="tag">'+p.category+'</div><h2>'+p.name+'</h2><div class="price">£'+p.price.toFixed(2)+'</div></div></article>').join('');count.textContent=list.length?list.length+' product'+(list.length===1?'':'s'):'No products found';empty.style.display=list.length?'none':'block'}
-search.addEventListener('input',render);sort.addEventListener('change',render);render();
+search.addEventListener('input',render);sort.addEventListener('change',render);async function loadProducts(){try{const response=await fetch('products.json?v='+Date.now());if(!response.ok)throw new Error();products=await response.json();render()}catch(e){count.textContent='Unable to load products';empty.style.display='block'}}
+loadProducts();
 </script>
 </body></html>
