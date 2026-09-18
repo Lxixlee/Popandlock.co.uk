@@ -7,7 +7,7 @@
 <title>Shop | Pop &amp; Lock</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif}a{text-decoration:none;color:inherit}button,input{font:inherit}img{display:block;max-width:100%}
-.top{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:20}.icons{height:112px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;align-items:center;padding:0 34px}.icon{display:flex;align-items:center;justify-content:center;color:#111}.icon svg{width:48px;height:48px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.brand{justify-self:center;width:82px}.brand img{width:82px;height:82px;object-fit:contain}.menu{display:flex;justify-content:center;gap:42px;height:76px;align-items:center;overflow-x:auto;white-space:nowrap}.menu a{font-size:24px;font-weight:500}.menu a:hover{text-decoration:underline}
+.top{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:20}.icons{height:112px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;align-items:center;padding:0 34px}.icon{display:flex;align-items:center;justify-content:center;color:#111}.icon{position:relative}.icon svg{width:48px;height:48px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.bag-count{position:absolute;top:24px;right:calc(50% - 30px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#111;color:#fff;font-size:11px;font-weight:700;line-height:22px;text-align:center;display:none;pointer-events:none}.brand{justify-self:center;width:82px}.brand img{width:82px;height:82px;object-fit:contain}.menu{display:flex;justify-content:center;gap:42px;height:76px;align-items:center;overflow-x:auto;white-space:nowrap}.menu a{font-size:24px;font-weight:500}.menu a:hover{text-decoration:underline}
 .page{width:min(1400px,calc(100% - 32px));margin:auto;padding:52px 0 85px}.heading{text-align:center;margin-bottom:34px}.heading h1{font-size:48px;font-weight:400;margin:0 0 9px}.heading p{color:#777;margin:0;line-height:1.5}
 .shopbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}.search{position:relative;flex:1;max-width:520px}.search input{width:100%;height:48px;border:1px solid #d8d8d8;padding:0 16px 0 45px;outline:0}.search input:focus{border-color:#111}.search svg{position:absolute;left:15px;top:14px;width:20px;height:20px;stroke:#555;fill:none;stroke-width:2}
 .sort{height:48px;border:1px solid #d8d8d8;background:#fff;padding:0 14px;min-width:170px}
@@ -17,7 +17,7 @@
 .count{font-size:13px;color:#777;margin:0 0 15px}
 footer{background:#fff;border-top:1px solid #eee;text-align:center;padding:45px 20px 60px}.footer-nav{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;font-size:14px;font-weight:700;text-transform:uppercase}.copy{margin-top:22px;color:#777;font-size:12px}
 @media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:760px){.icons{height:112px;padding:0 22px}.icon svg{width:43px;height:43px}.brand{width:76px}.brand img{width:76px;height:76px}.menu{height:76px;justify-content:flex-start;padding:0 40px;gap:48px}.menu a{font-size:22px}.page{width:calc(100% - 28px);padding-top:35px}.heading h1{font-size:34px}.shopbar{display:block}.search{max-width:none;margin-bottom:10px}.sort{width:100%}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.body{padding:11px}.body h2{font-size:14px}.empty{padding:50px 18px}}
+@media(max-width:760px){.icons{height:112px;padding:0 22px}.icon svg{width:43px;height:43px}.bag-count{top:22px;right:calc(50% - 28px)}.brand{width:76px}.brand img{width:76px;height:76px}.menu{height:76px;justify-content:flex-start;padding:0 40px;gap:48px}.menu a{font-size:22px}.page{width:calc(100% - 28px);padding-top:35px}.heading h1{font-size:34px}.shopbar{display:block}.search{max-width:none;margin-bottom:10px}.sort{width:100%}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.body{padding:11px}.body h2{font-size:14px}.empty{padding:50px 18px}}
 @media(max-width:420px){.icons{padding:0 10px}.menu{padding:0 20px;gap:30px}.menu a{font-size:19px}}
 </style>
 </head>
@@ -27,7 +27,7 @@ footer{background:#fff;border-top:1px solid #eee;text-align:center;padding:45px 
 <a class="icon" href="#" aria-label="Wishlist"><svg viewBox="0 0 48 48"><path d="M24 38S7 28 7 16c0-6 4-10 10-10 3 0 6 2 7 5 2-3 4-5 8-5 5 0 9 4 9 10 0 12-17 22-17 22z"></path></svg></a>
 <a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a>
 <a class="icon" href="#shop-search" aria-label="Search"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a>
-<a class="icon" href="bag.html" aria-label="Bag"><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a>
+<a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a>
 </div><nav class="menu" aria-label="Main navigation"><a href="shop.html">SHOP</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header>
 
 <main class="page">
@@ -50,6 +50,16 @@ footer{background:#fff;border-top:1px solid #eee;text-align:center;padding:45px 
 <footer><nav class="footer-nav"><a href="about.html">ABOUT</a><a href="shipping.html">SHIPPING</a><a href="returns.html">RETURNS</a><a href="contact.html">CONTACT</a></nav><div class="copy">© Pop &amp; Lock</div></footer>
 
 <script>
+function updateBagCount(){
+  try{
+    const bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]');
+    const count=bag.reduce((n,x)=>n+Math.max(0,Number(x.qty)||0),0);
+    document.querySelectorAll('.bag-count').forEach(el=>{el.textContent=count;el.style.display=count?'block':'none'});
+  }catch(e){}
+}
+document.addEventListener('DOMContentLoaded',updateBagCount);
+window.addEventListener('storage',updateBagCount);
+
 let products=[];
 let category=new URLSearchParams(location.search).get('category')||'All';
 const search=document.getElementById('search'),sort=document.getElementById('sort'),grid=document.getElementById('grid'),empty=document.getElementById('empty'),count=document.getElementById('count');
