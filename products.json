@@ -10,5 +10,17 @@
     "boxCondition": "Mint",
     "stock": 1,
     "featured": true
+  },
+  {
+    "id": "b-rabbit-1052",
+    "name": "B-Rabbit #1052",
+    "category": "Music",
+    "price": 119.99,
+    "image": "product-images/b-rabbit-1052.jpg",
+    "description": "8 Mile Movie\nMinor crease \nComes in Hard Stack",
+    "condition": "Vaulted",
+    "boxCondition": "Good",
+    "stock": 1,
+    "featured": true
   }
 ]
