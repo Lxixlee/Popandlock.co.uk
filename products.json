@@ -10,5 +10,17 @@
     "boxCondition": "Mint",
     "stock": 0,
     "featured": true
+  },
+  {
+    "id": "la-llorona-wb-mystery-horror-chase-2061",
+    "name": "La Llorona WB Mystery Horror Chase #2061",
+    "category": "Horror",
+    "price": 224.99,
+    "image": "product-images/la-llorona-wb-mystery-horror-chase-2061.jpg",
+    "description": "",
+    "condition": "New",
+    "boxCondition": "Mint",
+    "stock": 1,
+    "featured": true
   }
 ]
