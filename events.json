@@ -1,119 +1,93 @@
 [
   {
     "id": "new-year",
-    "name": "NEW YEAR",
-    "start": "2026-12-26",
-    "end": "2027-01-08",
-    "image": "event-banners/new-year.jpg",
-    "subtitle": "Start the year with Pop & Lock.",
-    "button": "SHOP NEW YEAR"
+    "title": "NEW YEAR",
+    "link": "event.html?event=new-year",
+    "visible": false,
+    "image": "event-banners/new-year.jpg"
   },
   {
     "id": "valentines",
-    "name": "VALENTINE'S DAY",
-    "start": "2027-02-01",
-    "end": "2027-02-15",
-    "image": "event-banners/valentines.jpg",
-    "subtitle": "Love, Pops & collectables.",
-    "button": "SHOP VALENTINE'S"
+    "title": "VALENTINE'S DAY",
+    "link": "event.html?event=valentines",
+    "visible": false,
+    "image": "event-banners/valentines.jpg"
   },
   {
     "id": "mothers-day",
-    "name": "MOTHER'S DAY",
-    "start": "2027-02-22",
-    "end": "2027-03-15",
-    "image": "event-banners/mothers-day.jpg",
-    "subtitle": "Find something special for Mum.",
-    "button": "SHOP MOTHER'S DAY"
+    "title": "MOTHER'S DAY",
+    "link": "event.html?event=mothers-day",
+    "visible": false,
+    "image": "event-banners/mothers-day.jpg"
   },
   {
     "id": "st-patricks",
-    "name": "ST PATRICK'S DAY",
-    "start": "2027-03-08",
-    "end": "2027-03-18",
-    "image": "event-banners/st-patricks.jpg",
-    "subtitle": "A little bit of luck for collectors.",
-    "button": "SHOP ST PATRICK'S"
+    "title": "ST PATRICK'S DAY",
+    "link": "event.html?event=st-patricks",
+    "visible": false,
+    "image": "event-banners/st-patricks.jpg"
   },
   {
     "id": "easter",
-    "name": "EASTER",
-    "start": "2027-03-15",
-    "end": "2027-04-06",
-    "image": "event-banners/easter.jpg",
-    "subtitle": "Hop into something collectible.",
-    "button": "SHOP EASTER"
+    "title": "EASTER",
+    "link": "event.html?event=easter",
+    "visible": false,
+    "image": "event-banners/easter.jpg"
   },
   {
     "id": "fathers-day",
-    "name": "FATHER'S DAY",
-    "start": "2027-06-01",
-    "end": "2027-06-21",
-    "image": "event-banners/fathers-day.jpg",
-    "subtitle": "Gifts for Dad, collectors and fans.",
-    "button": "SHOP FATHER'S DAY"
+    "title": "FATHER'S DAY",
+    "link": "event.html?event=fathers-day",
+    "visible": false,
+    "image": "event-banners/fathers-day.jpg"
   },
   {
     "id": "summer",
-    "name": "SUMMER SALE",
-    "start": "2027-06-22",
-    "end": "2027-08-31",
-    "image": "event-banners/summer.jpg",
-    "subtitle": "Summer collecting starts here.",
-    "button": "SHOP SUMMER"
+    "title": "SUMMER SALE",
+    "link": "event.html?event=summer",
+    "visible": false,
+    "image": "event-banners/summer.jpg"
   },
   {
     "id": "halloween",
-    "name": "HALLOWEEN",
-    "start": "2026-10-01",
-    "end": "2026-11-02",
-    "image": "event-banners/halloween.jpg",
-    "subtitle": "Spooky Pops, horror grails & more.",
-    "button": "SHOP HALLOWEEN"
+    "title": "HALLOWEEN",
+    "link": "event.html?event=halloween",
+    "visible": false,
+    "image": "event-banners/halloween.jpg"
   },
   {
     "id": "bonfire",
-    "name": "BONFIRE NIGHT",
-    "start": "2026-11-01",
-    "end": "2026-11-06",
-    "image": "event-banners/bonfire.jpg",
-    "subtitle": "Light up your collection.",
-    "button": "SHOP BONFIRE NIGHT"
+    "title": "BONFIRE NIGHT",
+    "link": "event.html?event=bonfire",
+    "visible": false,
+    "image": "event-banners/bonfire.jpg"
   },
   {
     "id": "diwali",
-    "name": "DIWALI",
-    "start": "2026-11-01",
-    "end": "2026-11-10",
-    "image": "event-banners/diwali.jpg",
-    "subtitle": "Celebrate the Festival of Lights.",
-    "button": "SHOP DIWALI"
+    "title": "DIWALI",
+    "link": "event.html?event=diwali",
+    "visible": false,
+    "image": "event-banners/diwali.jpg"
   },
   {
     "id": "black-friday",
-    "name": "BLACK FRIDAY",
-    "start": "2026-11-16",
-    "end": "2026-11-30",
-    "image": "event-banners/black-friday.jpg",
-    "subtitle": "Big deals. Bigger Pops.",
-    "button": "SHOP BLACK FRIDAY"
+    "title": "BLACK FRIDAY",
+    "link": "event.html?event=black-friday",
+    "visible": false,
+    "image": "event-banners/black-friday.jpg"
   },
   {
     "id": "christmas",
-    "name": "CHRISTMAS",
-    "start": "2026-12-01",
-    "end": "2026-12-27",
-    "image": "event-banners/christmas.jpg",
-    "subtitle": "Make Christmas collectible.",
-    "button": "SHOP CHRISTMAS"
+    "title": "CHRISTMAS",
+    "link": "event.html?event=christmas",
+    "visible": false,
+    "image": "event-banners/christmas.jpg"
   },
   {
     "id": "boxing-day",
-    "name": "BOXING DAY SALE",
-    "start": "2026-12-26",
-    "end": "2027-01-05",
-    "image": "event-banners/boxing-day.jpg",
-    "subtitle": "Post-Christmas bargains for collectors.",
-    "button": "SHOP BOXING DAY"
+    "title": "BOXING DAY SALE",
+    "link": "event.html?event=boxing-day",
+    "visible": false,
+    "image": "event-banners/boxing-day.jpg"
   }
 ]
