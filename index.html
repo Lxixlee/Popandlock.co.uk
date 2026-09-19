@@ -152,7 +152,7 @@ window.addEventListener('storage',updateBagCount);
   try{
     const r=await fetch("homepage.json?v="+Date.now(),{cache:"no-store"});
     if(!r.ok) throw new Error();
-    const items=await r.json(); items=items.filter(x=>String(x.id||"").toLowerCase()!=="thrilljoy"); render(items);
+    let items=await r.json(); items=items.filter(x=>String(x.id||"").toLowerCase()!=="thrilljoy"); render(items);
   }catch(e){
     render(fallback.map(x=>({id:x[0],name:x[1],image:x[2],link:x[3],visible:true})));
   }
