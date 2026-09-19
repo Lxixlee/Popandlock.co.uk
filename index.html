@@ -170,7 +170,8 @@ window.addEventListener('storage',updateBagCount);
     const slideDots=[];
     for(let i=0;i<track.children.length;i++){const dot=document.createElement("button");dot.className="reel-dot"+(i===0?" active":"");dot.setAttribute("aria-label","Go to slide "+(i+1));dot.addEventListener("click",()=>track.scrollTo({left:track.clientWidth*i,behavior:"smooth"}));dots.appendChild(dot);slideDots.push(dot);}
     function update(){const width=track.clientWidth||1;const index=Math.max(0,Math.min(track.children.length-1,Math.round(track.scrollLeft/width)));slideDots.forEach((d,i)=>d.classList.toggle("active",i===index));}
-    track.addEventListener("scroll",()=>requestAnimationFrame(update));\n    let autoSlideTimer;
+    track.addEventListener("scroll",()=>requestAnimationFrame(update));
+    let autoSlideTimer;
     function startAutoSlide(){
       clearInterval(autoSlideTimer);
       autoSlideTimer=setInterval(()=>{
