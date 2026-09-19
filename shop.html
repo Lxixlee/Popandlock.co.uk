@@ -78,9 +78,9 @@ const categoryNames=['Marvel','DC','Disney','Horror','TV & Film','Music','Signed
 function productCategories(p){return Array.isArray(p.categories)&&p.categories.length?p.categories:[p.category];}
 function renderSubcategories(){
   if(category==='All'){subcategoryFilters.style.display='none';subcategory='All';return}
-  const available=categoryNames.filter(cat=>cat!==category && products.some(p=>productCategories(p).some(c=>String(c).toLowerCase()===cat.toLowerCase() && productCategories(p).some(c=>String(c).toLowerCase()===category.toLowerCase()))));
-  subcategoryFilters.style.display=available.length?'flex':'none';
-  subcategoryFilters.innerHTML=available.length?'<button class="filter '+(subcategory==='All'?'active':'')+'" data-sub="All">ALL</button>'+available.map(cat=>'<button class="filter '+(subcategory.toLowerCase()===cat.toLowerCase()?'active':'')+'" data-sub="'+cat+'">'+cat.toUpperCase()+'</button>').join(''):'';
+  const available=categoryNames.filter(cat=>cat!==category);
+  subcategoryFilters.style.display='flex';
+  subcategoryFilters.innerHTML='<button class="filter '+(subcategory==='All'?'active':'')+'" data-sub="All">ALL</button>'+available.map(cat=>'<button class="filter '+(subcategory.toLowerCase()===cat.toLowerCase()?'active':'')+'" data-sub="'+cat+'">'+cat.toUpperCase()+'</button>').join('');
   subcategoryFilters.querySelectorAll('[data-sub]').forEach(b=>b.addEventListener('click',()=>{subcategory=b.dataset.sub;renderSubcategories();render()}));
 }
 document.querySelectorAll('#categoryFilters .filter').forEach(b=>{if(b.dataset.category.toLowerCase()===category.toLowerCase()){document.querySelector('#categoryFilters .filter.active')?.classList.remove('active');b.classList.add('active')}b.addEventListener('click',()=>{category=b.dataset.category;subcategory='All';document.querySelectorAll('#categoryFilters .filter').forEach(x=>x.classList.toggle('active',x===b));renderSubcategories();render()})});
