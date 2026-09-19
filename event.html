@@ -10,10 +10,19 @@
 (async function(){
 const id=new URLSearchParams(location.search).get('event');
 try{
-const r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;
-const events=await r.json();const e=events.find(x=>x.id===id)||events[0];
-document.title=e.name+' | Pop & Lock';
-document.getElementById('event').innerHTML='<img class="event-bg" src="'+e.image+'" alt="'+e.name+'" onerror="this.style.display=\'none\'"><div class="shade"></div><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>'+e.name+'</h1><p>'+e.subtitle+'</p><a class="btn" href="shop.html">'+e.button+'</a></div>';
-}catch(e){}
+const r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});
+if(!r.ok) throw new Error('Events unavailable');
+const events=await r.json();
+const e=events.find(x=>String(x.id)===String(id));
+if(!e || e.visible!==true){
+  location.replace('index.html');
+  return;
+}
+document.title=(e.title||e.name||'Event')+' | Pop & Lock';
+document.getElementById('event').innerHTML='<img class="event-bg" src="'+(e.image||'')+'" alt="'+(e.title||e.name||'Event')+'" onerror="this.style.display=\'none\'"><div class="shade"></div><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>'+ (e.title||e.name||'Event') +'</h1><p>'+ (e.subtitle||'Explore this Pop & Lock event.') +'</p><a class="btn" href="'+(e.link||'shop.html')+'">SHOP NOW</a></div>';
+}catch(err){
+  location.replace('index.html');
+}
 })();
-</script></body></html>
+</script>
+</body></html>
