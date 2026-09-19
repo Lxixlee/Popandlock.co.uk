@@ -50,7 +50,7 @@
 <h3 style="margin-top:0">Add Event Banner</h3>
 <div class="eventfields">
 <div class="field"><label>Title</label><input id="newEventTitle" placeholder="Halloween Event"></div>
-<div class="field"><label>Link</label><input id="newEventLink" placeholder="halloween.html"></div>
+<div class="field"><label>Link <span style="font-weight:400;color:#777">(optional — created automatically)</span></label><input id="newEventLink" placeholder="Leave blank to use the event page"></div>
 <div class="field wide"><label>Image</label><input id="newEventImage" type="file" accept="image/*"></div>
 <label class="check"><input id="newEventVisible" type="checkbox"> Visible on homepage</label>
 </div>
@@ -214,9 +214,9 @@ function renderEvents(){
 }
 document.getElementById('addEvent').onclick=async function(){
   var title=document.getElementById('newEventTitle').value.trim(),link=document.getElementById('newEventLink').value.trim(),file=document.getElementById('newEventImage').files[0],btn=this;
-  if(!title||!link||!file){show(document.getElementById('eventStatus'),'Please enter a title, link and image.','error');return}
+  if(!title||!file){show(document.getElementById('eventStatus'),'Please enter a title and image.','error');return}
   btn.disabled=true;
-  try{var imageBase64=await resizeImage(file);var id=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-'+Date.now();
+  try{var imageBase64=await resizeImage(file);var id=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-'+Date.now();if(!link)link='event.html?event='+id;
     var updated=eventData.concat([{id:id,title:title,link:link,visible:document.getElementById('newEventVisible').checked,image:'',imageBase64:imageBase64}]);
     var d=await api('/admin/update-events',{password:password(),items:updated});eventData=d.items||updated;
     document.getElementById('newEventTitle').value='';document.getElementById('newEventLink').value='';document.getElementById('newEventImage').value='';document.getElementById('newEventVisible').checked=false;
