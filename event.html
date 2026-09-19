@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pop & Lock Event | Funko Collectibles</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}a{text-decoration:none;color:inherit}
+.wrap{max-width:1200px;margin:auto;padding:35px 20px 80px}.back{display:inline-block;font-size:12px;font-weight:700;margin-bottom:25px}.event{min-height:520px;background:#111;color:#fff;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}.event-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.62}.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.3),rgba(0,0,0,.72))}.copy{position:relative;z-index:2;padding:40px 20px}.kicker{font-size:12px;letter-spacing:.22em;font-weight:700;color:#ddd}.copy h1{font-size:clamp(42px,8vw,90px);font-weight:500;margin:12px 0}.copy p{font-size:16px;color:#eee;margin:0 auto 28px}.btn{display:inline-block;background:#fff;color:#111;padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:.08em}.note{text-align:center;padding:35px 15px}.note h2{font-size:28px;font-weight:400;margin:0 0 10px}.note p{color:#777;margin:0}
+@media(max-width:600px){.event{min-height:430px}.copy h1{font-size:42px}.copy p{font-size:14px}}
+</style></head><body><div class="wrap"><a class="back" href="index.html">← BACK TO POP &amp; LOCK</a><section class="event" id="event"><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>POP &amp; LOCK</h1><p>Explore our latest event.</p><a class="btn" href="shop.html">SHOP ALL</a></div></section><section class="note"><h2>More to discover</h2><p>Browse the full Pop &amp; Lock collection for Funko Pops, grails and signed pieces.</p></section></div>
+<script>
+(async function(){
+const id=new URLSearchParams(location.search).get('event');
+try{
+const r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0;
+const events=await r.json();const e=events.find(x=>x.id===id)||events[0];
+document.title=e.name+' | Pop & Lock';
+document.getElementById('event').innerHTML='<img class="event-bg" src="'+e.image+'" alt="'+e.name+'" onerror="this.style.display=\'none\'"><div class="shade"></div><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>'+e.name+'</h1><p>'+e.subtitle+'</p><a class="btn" href="shop.html">'+e.button+'</a></div>';
+}catch(e){}
+})();
+</script></body></html>
