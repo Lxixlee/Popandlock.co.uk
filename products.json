@@ -46,5 +46,17 @@
     "boxCondition": "Near Mint",
     "stock": 1,
     "featured": true
+  },
+  {
+    "id": "ethan-hawke-signed-the-grabber-black-phone-1488",
+    "name": "Ethan Hawke signed The Grabber - Black Phone #1488",
+    "category": "Signed",
+    "price": 109.99,
+    "image": "product-images/ethan-hawke-signed-the-grabber-black-phone-1488.jpg",
+    "description": "PSA Authenticated - AP60821",
+    "condition": "Used",
+    "boxCondition": "Mint",
+    "stock": 1,
+    "featured": true
   }
 ]
