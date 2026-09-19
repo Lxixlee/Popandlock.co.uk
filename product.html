@@ -42,4 +42,23 @@ window.addEventListener('storage',updateBagCount);
 const app=document.getElementById('app');
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function load(){try{const r=await fetch('products.json?v='+Date.now());const products=await r.json();const id=new URLSearchParams(location.search).get('id');const p=products.find(x=>x.id===id);if(!p){app.innerHTML='<div class="notfound"><h1>Product not found</h1><p>That product is no longer available.</p><a class="back" href="shop.html">Back to shop</a></div>';return}document.title=p.name+' | Pop & Lock';const canonical=document.querySelector('link[rel="canonical"]');if(canonical)canonical.href=location.href;let ld=document.getElementById('product-jsonld');if(!ld){ld=document.createElement('script');ld.type='application/ld+json';ld.id='product-jsonld';document.head.appendChild(ld)}ld.textContent=JSON.stringify({"@context":"https://schema.org","@type":"Product","name":p.name,"description":p.description||p.name,"image":p.image?[new URL(p.image,location.href).href]:[],"sku":p.id,"brand":{"@type":"Brand","name":"Funko"},"category":"Funko Pop","offers":{"@type":"Offer","url":location.href,"priceCurrency":"GBP","price":Number(p.price).toFixed(2),"availability":Number(p.stock)>0?"https://schema.org/InStock":"https://schema.org/OutOfStock","itemCondition":p.condition==="New"?"https://schema.org/NewCondition":"https://schema.org/UsedCondition"}});app.innerHTML='<div class="crumb"><a href="shop.html">Shop</a> / '+esc(p.category)+'</div><section class="product"><div class="image-wrap">'+(p.image?'<img src="'+esc(p.image)+'" alt="'+esc(p.name)+'">':'<span class="placeholder">Product photo</span>')+'</div><div class="image-badge">Pop &amp; Lock</div></div><div class="details"><div class="tag">'+esc(p.category)+'</div><h1>'+esc(p.name)+'</h1><div class="price">£'+Number(p.price).toFixed(2)+'</div><div class="line"></div><div class="meta"><b>Condition</b><span>'+esc(p.condition||'Not specified')+'</span><b>Box condition</b><span>'+esc(p.boxCondition||'Not specified')+'</span></div><div class="line"></div><div class="description">'+esc(p.description||'More information coming soon.')+'</div><div class="stock">'+(Number(p.stock)>0?'In stock — '+Number(p.stock)+' available':'Out of stock')+'</div><button class="button" id="add" '+(Number(p.stock)>0?'':'disabled')+'>ADD TO BAG</button><a class="back" href="shop.html">← Back to shop</a><div class="benefits"><div class="benefit">Secure checkout</div><div class="benefit">UK delivery</div><div class="benefit">Carefully packed</div></div><div class="product-note">Your order is securely processed at checkout.</div></div></section>';document.getElementById('add')?.addEventListener('click',()=>{const bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]');const i=bag.findIndex(x=>x.id===p.id);if(i>=0)bag[i].qty=Math.min((bag[i].qty||1)+1,Number(p.stock));else bag.push({id:p.id,qty:1});localStorage.setItem('popandlock-bag',JSON.stringify(bag));location.href='bag.html'})}catch(e){app.innerHTML='<div class="notfound"><h1>Something went wrong</h1><a class="back" href="shop.html">Back to shop</a></div>'}}load();
-</script><script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script></body></html>
+</script><script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script><script id="event-nav-loader">
+(function(){
+  try{
+    fetch('events.json?v='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():[]}).then(function(events){
+      var menu=document.querySelector('.menu');
+      if(!menu||!Array.isArray(events))return;
+      var live=Array.from(menu.querySelectorAll('a')).find(function(a){return a.textContent.trim()==='LIVE SHOWS'});
+      if(!live)return;
+      events.filter(function(e){return e&&e.visible===true}).forEach(function(e){
+        if(Array.from(menu.querySelectorAll('a')).some(function(a){return a.getAttribute('href')===(e.link||('event.html?event='+encodeURIComponent(e.id)))}))return;
+        var a=document.createElement('a');
+        a.href=e.link||('event.html?event='+encodeURIComponent(e.id));
+        a.textContent=e.title||e.name||'EVENT';
+        live.insertAdjacentElement('afterend',a);
+        live=a;
+      });
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script></body></html>
