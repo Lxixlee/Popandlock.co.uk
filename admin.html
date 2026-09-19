@@ -147,11 +147,24 @@ document.getElementById('editForm').onsubmit=async function(e){
 
 async function loadHomepage(){
   var el=document.getElementById('homepageItems'),st=document.getElementById('homepageStatus');
-  if(!password()){show(st,'Enter your admin password first.','error');return}
   el.innerHTML='<div class="empty">Loading homepage...</div>';
   try{
-    var d=await api('/admin/list-homepage',{password:password()});
-    homepageData=d.items||[];renderHomepage(homepageData);
+    if(password()){
+      try{
+        var d=await api('/admin/list-homepage',{password:password()});
+        homepageData=d.items||[];
+      }catch(workerError){
+        var fallback=await fetch('homepage.json?v='+Date.now());
+        if(!fallback.ok)throw workerError;
+        homepageData=await fallback.json();
+        show(st,'Homepage loaded. Worker connection needs attention before saving changes.','error');
+      }
+    }else{
+      var fallback=await fetch('homepage.json?v='+Date.now());
+      if(!fallback.ok)throw new Error('Unable to load homepage categories');
+      homepageData=await fallback.json();
+    }
+    renderHomepage(homepageData);
   }catch(e){show(st,e.message,'error');el.innerHTML=''}
 }
 function renderHomepage(items){
@@ -186,9 +199,27 @@ function renderHomepage(items){
 }
 async function loadEvents(){
   var el=document.getElementById('eventItems'),st=document.getElementById('eventStatus');
-  if(!password()){show(st,'Enter your admin password first.','error');return}
   el.innerHTML='<div class="empty">Loading event banners...</div>';
-  try{var d=await api('/admin/list-events',{password:password()});eventData=d.items||[];renderEvents();}catch(e){show(st,e.message,'error');el.innerHTML=''}
+  try{
+    if(password()){
+      try{
+        var d=await api('/admin/list-events',{password:password()});
+        eventData=d.items||[];
+      }catch(workerError){
+        var fallback=await fetch('events.json?v='+Date.now());
+        if(!fallback.ok)throw workerError;
+        eventData=await fallback.json();
+        eventData=eventData.map(function(x){return {id:x.id,title:x.title||x.name||'',link:x.link||('event.html?event='+x.id),visible:x.visible===true,image:x.image||''}});
+        show(st,'Events loaded. Worker connection needs attention before saving changes.','error');
+      }
+    }else{
+      var fallback=await fetch('events.json?v='+Date.now());
+      if(!fallback.ok)throw new Error('Unable to load event banners');
+      eventData=await fallback.json();
+      eventData=eventData.map(function(x){return {id:x.id,title:x.title||x.name||'',link:x.link||('event.html?event='+x.id),visible:x.visible===true,image:x.image||''}});
+    }
+    renderEvents();
+  }catch(e){show(st,e.message,'error');el.innerHTML=''}
 }
 function renderEvents(){
   var el=document.getElementById('eventItems');
@@ -224,7 +255,8 @@ document.getElementById('addEvent').onclick=async function(){
     show(document.getElementById('eventStatus'),'Event banner added.','ok');renderEvents();
   }catch(e){show(document.getElementById('eventStatus'),e.message,'error')}finally{btn.disabled=false}
 };
-document.getElementById('password').addEventListener('change',function(){loadHomepage();loadEvents()});
+document.getElementById('password').addEventListener('change',function(){loadHomepage();loadEvents();loadProducts()});
+document.getElementById('password').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();loadHomepage();loadEvents();loadProducts()}});
 document.querySelectorAll('#categoryChoices input').forEach(function(x){x.addEventListener('change',function(){if(!document.querySelector('#categoryChoices input:checked'))x.checked=true})});
 form.onsubmit=async function(e){
   e.preventDefault();submit.disabled=true;status.className='status';status.textContent='Adding product...';
