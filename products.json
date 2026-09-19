@@ -22,5 +22,17 @@
     "boxCondition": "Good",
     "stock": 1,
     "featured": true
+  },
+  {
+    "id": "pazuzu-nft-1900pcs-the-exorcist-291",
+    "name": "Pazuzu NFT 1900pcs- The Exorcist #291",
+    "category": "Horror",
+    "price": 119.99,
+    "image": "product-images/pazuzu-nft-1900pcs-the-exorcist-291.jpg",
+    "description": "",
+    "condition": "Used",
+    "boxCondition": "Near Mint",
+    "stock": 1,
+    "featured": true
   }
 ]
