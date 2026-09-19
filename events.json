@@ -3,7 +3,7 @@
     "id": "new-year",
     "title": "NEW YEAR",
     "link": "event.html?event=new-year",
-    "visible": true,
+    "visible": false,
     "image": "event-banners/new-year.jpg"
   },
   {
