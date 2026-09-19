@@ -45,4 +45,6 @@ html,body{max-width:100%;overflow-x:hidden}
     }).catch(function(){});
   }catch(e){}
 })();
+</script><script id="event-navigation">
+(async function(){try{var r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;var events=await r.json(),menu=document.querySelector('.menu');if(!menu)return;var live=Array.from(menu.querySelectorAll('a')).find(function(x){return x.textContent.trim().replace(/^(FUNKO )?SHOP$/,'SHOP')==='LIVE SHOWS'});events.filter(function(e){return e&&e.visible===true}).forEach(function(e){if(Array.from(menu.querySelectorAll('a')).some(function(x){return x.textContent.trim()===String(e.title||e.name||'EVENT')}))return;var a=document.createElement('a');a.href=e.link||('event.html?event='+encodeURIComponent(e.id));a.textContent=e.title||e.name||'EVENT';if(live)live.insertAdjacentElement('afterend',a);else menu.appendChild(a)})}catch(e){}})();
 </script></body></html>
