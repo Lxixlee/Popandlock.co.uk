@@ -47,6 +47,70 @@
 .event-buy{margin-top:auto!important}
 @media(max-width:900px){.event-products{grid-template-columns:repeat(3,minmax(0,1fr))}.event-product img{height:230px!important;flex-basis:230px}}
 @media(max-width:600px){.event-page .event-shop{padding:40px 12px 55px}.event-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.event-product{padding:9px!important}.event-product img{height:155px!important;flex-basis:155px}.event-product h3{font-size:12px!important;min-height:34px!important}.event-price{font-size:14px}.event-page .event-shop h2{font-size:28px}}
+</style><style>
+/* EVENT EXPERIENCE */
+.event-page{isolation:isolate}
+.event-page .event{height:180px;border:0}
+.event-page .event-bg{transform:scale(1.03);animation:eventHeroZoom 12s ease-in-out infinite alternate}
+@keyframes eventHeroZoom{from{transform:scale(1.03)}to{transform:scale(1.10)}}
+.event-page .event:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 0 35%,rgba(255,255,255,.12) 45%,transparent 55%);transform:translateX(-120%);animation:eventShimmer 7s ease-in-out infinite}
+@keyframes eventShimmer{0%,55%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}
+.event-page .event-shop{overflow:hidden}
+.event-page .event-shop:after{content:"";position:absolute;inset:-20%;z-index:-1;pointer-events:none;opacity:.45;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.12),transparent 18%),radial-gradient(circle at 80% 65%,rgba(255,255,255,.08),transparent 20%);animation:eventGlow 8s ease-in-out infinite alternate}
+@keyframes eventGlow{from{transform:scale(1);opacity:.28}to{transform:scale(1.12);opacity:.5}}
+.event-page .event-product{position:relative;transition:transform .35s ease,box-shadow .35s ease;animation:cardRise .7s both}
+.event-page .event-product:nth-child(2){animation-delay:.08s}.event-page .event-product:nth-child(3){animation-delay:.16s}.event-page .event-product:nth-child(4){animation-delay:.24s}.event-page .event-product:nth-child(5){animation-delay:.32s}.event-page .event-product:nth-child(6){animation-delay:.40s}.event-page .event-product:nth-child(7){animation-delay:.48s}.event-page .event-product:nth-child(8){animation-delay:.56s}
+@keyframes cardRise{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.event-page .event-product:hover{transform:translateY(-10px) rotateX(1deg);box-shadow:0 20px 42px rgba(0,0,0,.3)}
+.event-page .event-product:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:3px;opacity:0;transition:opacity .3s;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%)}
+.event-page .event-product:hover:before{opacity:1;animation:cardShine .8s ease}
+@keyframes cardShine{to{transform:translateX(100%)}}
+
+/* Floating event atmosphere */
+.event-particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.event-particle{position:absolute;top:105%;animation:floatParticle linear infinite;opacity:0}
+@keyframes floatParticle{0%{transform:translate3d(0,0,0) rotate(0deg);opacity:0}10%{opacity:.85}90%{opacity:.55}100%{transform:translate3d(var(--drift),-125vh,0) rotate(var(--spin));opacity:0}}
+.event-spark{position:absolute;width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor}
+
+/* Halloween */
+.theme-halloween .event-spark{color:#ff7418}
+.theme-halloween .event-particle.glyph{filter:drop-shadow(0 0 7px #ff5a00)}
+.theme-halloween .event-shop h2{animation:hauntedPulse 3s ease-in-out infinite}
+@keyframes hauntedPulse{50%{text-shadow:0 0 24px rgba(255,91,0,.65)}}
+
+/* New Year */
+.theme-newyear .event-spark{color:#fff}
+.theme-newyear .event-shop h2{animation:celebratePulse 2s ease-in-out infinite}
+@keyframes celebratePulse{50%{text-shadow:0 0 28px rgba(180,150,255,.8);transform:scale(1.015)}}
+
+/* Christmas */
+.theme-christmas .event-spark{color:#fff}
+.theme-christmas .event-shop h2{animation:snowGlow 3s ease-in-out infinite}
+@keyframes snowGlow{50%{text-shadow:0 0 22px rgba(255,255,255,.75)}}
+
+/* Valentine's */
+.theme-valentines .event-spark{color:#ff6b9d}
+.theme-valentines .event-shop h2{animation:heartPulse 2.4s ease-in-out infinite}
+@keyframes heartPulse{50%{transform:scale(1.025);text-shadow:0 0 24px rgba(255,70,130,.55)}}
+
+/* Bonfire */
+.theme-bonfire .event-spark{color:#ff7200}
+.theme-bonfire .event-shop:after{animation:fireGlow 2s ease-in-out infinite alternate}
+@keyframes fireGlow{from{transform:scale(1);filter:blur(0)}to{transform:scale(1.08);filter:blur(3px)}}
+
+/* Diwali */
+.theme-diwali .event-spark{color:#ffd34d}
+.theme-diwali .event-shop h2{animation:goldGlow 2.5s ease-in-out infinite}
+@keyframes goldGlow{50%{text-shadow:0 0 26px rgba(255,193,7,.8)}}
+
+/* Summer */
+.theme-summer .event-spark{color:#fff}
+.theme-summer .event-shop:after{animation:summerWave 5s ease-in-out infinite alternate}
+@keyframes summerWave{to{transform:translateY(-15px) scale(1.06)}}
+
+@media(prefers-reduced-motion:reduce){
+ .event-page *,.event-page *:before,.event-page *:after{animation:none!important;transition:none!important}
+}
 </style></style></head><body id="page"><header class="top"><div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div><nav class="menu" id="mainMenu" aria-label="Main navigation"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header><div class="wrap"><section class="event" id="event"><div class="copy"><h1>EVENT</h1></div></section><section class="event-shop" id="eventShop"><h2>SHOP THE EVENT</h2><p class="event-shop-intro" id="eventShopIntro">Loading the collection...</p><div class="event-products" id="eventProducts"></div></section><section class="note"><h2>More to discover</h2><p>Browse the full Pop &amp; Lock collection for Funko Pops, grails and signed pieces.</p></section></div>
 <script>
 (async function(){
@@ -96,4 +160,31 @@ if(pr.ok){
 }
 })();
 </script>
-<script>(async function(){try{const r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;const events=await r.json();const menu=document.getElementById('mainMenu');events.filter(e=>e&&e.visible===true).forEach(e=>{const a=document.createElement('a');a.href=e.link||('event.html?event='+encodeURIComponent(e.id));a.textContent=e.title||e.name||'EVENT';const live=Array.from(menu.querySelectorAll('a')).find(x=>x.textContent.trim()==='LIVE SHOWS');if(live)live.insertAdjacentElement('afterend',a);else menu.appendChild(a);});}catch(e){}})();</script></body></html>
+<script>(async function(){try{const r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;const events=await r.json();const menu=document.getElementById('mainMenu');events.filter(e=>e&&e.visible===true).forEach(e=>{const a=document.createElement('a');a.href=e.link||('event.html?event='+encodeURIComponent(e.id));a.textContent=e.title||e.name||'EVENT';const live=Array.from(menu.querySelectorAll('a')).find(x=>x.textContent.trim()==='LIVE SHOWS');if(live)live.insertAdjacentElement('afterend',a);else menu.appendChild(a);});}catch(e){}})();</script><script>
+(function(){
+ const page=document.getElementById('page');
+ const box=document.createElement('div');box.className='event-particles';box.setAttribute('aria-hidden','true');
+ const title=(document.title||'').toLowerCase();
+ let glyphs=['✦','✧','•'];
+ if(title.includes('halloween'))glyphs=['🦇','🕷','•','✦'];
+ else if(title.includes('christmas'))glyphs=['❄','❄','✦','•'];
+ else if(title.includes('new year'))glyphs=['✦','✧','•','✷'];
+ else if(title.includes('valentine'))glyphs=['♥','♡','•'];
+ else if(title.includes('easter'))glyphs=['✦','•','🌸'];
+ else if(title.includes('bonfire'))glyphs=['✦','•','🔥'];
+ else if(title.includes('diwali'))glyphs=['✦','✧','•','🪔'];
+ else if(title.includes('summer'))glyphs=['•','✦','☀'];
+ for(let n=0;n<30;n++){
+   const p=document.createElement('span');p.className='event-particle glyph';
+   p.textContent=glyphs[n%glyphs.length];
+   p.style.left=(Math.random()*100)+'%';
+   p.style.fontSize=(10+Math.random()*20)+'px';
+   p.style.animationDuration=(8+Math.random()*13)+'s';
+   p.style.animationDelay=(-Math.random()*18)+'s';
+   p.style.setProperty('--drift',(-90+Math.random()*180)+'px');
+   p.style.setProperty('--spin',(-180+Math.random()*360)+'deg');
+   box.appendChild(p);
+ }
+ page.appendChild(box);
+})();
+</script></body></html>
