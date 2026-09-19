@@ -192,13 +192,17 @@ window.addEventListener('storage',updateBagCount);
 (async function(){
   try{
     const r=await fetch("events.json?v="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error();
-    const events=await r.json();const now=new Date();now.setHours(0,0,0,0);
-    const active=events.filter(e=>new Date(e.start)<=now&&now<=new Date(e.end));
-    const upcoming=events.filter(e=>new Date(e.start)>now).sort((a,b)=>new Date(a.start)-new Date(b.start));
-    const e=(active.length?active[active.length-1]:upcoming[0]);if(!e)return;
-    const banner=document.getElementById("eventBanner"),wrap=document.getElementById("eventBannerWrap");
-    banner.innerHTML='<img src="'+String(e.image).replace(/"/g,"&quot;")+'" alt="'+String(e.name).replace(/"/g,"&quot;")+'" onerror="this.style.display=\'none\'"><div class="event-banner-copy"><div class="event-banner-kicker">UPCOMING EVENT</div><h2>'+String(e.name).replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</h2><p>'+String(e.subtitle).replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</p><a href="event.html?event='+encodeURIComponent(e.id)+'">'+String(e.button).replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</a></div>';
-    wrap.style.display="block";
+    const events=await r.json();const visible=events.filter(e=>e.visible===true);
+    if(!visible.length)return;
+    const wrap=document.getElementById("eventBannerWrap"),banner=document.getElementById("eventBanner");
+    let i=0;
+    function showEvent(){
+      const e=visible[i%visible.length];
+      banner.innerHTML='<img src="'+String(e.image||"").replace(/"/g,"&quot;")+'" alt="'+String(e.title||"").replace(/"/g,"&quot;")+'" onerror="this.style.display=\'none\'"><div class="event-banner-copy"><div class="event-banner-kicker">POP &amp; LOCK EVENT</div><h2>'+String(e.title||"").replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</h2><a href="'+String(e.link||"shop.html").replace(/"/g,"&quot;")+'">SHOP NOW</a></div>';
+      wrap.style.display="block";
+    }
+    showEvent();
+    if(visible.length>1)setInterval(function(){i++;showEvent()},10000);
   }catch(e){}
 })();
 </script>
