@@ -62,7 +62,7 @@
   {
     "id": "ethan-hawke-signed-the-grabber-black-phone-1488",
     "name": "Ethan Hawke signed The Grabber - Black Phone #1488",
-    "category": "Signed",
+    "category": "Horror",
     "price": 109.99,
     "image": "product-images/ethan-hawke-signed-the-grabber-black-phone-1488.jpg",
     "description": "PSA Authenticated - AP60821",
@@ -71,8 +71,8 @@
     "stock": 1,
     "featured": true,
     "categories": [
-      "Signed",
-      "Horror"
+      "Horror",
+      "Signed"
     ]
   }
 ]
