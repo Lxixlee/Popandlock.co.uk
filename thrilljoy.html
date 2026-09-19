@@ -9,4 +9,23 @@ function cats(p){return Array.isArray(p.categories)?p.categories:[p.category]}
 function renderFilters(){filters.innerHTML='<button class="filter '+(sub==='All'?'active':'')+'" data-sub="All">ALL</button>'+categories.map(c=>'<button class="filter '+(sub.toLowerCase()===c.toLowerCase()?'active':'')+'" data-sub="'+c+'">'+c.toUpperCase()+'</button>').join('');filters.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{sub=b.dataset.sub;renderFilters();render()})}
 function render(){let list=products.filter(p=>{const c=cats(p).map(x=>String(x).toLowerCase());return c.includes('thrilljoy')&&(sub==='All'||c.includes(sub.toLowerCase()))&&(!search.value||p.name.toLowerCase().includes(search.value.toLowerCase()))});if(sort.value==='az')list.sort((a,b)=>a.name.localeCompare(b.name));if(sort.value==='za')list.sort((a,b)=>b.name.localeCompare(a.name));if(sort.value==='low')list.sort((a,b)=>a.price-b.price);if(sort.value==='high')list.sort((a,b)=>b.price-a.price);let bag=[];try{bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]')}catch(e){}grid.innerHTML=list.map(p=>{const stock=Math.max(0,Number(p.stock)||0),sold=stock<=0,item=bag.find(x=>x.id===p.id),qty=item?Number(item.qty)||0:0,disabled=sold||qty>=stock;return '<div class="card"><a href="product.html?id='+encodeURIComponent(p.id)+'"><div class="pic">'+(p.image?'<img src="'+p.image+'" alt="'+p.name.replace(/"/g,'&quot;')+'">':'')+(sold?'<span class="sold-badge">SOLD OUT</span>':stock===1?'<span class="stock-badge">1 LEFT</span>':'')+'</div></a><div class="body"><div class="tag">'+cats(p).filter(x=>String(x).toLowerCase()!=='thrilljoy').join(' · ')+'</div><h2><a href="product.html?id='+encodeURIComponent(p.id)+'">'+p.name+'</a></h2><div class="price">£'+Number(p.price).toFixed(2)+'</div><button class="add-bag" '+(disabled?'disabled':'')+' data-id="'+p.id+'">'+(sold?'SOLD OUT':qty>=stock?'IN BAG':'ADD TO BAG')+'</button></div></div>'}).join('');count.textContent=list.length?list.length+' product'+(list.length===1?'':'s'):'No Thrilljoy products found';empty.style.display=list.length?'none':'block'}
 search.oninput=render;sort.onchange=render;grid.onclick=e=>{const b=e.target.closest('.add-bag');if(!b)return;const p=products.find(x=>x.id===b.dataset.id);if(!p)return;let bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]'),i=bag.find(x=>x.id===p.id);if(i)i.qty=(Number(i.qty)||0)+1;else bag.push({id:p.id,qty:1});localStorage.setItem('popandlock-bag',JSON.stringify(bag));updateBagCount();render()};updateBagCount();fetch('products.json?v='+Date.now()).then(r=>r.json()).then(x=>{products=x;renderFilters();render()});
+</script><script id="event-nav-loader">
+(function(){
+  try{
+    fetch('events.json?v='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():[]}).then(function(events){
+      var menu=document.querySelector('.menu');
+      if(!menu||!Array.isArray(events))return;
+      var live=Array.from(menu.querySelectorAll('a')).find(function(a){return a.textContent.trim()==='LIVE SHOWS'});
+      if(!live)return;
+      events.filter(function(e){return e&&e.visible===true}).forEach(function(e){
+        if(Array.from(menu.querySelectorAll('a')).some(function(a){return a.getAttribute('href')===(e.link||('event.html?event='+encodeURIComponent(e.id)))}))return;
+        var a=document.createElement('a');
+        a.href=e.link||('event.html?event='+encodeURIComponent(e.id));
+        a.textContent=e.title||e.name||'EVENT';
+        live.insertAdjacentElement('afterend',a);
+        live=a;
+      });
+    }).catch(function(){});
+  }catch(e){}
+})();
 </script></body></html>
