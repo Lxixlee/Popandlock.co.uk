@@ -3,7 +3,7 @@
 <title>Pop & Lock Event | Funko Collectibles</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}a{text-decoration:none;color:inherit}
-.top{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:20}.icons{height:112px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 34px}.icon{display:flex;align-items:center;justify-content:center;color:#111;position:relative}.icon svg{width:48px;height:48px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.bag-count{position:absolute;top:7px;right:calc(50% - 25px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#111;color:#fff;font-size:11px;font-weight:700;line-height:22px;text-align:center;display:none;pointer-events:none}.brand{justify-self:center;width:82px}.brand img{width:82px;height:82px;object-fit:contain}.menu{display:flex;justify-content:center;gap:42px;height:76px;align-items:center;overflow-x:auto;white-space:nowrap;border-top:0}.menu a{font-size:24px;font-weight:500;display:block;white-space:nowrap}.menu a:hover{text-decoration:underline}.header-search{display:none;justify-content:center;padding:0 20px 18px}.header-search.open{display:flex}.header-search form{width:min(520px,100%)}.header-search input{width:100%;padding:12px 14px;border:1px solid #ddd;font-size:15px}.wrap{max-width:1200px;margin:auto;padding:20px 20px 80px}.back{display:inline-block;font-size:12px;font-weight:700;margin-bottom:25px}.event{height:180px;background:#111;color:#fff;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}.event-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1}.shade{position:absolute;inset:0;background:rgba(0,0,0,.12)}.copy{position:relative;z-index:2;padding:40px 20px}.kicker{font-size:12px;letter-spacing:.22em;font-weight:700;color:#ddd}.copy h1{font-size:clamp(42px,8vw,90px);font-weight:500;margin:12px 0}.copy p{font-size:16px;color:#eee;margin:0 auto 28px}.btn{display:inline-block;background:#fff;color:#111;padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:.08em}.note{text-align:center;padding:35px 15px}.note h2{font-size:28px;font-weight:400;margin:0 0 10px}.note p{color:#777;margin:0}
+.top{color:#111;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:20}.icons{height:112px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 34px}.icon{display:flex;align-items:center;justify-content:center;color:#111;position:relative}.icon svg{width:48px;height:48px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.bag-count{position:absolute;top:7px;right:calc(50% - 25px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#111;color:#fff;font-size:11px;font-weight:700;line-height:22px;text-align:center;display:none;pointer-events:none}.brand{justify-self:center;width:82px}.brand img{width:82px;height:82px;object-fit:contain}.menu{display:flex;justify-content:center;gap:42px;height:76px;align-items:center;overflow-x:auto;white-space:nowrap;border-top:0}.menu a{color:#111;font-size:24px;font-weight:500;display:block;white-space:nowrap}.menu a:hover{text-decoration:underline}.header-search{display:none;justify-content:center;padding:0 20px 18px}.header-search.open{display:flex}.header-search form{width:min(520px,100%)}.header-search input{width:100%;padding:12px 14px;border:1px solid #ddd;font-size:15px}.wrap{max-width:1200px;margin:auto;padding:20px 20px 80px}.back{display:inline-block;font-size:12px;font-weight:700;margin-bottom:25px}.event{height:180px;background:#111;color:#fff;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}.event-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1}.shade{position:absolute;inset:0;background:rgba(0,0,0,.12)}.copy{position:relative;z-index:2;padding:40px 20px}.kicker{font-size:12px;letter-spacing:.22em;font-weight:700;color:#ddd}.copy h1{font-size:clamp(42px,8vw,90px);font-weight:500;margin:12px 0}.copy p{font-size:16px;color:#eee;margin:0 auto 28px}.btn{display:inline-block;background:#fff;color:#111;padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:.08em}.note{text-align:center;padding:35px 15px}.note h2{font-size:28px;font-weight:400;margin:0 0 10px}.note p{color:#777;margin:0}
 .event.theme-christmas{background:linear-gradient(135deg,#0b3d2e,#8b0000 52%,#d4af37);}.theme-christmas .shade{background:linear-gradient(90deg,rgba(0,45,30,.78),rgba(120,0,0,.35),rgba(0,30,20,.78))}.theme-christmas .btn{background:#fff;color:#8b0000}.theme-christmas .kicker{color:#f5d76e}
 .event.theme-halloween{background:linear-gradient(135deg,#14001f,#ff6a00 55%,#080808)}.theme-halloween .shade{background:linear-gradient(90deg,rgba(20,0,31,.82),rgba(255,70,0,.3),rgba(0,0,0,.8))}.theme-halloween .btn{background:#ff6a00;color:#111}.theme-halloween .kicker{color:#ffb36b}
 .event.theme-valentines{background:linear-gradient(135deg,#5b001b,#d4145a 55%,#ff7aa2)}.theme-valentines .shade{background:linear-gradient(90deg,rgba(70,0,20,.8),rgba(212,20,90,.3),rgba(80,0,30,.75))}.theme-valentines .btn{background:#fff;color:#b00045}.theme-valentines .kicker{color:#ffd0df}
@@ -157,6 +157,27 @@ linear-gradient(180deg,rgba(5,3,8,.12),rgba(5,3,8,.72))!important}
 @keyframes halloweenMist{from{transform:scale(1);opacity:.5}to{transform:scale(1.12) translateX(2%);opacity:1}}
 .event-page.theme-halloween .event-shop:after{animation:halloweenAtmosphere 7s ease-in-out infinite alternate!important}
 @keyframes halloweenAtmosphere{from{transform:scale(1);opacity:.3}to{transform:scale(1.16) translate3d(1%, -1%, 0);opacity:.65}}
+</style><style id="halloween-fog-webs">
+.event-page.theme-halloween .event-product{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23eee' stroke-width='1.6' opacity='.72'%3E%3Cpath d='M2 2Q45 8 91 39Q130 65 178 178'/%3E%3Cpath d='M2 2Q18 47 57 82Q96 116 178 178'/%3E%3Cpath d='M2 2Q54 20 91 20Q136 20 178 68'/%3E%3Cpath d='M2 2Q28 20 45 58Q58 91 60 178'/%3E%3Cpath d='M12 12Q38 31 65 36Q98 42 129 72'/%3E%3Cpath d='M27 27Q49 48 76 52Q105 58 126 84'/%3E%3Cpath d='M178 178Q137 169 99 140Q62 111 2 2'/%3E%3Cpath d='M178 178Q160 133 123 99Q82 61 2 2'/%3E%3Cpath d='M178 178Q126 160 91 160Q43 160 2 112'/%3E%3Cpath d='M178 178Q152 159 136 122Q122 89 120 2'/%3E%3C/g%3E%3Ccircle cx='39' cy='61' r='5' fill='%230b0710' stroke='%23eee'/%3E%3Cpath d='M34 61l-8 5m9-1l-8 9m17-9l8 9m-9-9l8-5' stroke='%23eee'/%3E%3C/svg%3E");
+ background-repeat:no-repeat;
+ background-size:150px 150px;
+ background-position:top left,bottom right;
+}
+.event-page.theme-halloween .event-particle.glyph{z-index:1}
+.event-page.theme-halloween .event-particle.glyph:nth-child(4n){animation-duration:14s}
+.event-page.theme-halloween .event-particle.glyph:nth-child(4n+1){animation-duration:19s}
+.event-page.theme-halloween .event-particle.glyph:nth-child(4n+2){animation-duration:23s}
+.event-page.theme-halloween .event-particle.glyph:nth-child(4n+3){animation-duration:17s}
+.event-page.theme-halloween .wrap:before,.event-page.theme-halloween .wrap:after{content:"";position:absolute;left:-20vw;width:140vw;height:240px;pointer-events:none;z-index:1;background:radial-gradient(ellipse at 20% 50%,rgba(210,210,225,.12),transparent 52%),radial-gradient(ellipse at 70% 45%,rgba(255,255,255,.08),transparent 55%);filter:blur(18px);opacity:.65;animation:halloweenFog 10s ease-in-out infinite alternate}
+.event-page.theme-halloween .wrap:before{top:480px;transform:translateX(-8%)}
+.event-page.theme-halloween .wrap:after{top:980px;transform:translateX(8%);opacity:.5;animation-delay:-4s}
+@keyframes halloweenFog{from{transform:translateX(-8%) translateY(0) scaleX(1)}to{transform:translateX(10%) translateY(-28px) scaleX(1.12)}}
+@media(max-width:600px){
+ .event-page.theme-halloween .event-product{background-size:105px 105px}
+ .event-page.theme-halloween .wrap:before{top:360px;height:190px}
+ .event-page.theme-halloween .wrap:after{top:820px;height:190px}
+}
 </style></head><body id="page"><header class="top"><div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div><nav class="menu" id="mainMenu" aria-label="Main navigation"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header><div class="wrap"><section class="event" id="event"><div class="copy"><h1>EVENT</h1></div></section><section class="event-shop" id="eventShop"><h2>SHOP THE EVENT</h2><p class="event-shop-intro" id="eventShopIntro">Loading the collection...</p><div class="event-products" id="eventProducts"></div></section><section class="note"><h2>More to discover</h2><p>Browse the full Pop &amp; Lock collection for Funko Pops, grails and signed pieces.</p></section></div>
 <script>
 (async function(){
@@ -210,16 +231,16 @@ if(pr.ok){
 (function(){
  const page=document.getElementById('page');
  const box=document.createElement('div');box.className='event-particles';box.setAttribute('aria-hidden','true');
- const title=(document.title||'').toLowerCase();
+ const eventId=(new URLSearchParams(location.search).get('event')||'').toLowerCase();
  let glyphs=['✦','✧','•'];
- if(title.includes('halloween'))glyphs=['🦇','🎃','🧙‍♀️','🕷','🕸','👻','💀'];
- else if(title.includes('christmas'))glyphs=['❄','❄','✦','•'];
- else if(title.includes('new year'))glyphs=['✦','✧','•','✷'];
- else if(title.includes('valentine'))glyphs=['♥','♡','•'];
- else if(title.includes('easter'))glyphs=['✦','•','🌸'];
- else if(title.includes('bonfire'))glyphs=['✦','•','🔥'];
- else if(title.includes('diwali'))glyphs=['✦','✧','•','🪔'];
- else if(title.includes('summer'))glyphs=['•','✦','☀'];
+ if(eventId.includes('halloween'))glyphs=['🦇','🎃','🧙‍♀️','🕷','🕸','👻','💀'];
+ else if(eventId.includes('christmas')||eventId.includes('boxing'))glyphs=['❄','❄','✦','•'];
+ else if(eventId.includes('new-year')||eventId.includes('newyear'))glyphs=['✦','✧','•','✷'];
+ else if(eventId.includes('valentine'))glyphs=['♥','♡','•'];
+ else if(eventId.includes('easter'))glyphs=['✦','•','🌸'];
+ else if(eventId.includes('bonfire'))glyphs=['✦','•','🔥'];
+ else if(eventId.includes('diwali'))glyphs=['✦','✧','•','🪔'];
+ else if(eventId.includes('summer'))glyphs=['•','✦','☀'];
  for(let n=0;n<30;n++){
    const p=document.createElement('span');p.className='event-particle glyph';
    p.textContent=glyphs[n%glyphs.length];
