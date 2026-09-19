@@ -1,283 +1,61 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Pop & Lock Event | Funko Collectibles</title>
+<title>Event | Pop &amp; Lock</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}a{text-decoration:none;color:inherit}
-.top{color:#111;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:20}.icons{height:112px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 34px}.icon{display:flex;align-items:center;justify-content:center;color:#111;position:relative}.icon svg{width:48px;height:48px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.bag-count{position:absolute;top:7px;right:calc(50% - 25px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#111;color:#fff;font-size:11px;font-weight:700;line-height:22px;text-align:center;display:none;pointer-events:none}.brand{justify-self:center;width:82px}.brand img{width:82px;height:82px;object-fit:contain}.menu{display:flex;justify-content:center;gap:42px;height:76px;align-items:center;overflow-x:auto;white-space:nowrap;border-top:0}.menu a{color:#111;font-size:24px;font-weight:500;display:block;white-space:nowrap}.menu a:hover{text-decoration:underline}.header-search{display:none;justify-content:center;padding:0 20px 18px}.header-search.open{display:flex}.header-search form{width:min(520px,100%)}.header-search input{width:100%;padding:12px 14px;border:1px solid #ddd;font-size:15px}.wrap{max-width:1200px;margin:auto;padding:20px 20px 80px}.back{display:inline-block;font-size:12px;font-weight:700;margin-bottom:25px}.event{height:180px;background:#111;color:#fff;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}.event-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1}.shade{position:absolute;inset:0;background:rgba(0,0,0,.12)}.copy{position:relative;z-index:2;padding:40px 20px}.kicker{font-size:12px;letter-spacing:.22em;font-weight:700;color:#ddd}.copy h1{font-size:clamp(42px,8vw,90px);font-weight:500;margin:12px 0}.copy p{font-size:16px;color:#eee;margin:0 auto 28px}.btn{display:inline-block;background:#fff;color:#111;padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:.08em}.note{text-align:center;padding:35px 15px}.note h2{font-size:28px;font-weight:400;margin:0 0 10px}.note p{color:#777;margin:0}
-.event.theme-christmas{background:linear-gradient(135deg,#0b3d2e,#8b0000 52%,#d4af37);}.theme-christmas .shade{background:linear-gradient(90deg,rgba(0,45,30,.78),rgba(120,0,0,.35),rgba(0,30,20,.78))}.theme-christmas .btn{background:#fff;color:#8b0000}.theme-christmas .kicker{color:#f5d76e}
-.event.theme-halloween{background:linear-gradient(135deg,#14001f,#ff6a00 55%,#080808)}.theme-halloween .shade{background:linear-gradient(90deg,rgba(20,0,31,.82),rgba(255,70,0,.3),rgba(0,0,0,.8))}.theme-halloween .btn{background:#ff6a00;color:#111}.theme-halloween .kicker{color:#ffb36b}
-.event.theme-valentines{background:linear-gradient(135deg,#5b001b,#d4145a 55%,#ff7aa2)}.theme-valentines .shade{background:linear-gradient(90deg,rgba(70,0,20,.8),rgba(212,20,90,.3),rgba(80,0,30,.75))}.theme-valentines .btn{background:#fff;color:#b00045}.theme-valentines .kicker{color:#ffd0df}
-.event.theme-easter{background:linear-gradient(135deg,#6a4c93,#ffb4d8 50%,#8fd694)}.theme-easter .shade{background:linear-gradient(90deg,rgba(70,40,110,.72),rgba(255,180,216,.2),rgba(40,100,60,.55))}.theme-easter .btn{background:#fff;color:#6a4c93}.theme-easter .kicker{color:#fff}
-.event.theme-holiday{background:linear-gradient(135deg,#004d40,#00796b 50%,#f9a825)}.theme-holiday .shade{background:linear-gradient(90deg,rgba(0,60,50,.78),rgba(0,121,107,.3),rgba(100,70,0,.65))}.theme-holiday .btn{background:#fff;color:#00695c}.theme-holiday .kicker{color:#ffe082}
-.event.theme-bonfire{background:linear-gradient(135deg,#111,#7b1e00 50%,#ff9800)}.theme-bonfire .shade{background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(120,25,0,.35),rgba(255,120,0,.45))}.theme-bonfire .btn{background:#ff9800;color:#111}.theme-bonfire .kicker{color:#ffd180}
-.event.theme-blackfriday{background:linear-gradient(135deg,#050505,#252525 50%,#111)}.theme-blackfriday .shade{background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(30,30,30,.35),rgba(0,0,0,.9))}.theme-blackfriday .btn{background:#d4af37;color:#111}.theme-blackfriday .kicker{color:#d4af37}
-.event.theme-newyear{background:linear-gradient(135deg,#050505,#172554 50%,#7c3aed)}.theme-newyear .shade{background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(23,37,84,.35),rgba(70,20,100,.65))}.theme-newyear .btn{background:#fff;color:#172554}.theme-newyear .kicker{color:#f7d774}
-.event.theme-summer{background:linear-gradient(135deg,#006064,#00acc1 50%,#ffd54f)}.theme-summer .shade{background:linear-gradient(90deg,rgba(0,70,80,.7),rgba(0,172,193,.25),rgba(200,150,0,.4))}.theme-summer .btn{background:#fff;color:#006064}.theme-summer .kicker{color:#fff59d}
-.event.theme-diwali{background:linear-gradient(135deg,#4a001f,#c2185b 45%,#ffb300)}.theme-diwali .shade{background:linear-gradient(90deg,rgba(60,0,25,.8),rgba(194,24,91,.3),rgba(180,100,0,.55))}.theme-diwali .btn{background:#ffd54f;color:#4a001f}.theme-diwali .kicker{color:#ffe082}
-
-@media(max-width:600px){.icons{height:78px;padding:0 18px}.brand,.brand img{width:62px;height:62px}.icon svg{width:38px;height:38px}.menu{justify-content:flex-start!important;gap:28px!important;padding:0 20px;height:58px}.menu a{font-size:16px}.event{height:130px}.copy h1{font-size:34px}.copy p{font-size:14px}}
-.event-shop{padding:42px 20px 10px;margin:0 -20px}.event-shop h2{text-align:center;font-size:32px;font-weight:500;margin:0 0 8px}.event-shop-intro{text-align:center;color:#777;margin:0 0 28px}.event-products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.event-product{border:1px solid #ddd;background:#fff;padding:12px}.event-product img{width:100%;aspect-ratio:1;object-fit:contain;background:#f7f7f7}.event-product h3{font-size:14px;font-weight:500;margin:12px 0 6px}.event-price{font-weight:700;margin-bottom:10px}.event-buy{display:block;text-align:center;padding:10px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em}.theme-christmas + .event-shop .event-buy{background:#8b0000}.event-page{position:relative;min-height:100vh;overflow-x:hidden;overflow-y:auto}.event-page:before,.event-page:after{content:"";position:fixed;pointer-events:none;z-index:0}.wrap{position:relative;z-index:2}.event-page:before{inset:0;opacity:.12;background-repeat:repeat;background-size:220px 220px}.event-page.theme-christmas:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Ctext x='20' y='50' font-size='30'%3E❄%3C/text%3E%3Ctext x='140' y='120' font-size='34'%3E🎄%3C/text%3E%3Ctext x='55' y='190' font-size='28'%3E🎁%3C/text%3E%3C/svg%3E")}.event-page.theme-halloween:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='20' y='55' font-size='34'%3E🦇%3C/text%3E%3Ctext x='135' y='125' font-size='32'%3E🎃%3C/text%3E%3Ctext x='50' y='195' font-size='30'%3E🕷%3C/text%3E%3C/svg%3E")}.event-page.theme-newyear:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='15' y='60' font-size='34'%3E🎆%3C/text%3E%3Ctext x='140' y='125' font-size='30'%3E✨%3C/text%3E%3Ctext x='55' y='195' font-size='30'%3E🎇%3C/text%3E%3C/svg%3E")}.event-page.theme-valentines:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='25' y='60' font-size='32'%3E♥%3C/text%3E%3Ctext x='145' y='125' font-size='30'%3E💌%3C/text%3E%3Ctext x='60' y='195' font-size='28'%3E♥%3C/text%3E%3C/svg%3E")}.event-page.theme-easter:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='20' y='60' font-size='32'%3E🐰%3C/text%3E%3Ctext x='145' y='125' font-size='30'%3E🥚%3C/text%3E%3Ctext x='55' y='195' font-size='28'%3E🌷%3C/text%3E%3C/svg%3E")}.event-page.theme-bonfire:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='25' y='70' font-size='36'%3E🔥%3C/text%3E%3Ctext x='145' y='140' font-size='28'%3E✨%3C/text%3E%3C/svg%3E")}.event-page.theme-diwali:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='20' y='65' font-size='32'%3E🪔%3C/text%3E%3Ctext x='145' y='130' font-size='30'%3E✨%3C/text%3E%3Ctext x='55' y='195' font-size='28'%3E🌸%3C/text%3E%3C/svg%3E")}.event-page.theme-summer:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='20' y='60' font-size='34'%3E☀%3C/text%3E%3Ctext x='145' y='130' font-size='30'%3E🌴%3C/text%3E%3Ctext x='55' y='195' font-size='28'%3E🌊%3C/text%3E%3C/svg%3E")}.event-page.theme-blackfriday:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='20' y='60' font-size='32'%3E$%3C/text%3E%3Ctext x='145' y='130' font-size='30'%3E★%3C/text%3E%3C/svg%3E")}.event-page.theme-holiday:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Ctext x='20' y='60' font-size='32'%3E🎁%3C/text%3E%3Ctext x='145' y='130' font-size='30'%3E💝%3C/text%3E%3C/svg%3E")}.event-page.theme-christmas .event,.event-page.theme-halloween .event,.event-page.theme-newyear .event,.event-page.theme-valentines .event,.event-page.theme-easter .event,.event-page.theme-holiday .event,.event-page.theme-bonfire .event,.event-page.theme-blackfriday .event,.event-page.theme-summer .event,.event-page.theme-diwali .event{position:relative;z-index:2}.event-page:after{inset:0;opacity:.28;z-index:0;background-repeat:repeat;background-size:180px 180px;mix-blend-mode:screen}.event-page.theme-halloween:after{background-image:radial-gradient(circle at 15% 20%,rgba(255,102,0,.28) 0 2px,transparent 3px),radial-gradient(circle at 80% 35%,rgba(255,102,0,.22) 0 2px,transparent 3px),radial-gradient(circle at 55% 75%,rgba(255,102,0,.25) 0 2px,transparent 3px)}.event-page.theme-newyear:after{background-image:radial-gradient(circle,rgba(255,255,255,.55) 0 1.5px,transparent 2px);background-size:95px 95px}.event-page.theme-christmas:after{background-image:radial-gradient(circle,rgba(255,255,255,.45) 0 2px,transparent 3px);background-size:80px 80px}.event-page.theme-valentines:after{background-image:radial-gradient(circle,rgba(255,70,100,.25) 0 3px,transparent 4px);background-size:120px 120px}.event-page.theme-easter:after{background-image:radial-gradient(circle,rgba(255,255,255,.4) 0 2px,transparent 3px);background-size:110px 110px}.event-page.theme-bonfire:after{background-image:radial-gradient(circle,rgba(255,120,0,.35) 0 3px,transparent 4px);background-size:75px 75px}.event-page.theme-diwali:after{background-image:radial-gradient(circle,rgba(255,210,80,.45) 0 2px,transparent 3px);background-size:85px 85px}.event-page.theme-summer:after{background-image:radial-gradient(circle,rgba(255,255,255,.3) 0 2px,transparent 3px);background-size:120px 120px}.event-page.theme-blackfriday:after{background-image:radial-gradient(circle,rgba(255,215,0,.35) 0 2px,transparent 3px);background-size:100px 100px}.event-page.theme-holiday:after{background-image:radial-gradient(circle,rgba(255,255,255,.3) 0 2px,transparent 3px);background-size:105px 105px}.event-page.theme-halloween{background-image:radial-gradient(circle at 50% 0%,rgba(255,90,0,.18),transparent 38%),linear-gradient(180deg,#13071c 0%,#24102c 45%,#0b0810 100%)}.event-page.theme-newyear{background-image:radial-gradient(circle at 50% 0%,rgba(80,50,160,.3),transparent 45%),linear-gradient(180deg,#070b20,#17102f 55%,#070711)}.event-page.theme-christmas{background-image:radial-gradient(circle at 50% 0%,rgba(190,30,40,.22),transparent 40%),linear-gradient(180deg,#071b15,#0b2a20 55%,#07120f)}.event-page.theme-valentines{background-image:radial-gradient(circle at 50% 0%,rgba(255,60,100,.2),transparent 42%),linear-gradient(180deg,#260b18,#3a1023 55%,#17070f)}.event-page.theme-easter{background-image:radial-gradient(circle at 50% 0%,rgba(190,120,255,.2),transparent 42%),linear-gradient(180deg,#21152d,#302044 55%,#161020)}.event-page.theme-bonfire{background-image:radial-gradient(circle at 50% 20%,rgba(255,90,0,.28),transparent 38%),linear-gradient(180deg,#090a17,#1d1012 55%,#090707)}.event-page.theme-diwali{background-image:radial-gradient(circle at 50% 0%,rgba(255,180,40,.25),transparent 42%),linear-gradient(180deg,#24100a,#351321 55%,#12080a)}.event-page.theme-summer{background-image:radial-gradient(circle at 50% 0%,rgba(0,190,220,.2),transparent 42%),linear-gradient(180deg,#082b35,#0b3a42 55%,#071c22)}.event-page.theme-blackfriday{background-image:radial-gradient(circle at 50% 0%,rgba(255,190,0,.14),transparent 42%),linear-gradient(180deg,#090909,#171717 55%,#050505)}.event-page.theme-holiday{background-image:radial-gradient(circle at 50% 0%,rgba(0,150,130,.18),transparent 42%),linear-gradient(180deg,#08231f,#12352f 55%,#071512)}.event-page .event-shop,.event-page .note{position:relative;z-index:2}.event-shop .product-grid{align-items:stretch}.event-shop .product-card{height:100%;min-height:0}.event-shop .product-card img{width:100%;aspect-ratio:1/1;object-fit:contain;display:block}.event-shop .product-card h3{min-height:2.6em}.event-shop .product-card .price{min-height:1.4em}@media(max-width:600px){.header-search{padding-bottom:12px}}.event-page.theme-christmas{background:linear-gradient(180deg,#f2fff8 0%,#fff 55%);color:#143d2f}.event-page.theme-christmas .event-shop{background:transparent}.event-page.theme-christmas .event-shop h2{color:#8b0000}.event-page.theme-christmas .event-buy{background:#8b0000}.event-page.theme-christmas .note{background:#fff7f7}
-.event-shop.theme-christmas-shop{background:transparent}.event-page.theme-halloween{background:linear-gradient(180deg,#fff5eb 0%,#fff 55%)}.event-page.theme-halloween .event-shop{background:transparent}.event-page.theme-halloween .event-shop h2{color:#c44b00}.event-page.theme-halloween .event-buy{background:#ff6a00;color:#111}
-.event-page.theme-valentines{background:linear-gradient(180deg,#fff0f5 0%,#fff 55%)}.event-page.theme-valentines .event-shop{background:transparent}.event-page.theme-valentines .event-shop h2{color:#b00045}.event-page.theme-valentines .event-buy{background:#b00045}
-.event-page.theme-easter{background:linear-gradient(180deg,#faf2ff 0%,#fff 55%)}.event-page.theme-easter .event-shop{background:transparent}.event-page.theme-easter .event-shop h2{color:#6a4c93}.event-page.theme-easter .event-buy{background:#6a4c93}
-.event-page.theme-holiday{background:linear-gradient(180deg,#effbf8 0%,#fff 55%)}.event-page.theme-holiday .event-shop{background:transparent}.event-page.theme-holiday .event-shop h2{color:#00695c}.event-page.theme-holiday .event-buy{background:#00695c}
-.event-page.theme-bonfire{background:linear-gradient(180deg,#fff4eb 0%,#fff 55%)}.event-page.theme-bonfire .event-shop{background:transparent}.event-page.theme-bonfire .event-shop h2{color:#9b2c00}.event-page.theme-bonfire .event-buy{background:#ff9800;color:#111}
-.event-page.theme-blackfriday{background:linear-gradient(180deg,#eeeeee 0%,#fff 55%)}.event-page.theme-blackfriday .event-shop{background:transparent}.event-page.theme-blackfriday .event-shop h2{color:#111}.event-page.theme-blackfriday .event-buy{background:#111;color:#d4af37}
-.event-page.theme-newyear{background:linear-gradient(180deg,#f0efff 0%,#fff 55%)}.event-page.theme-newyear .event-shop{background:transparent}.event-page.theme-newyear .event-shop h2{color:#4b2aa8}.event-page.theme-newyear .event-buy{background:#172554}
-.event-page.theme-summer{background:linear-gradient(180deg,#ecfcff 0%,#fff 55%)}.event-page.theme-summer .event-shop{background:transparent}.event-page.theme-summer .event-shop h2{color:#006064}.event-page.theme-summer .event-buy{background:#006064}
-.event-page.theme-diwali{background:linear-gradient(180deg,#fff3e3 0%,#fff 55%)}.event-page.theme-diwali .event-shop{background:transparent}.event-page.theme-diwali .event-shop h2{color:#9c1650}.event-page.theme-diwali .event-buy{background:#c2185b}.event-empty{text-align:center;padding:30px;border:1px dashed #ccc;color:#777}@media(max-width:900px){.event-products{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.event-products{grid-template-columns:repeat(2,1fr);gap:10px}.event-shop{padding-top:30px}.event-shop h2{font-size:25px}}
-<style>.event-page.theme-halloween{background:radial-gradient(circle at 50% 15%,rgba(255,90,0,.22),transparent 35%),linear-gradient(180deg,#10051a 0%,#24102c 48%,#08060c 100%)!important;color:#fff}.event-page.theme-christmas{background:radial-gradient(circle at 50% 10%,rgba(210,30,40,.2),transparent 35%),linear-gradient(180deg,#061a13,#0b3024 50%,#04100c)!important;color:#fff}.event-page.theme-newyear{background:radial-gradient(circle at 50% 10%,rgba(100,70,220,.3),transparent 40%),linear-gradient(180deg,#05091c,#171034 50%,#05050d)!important;color:#fff}.event-page.theme-valentines{background:radial-gradient(circle at 50% 10%,rgba(255,50,100,.25),transparent 40%),linear-gradient(180deg,#240816,#3a1023 50%,#12060d)!important;color:#fff}.event-page.theme-easter{background:radial-gradient(circle at 50% 10%,rgba(190,120,255,.25),transparent 40%),linear-gradient(180deg,#21142d,#352047 50%,#120d19)!important;color:#fff}.event-page.theme-bonfire{background:radial-gradient(circle at 50% 15%,rgba(255,80,0,.3),transparent 35%),linear-gradient(180deg,#080914,#24100b 50%,#070506)!important;color:#fff}.event-page.theme-diwali{background:radial-gradient(circle at 50% 10%,rgba(255,180,30,.25),transparent 38%),linear-gradient(180deg,#211008,#381322 50%,#100709)!important;color:#fff}.event-page.theme-summer{background:radial-gradient(circle at 50% 10%,rgba(0,210,230,.25),transparent 38%),linear-gradient(180deg,#062932,#0b4249 50%,#06171c)!important;color:#fff}.event-page.theme-blackfriday{background:radial-gradient(circle at 50% 10%,rgba(255,200,40,.15),transparent 38%),linear-gradient(180deg,#050505,#181818 50%,#030303)!important;color:#fff}.event-page.theme-holiday{background:radial-gradient(circle at 50% 10%,rgba(0,180,150,.22),transparent 38%),linear-gradient(180deg,#06201b,#10382f 50%,#040e0b)!important;color:#fff}.event-page .event-shop{background:transparent!important}.event-page .event-shop h2,.event-page .event-shop-intro{color:inherit}.event-page .event-product{background:#fff;color:#111;border-color:rgba(255,255,255,.18)}.event-page .note{background:transparent;color:inherit}.event-page .note p{color:rgba(255,255,255,.7)}</style><style>
-/* Immersive event shop */
-.event-page .event-shop{position:relative;padding:55px 20px 70px;min-height:600px}
-.event-page .event-shop:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.18;background-size:260px 260px;background-repeat:repeat}
-.event-page.theme-halloween .event-shop:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Ctext x='18' y='48' font-size='38'%3E🦇%3C/text%3E%3Ctext x='190' y='85' font-size='42'%3E🕷%3C/text%3E%3Ctext x='90' y='175' font-size='54'%3E🎃%3C/text%3E%3Ctext x='210' y='235' font-size='28'%3E🕸%3C/text%3E%3C/svg%3E")}
-.event-page.theme-christmas .event-shop:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Ctext x='18' y='55' font-size='38'%3E❄%3C/text%3E%3Ctext x='185' y='95' font-size='40'%3E🎄%3C/text%3E%3Ctext x='75' y='190' font-size='40'%3E🎁%3C/text%3E%3C/svg%3E")}
-.event-page.theme-newyear .event-shop:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Ctext x='15' y='55' font-size='42'%3E🎆%3C/text%3E%3Ctext x='185' y='105' font-size='42'%3E🎇%3C/text%3E%3Ctext x='95' y='205' font-size='32'%3E✨%3C/text%3E%3C/svg%3E")}
-.event-page.theme-valentines .event-shop:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Ctext x='20' y='60' font-size='42'%3E♥%3C/text%3E%3Ctext x='190' y='110' font-size='38'%3E💌%3C/text%3E%3Ctext x='90' y='210' font-size='45'%3E♥%3C/text%3E%3C/svg%3E")}
-.event-page.theme-easter .event-shop:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Ctext x='20' y='60' font-size='42'%3E🐰%3C/text%3E%3Ctext x='190' y='110' font-size='40'%3E🥚%3C/text%3E%3Ctext x='90' y='210' font-size='40'%3E🌷%3C/text%3E%3C/svg%3E")}
-.event-page.theme-bonfire .event-shop:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Ctext x='20' y='65' font-size='45'%3E🔥%3C/text%3E%3Ctext x='190' y='120' font-size='38'%3E✨%3C/text%3E%3C/svg%3E")}
-.event-page.theme-diwali .event-shop:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Ctext x='20' y='65' font-size='40'%3E🪔%3C/text%3E%3Ctext x='190' y='110' font-size='40'%3E✨%3C/text%3E%3Ctext x='90' y='210' font-size='38'%3E🌸%3C/text%3E%3C/svg%3E")}
-.event-page .event-shop h2{font-size:clamp(30px,4vw,46px);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin:0 0 8px;text-shadow:0 2px 12px rgba(0,0,0,.18)}
-.event-page .event-shop-intro{font-size:13px;margin:0 auto 35px;max-width:650px;text-align:center}
-.event-products{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;align-items:stretch}
-.event-product{display:flex;flex-direction:column;min-width:0;height:100%;padding:14px!important;border-radius:3px;box-shadow:0 10px 28px rgba(0,0,0,.16);overflow:hidden}
-.event-product img{width:100%!important;height:260px!important;aspect-ratio:auto!important;object-fit:contain!important;background:#f6f6f6!important;flex:0 0 260px}
-.event-product h3{font-size:14px!important;line-height:1.35!important;margin:14px 2px 7px!important;min-height:38px!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-.event-price{margin:0 2px 12px!important;min-height:20px;font-size:15px}
-.event-buy{margin-top:auto!important}
-@media(max-width:900px){.event-products{grid-template-columns:repeat(3,minmax(0,1fr))}.event-product img{height:230px!important;flex-basis:230px}}
-@media(max-width:600px){.event-page .event-shop{padding:40px 12px 55px}.event-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.event-product{padding:9px!important}.event-product img{height:155px!important;flex-basis:155px}.event-product h3{font-size:12px!important;min-height:34px!important}.event-price{font-size:14px}.event-page .event-shop h2{font-size:28px}}
-</style><style>
-/* EVENT EXPERIENCE */
-.event-page{isolation:isolate}
-.event-page .event{height:180px;border:0}
-.event-page .event-bg{transform:scale(1.03);animation:eventHeroZoom 12s ease-in-out infinite alternate}
-@keyframes eventHeroZoom{from{transform:scale(1.03)}to{transform:scale(1.10)}}
-.event-page .event:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 0 35%,rgba(255,255,255,.12) 45%,transparent 55%);transform:translateX(-120%);animation:eventShimmer 7s ease-in-out infinite}
-@keyframes eventShimmer{0%,55%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}
-.event-page .event-shop{overflow:hidden}
-.event-page .event-shop:after{content:"";position:absolute;inset:-20%;z-index:-1;pointer-events:none;opacity:.45;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.12),transparent 18%),radial-gradient(circle at 80% 65%,rgba(255,255,255,.08),transparent 20%);animation:eventGlow 8s ease-in-out infinite alternate}
-@keyframes eventGlow{from{transform:scale(1);opacity:.28}to{transform:scale(1.12);opacity:.5}}
-.event-page .event-product{position:relative;transition:transform .35s ease,box-shadow .35s ease;animation:cardRise .7s both}
-.event-page .event-product:nth-child(2){animation-delay:.08s}.event-page .event-product:nth-child(3){animation-delay:.16s}.event-page .event-product:nth-child(4){animation-delay:.24s}.event-page .event-product:nth-child(5){animation-delay:.32s}.event-page .event-product:nth-child(6){animation-delay:.40s}.event-page .event-product:nth-child(7){animation-delay:.48s}.event-page .event-product:nth-child(8){animation-delay:.56s}
-@keyframes cardRise{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-.event-page .event-product:hover{transform:translateY(-10px) rotateX(1deg);box-shadow:0 20px 42px rgba(0,0,0,.3)}
-.event-page .event-product:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:3px;opacity:0;transition:opacity .3s;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%)}
-.event-page .event-product:hover:before{opacity:1;animation:cardShine .8s ease}
-@keyframes cardShine{to{transform:translateX(100%)}}
-
-/* Floating event atmosphere */
-.event-particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-.event-particle{position:absolute;top:105%;animation:floatParticle linear infinite;opacity:0}
-@keyframes floatParticle{0%{transform:translate3d(0,0,0) rotate(0deg);opacity:0}10%{opacity:.85}90%{opacity:.55}100%{transform:translate3d(var(--drift),-125vh,0) rotate(var(--spin));opacity:0}}
-.event-spark{position:absolute;width:5px;height:5px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor}
-
-/* Halloween */
-.theme-halloween .event-spark{color:#ff7418}
-.theme-halloween .event-particle.glyph{filter:drop-shadow(0 0 7px #ff5a00)}
-.theme-halloween .event-shop h2{animation:hauntedPulse 3s ease-in-out infinite}
-@keyframes hauntedPulse{50%{text-shadow:0 0 24px rgba(255,91,0,.65)}}
-
-/* New Year */
-.theme-newyear .event-spark{color:#fff}
-.theme-newyear .event-shop h2{animation:celebratePulse 2s ease-in-out infinite}
-@keyframes celebratePulse{50%{text-shadow:0 0 28px rgba(180,150,255,.8);transform:scale(1.015)}}
-
-/* Christmas */
-.theme-christmas .event-spark{color:#fff}
-.theme-christmas .event-shop h2{animation:snowGlow 3s ease-in-out infinite}
-@keyframes snowGlow{50%{text-shadow:0 0 22px rgba(255,255,255,.75)}}
-
-/* Valentine's */
-.theme-valentines .event-spark{color:#ff6b9d}
-.theme-valentines .event-shop h2{animation:heartPulse 2.4s ease-in-out infinite}
-@keyframes heartPulse{50%{transform:scale(1.025);text-shadow:0 0 24px rgba(255,70,130,.55)}}
-
-/* Bonfire */
-.theme-bonfire .event-spark{color:#ff7200}
-.theme-bonfire .event-shop:after{animation:fireGlow 2s ease-in-out infinite alternate}
-@keyframes fireGlow{from{transform:scale(1);filter:blur(0)}to{transform:scale(1.08);filter:blur(3px)}}
-
-/* Diwali */
-.theme-diwali .event-spark{color:#ffd34d}
-.theme-diwali .event-shop h2{animation:goldGlow 2.5s ease-in-out infinite}
-@keyframes goldGlow{50%{text-shadow:0 0 26px rgba(255,193,7,.8)}}
-
-/* Summer */
-.theme-summer .event-spark{color:#fff}
-.theme-summer .event-shop:after{animation:summerWave 5s ease-in-out infinite alternate}
-@keyframes summerWave{to{transform:translateY(-15px) scale(1.06)}}
-
-@media(prefers-reduced-motion:reduce){
- .event-page *,.event-page *:before,.event-page *:after{animation:none!important;transition:none!important}
-}
-</style><style id="halloween-overrides">
-.event-page.theme-halloween{background:radial-gradient(circle at 50% 8%,rgba(255,77,0,.22),transparent 28%),radial-gradient(circle at 10% 60%,rgba(111,0,180,.16),transparent 32%),linear-gradient(180deg,#07030b 0%,#120719 38%,#08050d 100%)!important;color:#fff}
-.event-page.theme-halloween .event-shop{background:linear-gradient(180deg,rgba(7,3,11,.15),rgba(7,3,11,.65))!important}
-.event-page.theme-halloween .event-shop h2{color:#ff7a18!important;text-shadow:0 0 14px rgba(255,80,0,.35)}
-.event-page.theme-halloween .event-shop-intro{color:rgba(255,255,255,.72)!important}
-.event-page.theme-halloween .event-product{background:linear-gradient(145deg,#17101d,#0d0912)!important;color:#fff;border:1px solid rgba(255,106,0,.35)!important;box-shadow:0 12px 35px rgba(0,0,0,.55)}
-.event-page.theme-halloween .event-product img{background:#0a070d!important}
-.event-page.theme-halloween .event-price{color:#ff9a4a}
-.event-page.theme-halloween .event-buy{background:#ff6a00!important;color:#120a05!important;box-shadow:0 0 18px rgba(255,106,0,.2)}
-.event-page.theme-halloween .note{border-top:1px solid rgba(255,106,0,.2);color:#fff}
-.event-page.theme-halloween .note p{color:rgba(255,255,255,.6)!important}
-.event-page.theme-halloween .event-particles{z-index:3}
-.event-page.theme-halloween .event-particle{filter:drop-shadow(0 0 8px rgba(255,80,0,.65));text-shadow:0 0 10px rgba(255,80,0,.5)}
-.event-page.theme-halloween .event-particle.glyph{opacity:0}
-.event-page.theme-halloween .event-shop:after{background:radial-gradient(circle at 18% 25%,rgba(255,80,0,.12),transparent 18%),radial-gradient(circle at 82% 65%,rgba(120,0,190,.13),transparent 22%)!important}
-</style><style id="halloween-final">
-/* HALLOWEEN FULL-PAGE EXPERIENCE */
-.event-page.theme-halloween{background:
-radial-gradient(ellipse at 50% 8%,rgba(255,74,0,.24),transparent 25%),
-radial-gradient(ellipse at 5% 55%,rgba(108,0,180,.20),transparent 30%),
-radial-gradient(ellipse at 95% 70%,rgba(255,55,0,.13),transparent 28%),
-linear-gradient(180deg,#050308 0%,#100617 38%,#07050a 100%)!important;color:#fff}
-.event-page.theme-halloween:before{opacity:.13;background-size:320px 320px}
-.event-page.theme-halloween:after{opacity:.5;mix-blend-mode:screen}
-.event-page.theme-halloween .event-particles{z-index:1}
-.event-page.theme-halloween .event-shop,.event-page.theme-halloween .note{z-index:2}
-.event-page.theme-halloween .event-shop{background:
-linear-gradient(180deg,rgba(5,3,8,.12),rgba(5,3,8,.72))!important}
-.event-page.theme-halloween .event-shop:before{opacity:.24;background-size:300px 300px}
-.event-page.theme-halloween .event-shop h2{color:#ff7418!important;text-shadow:0 0 8px #ff4b00,0 0 28px rgba(255,60,0,.55);letter-spacing:.08em}
-.event-page.theme-halloween .event-shop-intro{color:rgba(255,255,255,.72)!important}
-.event-page.theme-halloween .event-product{background:linear-gradient(145deg,#19101f 0%,#0a070e 100%)!important;color:#fff;border:1px solid rgba(255,91,0,.48)!important;box-shadow:0 12px 35px rgba(0,0,0,.65),0 0 0 1px rgba(112,0,180,.16);position:relative;overflow:hidden}
-.event-page.theme-halloween .event-product:after{content:"";position:absolute;top:0;left:0;width:155px;height:175px;z-index:5;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 200'%3E%3Cg fill='none' stroke='%23f5f5f5' stroke-width='1.8' opacity='.95'%3E%3Cpath d='M0 0L175 55M0 0L145 95M0 0L115 145M0 0L55 190M0 0L35 120M0 0L95 20M0 0L145 12'/%3E%3Cpath d='M0 0Q35 5 65 18T125 32T175 55'/%3E%3Cpath d='M0 0Q28 20 58 42T108 70T145 95'/%3E%3Cpath d='M0 0Q18 35 38 65T78 110T115 145'/%3E%3Cpath d='M0 0Q8 42 12 78T28 145T55 190'/%3E%3Cpath d='M0 0Q42 12 78 12T125 15T175 12'/%3E%3Cpath d='M0 0Q22 10 40 35T55 75T58 125T55 190'/%3E%3Cpath d='M0 0Q18 52 62 72T110 108T145 150'/%3E%3Cpath d='M0 0Q10 70 45 92T92 135T118 175'/%3E%3Cpath d='M0 0Q50 28 92 28T145 45T175 70'/%3E%3C/g%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.5' opacity='.95'%3E%3Ccircle cx='15' cy='15' r='12'/%3E%3Ccircle cx='32' cy='32' r='25'/%3E%3Ccircle cx='55' cy='55' r='43'/%3E%3Ccircle cx='83' cy='83' r='64'/%3E%3Ccircle cx='112' cy='112' r='88'/%3E%3C/g%3E%3Cg fill='%230d0710' stroke='%23f5f5f5' stroke-width='1.6'%3E%3Cellipse cx='43' cy='43' rx='7' ry='9'/%3E%3Cpath d='M37 38L24 28M37 42L21 39M37 47L23 53M49 38L62 27M49 42L65 39M49 47L62 54M40 35L37 22M46 35L50 21M40 51L37 65M46 51L51 65'/%3E%3C/g%3E%3C/svg%3E");background-size:100% 100%;background-position:top left;background-repeat:no-repeat;filter:drop-shadow(0 0 3px rgba(255,255,255,.4))}
-.event-page.theme-halloween .event-product img{background:#07050a!important}
-.event-page.theme-halloween .event-product h3{color:#fff}
-.event-page.theme-halloween .event-price{color:#ff9a4a}
-.event-page.theme-halloween .event-buy{background:#ff6500!important;color:#100500!important;box-shadow:0 0 20px rgba(255,90,0,.22)}
-.event-page.theme-halloween .event-product:hover{border-color:#ff7418!important;box-shadow:0 20px 48px rgba(0,0,0,.8),0 0 22px rgba(255,75,0,.18)}
-.event-page.theme-halloween .note{border-top:1px solid rgba(255,100,0,.25)}
-.event-page.theme-halloween .note h2{color:#ff7418;text-shadow:0 0 18px rgba(255,70,0,.4)}
-.event-page.theme-halloween .event-particle{z-index:1;filter:drop-shadow(0 0 9px rgba(255,70,0,.8));text-shadow:0 0 12px rgba(255,70,0,.7)}
-.event-page.theme-halloween .event-particle.glyph{font-family:"Apple Color Emoji","Segoe UI Emoji",sans-serif}
-.event-page.theme-halloween .event:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 15% 50%,rgba(255,90,0,.18),transparent 18%),radial-gradient(circle at 85% 40%,rgba(120,0,180,.22),transparent 22%);animation:halloweenMist 6s ease-in-out infinite alternate}
-@keyframes halloweenMist{from{transform:scale(1);opacity:.5}to{transform:scale(1.12) translateX(2%);opacity:1}}
-.event-page.theme-halloween .event-shop:after{animation:halloweenAtmosphere 7s ease-in-out infinite alternate!important}
-@keyframes halloweenAtmosphere{from{transform:scale(1);opacity:.3}to{transform:scale(1.16) translate3d(1%, -1%, 0);opacity:.65}}
-</style><style id="halloween-fog-webs">
-.event-page.theme-halloween .event-product{
- background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23eee' stroke-width='1.6' opacity='.72'%3E%3Cpath d='M2 2Q45 8 91 39Q130 65 178 178'/%3E%3Cpath d='M2 2Q18 47 57 82Q96 116 178 178'/%3E%3Cpath d='M2 2Q54 20 91 20Q136 20 178 68'/%3E%3Cpath d='M2 2Q28 20 45 58Q58 91 60 178'/%3E%3Cpath d='M12 12Q38 31 65 36Q98 42 129 72'/%3E%3Cpath d='M27 27Q49 48 76 52Q105 58 126 84'/%3E%3Cpath d='M178 178Q137 169 99 140Q62 111 2 2'/%3E%3Cpath d='M178 178Q160 133 123 99Q82 61 2 2'/%3E%3Cpath d='M178 178Q126 160 91 160Q43 160 2 112'/%3E%3Cpath d='M178 178Q152 159 136 122Q122 89 120 2'/%3E%3C/g%3E%3Ccircle cx='39' cy='61' r='5' fill='%230b0710' stroke='%23eee'/%3E%3Cpath d='M34 61l-8 5m9-1l-8 9m17-9l8 9m-9-9l8-5' stroke='%23eee'/%3E%3C/svg%3E");
- background-repeat:no-repeat;
- background-size:150px 150px;
- background-position:top left,bottom right;
-}
-.event-page.theme-halloween .event-particle.glyph{z-index:1}
-.event-page.theme-halloween .event-particle.glyph:nth-child(4n){animation-duration:14s}
-.event-page.theme-halloween .event-particle.glyph:nth-child(4n+1){animation-duration:19s}
-.event-page.theme-halloween .event-particle.glyph:nth-child(4n+2){animation-duration:23s}
-.event-page.theme-halloween .event-particle.glyph:nth-child(4n+3){animation-duration:17s}
-.event-page.theme-halloween .wrap:before,.event-page.theme-halloween .wrap:after{content:"";position:absolute;left:-20vw;width:140vw;height:240px;pointer-events:none;z-index:1;background:radial-gradient(ellipse at 20% 50%,rgba(210,210,225,.12),transparent 52%),radial-gradient(ellipse at 70% 45%,rgba(255,255,255,.08),transparent 55%);filter:blur(18px);opacity:.65;animation:halloweenFog 10s ease-in-out infinite alternate}
-.event-page.theme-halloween .wrap:before{top:480px;transform:translateX(-8%)}
-.event-page.theme-halloween .wrap:after{top:980px;transform:translateX(8%);opacity:.5;animation-delay:-4s}
-@keyframes halloweenFog{from{transform:translateX(-8%) translateY(0) scaleX(1)}to{transform:translateX(10%) translateY(-28px) scaleX(1.12)}}
-@media(max-width:600px){
- .event-page.theme-halloween .event-product{background-size:105px 105px}
- .event-page.theme-halloween .wrap:before{top:360px;height:190px}
- .event-page.theme-halloween .wrap:after{top:820px;height:190px}
-}
-</style><style id="halloween-cobweb-final">
-.event-page.theme-halloween .event-product{
-  background-image:none!important;
-}
-.event-page.theme-halloween .event-product:after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:170px;
-  height:170px;
-  z-index:5;
-  pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 170 170'%3E%3Cg fill='none' stroke='%23f5f5f5' stroke-width='1.25' stroke-linecap='round' opacity='.92'%3E%3Cpath d='M0 0L170 0M0 0L170 28M0 0L170 62M0 0L170 105M0 0L145 145M0 0L105 170M0 0L62 170M0 0L28 170M0 0L0 170'/%3E%3Cpath d='M13 0Q10 10 0 13'/%3E%3Cpath d='M30 0Q25 22 0 30'/%3E%3Cpath d='M49 0Q43 36 0 49'/%3E%3Cpath d='M70 0Q61 51 0 70'/%3E%3Cpath d='M94 0Q80 67 0 94'/%3E%3Cpath d='M119 0Q100 84 0 119'/%3E%3Cpath d='M143 0Q119 101 0 143'/%3E%3Cpath d='M0 30Q22 25 30 0'/%3E%3Cpath d='M0 49Q36 43 49 0'/%3E%3Cpath d='M0 70Q51 61 70 0'/%3E%3Cpath d='M0 94Q67 80 94 0'/%3E%3Cpath d='M0 119Q84 100 119 0'/%3E%3Cpath d='M0 143Q101 119 143 0'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  background-repeat:no-repeat;
-  background-position:top left;
-  background-size:170px 170px;
-  filter:drop-shadow(0 0 2px rgba(255,255,255,.45));
-}
-@media(max-width:600px){
-  .event-page.theme-halloween .event-product:after{
-    width:145px;
-    height:145px;
-    background-size:145px 145px;
-  }
-}
-</style></head><body id="page"><header class="top"><div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div><nav class="menu" id="mainMenu" aria-label="Main navigation"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header><div class="wrap"><section class="event" id="event"><div class="copy"><h1>EVENT</h1></div></section><section class="event-shop" id="eventShop"><h2>SHOP THE EVENT</h2><p class="event-shop-intro" id="eventShopIntro">Loading the collection...</p><div class="event-products" id="eventProducts"></div></section><section class="note"><h2>More to discover</h2><p>Browse the full Pop &amp; Lock collection for Funko Pops, grails and signed pieces.</p></section></div>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#08060b}a{text-decoration:none;color:inherit}
+.top{color:#111;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:50}.icons{height:112px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 34px}.icon{display:flex;align-items:center;justify-content:center;color:#111;position:relative}.icon svg{width:48px;height:48px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.bag-count{position:absolute;top:7px;right:calc(50% - 25px);min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#111;color:#fff;font-size:11px;font-weight:700;line-height:22px;text-align:center;display:none}.brand{justify-self:center;width:82px}.brand img{width:82px;height:82px;object-fit:contain}.menu{display:flex;justify-content:center;gap:42px;height:76px;align-items:center;overflow-x:auto;white-space:nowrap}.menu a{color:#111;font-size:24px;font-weight:500;display:block;white-space:nowrap}.menu a:hover{text-decoration:underline}.header-search{display:none;justify-content:center;padding:0 20px 18px}.header-search.open{display:flex}.header-search form{width:min(520px,100%)}.header-search input{width:100%;padding:12px 14px;border:1px solid #ddd;font-size:15px}
+.event-page{min-height:100vh;position:relative;overflow-x:hidden;isolation:isolate}.event-page.theme-halloween{background:radial-gradient(ellipse at 50% 5%,rgba(255,80,0,.22),transparent 28%),radial-gradient(ellipse at 5% 55%,rgba(108,0,180,.18),transparent 30%),linear-gradient(180deg,#050308,#120719 45%,#07050a);color:#fff}.event-page.theme-christmas{background:linear-gradient(180deg,#04170f,#0b2d21 48%,#06100c);color:#fff}.event-page.theme-newyear{background:radial-gradient(circle at 50% 0,rgba(95,65,220,.3),transparent 35%),linear-gradient(180deg,#05091c,#171034 55%,#05050d);color:#fff}.event-page.theme-valentines{background:linear-gradient(180deg,#250816,#3d1025 50%,#12060d);color:#fff}.event-page.theme-easter{background:linear-gradient(180deg,#21142d,#352047 50%,#120d19);color:#fff}.event-page.theme-bonfire{background:radial-gradient(circle at 50% 15%,rgba(255,80,0,.3),transparent 35%),linear-gradient(180deg,#080914,#24100b 55%,#070506);color:#fff}.event-page.theme-diwali{background:radial-gradient(circle at 50% 0,rgba(255,180,30,.25),transparent 35%),linear-gradient(180deg,#211008,#381322 55%,#100709);color:#fff}.event-page.theme-summer{background:linear-gradient(180deg,#062932,#0b4249 55%,#06171c);color:#fff}.event-page.theme-blackfriday{background:linear-gradient(180deg,#050505,#181818 55%,#030303);color:#fff}.event-page.theme-holiday{background:linear-gradient(180deg,#06201b,#10382f 55%,#040e0b);color:#fff}
+.wrap{max-width:1240px;margin:auto;padding:20px 20px 0;position:relative;z-index:5}.event{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;border-radius:2px;background:#111}.event-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:eventHeroZoom 14s ease-in-out infinite alternate}.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(0,0,0,.04),rgba(0,0,0,.28))}.copy{position:relative;z-index:3}.copy h1{font-size:clamp(38px,7vw,82px);font-weight:700;letter-spacing:.12em;margin:0;text-shadow:0 3px 18px rgba(0,0,0,.6);animation:eventTitle .9s ease both}.event:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.13) 50%,transparent 65%);transform:translateX(-120%);animation:eventShimmer 7s ease-in-out infinite;pointer-events:none}@keyframes eventHeroZoom{from{transform:scale(1.02)}to{transform:scale(1.09)}}@keyframes eventTitle{from{opacity:0;transform:translateY(18px) scale(.96);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}@keyframes eventShimmer{0%,55%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}
+.event-tools{display:flex;justify-content:center;gap:10px;margin:18px 0 0}.atmo-btn{border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;padding:9px 14px;font-size:11px;font-weight:700;letter-spacing:.1em;cursor:pointer;border-radius:999px;backdrop-filter:blur(6px)}.atmo-btn:hover{border-color:#fff}
+.event-shop{position:relative;padding:58px 10px 85px;min-height:650px}.event-heading{text-align:center;margin:0 auto 42px;position:relative}.event-kicker{font-size:11px;letter-spacing:.35em;font-weight:700;opacity:.7;margin-bottom:10px}.event-heading h2{font-size:clamp(30px,5vw,52px);margin:0;font-weight:700;letter-spacing:.06em}.event-heading p{max-width:650px;margin:12px auto 0;opacity:.7;font-size:14px;line-height:1.6}.event-heading:after{content:"";display:block;width:90px;height:2px;margin:18px auto 0;background:currentColor;opacity:.5}
+.event-products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;align-items:stretch}.event-product{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid rgba(255,255,255,.18);background:linear-gradient(145deg,#19101f,#09070d);color:#fff;box-shadow:0 14px 35px rgba(0,0,0,.45);overflow:hidden;animation:cardRise .7s both;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}.event-product:nth-child(2){animation-delay:.08s}.event-product:nth-child(3){animation-delay:.16s}.event-product:nth-child(4){animation-delay:.24s}.event-product:nth-child(5){animation-delay:.32s}.event-product:nth-child(6){animation-delay:.40s}.event-product:nth-child(7){animation-delay:.48s}.event-product:nth-child(8){animation-delay:.56s}@keyframes cardRise{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:none}}.event-product:hover{transform:translateY(-9px);box-shadow:0 24px 50px rgba(0,0,0,.65),0 0 25px rgba(255,90,0,.12);border-color:rgba(255,120,30,.6)}.product-art{position:relative;background:#08060b;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden}.product-art:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.13) 50%,transparent 75%);transform:translateX(-120%);transition:none}.event-product:hover .product-art:after{animation:cardShine .8s ease}@keyframes cardShine{to{transform:translateX(120%)}}.product-art img{width:100%;height:100%;object-fit:contain;display:block}.product-info{padding:15px 15px 16px;display:flex;flex-direction:column;flex:1}.event-badge{display:inline-block;align-self:flex-start;font-size:9px;font-weight:800;letter-spacing:.14em;padding:5px 8px;border:1px solid currentColor;border-radius:999px;margin-bottom:9px;opacity:.85}.event-product h3{font-size:14px;line-height:1.4;font-weight:500;margin:0 0 10px;min-height:40px}.event-price{font-size:16px;font-weight:800;margin-top:auto;margin-bottom:13px}.event-buy{display:block;text-align:center;padding:12px;background:#ff6500;color:#120500;font-size:10px;font-weight:800;letter-spacing:.13em}.event-buy:hover{filter:brightness(1.08)}
+.event-end{text-align:center;padding:35px 20px 80px}.event-end h3{font-size:27px;margin:0 0 10px}.event-end p{opacity:.65;margin:0 0 22px}.event-end a{display:inline-block;border:1px solid currentColor;padding:12px 20px;font-size:11px;font-weight:700;letter-spacing:.12em}
+.event-empty{text-align:center;padding:50px 20px;border:1px dashed rgba(255,255,255,.3);opacity:.7}
+.event-particles{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}.event-particle{position:absolute;top:105%;opacity:0;animation:floatParticle linear infinite}.event-particle.glyph{font-family:"Apple Color Emoji","Segoe UI Emoji",sans-serif;filter:drop-shadow(0 0 8px rgba(255,90,0,.65))}@keyframes floatParticle{0%{transform:translate3d(0,0,0) rotate(0deg);opacity:0}10%{opacity:.8}90%{opacity:.45}100%{transform:translate3d(var(--drift),-125vh,0) rotate(var(--spin));opacity:0}}
+.fog{position:fixed;left:-20vw;width:140vw;height:240px;pointer-events:none;z-index:3;filter:blur(20px);opacity:.45;mix-blend-mode:screen;animation:fogDrift 12s ease-in-out infinite alternate}.fog.one{top:48vh;background:radial-gradient(ellipse at 20% 50%,rgba(210,210,225,.16),transparent 48%),radial-gradient(ellipse at 70% 45%,rgba(255,255,255,.08),transparent 55%)}.fog.two{top:78vh;opacity:.28;animation-delay:-5s;background:radial-gradient(ellipse at 70% 50%,rgba(210,210,225,.13),transparent 50%),radial-gradient(ellipse at 20% 40%,rgba(255,255,255,.06),transparent 55%)}@keyframes fogDrift{from{transform:translateX(-8%) translateY(0) scaleX(1)}to{transform:translateX(10%) translateY(-25px) scaleX(1.12)}}
+.web{position:absolute;z-index:6;pointer-events:none;width:180px;height:180px;opacity:.85}.web svg{width:100%;height:100%;overflow:visible}.web-tl{top:-3px;left:-3px}.web-br{right:-5px;bottom:40px;transform:rotate(180deg) scale(.72);opacity:.48}.spider-drop{position:absolute;z-index:7;top:-2px;right:14%;width:34px;height:130px;pointer-events:none}.spider-drop:before{content:"";position:absolute;left:16px;top:0;width:1px;height:95px;background:rgba(255,255,255,.55)}.spider-drop:after{content:"🕷";position:absolute;top:87px;left:4px;font-size:24px;filter:drop-shadow(0 0 7px #ff5a00);animation:spiderSwing 3s ease-in-out infinite}@keyframes spiderSwing{50%{transform:translateX(9px) rotate(8deg)}}
+.theme-halloween .event-heading h2{color:#ff7418;text-shadow:0 0 8px #ff4b00,0 0 28px rgba(255,60,0,.55)}.theme-halloween .event-product{border-color:rgba(255,91,0,.42)}.theme-halloween .event-buy{background:#ff6500}.theme-halloween .event-end h3{color:#ff7418}.theme-halloween .event-heading:after{color:#ff7418}.theme-halloween .event-product:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 10%,rgba(255,90,0,.1),transparent 28%),radial-gradient(circle at 90% 90%,rgba(110,0,180,.1),transparent 30%)}.theme-halloween .event-particle{filter:drop-shadow(0 0 9px rgba(255,70,0,.8))}.theme-halloween .event-page{} 
+.theme-christmas .event-heading h2{color:#e5c65a}.theme-christmas .event-buy{background:#a50d20;color:#fff}.theme-newyear .event-heading h2{color:#d8c9ff}.theme-newyear .event-buy{background:#5f43c2;color:#fff}.theme-valentines .event-heading h2{color:#ff8aaa}.theme-valentines .event-buy{background:#c51659;color:#fff}.theme-easter .event-heading h2{color:#e0b9ff}.theme-easter .event-buy{background:#8156a9;color:#fff}.theme-bonfire .event-heading h2{color:#ff9b42}.theme-bonfire .event-buy{background:#ff7200}.theme-diwali .event-heading h2{color:#ffd45b}.theme-diwali .event-buy{background:#c2185b;color:#fff}.theme-summer .event-heading h2{color:#63ecff}.theme-summer .event-buy{background:#00a5b5;color:#fff}.theme-blackfriday .event-heading h2{color:#e4c45c}.theme-blackfriday .event-buy{background:#111;color:#e4c45c}.theme-holiday .event-heading h2{color:#64dfc5}.theme-holiday .event-buy{background:#007f6d;color:#fff}
+@media(max-width:900px){.event-products{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:650px){.icons{height:78px;padding:0 18px}.brand,.brand img{width:62px;height:62px}.icon svg{width:38px;height:38px}.menu{justify-content:flex-start;gap:28px;padding:0 20px;height:58px}.menu a{font-size:16px}.event{height:130px}.wrap{padding:12px 12px 0}.event-shop{padding:42px 2px 60px}.event-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-info{padding:11px}.event-product h3{font-size:12px;min-height:50px}.event-price{font-size:14px}.event-buy{padding:11px 5px;font-size:9px}.web{width:145px;height:145px}.spider-drop{right:8%;transform:scale(.8);transform-origin:top}.fog{height:180px}.event-heading{margin-bottom:28px}.event-end{padding-bottom:55px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head>
+<body id="page">
+<header class="top"><div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div><nav class="menu" id="mainMenu"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header>
+<div class="wrap">
+<section class="event" id="event"></section>
+<div class="event-tools"><button class="atmo-btn" id="atmoBtn" type="button">🔊 ATMOSPHERE OFF</button></div>
+<section class="event-shop" id="eventShop"><div class="event-heading"><div class="event-kicker">POP &amp; LOCK PRESENTS</div><h2 id="eventHeading">THE COLLECTION</h2><p id="eventShopIntro">Loading the event collection...</p></div><div class="event-products" id="eventProducts"></div><div class="web web-tl" aria-hidden="true"><svg viewBox="0 0 180 180"><g fill="none" stroke="white" stroke-width="1.2" opacity=".9"><path d="M0 0H180M0 0L180 30M0 0L180 65M0 0L180 105M0 0L150 150M0 0L105 180M0 0L65 180M0 0L30 180"/><path d="M16 0Q12 12 0 16M36 0Q29 29 0 36M60 0Q48 48 0 60M87 0Q69 69 0 87M115 0Q91 91 0 115M143 0Q113 113 0 143"/><path d="M0 36Q29 29 36 0M0 60Q48 48 60 0M0 87Q69 69 87 0M0 115Q91 91 115 0M0 143Q113 113 143 0"/></g></svg></div><div class="web web-br" aria-hidden="true"><svg viewBox="0 0 180 180"><g fill="none" stroke="white" stroke-width="1.2" opacity=".9"><path d="M0 0H180M0 0L180 30M0 0L180 65M0 0L180 105M0 0L150 150M0 0L105 180M0 0L65 180M0 0L30 180"/><path d="M16 0Q12 12 0 16M36 0Q29 29 0 36M60 0Q48 48 0 60M87 0Q69 69 0 87M115 0Q91 91 0 115M143 0Q113 113 0 143"/><path d="M0 36Q29 29 36 0M0 60Q48 48 60 0M0 87Q69 69 87 0M0 115Q91 91 115 0M0 143Q113 113 143 0"/></g></svg></div><div class="spider-drop" aria-hidden="true"></div></section>
+<section class="event-end"><h3 id="eventEndTitle">THE ADVENTURE CONTINUES</h3><p>Explore the full Pop &amp; Lock collection for more grails, signed pieces and collectibles.</p><a href="shop.html">BROWSE THE FULL SHOP</a></section>
+</div>
+<div class="fog one" aria-hidden="true"></div><div class="fog two" aria-hidden="true"></div><div class="event-particles" id="particles" aria-hidden="true"></div>
 <script>
-(async function(){
-const id=new URLSearchParams(location.search).get('event');
-try{
-const r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});
-if(!r.ok) throw new Error('Events unavailable');
-const events=await r.json();
-const e=events.find(x=>String(x.id)===String(id));
-if(!e || e.visible!==true){
-  location.replace('index.html');
-  return;
-}
-document.title=(e.title||e.name||'Event')+' | Pop & Lock';
-const eventName=String(e.title||e.name||'event').toLowerCase();
-let theme='default';
-if(eventName.includes('christmas')||eventName.includes('boxing')) theme='christmas';
-else if(eventName.includes('halloween')) theme='halloween';
-else if(eventName.includes('valentine')) theme='valentines';
-else if(eventName.includes('easter')) theme='easter';
-else if(eventName.includes('patrick')||eventName.includes('mother')||eventName.includes('father')) theme='holiday';
-else if(eventName.includes('bonfire')) theme='bonfire';
-else if(eventName.includes('black friday')) theme='blackfriday';
-else if(eventName.includes('new year')) theme='newyear';
-else if(eventName.includes('summer')) theme='summer';
-else if(eventName.includes('diwali')) theme='diwali';
-document.getElementById('page').className='event-page theme-'+theme;
-document.getElementById('event').className='event';
-document.getElementById('eventShop').className='event-shop theme-'+theme+'-shop';
-document.getElementById('event').innerHTML='<img class="event-bg" src="'+(e.image||'')+'" alt="'+(e.title||e.name||'Event')+'" onerror="this.style.display=\'none\'"><div class="shade"></div><div class="copy"><h1>'+ (e.title||e.name||'Event') +'</h1></div>';
-const pr=await fetch('products.json?v='+Date.now(),{cache:'no-store'});
-if(pr.ok){
- const products=await pr.json();
- const shop=document.getElementById('eventProducts');
- const intro=document.getElementById('eventShopIntro');
- intro.textContent='Browse the Pop & Lock collection for '+(e.title||e.name||'this event')+'.';
- const available=products.filter(function(p){return Number(p.stock||0)>0});
- if(!available.length){shop.innerHTML='<div class="event-empty">No products are currently available.</div>';}
- else {
-   shop.innerHTML=available.map(function(p){
-     return '<article class="event-product"><img src="'+String(p.image||'')+'" alt="'+String(p.name||'').replace(/"/g,'&quot;')+'"><h3>'+String(p.name||'')+'</h3><div class="event-price">£'+Number(p.price||0).toFixed(2)+'</div><a class="event-buy" href="product.html?id='+encodeURIComponent(p.id)+'">VIEW PRODUCT</a></article>';
-   }).join('');
- }
-}
-}catch(err){
-  location.replace('index.html');
-}
-})();
-</script>
-<script>(async function(){try{const r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;const events=await r.json();const menu=document.getElementById('mainMenu');events.filter(e=>e&&e.visible===true).forEach(e=>{const a=document.createElement('a');a.href=e.link||('event.html?event='+encodeURIComponent(e.id));a.textContent=e.title||e.name||'EVENT';const live=Array.from(menu.querySelectorAll('a')).find(x=>x.textContent.trim()==='LIVE SHOWS');if(live)live.insertAdjacentElement('afterend',a);else menu.appendChild(a);});}catch(e){}})();</script><script>
 (function(){
- const page=document.getElementById('page');
- const box=document.createElement('div');box.className='event-particles';box.setAttribute('aria-hidden','true');
- const eventId=(new URLSearchParams(location.search).get('event')||'').toLowerCase();
- let glyphs=['✦','✧','•'];
- if(eventId.includes('halloween'))glyphs=['🦇','🎃','🧙‍♀️','🕷','🕸','👻','💀'];
- else if(eventId.includes('christmas')||eventId.includes('boxing'))glyphs=['❄','❄','✦','•'];
- else if(eventId.includes('new-year')||eventId.includes('newyear'))glyphs=['✦','✧','•','✷'];
- else if(eventId.includes('valentine'))glyphs=['♥','♡','•'];
- else if(eventId.includes('easter'))glyphs=['✦','•','🌸'];
- else if(eventId.includes('bonfire'))glyphs=['✦','•','🔥'];
- else if(eventId.includes('diwali'))glyphs=['✦','✧','•','🪔'];
- else if(eventId.includes('summer'))glyphs=['•','✦','☀'];
- for(let n=0;n<30;n++){
-   const p=document.createElement('span');p.className='event-particle glyph';
-   p.textContent=glyphs[n%glyphs.length];
-   p.style.left=(Math.random()*100)+'%';
-   p.style.fontSize=(10+Math.random()*20)+'px';
-   p.style.animationDuration=(8+Math.random()*13)+'s';
-   p.style.animationDelay=(-Math.random()*18)+'s';
-   p.style.setProperty('--drift',(-90+Math.random()*180)+'px');
-   p.style.setProperty('--spin',(-180+Math.random()*360)+'deg');
-   box.appendChild(p);
- }
- page.appendChild(box);
+var searchToggle=document.getElementById('searchToggle'),search=document.getElementById('headerSearch');
+searchToggle.addEventListener('click',function(e){e.preventDefault();search.classList.toggle('open');if(search.classList.contains('open'))document.getElementById('headerSearchInput').focus()});
 })();
-</script></body></html>
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function themeFor(name){var n=String(name||'').toLowerCase();if(n.includes('christmas')||n.includes('boxing'))return'christmas';if(n.includes('halloween'))return'halloween';if(n.includes('valentine'))return'valentines';if(n.includes('easter'))return'easter';if(n.includes('patrick')||n.includes('mother')||n.includes('father'))return'holiday';if(n.includes('bonfire'))return'bonfire';if(n.includes('black friday'))return'blackfriday';if(n.includes('new year'))return'newyear';if(n.includes('summer'))return'summer';if(n.includes('diwali'))return'diwali';return'default'}
+function eventCopy(theme,title){var m={halloween:['ENTER IF YOU DARE','THE SPOOKY COLLECTION','THE NIGHT ISN’T OVER…'],christmas:['CHRISTMAS COLLECTION','MERRY POPMAS','KEEP THE MAGIC GOING'],newyear:['THE NEW YEAR COLLECTION','NEW YEAR, NEW GRAILS','SEE YOU IN THE NEXT YEAR'],valentines:['LOVE AT FIRST POP','THE VALENTINE’S COLLECTION','MORE POPS TO LOVE'],easter:['THE EASTER COLLECTION','HOP INTO THE COLLECTION','MORE TO DISCOVER'],bonfire:['LIGHT UP THE COLLECTION','BONFIRE NIGHT','KEEP THE NIGHT BURNING'],diwali:['THE DIWALI COLLECTION','LIGHT UP YOUR COLLECTION','MORE TO DISCOVER'],summer:['THE SUMMER COLLECTION','SUMMER POPS','KEEP EXPLORING'],blackfriday:['BLACK FRIDAY COLLECTION','THE BIGGEST POP PICKS','MORE DEALS TO DISCOVER'],holiday:[title||'HOLIDAY COLLECTION','THE HOLIDAY COLLECTION','MORE TO DISCOVER'],default:[title||'THE COLLECTION','THE EVENT COLLECTION','MORE TO DISCOVER']};return m[theme]||m.default}
+function makeParticles(theme){
+var box=document.getElementById('particles'),g={halloween:['🦇','👻','🎃','🕷','💀'],christmas:['❄','❄','🎁','✦'],newyear:['✦','✧','🎆','✨'],valentines:['♥','♡','💌'],easter:['🌸','🐰','🥚'],bonfire:['🔥','✦','•'],diwali:['🪔','✨','✦'],summer:['☀','🌊','✦'],blackfriday:['$','★','✦'],holiday:['🎁','✦','✨']}[theme]||['✦','•'];for(var i=0;i<32;i++){var p=document.createElement('span');p.className='event-particle glyph';p.textContent=g[i%g.length];p.style.left=Math.random()*100+'%';p.style.fontSize=(11+Math.random()*19)+'px';p.style.animationDuration=(9+Math.random()*15)+'s';p.style.animationDelay=(-Math.random()*20)+'s';p.style.setProperty('--drift',(-100+Math.random()*200)+'px');p.style.setProperty('--spin',(-180+Math.random()*360)+'deg');box.appendChild(p)}}
+var audioCtx=null,master=null,oscillators=[];
+function toggleAtmosphere(theme){
+var btn=document.getElementById('atmoBtn');
+if(!audioCtx){var C=window.AudioContext||window.webkitAudioContext;if(!C)return;audioCtx=new C();master=audioCtx.createGain();master.gain.value=.018;master.connect(audioCtx.destination);[55,73.42,110].forEach(function(freq,i){var o=audioCtx.createOscillator();var g=audioCtx.createGain();o.type=i===2?'sine':'triangle';o.frequency.value=freq;g.gain.value=i===0?.35:.16;o.connect(g).connect(master);o.start();oscillators.push(o)})}
+if(audioCtx.state==='running'){audioCtx.suspend();btn.textContent='🔊 ATMOSPHERE OFF'}else{audioCtx.resume();btn.textContent='🔊 ATMOSPHERE ON'}}
+document.getElementById('atmoBtn').addEventListener('click',function(){toggleAtmosphere(window.currentTheme||'default')});
+(async function(){
+try{
+var id=new URLSearchParams(location.search).get('event');if(!id){location.replace('index.html');return}
+var er=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!er.ok)throw new Error();var events=await er.json();var e=events.find(function(x){return String(x.id)===String(id)});if(!e||e.visible!==true){location.replace('index.html');return}
+var title=e.title||e.name||'EVENT',theme=themeFor(title);window.currentTheme=theme;document.getElementById('page').className='event-page theme-'+theme;document.title=title+' | Pop & Lock';
+document.getElementById('event').innerHTML='<img class="event-bg" src="'+esc(e.image||'')+'" alt="'+esc(title)+'"><div class="shade"></div><div class="copy"><h1>'+esc(title)+'</h1></div>';
+var copy=eventCopy(theme,title);document.getElementById('eventHeading').textContent=copy[1];document.getElementById('eventEndTitle').textContent=copy[2];document.getElementById('eventShopIntro').textContent='A hand-picked Pop & Lock collection for '+title+'.';
+makeParticles(theme);
+var pr=await fetch('products.json?v='+Date.now(),{cache:'no-store'});if(!pr.ok)throw new Error();var products=await pr.json();var chosen=Array.isArray(e.products)&&e.products.length?products.filter(function(p){return e.products.map(String).includes(String(p.id))}):products;chosen=chosen.filter(function(p){return Number(p.stock||0)>0});
+var shop=document.getElementById('eventProducts');if(!chosen.length){shop.innerHTML='<div class="event-empty">The event collection is being refreshed. Check back soon.</div>'}else{shop.innerHTML=chosen.map(function(p){var badge=theme==='halloween'?'SPOOKY PICK':theme==='christmas'?'CHRISTMAS PICK':theme==='newyear'?'NEW YEAR PICK':theme==='valentines'?'LOVE PICK':theme==='bonfire'?'NIGHT PICK':'EVENT PICK';return '<article class="event-product"><div class="product-art"><img src="'+esc(p.image||'')+'" alt="'+esc(p.name||'')+'"></div><div class="product-info"><span class="event-badge">'+badge+'</span><h3>'+esc(p.name||'')+'</h3><div class="event-price">£'+Number(p.price||0).toFixed(2)+'</div><a class="event-buy" href="product.html?id='+encodeURIComponent(p.id)+'">VIEW PRODUCT</a></div></article>'}).join('')}
+}catch(err){location.replace('index.html')}
+})();
+(async function(){try{var r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;var events=await r.json(),menu=document.getElementById('mainMenu');events.filter(function(e){return e&&e.visible===true}).forEach(function(e){var a=document.createElement('a');a.href=e.link||('event.html?event='+encodeURIComponent(e.id));a.textContent=e.title||e.name||'EVENT';var live=Array.from(menu.querySelectorAll('a')).find(function(x){return x.textContent.trim()==='LIVE SHOWS'});if(live)live.insertAdjacentElement('afterend',a);else menu.appendChild(a)})}catch(e){}})();
+</script>
+</body></html>
