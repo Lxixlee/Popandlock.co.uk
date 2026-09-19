@@ -9,7 +9,7 @@
 
 .homeitem{border:1px solid #ddd;padding:14px;margin:10px 0;display:grid;grid-template-columns:90px 1fr;gap:14px}.homeitem img{width:90px;height:90px;object-fit:cover;border:1px solid #eee}.homefields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.homefields .wide{grid-column:1/-1}.homeactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.category-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.category-choices label{border:1px solid #ddd;padding:10px;font-size:12px;font-weight:500}.category-choices .sale-choice{border-color:#d22;background:#fff1f1;color:#b00000;font-weight:700}.category-choices input{width:auto;margin-right:6px}.check{display:flex;align-items:center;gap:7px;font-size:13px}.check input{width:auto}.preview{font-size:12px;color:#777;margin-top:4px}@media(max-width:700px){.homeitem{grid-template-columns:1fr}.homefields{grid-template-columns:1fr}.homefields .wide{grid-column:auto}.homeitem img{width:100%;height:150px}}
 
-.eventitem{border:1px solid #ddd;padding:14px;margin:10px 0}.eventfields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.eventfields .wide{grid-column:1/-1}.eventpreview{width:100%;height:150px;object-fit:cover;background:#f2f2f2;border:1px solid #eee}.eventactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.event-add{background:#f7f7f7;border:1px dashed #bbb;padding:14px;margin-bottom:15px}@media(max-width:700px){.eventfields{grid-template-columns:1fr}.eventfields .wide{grid-column:auto}.eventpreview{height:120px}}
+.eventitem{border:1px solid #ddd;padding:14px;margin:10px 0}.eventfields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.eventfields .wide{grid-column:1/-1}.eventpreview{width:100%;height:150px;object-fit:cover;background:#f2f2f2;border:1px solid #eee}.eventactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.event-add{background:#f7f7f7;border:1px dashed #bbb;padding:14px;margin-bottom:15px}.event-picker{margin-top:10px;border:1px solid #ddd;background:#fff;padding:10px;max-height:240px;overflow:auto}.event-picker-title{font-size:12px;font-weight:700;margin-bottom:8px}.event-picker label{display:flex;align-items:center;gap:8px;padding:7px;border-bottom:1px solid #eee;font-weight:400}.event-picker input{width:auto}.event-picker img{width:38px;height:38px;object-fit:contain;border:1px solid #eee}.event-picker small{color:#777}@media(max-width:700px){.eventfields{grid-template-columns:1fr}.eventfields .wide{grid-column:auto}.eventpreview{height:120px}}
 </style>
 </head>
 <body>
@@ -52,7 +52,7 @@
 <div class="field"><label>Title</label><input id="newEventTitle" placeholder="Halloween Event"></div>
 <div class="field"><label>Link <span style="font-weight:400;color:#777">(optional — created automatically)</span></label><input id="newEventLink" placeholder="Leave blank to use the event page"></div>
 <div class="field wide"><label>Image</label><input id="newEventImage" type="file" accept="image/*"></div>
-<label class="check"><input id="newEventVisible" type="checkbox"> Visible on homepage</label>
+<label class="check"><input id="newEventVisible" type="checkbox"> Visible on homepage</label><div class="field wide"><label>Event products <span style="font-weight:400;color:#777">(optional — leave all unchecked to show every available product)</span></label><div id="newEventProducts" class="event-picker"></div></div>
 </div>
 <button class="small" id="addEvent" type="button" style="margin-top:10px">ADD EVENT</button>
 </div>
@@ -109,7 +109,7 @@ async function loadProducts(){
   var ls=document.getElementById('listStatus');
   if(!password()){show(ls,'Enter your admin password first.','error');return}
   ls.className='status show';ls.textContent='Loading products...';
-  try{var d=await api('/admin/list-products',{password:password()});products=d.products||[];render();ls.className='status'}catch(e){show(ls,e.message,'error')}
+  try{var d=await api('/admin/list-products',{password:password()});products=d.products||[];render();renderEvents();ls.className='status'}catch(e){show(ls,e.message,'error')}
 }
 function render(){
   var q=document.getElementById('search').value.toLowerCase().trim();
@@ -221,21 +221,30 @@ async function loadEvents(){
     renderEvents();
   }catch(e){show(st,e.message,'error');el.innerHTML=''}
 }
+function eventPickerHtml(selected){
+  selected=(Array.isArray(selected)?selected:[]).map(String);
+  if(!products.length)return '<div class="meta">Load products to choose event products.</div>';
+  return products.map(function(p){var checked=selected.includes(String(p.id))?'checked':'';return '<label><input type="checkbox" data-event-product value="'+esc(p.id)+'" '+checked+'><img src="'+esc(p.image||'')+'" alt=""><span>'+esc(p.name||'')+'<br><small>£'+Number(p.price||0).toFixed(2)+' · Stock '+Number(p.stock||0)+'</small></span></label>'}).join('');
+}
+function selectedEventProducts(root){return Array.from(root.querySelectorAll('[data-event-product]:checked')).map(function(x){return x.value})}
+function renderNewEventProducts(){var el=document.getElementById('newEventProducts');if(el)el.innerHTML=eventPickerHtml([])}
 function renderEvents(){
   var el=document.getElementById('eventItems');
-  if(!eventData.length){el.innerHTML='<div class="empty">No event banners added yet.</div>';return}
-  el.innerHTML=eventData.map(function(x,i){
+  if(!eventData.length){el.innerHTML='<div class="empty">No event banners added yet.</div>';renderNewEventProducts();return}
+  el.innerHTML=eventData.map(function(x){
     return '<div class="eventitem" data-id="'+esc(x.id)+'"><img class="eventpreview" src="'+esc(x.image||'')+'?v='+Date.now()+'" alt=""><div class="eventfields">'+
       '<div class="field"><label>Title</label><input data-k="title" value="'+esc(x.title||x.name||'')+'"></div>'+
       '<div class="field"><label>Link</label><input data-k="link" value="'+esc(x.link||'')+'"></div>'+
       '<div class="field wide"><label>Replace image (optional)</label><input data-k="image" type="file" accept="image/*"></div>'+
-      '<label class="check"><input data-k="visible" type="checkbox" '+(x.visible===true?'checked':'')+'> Visible on homepage</label></div>'+
+      '<label class="check"><input data-k="visible" type="checkbox" '+(x.visible===true?'checked':'')+'> Visible on homepage</label>'+
+      '<div class="field wide"><label>Event products <span style="font-weight:400;color:#777">(leave all unchecked to show every available product)</span></label><div class="event-picker" data-picker>'+eventPickerHtml(x.products||[])+'</div></div></div>'+
       '<div class="eventactions"><button class="small" type="button" data-save-event>SAVE CHANGES</button><button class="small danger" type="button" data-delete-event>REMOVE</button></div></div>';
   }).join('');
+  renderNewEventProducts();
   el.querySelectorAll('[data-save-event]').forEach(function(btn){btn.onclick=async function(){
     var item=btn.closest('.eventitem'),id=item.getAttribute('data-id'),file=item.querySelector('[data-k="image"]').files[0];btn.disabled=true;
     try{var imageBase64='';if(file)imageBase64=await resizeImage(file);
-      var updated=eventData.map(function(x){if(String(x.id)!==String(id))return x;return {id:x.id,title:item.querySelector('[data-k="title"]').value.trim(),link:item.querySelector('[data-k="link"]').value.trim(),visible:item.querySelector('[data-k="visible"]').checked,image:x.image||'',imageBase64:imageBase64};});
+      var updated=eventData.map(function(x){if(String(x.id)!==String(id))return x;return {id:x.id,title:item.querySelector('[data-k="title"]').value.trim(),link:item.querySelector('[data-k="link"]').value.trim(),visible:item.querySelector('[data-k="visible"]').checked,image:x.image||'',products:selectedEventProducts(item),imageBase64:imageBase64};});
       var d=await api('/admin/update-events',{password:password(),items:updated});eventData=d.items||updated;show(document.getElementById('eventStatus'),'Event banners updated successfully.','ok');renderEvents();
     }catch(e){show(document.getElementById('eventStatus'),e.message,'error')}finally{btn.disabled=false}
   }});
@@ -249,7 +258,7 @@ document.getElementById('addEvent').onclick=async function(){
   if(!title||!file){show(document.getElementById('eventStatus'),'Please enter a title and image.','error');return}
   btn.disabled=true;
   try{var imageBase64=await resizeImage(file);var id=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-'+Date.now();if(!link)link='event.html?event='+id;
-    var updated=eventData.concat([{id:id,title:title,link:link,visible:document.getElementById('newEventVisible').checked,image:'',imageBase64:imageBase64}]);
+    var updated=eventData.concat([{id:id,title:title,link:link,visible:document.getElementById('newEventVisible').checked,image:'',products:selectedEventProducts(document.getElementById('newEventProducts')),imageBase64:imageBase64}]);
     var d=await api('/admin/update-events',{password:password(),items:updated});eventData=d.items||updated;
     document.getElementById('newEventTitle').value='';document.getElementById('newEventLink').value='';document.getElementById('newEventImage').value='';document.getElementById('newEventVisible').checked=false;
     show(document.getElementById('eventStatus'),'Event banner added.','ok');renderEvents();
