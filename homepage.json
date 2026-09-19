@@ -68,5 +68,12 @@
     "image": "homepage-images/other.jpg",
     "link": "shop.html#other",
     "visible": true
+  },
+  {
+    "id": "thrilljoy",
+    "name": "THRILLJOY",
+    "image": "homepage-images/thrilljoy.jpg",
+    "link": "shop.html#thrilljoy",
+    "visible": true
   }
 ]
