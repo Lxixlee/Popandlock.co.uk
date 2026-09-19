@@ -16,7 +16,8 @@
 .event.theme-diwali{background:linear-gradient(135deg,#4a001f,#c2185b 45%,#ffb300)}.theme-diwali .shade{background:linear-gradient(90deg,rgba(60,0,25,.8),rgba(194,24,91,.3),rgba(180,100,0,.55))}.theme-diwali .btn{background:#ffd54f;color:#4a001f}.theme-diwali .kicker{color:#ffe082}
 
 @media(max-width:600px){.event{min-height:430px}.copy h1{font-size:42px}.copy p{font-size:14px}}
-</style></head><body><div class="wrap"><a class="back" href="index.html">← BACK TO POP &amp; LOCK</a><section class="event" id="event"><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>POP &amp; LOCK</h1><p>Explore our latest event.</p><a class="btn" href="shop.html">SHOP ALL</a></div></section><section class="note"><h2>More to discover</h2><p>Browse the full Pop &amp; Lock collection for Funko Pops, grails and signed pieces.</p></section></div>
+.event-shop{padding:42px 0 10px}.event-shop h2{text-align:center;font-size:32px;font-weight:500;margin:0 0 8px}.event-shop-intro{text-align:center;color:#777;margin:0 0 28px}.event-products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.event-product{border:1px solid #ddd;background:#fff;padding:12px}.event-product img{width:100%;aspect-ratio:1;object-fit:contain;background:#f7f7f7}.event-product h3{font-size:14px;font-weight:500;margin:12px 0 6px}.event-price{font-weight:700;margin-bottom:10px}.event-buy{display:block;text-align:center;padding:10px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em}.theme-christmas + .event-shop .event-buy,.theme-christmas .event-buy{background:#8b0000}.event-empty{text-align:center;padding:30px;border:1px dashed #ccc;color:#777}@media(max-width:900px){.event-products{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.event-products{grid-template-columns:repeat(2,1fr);gap:10px}.event-shop{padding-top:30px}.event-shop h2{font-size:25px}}
+</style></head><body><div class="wrap"><a class="back" href="index.html">← BACK TO POP &amp; LOCK</a><section class="event" id="event"><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>POP &amp; LOCK</h1><p>Explore our latest event.</p><a class="btn" href="shop.html">SHOP ALL</a></div></section><section class="event-shop" id="eventShop"><h2>SHOP THE EVENT</h2><p class="event-shop-intro" id="eventShopIntro">Loading the collection...</p><div class="event-products" id="eventProducts"></div></section><section class="note"><h2>More to discover</h2><p>Browse the full Pop &amp; Lock collection for Funko Pops, grails and signed pieces.</p></section></div>
 <script>
 (async function(){
 const id=new URLSearchParams(location.search).get('event');
@@ -43,7 +44,21 @@ else if(eventName.includes('new year')) theme='newyear';
 else if(eventName.includes('summer')) theme='summer';
 else if(eventName.includes('diwali')) theme='diwali';
 document.getElementById('event').className='event theme-'+theme;
-document.getElementById('event').innerHTML='<img class="event-bg" src="'+(e.image||'')+'" alt="'+(e.title||e.name||'Event')+'" onerror="this.style.display=\'none\'"><div class="shade"></div><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>'+ (e.title||e.name||'Event') +'</h1><p>'+ (e.subtitle||'Explore this Pop & Lock event.') +'</p><a class="btn" href="'+(e.link||'shop.html')+'">SHOP NOW</a></div>';
+document.getElementById('event').innerHTML='<img class="event-bg" src="'+(e.image||'')+'" alt="'+(e.title||e.name||'Event')+'" onerror="this.style.display=\'none\'"><div class="shade"></div><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>'+ (e.title||e.name||'Event') +'</h1><p>'+ (e.subtitle||'Explore this Pop & Lock event.') +'</p><a class="btn" href="#eventShop">SHOP NOW</a></div>';
+const pr=await fetch('products.json?v='+Date.now(),{cache:'no-store'});
+if(pr.ok){
+ const products=await pr.json();
+ const shop=document.getElementById('eventProducts');
+ const intro=document.getElementById('eventShopIntro');
+ intro.textContent='Browse the Pop & Lock collection for '+(e.title||e.name||'this event')+'.';
+ const available=products.filter(function(p){return Number(p.stock||0)>0});
+ if(!available.length){shop.innerHTML='<div class="event-empty">No products are currently available.</div>';}
+ else {
+   shop.innerHTML=available.map(function(p){
+     return '<article class="event-product"><img src="'+String(p.image||'')+'" alt="'+String(p.name||'').replace(/"/g,'&quot;')+'"><h3>'+String(p.name||'')+'</h3><div class="event-price">£'+Number(p.price||0).toFixed(2)+'</div><a class="event-buy" href="product.html?id='+encodeURIComponent(p.id)+'">VIEW PRODUCT</a></article>';
+   }).join('');
+ }
+}
 }catch(err){
   location.replace('index.html');
 }
