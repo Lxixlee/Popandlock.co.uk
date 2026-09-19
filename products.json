@@ -34,5 +34,17 @@
     "boxCondition": "Near Mint",
     "stock": 1,
     "featured": true
+  },
+  {
+    "id": "stonekeeper-avengers-infinity-war-339",
+    "name": "Stonekeeper - Avengers Infinity War #339",
+    "category": "Marvel",
+    "price": 54.99,
+    "image": "product-images/stonekeeper-avengers-infinity-war-339.jpg",
+    "description": "",
+    "condition": "Vaulted",
+    "boxCondition": "Near Mint",
+    "stock": 1,
+    "featured": true
   }
 ]
