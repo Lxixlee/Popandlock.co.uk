@@ -8,6 +8,8 @@
 *{box-sizing:border-box}body{margin:0;background:#f7f7f7;color:#111;font-family:Arial,Helvetica,sans-serif}.wrap{max-width:1000px;margin:auto;padding:25px 12px 60px}.top,.card{background:#fff;border:1px solid #ddd;padding:20px;margin-bottom:18px}.top{text-align:center}.top img{width:70px;height:70px;object-fit:contain}.top h1{margin:5px 0 0;font-size:25px;font-weight:500}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px}.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input,select,textarea{width:100%;padding:12px;border:1px solid #ccc;background:#fff;font:inherit}textarea{min-height:100px;resize:vertical}.button,.small{border:0;background:#111;color:#fff;padding:13px;font-weight:700;cursor:pointer}.button{width:100%;margin-top:18px}.small{padding:9px 12px}.danger{background:#9b1c1c}.light{background:#eee;color:#111}.status{display:none;padding:12px;margin-top:14px;font-size:13px}.show{display:block}.ok{background:#edf8ef}.error{background:#fff0f0}.toolbar{display:flex;gap:10px;margin-bottom:15px}.toolbar input{flex:1}.products{display:grid;grid-template-columns:1fr 1fr;gap:12px}.product{border:1px solid #ddd;padding:12px;display:grid;grid-template-columns:80px 1fr;gap:12px}.product img{width:80px;height:80px;object-fit:contain;border:1px solid #eee}.product h3{font-size:15px;margin:0 0 5px}.meta{font-size:12px;color:#666;line-height:1.5}.actions{display:flex;gap:7px;margin-top:8px}.empty{text-align:center;color:#777;padding:20px;border:1px dashed #ccc}#editCard{display:none}@media(max-width:700px){.grid,.products{grid-template-columns:1fr}.full{grid-column:auto}.toolbar{display:block}.toolbar input{margin-bottom:8px}}
 
 .homeitem{border:1px solid #ddd;padding:14px;margin:10px 0;display:grid;grid-template-columns:90px 1fr;gap:14px}.homeitem img{width:90px;height:90px;object-fit:cover;border:1px solid #eee}.homefields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.homefields .wide{grid-column:1/-1}.homeactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.category-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.category-choices label{border:1px solid #ddd;padding:10px;font-size:12px;font-weight:500}.category-choices .sale-choice{border-color:#d22;background:#fff1f1;color:#b00000;font-weight:700}.category-choices input{width:auto;margin-right:6px}.check{display:flex;align-items:center;gap:7px;font-size:13px}.check input{width:auto}.preview{font-size:12px;color:#777;margin-top:4px}@media(max-width:700px){.homeitem{grid-template-columns:1fr}.homefields{grid-template-columns:1fr}.homefields .wide{grid-column:auto}.homeitem img{width:100%;height:150px}}
+
+.eventitem{border:1px solid #ddd;padding:14px;margin:10px 0}.eventfields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.eventfields .wide{grid-column:1/-1}.eventpreview{width:100%;height:150px;object-fit:cover;background:#f2f2f2;border:1px solid #eee}.eventactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.event-add{background:#f7f7f7;border:1px dashed #bbb;padding:14px;margin-bottom:15px}@media(max-width:700px){.eventfields{grid-template-columns:1fr}.eventfields .wide{grid-column:auto}.eventpreview{height:120px}}
 </style>
 </head>
 <body>
@@ -41,6 +43,22 @@
 <div id="homepageStatus" class="status"></div>
 </div>
 
+<div class="card" id="eventsCard">
+<h2>Event Banners</h2>
+<p style="font-size:13px;color:#666">Add, remove and control homepage event banners. Upload a banner, choose its title and link, then switch it Visible on/off whenever you want.</p>
+<div class="event-add">
+<h3 style="margin-top:0">Add Event Banner</h3>
+<div class="eventfields">
+<div class="field"><label>Title</label><input id="newEventTitle" placeholder="Halloween Event"></div>
+<div class="field"><label>Link</label><input id="newEventLink" placeholder="halloween.html"></div>
+<div class="field wide"><label>Image</label><input id="newEventImage" type="file" accept="image/*"></div>
+<label class="check"><input id="newEventVisible" type="checkbox"> Visible on homepage</label>
+</div>
+<button class="small" id="addEvent" type="button" style="margin-top:10px">ADD EVENT</button>
+</div>
+<div id="eventItems"></div>
+<div id="eventStatus" class="status"></div>
+</div>
 <div class="card" id="editCard">
 <h2>Edit Product</h2>
 <form id="editForm">
@@ -73,7 +91,7 @@
 <script>
 var API='https://popandlock-payments.popandlock31.workers.dev';
 var products=[];
-var homepageData=[];
+var homepageData=[];\nvar eventData=[];
 var form=document.getElementById('form');
 var file=document.getElementById('image');
 var status=document.getElementById('status');
@@ -165,7 +183,47 @@ function renderHomepage(items){
     }
   });
 }
-document.getElementById('password').addEventListener('change',function(){loadHomepage()});
+async function loadEvents(){
+  var el=document.getElementById('eventItems'),st=document.getElementById('eventStatus');
+  if(!password()){show(st,'Enter your admin password first.','error');return}
+  el.innerHTML='<div class="empty">Loading event banners...</div>';
+  try{var d=await api('/admin/list-events',{password:password()});eventData=d.items||[];renderEvents();}catch(e){show(st,e.message,'error');el.innerHTML=''}
+}
+function renderEvents(){
+  var el=document.getElementById('eventItems');
+  if(!eventData.length){el.innerHTML='<div class="empty">No event banners added yet.</div>';return}
+  el.innerHTML=eventData.map(function(x,i){
+    return '<div class="eventitem" data-id="'+esc(x.id)+'"><img class="eventpreview" src="'+esc(x.image||'')+'?v='+Date.now()+'" alt=""><div class="eventfields">'+
+      '<div class="field"><label>Title</label><input data-k="title" value="'+esc(x.title||x.name||'')+'"></div>'+
+      '<div class="field"><label>Link</label><input data-k="link" value="'+esc(x.link||'')+'"></div>'+
+      '<div class="field wide"><label>Replace image (optional)</label><input data-k="image" type="file" accept="image/*"></div>'+
+      '<label class="check"><input data-k="visible" type="checkbox" '+(x.visible===true?'checked':'')+'> Visible on homepage</label></div>'+
+      '<div class="eventactions"><button class="small" type="button" data-save-event>SAVE CHANGES</button><button class="small danger" type="button" data-delete-event>REMOVE</button></div></div>';
+  }).join('');
+  el.querySelectorAll('[data-save-event]').forEach(function(btn){btn.onclick=async function(){
+    var item=btn.closest('.eventitem'),id=item.getAttribute('data-id'),file=item.querySelector('[data-k="image"]').files[0];btn.disabled=true;
+    try{var imageBase64='';if(file)imageBase64=await resizeImage(file);
+      var updated=eventData.map(function(x){if(String(x.id)!==String(id))return x;return {id:x.id,title:item.querySelector('[data-k="title"]').value.trim(),link:item.querySelector('[data-k="link"]').value.trim(),visible:item.querySelector('[data-k="visible"]').checked,image:x.image||'',imageBase64:imageBase64};});
+      var d=await api('/admin/update-events',{password:password(),items:updated});eventData=d.items||updated;show(document.getElementById('eventStatus'),'Event banners updated successfully.','ok');renderEvents();
+    }catch(e){show(document.getElementById('eventStatus'),e.message,'error')}finally{btn.disabled=false}
+  }});
+  el.querySelectorAll('[data-delete-event]').forEach(function(btn){btn.onclick=async function(){
+    var item=btn.closest('.eventitem'),id=item.getAttribute('data-id');if(!confirm('Remove this event banner?'))return;btn.disabled=true;
+    try{var updated=eventData.filter(function(x){return String(x.id)!==String(id)});var d=await api('/admin/update-events',{password:password(),items:updated});eventData=d.items||updated;show(document.getElementById('eventStatus'),'Event removed.','ok');renderEvents();}catch(e){show(document.getElementById('eventStatus'),e.message,'error')}finally{btn.disabled=false}
+  }});
+}
+document.getElementById('addEvent').onclick=async function(){
+  var title=document.getElementById('newEventTitle').value.trim(),link=document.getElementById('newEventLink').value.trim(),file=document.getElementById('newEventImage').files[0],btn=this;
+  if(!title||!link||!file){show(document.getElementById('eventStatus'),'Please enter a title, link and image.','error');return}
+  btn.disabled=true;
+  try{var imageBase64=await resizeImage(file);var id=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-'+Date.now();
+    var updated=eventData.concat([{id:id,title:title,link:link,visible:document.getElementById('newEventVisible').checked,image:'',imageBase64:imageBase64}]);
+    var d=await api('/admin/update-events',{password:password(),items:updated});eventData=d.items||updated;
+    document.getElementById('newEventTitle').value='';document.getElementById('newEventLink').value='';document.getElementById('newEventImage').value='';document.getElementById('newEventVisible').checked=false;
+    show(document.getElementById('eventStatus'),'Event banner added.','ok');renderEvents();
+  }catch(e){show(document.getElementById('eventStatus'),e.message,'error')}finally{btn.disabled=false}
+};
+document.getElementById('password').addEventListener('change',function(){loadHomepage();loadEvents()});
 document.querySelectorAll('#categoryChoices input').forEach(function(x){x.addEventListener('change',function(){if(!document.querySelector('#categoryChoices input:checked'))x.checked=true})});
 form.onsubmit=async function(e){
   e.preventDefault();submit.disabled=true;status.className='status';status.textContent='Adding product...';
