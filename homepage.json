@@ -68,5 +68,12 @@
     "image": "homepage-images/other.jpg",
     "link": "shop.html#other",
     "visible": true
+  },
+  {
+    "id": "sale",
+    "name": "SALE",
+    "image": "",
+    "link": "shop.html#sale",
+    "visible": true
   }
 ]
