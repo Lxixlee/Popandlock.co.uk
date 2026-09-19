@@ -9,7 +9,10 @@
     "condition": "New",
     "boxCondition": "Mint",
     "stock": 1,
-    "featured": true
+    "featured": true,
+    "categories": [
+      "Horror"
+    ]
   },
   {
     "id": "b-rabbit-1052",
@@ -21,7 +24,10 @@
     "condition": "Vaulted",
     "boxCondition": "Good",
     "stock": 1,
-    "featured": true
+    "featured": true,
+    "categories": [
+      "Music"
+    ]
   },
   {
     "id": "pazuzu-nft-1900pcs-the-exorcist-291",
@@ -33,7 +39,10 @@
     "condition": "Used",
     "boxCondition": "Near Mint",
     "stock": 1,
-    "featured": true
+    "featured": true,
+    "categories": [
+      "Horror"
+    ]
   },
   {
     "id": "stonekeeper-avengers-infinity-war-339",
@@ -45,7 +54,10 @@
     "condition": "Vaulted",
     "boxCondition": "Near Mint",
     "stock": 1,
-    "featured": true
+    "featured": true,
+    "categories": [
+      "Marvel"
+    ]
   },
   {
     "id": "ethan-hawke-signed-the-grabber-black-phone-1488",
@@ -57,6 +69,10 @@
     "condition": "Used",
     "boxCondition": "Mint",
     "stock": 1,
-    "featured": true
+    "featured": true,
+    "categories": [
+      "Signed",
+      "Horror"
+    ]
   }
 ]
