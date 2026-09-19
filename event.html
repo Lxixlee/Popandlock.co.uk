@@ -4,6 +4,17 @@
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}a{text-decoration:none;color:inherit}
 .wrap{max-width:1200px;margin:auto;padding:35px 20px 80px}.back{display:inline-block;font-size:12px;font-weight:700;margin-bottom:25px}.event{min-height:520px;background:#111;color:#fff;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}.event-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.62}.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.3),rgba(0,0,0,.72))}.copy{position:relative;z-index:2;padding:40px 20px}.kicker{font-size:12px;letter-spacing:.22em;font-weight:700;color:#ddd}.copy h1{font-size:clamp(42px,8vw,90px);font-weight:500;margin:12px 0}.copy p{font-size:16px;color:#eee;margin:0 auto 28px}.btn{display:inline-block;background:#fff;color:#111;padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:.08em}.note{text-align:center;padding:35px 15px}.note h2{font-size:28px;font-weight:400;margin:0 0 10px}.note p{color:#777;margin:0}
+.event.theme-christmas{background:linear-gradient(135deg,#0b3d2e,#8b0000 52%,#d4af37);}.theme-christmas .shade{background:linear-gradient(90deg,rgba(0,45,30,.78),rgba(120,0,0,.35),rgba(0,30,20,.78))}.theme-christmas .btn{background:#fff;color:#8b0000}.theme-christmas .kicker{color:#f5d76e}
+.event.theme-halloween{background:linear-gradient(135deg,#14001f,#ff6a00 55%,#080808)}.theme-halloween .shade{background:linear-gradient(90deg,rgba(20,0,31,.82),rgba(255,70,0,.3),rgba(0,0,0,.8))}.theme-halloween .btn{background:#ff6a00;color:#111}.theme-halloween .kicker{color:#ffb36b}
+.event.theme-valentines{background:linear-gradient(135deg,#5b001b,#d4145a 55%,#ff7aa2)}.theme-valentines .shade{background:linear-gradient(90deg,rgba(70,0,20,.8),rgba(212,20,90,.3),rgba(80,0,30,.75))}.theme-valentines .btn{background:#fff;color:#b00045}.theme-valentines .kicker{color:#ffd0df}
+.event.theme-easter{background:linear-gradient(135deg,#6a4c93,#ffb4d8 50%,#8fd694)}.theme-easter .shade{background:linear-gradient(90deg,rgba(70,40,110,.72),rgba(255,180,216,.2),rgba(40,100,60,.55))}.theme-easter .btn{background:#fff;color:#6a4c93}.theme-easter .kicker{color:#fff}
+.event.theme-holiday{background:linear-gradient(135deg,#004d40,#00796b 50%,#f9a825)}.theme-holiday .shade{background:linear-gradient(90deg,rgba(0,60,50,.78),rgba(0,121,107,.3),rgba(100,70,0,.65))}.theme-holiday .btn{background:#fff;color:#00695c}.theme-holiday .kicker{color:#ffe082}
+.event.theme-bonfire{background:linear-gradient(135deg,#111,#7b1e00 50%,#ff9800)}.theme-bonfire .shade{background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(120,25,0,.35),rgba(255,120,0,.45))}.theme-bonfire .btn{background:#ff9800;color:#111}.theme-bonfire .kicker{color:#ffd180}
+.event.theme-blackfriday{background:linear-gradient(135deg,#050505,#252525 50%,#111)}.theme-blackfriday .shade{background:linear-gradient(90deg,rgba(0,0,0,.9),rgba(30,30,30,.35),rgba(0,0,0,.9))}.theme-blackfriday .btn{background:#d4af37;color:#111}.theme-blackfriday .kicker{color:#d4af37}
+.event.theme-newyear{background:linear-gradient(135deg,#050505,#172554 50%,#7c3aed)}.theme-newyear .shade{background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(23,37,84,.35),rgba(70,20,100,.65))}.theme-newyear .btn{background:#fff;color:#172554}.theme-newyear .kicker{color:#f7d774}
+.event.theme-summer{background:linear-gradient(135deg,#006064,#00acc1 50%,#ffd54f)}.theme-summer .shade{background:linear-gradient(90deg,rgba(0,70,80,.7),rgba(0,172,193,.25),rgba(200,150,0,.4))}.theme-summer .btn{background:#fff;color:#006064}.theme-summer .kicker{color:#fff59d}
+.event.theme-diwali{background:linear-gradient(135deg,#4a001f,#c2185b 45%,#ffb300)}.theme-diwali .shade{background:linear-gradient(90deg,rgba(60,0,25,.8),rgba(194,24,91,.3),rgba(180,100,0,.55))}.theme-diwali .btn{background:#ffd54f;color:#4a001f}.theme-diwali .kicker{color:#ffe082}
+
 @media(max-width:600px){.event{min-height:430px}.copy h1{font-size:42px}.copy p{font-size:14px}}
 </style></head><body><div class="wrap"><a class="back" href="index.html">← BACK TO POP &amp; LOCK</a><section class="event" id="event"><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>POP &amp; LOCK</h1><p>Explore our latest event.</p><a class="btn" href="shop.html">SHOP ALL</a></div></section><section class="note"><h2>More to discover</h2><p>Browse the full Pop &amp; Lock collection for Funko Pops, grails and signed pieces.</p></section></div>
 <script>
@@ -19,6 +30,19 @@ if(!e || e.visible!==true){
   return;
 }
 document.title=(e.title||e.name||'Event')+' | Pop & Lock';
+const eventName=String(e.title||e.name||'event').toLowerCase();
+let theme='default';
+if(eventName.includes('christmas')||eventName.includes('boxing')) theme='christmas';
+else if(eventName.includes('halloween')) theme='halloween';
+else if(eventName.includes('valentine')) theme='valentines';
+else if(eventName.includes('easter')) theme='easter';
+else if(eventName.includes('patrick')||eventName.includes('mother')||eventName.includes('father')) theme='holiday';
+else if(eventName.includes('bonfire')) theme='bonfire';
+else if(eventName.includes('black friday')) theme='blackfriday';
+else if(eventName.includes('new year')) theme='newyear';
+else if(eventName.includes('summer')) theme='summer';
+else if(eventName.includes('diwali')) theme='diwali';
+document.getElementById('event').className='event theme-'+theme;
 document.getElementById('event').innerHTML='<img class="event-bg" src="'+(e.image||'')+'" alt="'+(e.title||e.name||'Event')+'" onerror="this.style.display=\'none\'"><div class="shade"></div><div class="copy"><div class="kicker">POP &amp; LOCK EVENT</div><h1>'+ (e.title||e.name||'Event') +'</h1><p>'+ (e.subtitle||'Explore this Pop & Lock event.') +'</p><a class="btn" href="'+(e.link||'shop.html')+'">SHOP NOW</a></div>';
 }catch(err){
   location.replace('index.html');
