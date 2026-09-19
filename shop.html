@@ -100,4 +100,23 @@ function render(){
 search.addEventListener('input',render);sort.addEventListener('change',render);
 grid.addEventListener('click',function(e){const btn=e.target.closest('.add-bag');if(!btn)return;e.preventDefault();e.stopPropagation();const id=btn.dataset.add;const product=products.find(p=>p.id===id);if(!product||Number(product.stock)<=0)return;let bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]');const item=bag.find(x=>x.id===id);const currentQty=item?Math.max(0,Number(item.qty)||0):0;if(currentQty>=Number(product.stock)){btn.textContent='OUT OF STOCK';btn.disabled=true;return;}if(item)item.qty=currentQty+1;else bag.push({id:id,qty:1});localStorage.setItem('popandlock-bag',JSON.stringify(bag));updateBagCount();render()});
 async function loadProducts(){try{const response=await fetch('products.json?v='+Date.now());if(!response.ok)throw new Error();products=await response.json();renderSubcategories();render()}catch(e){count.textContent='Unable to load products';empty.style.display='block'}} loadProducts();</script>
-<script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script></body></html>
+<script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script><script id="event-nav-loader">
+(function(){
+  try{
+    fetch('events.json?v='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():[]}).then(function(events){
+      var menu=document.querySelector('.menu');
+      if(!menu||!Array.isArray(events))return;
+      var live=Array.from(menu.querySelectorAll('a')).find(function(a){return a.textContent.trim()==='LIVE SHOWS'});
+      if(!live)return;
+      events.filter(function(e){return e&&e.visible===true}).forEach(function(e){
+        if(Array.from(menu.querySelectorAll('a')).some(function(a){return a.getAttribute('href')===(e.link||('event.html?event='+encodeURIComponent(e.id)))}))return;
+        var a=document.createElement('a');
+        a.href=e.link||('event.html?event='+encodeURIComponent(e.id));
+        a.textContent=e.title||e.name||'EVENT';
+        live.insertAdjacentElement('afterend',a);
+        live=a;
+      });
+    }).catch(function(){});
+  }catch(e){}
+})();
+</script></body></html>
