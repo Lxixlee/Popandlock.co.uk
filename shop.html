@@ -45,7 +45,7 @@ html,body{max-width:100%;overflow-x:hidden}
 </div>
 
 <div class="filters" aria-label="Categories" id="categoryFilters">
-<button class="filter active" data-category="All">ALL</button><button class="filter" data-category="Marvel">MARVEL</button><button class="filter" data-category="DC">DC</button><button class="filter" data-category="Disney">DISNEY</button><button class="filter" data-category="Horror">HORROR</button><button class="filter" data-category="TV &amp; Film">TV &amp; FILM</button><button class="filter" data-category="Music">MUSIC</button><button class="filter" data-category="Signed">SIGNED</button><button class="filter" data-category="Grails">GRAILS</button><button class="filter" data-category="Anime">ANIME</button><button class="filter" data-category="Thrilljoy">THRILLJOY</button><button class="filter" data-category="Other">OTHER</button>
+<button class="filter active" data-category="All">ALL</button><button class="filter" data-category="Marvel">MARVEL</button><button class="filter" data-category="DC">DC</button><button class="filter" data-category="Disney">DISNEY</button><button class="filter" data-category="Horror">HORROR</button><button class="filter" data-category="TV &amp; Film">TV &amp; FILM</button><button class="filter" data-category="Music">MUSIC</button><button class="filter" data-category="Signed">SIGNED</button><button class="filter" data-category="Grails">GRAILS</button><button class="filter" data-category="Anime">ANIME</button><button class="filter" data-category="Other">OTHER</button>
 </div>
 <div id="subcategoryFilters" class="filters subfilters" style="display:none" aria-label="Subcategories"></div>
 
@@ -73,7 +73,7 @@ if(category.toLowerCase()==='tv & film') category='TV & Film';
 if(category.toLowerCase()==='thrilljoy') category='Thrilljoy';
 const search=document.getElementById('search'),sort=document.getElementById('sort'),grid=document.getElementById('grid'),empty=document.getElementById('empty'),count=document.getElementById('count'),subcategoryFilters=document.getElementById('subcategoryFilters');
 let subcategory=new URLSearchParams(location.search).get('subcategory')||'All';
-const categoryNames=['Marvel','DC','Disney','Horror','TV & Film','Music','Signed','Grails','Anime','Thrilljoy','Other'];
+const categoryNames=['Marvel','DC','Disney','Horror','TV & Film','Music','Signed','Grails','Anime','Other'];
 
 function productCategories(p){return Array.isArray(p.categories)&&p.categories.length?p.categories:[p.category];}
 function renderSubcategories(){
