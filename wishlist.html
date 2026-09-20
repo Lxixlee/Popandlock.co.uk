@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Wishlist | Pop &amp; Lock</title><meta name="description" content="Your saved Funko Pop wishlist at Pop &amp; Lock.">
+<link rel="canonical" href="https://www.popandlock.co.uk/wishlist.html"><link rel="icon" href="/logo.png">
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#fff;color:#111;font-family:Arial,Helvetica,sans-serif}a{text-decoration:none;color:inherit}img{display:block;max-width:100%}
+.top{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:20}.icons{height:112px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 34px}.icon{display:flex;align-items:center;justify-content:center;position:relative}.icon svg{width:48px;height:48px;stroke:#111;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}.brand{justify-self:center;width:82px}.brand img{width:82px;height:82px;object-fit:contain}.menu{display:flex;justify-content:center;gap:42px;height:76px;align-items:center;overflow-x:auto;white-space:nowrap}.menu a{font-size:24px;font-weight:500}.wishlist-count{position:absolute;top:7px;right:calc(50% - 25px);min-width:20px;height:20px;border-radius:10px;background:#111;color:#fff;font-size:10px;align-items:center;justify-content:center}.page{width:min(1400px,calc(100% - 32px));margin:auto;padding:52px 0 90px}.heading{text-align:center;margin-bottom:34px}.heading h1{font-size:48px;font-weight:400;margin:0 0 9px}.heading p{color:#777}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}.card{border:1px solid #e7e7e7;overflow:hidden}.pic{position:relative;aspect-ratio:1;background:#f7f7f7}.pic img{width:100%;height:100%;object-fit:contain;padding:12px}.heart{position:absolute;top:12px;right:12px;width:40px;height:40px;border:1px solid #ddd;background:#fff;border-radius:50%;font-size:22px;line-height:1;cursor:pointer}.heart.saved{background:#111;color:#fff;border-color:#111}.body{padding:15px}.tag{font-size:9px;color:#777;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.name{font-size:15px;line-height:1.35;margin:7px 0}.price{font-weight:700}.empty{text-align:center;border:1px solid #eee;padding:75px 20px;color:#777}.empty h2{color:#111;font-weight:400}.empty a{display:inline-block;background:#111;color:#fff;padding:13px 22px;font-size:12px;font-weight:700;margin-top:12px}
+footer{border-top:1px solid #eee;text-align:center;padding:45px 20px 60px}.footer-links{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;font-size:14px;font-weight:700}.footer-note{margin-top:22px;font-size:11px;color:#777}.footer-copy{margin-top:10px;font-size:12px;color:#777}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:760px){.icons{height:100px;padding:0 15px}.icon svg{width:40px;height:40px}.brand,.brand img{width:70px;height:70px}.menu{height:65px;justify-content:flex-start;padding:0 20px;gap:28px}.menu a{font-size:17px}.page{padding-top:35px}.heading h1{font-size:34px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}@media(max-width:420px){.grid{gap:8px}.body{padding:11px}.name{font-size:13px}}
+</style></head><body>
+<header class="top"><div class="icons">
+<a class="icon" href="shop.html" aria-label="Search"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a>
+<a class="brand" href="index.html"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a>
+<a class="icon" href="bag.html" aria-label="Bag"><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a>
+</div><nav class="menu"><a href="shop.html">SHOP</a><a href="wishlist.html">WISHLIST</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header>
+<main class="page"><section class="heading"><h1>Your Wishlist</h1><p>Save Pops you want to come back to later. Your wishlist is stored on this device.</p></section><div id="grid" class="grid"></div><div id="empty" class="empty" style="display:none"><h2>Your wishlist is empty</h2><p>Tap the ♡ on any product to save it here.</p><a href="shop.html">SHOP FUNKOS</a></div></main>
+<footer><nav class="footer-links"><a href="shop.html">SHOP</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav><div class="footer-note">Questions? <a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></div><div class="footer-copy">© Pop &amp; Lock</div></footer>
+<script>/* Pop & Lock collector features: wishlist + recently viewed */
+(function(){
+  function read(key){try{var v=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(v)?v:[]}catch(e){return[]}}
+  function write(key,v){try{localStorage.setItem(key,JSON.stringify(v))}catch(e){}}
+  window.PLWishlist={
+    all:function(){return read('popandlock-wishlist')},
+    has:function(id){return this.all().some(function(x){return String(x)===String(id)})},
+    toggle:function(id){var a=this.all(),i=a.indexOf(id);if(i>=0)a.splice(i,1);else a.unshift(id);write('popandlock-wishlist',a);document.dispatchEvent(new CustomEvent('pl:wishlist'));return i<0},
+    count:function(){return this.all().length}
+  };
+  window.PLRecent={
+    all:function(){return read('popandlock-recent').filter(Boolean)},
+    add:function(id){var a=this.all().filter(function(x){return String(x)!==String(id)});a.unshift(id);write('popandlock-recent',a.slice(0,12));document.dispatchEvent(new CustomEvent('pl:recent'))}
+  };
+  function update(){
+    document.querySelectorAll('[data-wishlist-id]').forEach(function(b){
+      var on=PLWishlist.has(b.getAttribute('data-wishlist-id'));
+      b.classList.toggle('saved',on);b.setAttribute('aria-pressed',on?'true':'false');
+      b.setAttribute('title',on?'Remove from wishlist':'Add to wishlist');
+      b.innerHTML=on?'♥':'♡';
+    });
+    document.querySelectorAll('.wishlist-count').forEach(function(e){var n=PLWishlist.count();e.textContent=n;e.style.display=n?'inline-flex':'none'});
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('[data-wishlist-id]');if(!b)return;
+    e.preventDefault();e.stopPropagation();PLWishlist.toggle(b.getAttribute('data-wishlist-id'));update();
+  });
+  document.addEventListener('pl:wishlist',update);
+  document.addEventListener('DOMContentLoaded',update);
+})();
+async function load(){var grid=document.getElementById('grid'),empty=document.getElementById('empty');try{var products=await(await fetch('products.json?v='+Date.now())).json();function render(){var ids=PLWishlist.all(),items=ids.map(function(id){return products.find(function(p){return String(p.id)===String(id)})}).filter(Boolean);grid.innerHTML=items.map(function(p){return '<article class="card"><a href="product.html?id='+encodeURIComponent(p.id)+'"><div class="pic">'+(p.image?'<img src="'+p.image+'" alt="'+String(p.name).replace(/"/g,'&quot;')+'">':'')+'</div></a><button class="heart saved" data-wishlist-id="'+String(p.id).replace(/"/g,'&quot;')+'" aria-label="Remove from wishlist">♥</button><div class="body"><div class="tag">'+(p.categories||[p.category]).join(' · ')+'</div><div class="name"><a href="product.html?id='+encodeURIComponent(p.id)+'">'+p.name+'</a></div><div class="price">£'+Number(p.salePrice&&p.salePrice< p.price?p.salePrice:p.price).toFixed(2)+'</div></div></article>'}).join('');empty.style.display=items.length?'none':'block';grid.style.display=items.length?'grid':'none'}render();document.addEventListener('pl:wishlist',render)}catch(e){grid.style.display='none';empty.style.display='block'}}load();
+</script></body></html>
