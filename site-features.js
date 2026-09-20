@@ -17,6 +17,7 @@
       var on=PLWishlist.has(b.getAttribute('data-wishlist-id'));
       b.classList.toggle('saved',on);b.setAttribute('aria-pressed',on?'true':'false');
       b.setAttribute('title',on?'Remove from wishlist':'Add to wishlist');
+      b.setAttribute('aria-label',on?'Remove from wishlist':'Add to wishlist');
       b.innerHTML=on?'♥':'♡';
     });
     document.querySelectorAll('.wishlist-count').forEach(function(e){var n=PLWishlist.count();e.textContent=n;e.style.display=n?'inline-flex':'none'});
