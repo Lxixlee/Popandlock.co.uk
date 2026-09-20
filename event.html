@@ -24,6 +24,8 @@
 .intro-title-wrap{position:relative;z-index:20;text-align:center;opacity:0;transform:scale(.7);filter:blur(16px);animation:introTitleIn 1s cubic-bezier(.2,.85,.2,1) .7s forwards}
 .intro-kicker{display:block;font-size:10px;letter-spacing:.5em;font-weight:800;opacity:.65;margin-bottom:18px}
 .intro-title{margin:0;font-size:clamp(42px,9vw,118px);font-weight:900;letter-spacing:.13em;line-height:.95;text-shadow:0 0 14px currentColor,0 0 45px currentColor}
+.intro-message{margin:20px auto 0;max-width:min(760px,82vw);font-size:clamp(12px,1.8vw,18px);font-weight:700;letter-spacing:.24em;line-height:1.5;text-transform:uppercase;opacity:0;transform:translateY(14px);animation:introMessageIn .8s cubic-bezier(.2,.85,.2,1) 1.35s forwards;text-shadow:0 0 12px currentColor}
+@keyframes introMessageIn{to{opacity:.9;transform:none}}
 .intro-line{height:2px;width:0;margin:20px auto 0;background:currentColor;box-shadow:0 0 16px currentColor;animation:introLineIn .8s ease 1.15s forwards}
 .intro-fade{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 18%,rgba(0,0,0,.7) 100%);opacity:0;animation:introFadeIn 1.8s ease .1s forwards}
 .intro-stars,.intro-snow,.intro-hearts,.intro-particles,.intro-bats,.intro-gifts,.intro-eggs,.intro-flowers,.intro-lamps,.intro-sparks,.intro-confetti{position:absolute;display:block;font-style:normal;opacity:0}
@@ -54,7 +56,7 @@
 .intro-lamp-row{position:absolute;left:8%;right:8%;bottom:16%;display:flex;justify-content:space-between}
 .intro-lamp-row span{font-size:clamp(24px,4vw,54px);opacity:0;text-shadow:0 0 16px #ffb52e,0 0 35px #ff7a00;animation:lampGlow .9s ease var(--delay) forwards}
 .intro-sun-rays{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 38%,rgba(255,221,100,.08) 0 3deg,transparent 3deg 18deg);opacity:0;animation:introFadeIn 1.5s ease .4s forwards}
-@media(prefers-reduced-motion:reduce){.event-intro{animation:introExit .3s ease .4s forwards}.intro-title-wrap{animation:none;opacity:1;transform:none;filter:none}.intro-layer *{animation:none!important}.intro-countdown{display:none}}
+@media(prefers-reduced-motion:reduce){.event-intro{animation:introExit .3s ease .4s forwards}.intro-title-wrap{animation:none;opacity:1;transform:none;filter:none}.intro-message{animation:none;opacity:.9;transform:none}.intro-layer *{animation:none!important}.intro-countdown{display:none}}
 </style><style id="pl-mobile-app-css">
 .pl-mobile-nav,.pl-persistent-bag{display:none}
 @media(max-width:760px){
@@ -119,6 +121,7 @@ var fade=document.createElement('div');fade.className='intro-fade';layer.appendC
 var wrap=document.createElement('div');wrap.className='intro-title-wrap';
 var kicker=document.createElement('span');kicker.className='intro-kicker';kicker.textContent='POP & LOCK PRESENTS';wrap.appendChild(kicker);
 var h=document.createElement('h1');h.className='intro-title';h.textContent=title;wrap.appendChild(h);
+var message=document.createElement('div');message.className='intro-message';message.textContent=eventCopy(theme,title)[0];wrap.appendChild(message);
 var line=document.createElement('div');line.className='intro-line';wrap.appendChild(line);intro.appendChild(wrap);
 document.body.appendChild(intro);
 
