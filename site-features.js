@@ -90,7 +90,7 @@
     if(document.getElementById('pl-scroll-reveal-style'))return;
     var s=document.createElement('style');
     s.id='pl-scroll-reveal-style';
-    s.textContent='
+    s.textContent=`
       @media (prefers-reduced-motion:no-preference){
         .pl-reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
         .pl-reveal.pl-revealed{opacity:1;transform:none}
@@ -100,7 +100,7 @@
         .pl-reveal[data-reveal-delay="4"]{transition-delay:.28s}
         .pl-reveal[data-reveal-delay="5"]{transition-delay:.35s}
       }
-    ';
+    `;
     document.head.appendChild(s);
     if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     var selectors='.heading,.section,.category-grid,.event-grid,.grid,.related-products,.collection-strip,.benefits,.footer-info,.footer-links,.event-product,.card,.related-card,.collector-panel,.product-share,.sell-card,.contact-card,.live-card';
