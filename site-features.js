@@ -51,5 +51,6 @@
   }
   function refreshMobileBag(){var n=bagCount();document.querySelectorAll('.pl-mobile-bag i').forEach(function(x){x.textContent=n})}
   document.addEventListener('DOMContentLoaded',function(){mountMobileUI();transitions();refreshMobileBag()});
+  window.addEventListener('pageshow',function(){document.documentElement.classList.remove('pl-leaving');document.body.classList.remove('pl-leaving');});
   window.addEventListener('storage',refreshMobileBag);
 })();
