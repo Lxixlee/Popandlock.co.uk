@@ -234,12 +234,19 @@ html,body{max-width:100%;overflow-x:hidden}
   }
 }
 </style>
-<style id="pl-basket-state">
-.top .icons>a.icon:last-child{position:relative}
-.top .icons>a.icon:last-child svg{stroke:#111!important;fill:#fff!important;transition:stroke .2s ease,fill .2s ease}
-.top .icons>a.icon:last-child.has-items svg{stroke:#111!important;fill:#111!important}
-.top .icons>a.icon:last-child .bag-count{position:absolute!important;top:50%!important;right:50%!important;transform:translate(50%,-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;background:transparent!important;color:#fff!important;border:0!important;border-radius:0!important;min-width:0!important;width:auto!important;height:auto!important;padding:0!important;font-size:11px!important;font-weight:800!important;line-height:1!important;z-index:5!important;pointer-events:none!important}
-@media(max-width:760px){.top .icons>a.icon:last-child .bag-count{font-size:10px!important}}
+<style id="pl-basket-final-state">
+.top .icons>a.icon:last-child svg,.top .icons .bag-header svg{stroke:#111!important;fill:#fff!important}
+.top .icons>a.icon:last-child .bag-count,.top .icons .bag-header .bag-count{
+position:absolute!important;top:50%!important;left:50%!important;right:auto!important;
+transform:translate(-50%,-50%)!important;display:flex!important;align-items:center!important;
+justify-content:center!important;background:transparent!important;color:#111!important;
+border:0!important;border-radius:0!important;min-width:0!important;width:auto!important;height:auto!important;
+padding:0!important;font-size:11px!important;font-weight:800!important;line-height:1!important;
+z-index:5!important;pointer-events:none!important
+}
+@media(max-width:760px){
+ .top .icons>a.icon:last-child .bag-count,.top .icons .bag-header .bag-count{font-size:10px!important}
+}
 </style></head>
 <body>
 <header class="top">
@@ -252,7 +259,7 @@ function updateBagCount(){
   try{
     const bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]');
     const count=bag.reduce((n,x)=>n+Math.max(0,Number(x.qty)||0),0);
-    document.querySelectorAll('.bag-count').forEach(el=>{el.textContent=count;el.style.display=count?'flex':'none';var basket=el.closest('.icons')?.querySelector('a.icon:last-child');if(basket)basket.classList.toggle('has-items',count>0)});
+    document.querySelectorAll('.bag-count').forEach(el=>{el.textContent=count;el.style.display=count?'flex':'none';var basket=el.closest('.icons')?.querySelector('a.icon:last-child');if(basket)basket.classList.remove('has-items')});
   }catch(e){}
 }
 document.addEventListener('DOMContentLoaded',updateBagCount);
