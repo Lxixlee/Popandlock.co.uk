@@ -213,14 +213,14 @@ async function loadEvents(){
         var fallback=await fetch('events.json?v='+Date.now());
         if(!fallback.ok)throw workerError;
         eventData=await fallback.json();
-        eventData=eventData.map(function(x){return {id:x.id,title:x.title||x.name||'',link:x.link||('event.html?event='+x.id),visible:x.visible===true,image:x.image||''}});
-        show(st,'Events loaded. Worker connection needs attention before saving changes.','error');
+        eventData=eventData.map(function(x){return Object.assign({},x,{id:x.id,title:x.title||x.name||'',link:x.link||('event.html?event='+x.id),visible:x.visible===true,image:x.image||'',products:Array.isArray(x.products)?x.products:[]})});
+        show(st,'Events loaded from the site configuration. Worker connection needs attention before saving changes.','error');
       }
     }else{
       var fallback=await fetch('events.json?v='+Date.now());
       if(!fallback.ok)throw new Error('Unable to load event banners');
       eventData=await fallback.json();
-      eventData=eventData.map(function(x){return {id:x.id,title:x.title||x.name||'',link:x.link||('event.html?event='+x.id),visible:x.visible===true,image:x.image||''}});
+      eventData=eventData.map(function(x){return Object.assign({},x,{id:x.id,title:x.title||x.name||'',link:x.link||('event.html?event='+x.id),visible:x.visible===true,image:x.image||'',products:Array.isArray(x.products)?x.products:[]})});
     }
     renderEvents();
   }catch(e){show(st,e.message,'error');el.innerHTML=''}
@@ -248,7 +248,7 @@ function renderEvents(){
   el.querySelectorAll('[data-save-event]').forEach(function(btn){btn.onclick=async function(){
     var item=btn.closest('.eventitem'),id=item.getAttribute('data-id'),file=item.querySelector('[data-k="image"]').files[0];btn.disabled=true;
     try{var imageBase64='';if(file)imageBase64=await resizeImage(file);
-      var updated=eventData.map(function(x){if(String(x.id)!==String(id))return x;return {id:x.id,title:item.querySelector('[data-k="title"]').value.trim(),link:item.querySelector('[data-k="link"]').value.trim(),visible:item.querySelector('[data-k="visible"]').checked,image:x.image||'',products:selectedEventProducts(item),imageBase64:imageBase64};});
+      var updated=eventData.map(function(x){if(String(x.id)!==String(id))return x;return Object.assign({},x,{id:x.id,title:item.querySelector('[data-k="title"]').value.trim(),link:item.querySelector('[data-k="link"]').value.trim(),visible:item.querySelector('[data-k="visible"]').checked,image:x.image||'',products:selectedEventProducts(item),imageBase64:imageBase64});});
       var d=await api('/admin/update-events',{password:password(),items:updated});eventData=d.items||updated;show(document.getElementById('eventStatus'),'Event banners updated successfully.','ok');renderEvents();
     }catch(e){show(document.getElementById('eventStatus'),e.message,'error')}finally{btn.disabled=false}
   }});
@@ -261,8 +261,9 @@ document.getElementById('addEvent').onclick=async function(){
   var title=document.getElementById('newEventTitle').value.trim(),link=document.getElementById('newEventLink').value.trim(),file=document.getElementById('newEventImage').files[0],btn=this;
   if(!title||!file){show(document.getElementById('eventStatus'),'Please enter a title and image.','error');return}
   btn.disabled=true;
-  try{var imageBase64=await resizeImage(file);var id=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-'+Date.now();if(!link)link='event.html?event='+id;
-    var updated=eventData.concat([{id:id,title:title,link:link,visible:document.getElementById('newEventVisible').checked,image:'',products:selectedEventProducts(document.getElementById('newEventProducts')),imageBase64:imageBase64}]);
+  try{var imageBase64=await resizeImage(file);var baseId=title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');var existing=eventData.find(function(x){return String(x.id)===String(baseId)||String(x.title||'').trim().toLowerCase()===title.toLowerCase()});var id=existing?existing.id:baseId;if(!link)link='event.html?event='+id;
+    var newItem={id:id,title:title,link:link,visible:document.getElementById('newEventVisible').checked,image:existing&&existing.image?existing.image:'',products:selectedEventProducts(document.getElementById('newEventProducts')),imageBase64:imageBase64};
+    var updated=existing?eventData.map(function(x){return String(x.id)===String(existing.id)?Object.assign({},x,newItem):x}):eventData.concat([newItem]);
     var d=await api('/admin/update-events',{password:password(),items:updated});eventData=d.items||updated;
     document.getElementById('newEventTitle').value='';document.getElementById('newEventLink').value='';document.getElementById('newEventImage').value='';document.getElementById('newEventVisible').checked=false;
     show(document.getElementById('eventStatus'),'Event banner added.','ok');renderEvents();
