@@ -85,3 +85,44 @@
   window.addEventListener('pageshow',function(){document.documentElement.classList.remove('pl-leaving');document.body.classList.remove('pl-leaving')});
   window.addEventListener('storage',refreshMobileBag);
 })();
+(function(){
+  function scrollReveal(){
+    if(document.getElementById('pl-scroll-reveal-style'))return;
+    var s=document.createElement('style');
+    s.id='pl-scroll-reveal-style';
+    s.textContent='
+      @media (prefers-reduced-motion:no-preference){
+        .pl-reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+        .pl-reveal.pl-revealed{opacity:1;transform:none}
+        .pl-reveal[data-reveal-delay="1"]{transition-delay:.07s}
+        .pl-reveal[data-reveal-delay="2"]{transition-delay:.14s}
+        .pl-reveal[data-reveal-delay="3"]{transition-delay:.21s}
+        .pl-reveal[data-reveal-delay="4"]{transition-delay:.28s}
+        .pl-reveal[data-reveal-delay="5"]{transition-delay:.35s}
+      }
+    ';
+    document.head.appendChild(s);
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    var selectors='.heading,.section,.category-grid,.event-grid,.grid,.related-products,.collection-strip,.benefits,.footer-info,.footer-links,.event-product,.card,.related-card,.collector-panel,.product-share,.sell-card,.contact-card,.live-card';
+    var nodes=[];
+    document.querySelectorAll(selectors).forEach(function(el){
+      if(el.closest('.hero-reel,.hero-track,.event-opening-system'))return;
+      if(el.classList.contains('pl-reveal'))return;
+      el.classList.add('pl-reveal');
+      nodes.push(el);
+    });
+    if(!('IntersectionObserver' in window)){
+      nodes.forEach(function(el){el.classList.add('pl-revealed')});
+      return;
+    }
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting)return;
+        entry.target.classList.add('pl-revealed');
+        observer.unobserve(entry.target);
+      });
+    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    nodes.forEach(function(el){observer.observe(el)});
+  }
+  document.addEventListener('DOMContentLoaded',scrollReveal);
+})();
