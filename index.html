@@ -140,10 +140,12 @@ html,body{max-width:100%;overflow-x:hidden}
  .add-bag{min-height:40px!important;font-size:9px!important}
  /* product: easier thumb and CTA */
  .product{gap:18px!important}.details h1{font-size:27px!important}.button{min-height:52px!important}
- /* homepage hero: swipeable and edge-to-edge */
- .hero-reel{margin:0!important}.hero-track{touch-action:pan-x!important;scroll-snap-type:x mandatory!important}
- .hero-slide{min-height:430px!important}.hero-content{padding:30px 18px!important}
- .hero-track:after{content:'SWIPE →';position:absolute;right:14px;bottom:12px;color:#fff;background:rgba(0,0,0,.45);padding:6px 9px;border-radius:999px;font-size:8px;letter-spacing:.12em;pointer-events:none}
+ /* homepage hero: compact, clean banner */
+ .hero-reel{margin:0!important}
+ .hero-track{touch-action:pan-x!important;scroll-snap-type:x mandatory!important}
+ .hero-slide{min-height:215px!important}
+ .hero-content{padding:16px 12px!important}
+ .reel-arrow{display:none!important}
  /* mobile search */
  .header-search{position:fixed!important;top:72px!important;left:0;right:0;background:#fff!important;padding:10px 12px 12px!important;z-index:999!important;box-shadow:0 8px 20px rgba(0,0,0,.08)}
  .header-search input{height:46px!important;border-radius:24px!important;padding:0 18px!important;font-size:16px!important;background:#f7f7f7!important;border:1px solid #ddd!important}
@@ -266,7 +268,7 @@ z-index:5!important;pointer-events:none!important
 <div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon wishlist-header" href="wishlist.html" aria-label="Wishlist" title="Wishlist"><span class="wishlist-count" aria-label="Saved wishlist items">0</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40S7 29 7 17c0-6 4-10 10-10 4 0 6 2 7 5 1-3 3-5 7-5 6 0 10 4 10 10 0 12-17 23-17 23z"></path></svg></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div>
 <nav class="menu" id="mainMenu" aria-label="Main navigation"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav>
 </header>
-<main><section class="hero-reel"><div class="hero-track" id="heroTrack"><section class="hero-slide"><div class="hero-content"><img class="hero-logo" src="logo.png?v=4" alt="Pop &amp; Lock"><h1 style="color:#fff!important">POP &amp; LOCK</h1><p style="color:#fff!important">FUNKO POPS • EXCLUSIVES • GRAILS • SIGNED</p><div class="hero-actions"><a class="hero-btn" href="shop.html">SHOP NOW</a><a class="hero-btn alt" href="sell-to-us.html">SELL TO US</a></div></div></section><section class="hero-slide thrilljoy-slide"><img class="thrilljoy-full-bg" src="homepage-images/thrilljoy.jpg" alt="Thrilljoy"><div class="thrilljoy-overlay"></div><div class="hero-content thrilljoy-content"><div class="arrival-kicker">NOW SHOPPING</div><h1>THRILLJOY</h1><p>EXPLORE OUR THRILLJOY COLLECTIBLES</p><div class="hero-actions"><a class="hero-btn" href="thrilljoy.html">SHOP THRILLJOY</a></div></div></section></div><button class="reel-arrow reel-prev" id="reelPrev" aria-label="Previous slide">‹</button><button class="reel-arrow reel-next" id="reelNext" aria-label="Next slide">›</button><div class="reel-dots" id="reelDots"></div></section><section class="collection-heading"><h2>SHOP BY COLLECTION</h2><p>Find your next favourite Pop.</p></section><section class="categories" id="homepageCategories"></section></main>
+<main><section class="hero-reel"><div class="hero-track" id="heroTrack"><section class="hero-slide"><div class="hero-content"><img class="hero-logo" src="logo.png?v=4" alt="Pop &amp; Lock"><h1 style="color:#fff!important">POP &amp; LOCK</h1><p style="color:#fff!important">FUNKO POPS • EXCLUSIVES • GRAILS • SIGNED</p><div class="hero-actions"><a class="hero-btn" href="shop.html">SHOP NOW</a><a class="hero-btn alt" href="sell-to-us.html">SELL TO US</a></div></div></section><section class="hero-slide thrilljoy-slide"><img class="thrilljoy-full-bg" src="homepage-images/thrilljoy.jpg" alt="Thrilljoy"><div class="thrilljoy-overlay"></div><div class="hero-content thrilljoy-content"><div class="arrival-kicker">NOW SHOPPING</div><h1>THRILLJOY</h1><p>EXPLORE OUR THRILLJOY COLLECTIBLES</p><div class="hero-actions"><a class="hero-btn" href="thrilljoy.html">SHOP THRILLJOY</a></div></div></section></div><div class="reel-dots" id="reelDots"></div></section><section class="collection-heading"><h2>SHOP BY COLLECTION</h2><p>Find your next favourite Pop.</p></section><section class="categories" id="homepageCategories"></section></main>
 <script>
 function updateBagCount(){
   try{
@@ -382,6 +384,8 @@ window.addEventListener('storage',updateBagCount);
 <script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script></body>
 </html>
 
-<style id="pl-banner-nav-fix">@media(min-width:761px){.hero-reel{width:50%!important;margin-left:auto!important;margin-right:auto!important}}@media(max-width:760px){.hero-reel{width:100%!important}}.category.signed .label{width:100%!important;max-width:100%!important;padding:0 24px!important;white-space:nowrap!important;overflow:visible!important;text-align:center!important;font-size:clamp(34px,6vw,76px)!important}</style>
-
-<style id="pl-banner-nav-fix">@media(min-width:761px){.hero-reel{width:50%!important;margin-left:auto!important;margin-right:auto!important}}@media(max-width:760px){.hero-reel{width:100%!important}}.category.signed .label{width:100%!important;max-width:100%!important;padding:0 24px!important;white-space:nowrap!important;overflow:visible!important;text-align:center!important;font-size:clamp(34px,6vw,76px)!important}</style>
+<style id="pl-banner-nav-fix">
+@media(min-width:761px){.hero-reel{width:50%!important;margin-left:auto!important;margin-right:auto!important}}
+@media(max-width:760px){.hero-reel{width:100%!important}}
+.category.signed .label{width:100%!important;max-width:100%!important;padding:0 24px!important;white-space:nowrap!important;overflow:visible!important;text-align:center!important;font-size:clamp(34px,6vw,76px)!important}
+</style>
