@@ -24,7 +24,7 @@
     "id": "st-patricks",
     "title": "ST PATRICK'S DAY",
     "link": "event.html?event=st-patricks",
-    "visible": false,
+    "visible": true,
     "image": "event-banners/st-patricks.jpg"
   },
   {
