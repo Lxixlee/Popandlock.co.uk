@@ -74,5 +74,20 @@
       "Horror",
       "Signed"
     ]
+  },
+  {
+    "id": "fix-it-felix-ralph-breaks-the-internet-11",
+    "name": "Fix-it Felix - Ralph Breaks The Internet #11",
+    "category": "Disney",
+    "categories": [
+      "Disney"
+    ],
+    "price": 9.99,
+    "image": "product-images/fix-it-felix-ralph-breaks-the-internet-11.jpg",
+    "description": "",
+    "condition": "Vaulted",
+    "boxCondition": "Near Mint",
+    "stock": 1,
+    "featured": false
   }
 ]
