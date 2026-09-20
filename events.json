@@ -80,7 +80,7 @@
     "id": "christmas",
     "title": "CHRISTMAS",
     "link": "event.html?event=christmas",
-    "visible": true,
+    "visible": false,
     "image": "event-banners/christmas.jpg"
   },
   {
