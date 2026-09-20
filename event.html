@@ -24,7 +24,7 @@
 .intro-title-wrap{position:relative;z-index:20;text-align:center;opacity:0;transform:scale(.7);filter:blur(16px);animation:introTitleIn 1s cubic-bezier(.2,.85,.2,1) .7s forwards}
 .intro-kicker{display:block;font-size:10px;letter-spacing:.5em;font-weight:800;opacity:.65;margin-bottom:18px}
 .intro-title{margin:0;font-size:clamp(42px,9vw,118px);font-weight:900;letter-spacing:.13em;line-height:.95;text-shadow:0 0 14px currentColor,0 0 45px currentColor}
-.intro-message{margin:20px auto 0;max-width:min(760px,82vw);font-size:clamp(12px,1.8vw,18px);font-weight:700;letter-spacing:.24em;line-height:1.5;text-transform:uppercase;opacity:0;transform:translateY(14px);animation:introMessageIn .8s cubic-bezier(.2,.85,.2,1) 1.35s forwards;text-shadow:0 0 12px currentColor}
+.intro-message{display:block!important;margin:18px auto 0;max-width:min(820px,88vw);font-size:clamp(15px,2.2vw,24px);font-weight:800;letter-spacing:.2em;line-height:1.4;text-transform:uppercase;color:#fff!important;opacity:0;transform:translateY(10px);animation:introMessageIn .65s cubic-bezier(.2,.85,.2,1) .9s forwards;text-shadow:0 0 12px currentColor,0 0 28px currentColor}
 @keyframes introMessageIn{to{opacity:.9;transform:none}}
 .intro-line{height:2px;width:0;margin:20px auto 0;background:currentColor;box-shadow:0 0 16px currentColor;animation:introLineIn .8s ease 1.15s forwards}
 .intro-fade{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 18%,rgba(0,0,0,.7) 100%);opacity:0;animation:introFadeIn 1.8s ease .1s forwards}
@@ -161,7 +161,7 @@ for(var fd=0;fd<22;fd++)add('intro-particles',fd%2?'★':'🎁',Math.random()*10
 }else{
 for(var p=0;p<24;p++)add('intro-stars','✦',Math.random()*100,Math.random()*100,8+Math.random()*18,.1+Math.random(),{}).style.animation='sparkle 1.5s ease-in-out '+(.1+Math.random())+'s forwards';
 }
-setTimeout(function(){intro.classList.add('is-done');setTimeout(function(){intro.remove()},900)},3000);
+setTimeout(function(){intro.classList.add('is-done');setTimeout(function(){intro.remove()},900)},3600);
 }
 (async function(){
 try{
