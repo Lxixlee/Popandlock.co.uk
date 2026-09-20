@@ -12,7 +12,15 @@
     all:function(){return read('popandlock-recent').filter(Boolean)},
     add:function(id){var a=this.all().filter(function(x){return String(x)!==String(id)});a.unshift(id);write('popandlock-recent',a.slice(0,12));document.dispatchEvent(new CustomEvent('pl:recent'))}
   };
+  function addWishlistHeaderStyle(){
+    if(document.getElementById('pl-wishlist-header-style'))return;
+    var s=document.createElement('style');
+    s.id='pl-wishlist-header-style';
+    s.textContent='.wishlist-header svg{fill:#111!important;stroke:#111!important}.wishlist-count{background:#111!important;color:#fff!important;border:0!important;font-weight:800!important;display:none;align-items:center;justify-content:center}';
+    document.head.appendChild(s);
+  }
   function update(){
+    addWishlistHeaderStyle();
     document.querySelectorAll('[data-wishlist-id]').forEach(function(b){
       var on=PLWishlist.has(b.getAttribute('data-wishlist-id'));
       b.classList.toggle('saved',on);b.setAttribute('aria-pressed',on?'true':'false');
@@ -30,15 +38,12 @@
   document.addEventListener('DOMContentLoaded',update);
 })();
 (function(){
-  function bagCount(){
-    try{return JSON.parse(localStorage.getItem('popandlock-bag')||'[]').reduce(function(n,x){return n+Math.max(0,Number(x.qty)||0)},0)}catch(e){return 0}
-  }
+  function bagCount(){try{return JSON.parse(localStorage.getItem('popandlock-bag')||'[]').reduce(function(n,x){return n+Math.max(0,Number(x.qty)||0)},0)}catch(e){return 0}}
   function mountMobileUI(){
     if(document.querySelector('.pl-mobile-nav'))return;
     var nav=document.querySelector('.pl-mobile-nav');if(nav)nav.remove();
     var basket=document.createElement('a');basket.href='bag.html';basket.className='pl-persistent-bag';basket.innerHTML='<span>🛍</span><b>BAG</b><i>'+bagCount()+'</i>';document.body.appendChild(basket);
-    function refresh(){var n=bagCount();basket.querySelector('i').textContent=n;basket.style.display=n?'flex':'none'}
-    refresh();window.addEventListener('storage',refresh);setInterval(refresh,1500);
+    function refresh(){var n=bagCount();basket.querySelector('i').textContent=n;basket.style.display=n?'flex':'none'}refresh();window.addEventListener('storage',refresh);setInterval(refresh,1500);
   }
   function transitions(){
     document.documentElement.classList.add('pl-transitions');
