@@ -10,7 +10,7 @@
     "id": "valentines",
     "title": "VALENTINE'S DAY",
     "link": "event.html?event=valentines",
-    "visible": true,
+    "visible": false,
     "image": "event-banners/valentines.jpg"
   },
   {
