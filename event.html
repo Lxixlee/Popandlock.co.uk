@@ -30,7 +30,7 @@
 @keyframes introTitleIn{to{opacity:1;transform:none;filter:none}}
 @keyframes introLineIn{to{width:min(280px,48vw)}}
 @keyframes introFadeIn{to{opacity:1}}
-@keyframes introExit{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-100%);visibility:hidden}}
+@keyframes introExit{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-100%);visibility:hidden}}@keyframes flash{0%{opacity:0}40%{opacity:.95}100%{opacity:0}}
 @keyframes floatUp{0%{opacity:0;transform:translate3d(0,35px,0) scale(.6) rotate(-10deg)}18%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx),-110vh,0) scale(1.15) rotate(var(--rot))}}
 @keyframes driftAcross{0%{opacity:0;transform:translate3d(-15vw,0,0) rotate(-8deg)}15%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translate3d(120vw,var(--dy),0) rotate(10deg)}}
 @keyframes snowFall{0%{opacity:0;transform:translate3d(0,-12vh,0) rotate(0)}12%{opacity:.9}100%{opacity:0;transform:translate3d(var(--drift),110vh,0) rotate(360deg)}}
@@ -160,7 +160,6 @@ for(var p=0;p<24;p++)add('intro-stars','✦',Math.random()*100,Math.random()*100
 }
 setTimeout(function(){intro.classList.add('is-done');setTimeout(function(){intro.remove()},900)},3000);
 }
-@keyframes flash{0%{opacity:0}40%{opacity:.95}100%{opacity:0}}
 (async function(){
 try{
 var id=new URLSearchParams(location.search).get('event');if(!id){location.replace('index.html');return}
