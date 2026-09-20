@@ -34,9 +34,7 @@
   }
   function mountMobileUI(){
     if(document.querySelector('.pl-mobile-nav'))return;
-    var nav=document.createElement('nav');nav.className='pl-mobile-nav';nav.setAttribute('aria-label','Mobile navigation');
-    nav.innerHTML='<a href="index.html"><span>⌂</span>HOME</a><a href="shop.html"><span>⌕</span>SHOP</a><a href="wishlist.html"><span>♡</span>WISHLIST</a><a href="bag.html" class="pl-mobile-bag"><span>🛍</span>BAG<i></i></a>';
-    document.body.appendChild(nav);
+    var nav=document.querySelector('.pl-mobile-nav');if(nav)nav.remove();
     var basket=document.createElement('a');basket.href='bag.html';basket.className='pl-persistent-bag';basket.innerHTML='<span>🛍</span><b>BAG</b><i>'+bagCount()+'</i>';document.body.appendChild(basket);
     function refresh(){var n=bagCount();basket.querySelector('i').textContent=n;basket.style.display=n?'flex':'none'}
     refresh();window.addEventListener('storage',refresh);setInterval(refresh,1500);
