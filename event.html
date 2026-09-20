@@ -27,11 +27,11 @@
 .intro-message{display:block!important;position:relative;z-index:102;margin:18px auto 0;max-width:min(820px,88vw);font-size:clamp(15px,2.2vw,24px);font-weight:800;letter-spacing:.2em;line-height:1.4;text-transform:uppercase;color:#fff!important;opacity:1!important;visibility:visible!important;transform:none!important;text-shadow:0 0 12px currentColor,0 0 28px currentColor}
 @keyframes introMessageIn{to{opacity:.9;transform:none}}
 .intro-line{height:2px;width:0;margin:20px auto 0;background:currentColor;box-shadow:0 0 16px currentColor;animation:introLineIn .8s ease 1.15s forwards}
-.intro-fade{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 45%,transparent 18%,rgba(0,0,0,.7) 100%);opacity:0;animation:introFadeIn 1.8s ease .1s forwards}
+.intro-fade{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.045),transparent 28%),radial-gradient(circle at 50% 42%,transparent 12%,rgba(0,0,0,.78) 100%);opacity:0;animation:introFadeIn 2.2s ease .1s forwards}
 .intro-stars,.intro-snow,.intro-hearts,.intro-particles,.intro-bats,.intro-gifts,.intro-eggs,.intro-flowers,.intro-lamps,.intro-sparks,.intro-confetti{position:absolute;display:block;font-style:normal;opacity:0;z-index:5;pointer-events:none}
 @keyframes introTitleIn{to{opacity:1;transform:none;filter:none}}
-@keyframes introLineIn{to{width:min(280px,48vw)}}
-@keyframes introFadeIn{to{opacity:1}}
+@keyframes introLineIn{from{width:0;opacity:0}to{width:min(280px,48vw);opacity:.8}}}
+@keyframes introFadeIn{from{opacity:0}to{opacity:1}}}
 @keyframes introExit{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-100%);visibility:hidden}}@keyframes flash{0%{opacity:0}40%{opacity:.95}100%{opacity:0}}
 @keyframes floatUp{0%{opacity:0;transform:translate3d(0,35px,0) scale(.6) rotate(-10deg)}18%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx),-110vh,0) scale(1.15) rotate(var(--rot))}}
 @keyframes driftAcross{0%{opacity:0;transform:translate3d(-15vw,0,0) rotate(-8deg)}15%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translate3d(120vw,var(--dy),0) rotate(10deg)}}
@@ -95,7 +95,15 @@
  .filter-tools select,.clear-filters{flex:0 0 auto!important;height:38px!important;font-size:11px!important;border-radius:20px!important}
  .filters{overflow-x:auto!important;flex-wrap:nowrap!important;justify-content:flex-start!important;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{flex:0 0 auto!important;border-radius:20px!important}
 }
-</style><script src="site-features.js"></script></head>
+</style><script src="site-features.js"></script><style>
+@media(max-width:760px){
+  .intro-title-wrap{top:25%!important;width:94vw!important;padding:0 14px!important}
+  .intro-kicker{margin-bottom:16px!important;letter-spacing:.38em!important}
+  .intro-title{font-size:clamp(34px,12vw,64px)!important;letter-spacing:.07em!important}
+  .intro-message{margin-top:20px!important;font-size:clamp(12px,3.6vw,17px)!important;letter-spacing:.12em!important;line-height:1.5!important}
+  .intro-line{margin-top:20px!important}
+}
+</style></head>
 <body id="page">
 <header class="top"><div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon wishlist-header" href="wishlist.html" aria-label="Wishlist" title="Wishlist"><span class="wishlist-count" aria-label="Saved wishlist items">0</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40S7 29 7 17c0-6 4-10 10-10 4 0 6 2 7 5 1-3 3-5 7-5 6 0 10 4 10 10 0 12-17 23-17 23z"></path></svg></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div><nav class="menu" id="mainMenu"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header>
 <div class="wrap">
@@ -170,7 +178,7 @@ for(var fd=0;fd<22;fd++)add('intro-particles',fd%2?'★':'🎁',Math.random()*10
 }else{
 for(var p=0;p<24;p++)add('intro-stars','✦',Math.random()*100,Math.random()*100,8+Math.random()*18,.1+Math.random(),{}).style.animation='sparkle 1.5s ease-in-out '+(.1+Math.random())+'s forwards';
 }
-setTimeout(function(){intro.classList.add('is-done');setTimeout(function(){intro.remove()},900)},3600);
+setTimeout(function(){intro.classList.add('is-done');setTimeout(function(){intro.remove()},1250)},6200);
 }
 (async function(){
 try{
