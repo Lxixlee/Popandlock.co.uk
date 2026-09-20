@@ -21,13 +21,13 @@
 .event-intro{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;pointer-events:none;background:#030305;color:#fff}
 .event-intro.is-done{animation:introExit .8s cubic-bezier(.7,0,.2,1) forwards}
 .intro-layer{position:absolute;inset:0;width:100vw;height:100dvh;overflow:hidden}
-.intro-title-wrap{position:relative;z-index:20;text-align:center;opacity:0;transform:scale(.7);filter:blur(16px);animation:introTitleIn 1s cubic-bezier(.2,.85,.2,1) .7s forwards}
-.intro-kicker{display:block;font-size:10px;letter-spacing:.5em;font-weight:800;opacity:.65;margin-bottom:18px}
-.intro-title{margin:0;font-size:clamp(42px,9vw,118px);font-weight:900;letter-spacing:.13em;line-height:.95;text-shadow:0 0 14px currentColor,0 0 45px currentColor}
+.intro-title-wrap{position:relative;z-index:100;text-align:center;opacity:1!important;visibility:visible!important;transform:scale(1);filter:none}
+.intro-kicker{display:block;position:relative;z-index:101;font-size:10px;letter-spacing:.5em;font-weight:800;opacity:.9;margin-bottom:18px}
+.intro-title{position:relative;z-index:101;margin:0;font-size:clamp(42px,9vw,118px);font-weight:900;letter-spacing:.13em;line-height:.95;color:#fff!important;opacity:1!important;visibility:visible!important;text-shadow:0 0 14px currentColor,0 0 45px currentColor}
 .intro-message{display:block!important;position:relative;z-index:30;margin:18px auto 0;max-width:min(820px,88vw);font-size:clamp(15px,2.2vw,24px);font-weight:800;letter-spacing:.2em;line-height:1.4;text-transform:uppercase;color:#fff!important;opacity:1!important;visibility:visible!important;transform:none;text-shadow:0 0 12px currentColor,0 0 28px currentColor}
 @keyframes introMessageIn{to{opacity:.9;transform:none}}
 .intro-line{height:2px;width:0;margin:20px auto 0;background:currentColor;box-shadow:0 0 16px currentColor;animation:introLineIn .8s ease 1.15s forwards}
-.intro-fade{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 18%,rgba(0,0,0,.7) 100%);opacity:0;animation:introFadeIn 1.8s ease .1s forwards}
+.intro-fade{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 45%,transparent 18%,rgba(0,0,0,.7) 100%);opacity:0;animation:introFadeIn 1.8s ease .1s forwards}
 .intro-stars,.intro-snow,.intro-hearts,.intro-particles,.intro-bats,.intro-gifts,.intro-eggs,.intro-flowers,.intro-lamps,.intro-sparks,.intro-confetti{position:absolute;display:block;font-style:normal;opacity:0;z-index:5;pointer-events:none}
 @keyframes introTitleIn{to{opacity:1;transform:none;filter:none}}
 @keyframes introLineIn{to{width:min(280px,48vw)}}
