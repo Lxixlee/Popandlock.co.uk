@@ -346,7 +346,7 @@ html+='<div class="image-controls"><button class="image-control" id="zoomProduct
     function toggleWishlistUI(){
       var w=wishlist(),i=w.indexOf(p.id);
       if(i>=0)w.splice(i,1);else w.unshift(p.id);
-      saveWishlist(w);var on=w.indexOf(p.id)>=0;
+      saveWishlist(w);document.dispatchEvent(new CustomEvent('pl:wishlist'));var on=w.indexOf(p.id)>=0;
       var btn=document.getElementById('wishlistBtn'),icon=document.getElementById('productWishlistIcon');
       if(btn){btn.classList.toggle('saved',on);btn.textContent=on?'♥ SAVED TO WISHLIST':'♡ SAVE TO WISHLIST';}
       if(icon){icon.classList.toggle('saved',on);icon.setAttribute('aria-label',on?'Remove from wishlist':'Add to wishlist');icon.title=on?'Remove from wishlist':'Add to wishlist';}
