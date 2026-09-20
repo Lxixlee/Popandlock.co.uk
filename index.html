@@ -234,33 +234,13 @@ html,body{max-width:100%;overflow-x:hidden}
   }
 }
 </style>
-<style id="homepage-event-spotlight">
-.event-spotlight{display:none;position:relative;min-height:390px;margin:0 auto 62px;overflow:hidden;background:#111;color:#fff}
-.event-spotlight.is-live{display:flex}
-.event-spotlight-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.02);transition:transform 8s ease}
-.event-spotlight:hover .event-spotlight-bg{transform:scale(1.06)}
-.event-spotlight:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.32) 55%,rgba(0,0,0,.58))}
-.event-spotlight-content{position:relative;z-index:2;width:min(1180px,100%);margin:auto;padding:62px 42px}
-.event-spotlight-kicker{font-size:10px;font-weight:800;letter-spacing:.22em;color:#ddd;text-transform:uppercase}
-.event-spotlight h2{font-size:clamp(42px,6vw,76px);font-weight:500;line-height:1;margin:10px 0 13px}
-.event-spotlight p{max-width:560px;color:#eee;font-size:15px;line-height:1.6;margin:0 0 25px}
-.event-spotlight-cta{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#111;padding:14px 22px;font-size:11px;font-weight:800;letter-spacing:.1em}
-.event-spotlight-cta:hover{background:#eee}
-.event-spotlight-badge{display:inline-block;margin-top:22px;padding:7px 10px;border:1px solid rgba(255,255,255,.35);font-size:9px;letter-spacing:.13em;font-weight:700;text-transform:uppercase}
-@media(max-width:760px){
- .event-spotlight{min-height:330px;margin-bottom:45px}
- .event-spotlight-content{padding:45px 22px}
- .event-spotlight h2{font-size:42px}
- .event-spotlight p{font-size:13px}
- .event-spotlight:after{background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.45))}
-}
-</style></head>
+</head>
 <body>
 <header class="top">
 <div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon wishlist-header" href="wishlist.html" aria-label="Wishlist" title="Wishlist"><span class="wishlist-count" aria-label="Saved wishlist items">0</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40S7 29 7 17c0-6 4-10 10-10 4 0 6 2 7 5 1-3 3-5 7-5 6 0 10 4 10 10 0 12-17 23-17 23z"></path></svg></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div>
 <nav class="menu" id="mainMenu" aria-label="Main navigation"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav>
 </header>
-<main><section class="hero-reel"><div class="hero-track" id="heroTrack"><section class="hero-slide"><div class="hero-content"><img class="hero-logo" src="logo.png?v=4" alt="Pop &amp; Lock"><h1 style="color:#fff!important">POP &amp; LOCK</h1><p style="color:#fff!important">FUNKO POPS • EXCLUSIVES • GRAILS • SIGNED</p><div class="hero-actions"><a class="hero-btn" href="shop.html">SHOP NOW</a><a class="hero-btn alt" href="sell-to-us.html">SELL TO US</a></div></div></section><section class="hero-slide thrilljoy-slide"><img class="thrilljoy-full-bg" src="homepage-images/thrilljoy.jpg" alt="Thrilljoy"><div class="thrilljoy-overlay"></div><div class="hero-content thrilljoy-content"><div class="arrival-kicker">NOW SHOPPING</div><h1>THRILLJOY</h1><p>EXPLORE OUR THRILLJOY COLLECTIBLES</p><div class="hero-actions"><a class="hero-btn" href="thrilljoy.html">SHOP THRILLJOY</a></div></div></section></div><button class="reel-arrow reel-prev" id="reelPrev" aria-label="Previous slide">‹</button><button class="reel-arrow reel-next" id="reelNext" aria-label="Next slide">›</button><div class="reel-dots" id="reelDots"></div></section><section class="event-spotlight" id="eventSpotlight" aria-label="Current event"><img class="event-spotlight-bg" id="eventSpotlightBg" alt=""><div class="event-spotlight-content"><div class="event-spotlight-kicker">CURRENT POP &amp; LOCK EVENT</div><h2 id="eventSpotlightTitle"></h2><p id="eventSpotlightCopy">Explore the latest event collection from Pop &amp; Lock.</p><a class="event-spotlight-cta" id="eventSpotlightLink" href="shop.html">SHOP EVENT <span>→</span></a><div class="event-spotlight-badge">Limited event collection</div></div></section><section class="collection-heading"><h2>SHOP BY COLLECTION</h2><p>Find your next favourite Pop.</p></section><section class="categories" id="homepageCategories"></section></main>
+<main><section class="hero-reel"><div class="hero-track" id="heroTrack"><section class="hero-slide"><div class="hero-content"><img class="hero-logo" src="logo.png?v=4" alt="Pop &amp; Lock"><h1 style="color:#fff!important">POP &amp; LOCK</h1><p style="color:#fff!important">FUNKO POPS • EXCLUSIVES • GRAILS • SIGNED</p><div class="hero-actions"><a class="hero-btn" href="shop.html">SHOP NOW</a><a class="hero-btn alt" href="sell-to-us.html">SELL TO US</a></div></div></section><section class="hero-slide thrilljoy-slide"><img class="thrilljoy-full-bg" src="homepage-images/thrilljoy.jpg" alt="Thrilljoy"><div class="thrilljoy-overlay"></div><div class="hero-content thrilljoy-content"><div class="arrival-kicker">NOW SHOPPING</div><h1>THRILLJOY</h1><p>EXPLORE OUR THRILLJOY COLLECTIBLES</p><div class="hero-actions"><a class="hero-btn" href="thrilljoy.html">SHOP THRILLJOY</a></div></div></section></div><button class="reel-arrow reel-prev" id="reelPrev" aria-label="Previous slide">‹</button><button class="reel-arrow reel-next" id="reelNext" aria-label="Next slide">›</button><div class="reel-dots" id="reelDots"></div></section><section class="collection-heading"><h2>SHOP BY COLLECTION</h2><p>Find your next favourite Pop.</p></section><section class="categories" id="homepageCategories"></section></main>
 <script>
 function updateBagCount(){
   try{
@@ -373,32 +353,7 @@ window.addEventListener('storage',updateBagCount);
 (async function(){try{const r=await fetch("events.json?v="+Date.now(),{cache:"no-store"});if(!r.ok)return;const events=await r.json();const menu=document.getElementById("mainMenu");events.filter(e=>e&&e.visible===true).forEach(e=>{const a=document.createElement("a");a.href=e.link||("event.html?event="+encodeURIComponent(e.id));a.textContent=e.title||e.name||"EVENT";const live=Array.from(menu.querySelectorAll("a")).find(x=>x.textContent.trim()==="LIVE SHOWS");if(live)live.insertAdjacentElement("afterend",a);else menu.appendChild(a);});}catch(e){}})();
 </script>
 <footer><div class="footer-info"><div><h3>Pop &amp; Lock</h3><p>UK-based Funko Pop collectibles, exclusives, grails and signed pieces.</p></div><div><h3>Customer Care</h3><p><a href="contact.html">Contact us</a> for order questions, collection enquiries and general help.</p></div><div><h3>Delivery &amp; Payments</h3><p>Standard UK delivery £3.27 · Tracked UK delivery £5.95 · Secure checkout.</p></div></div><nav class="footer-links"><a href="about.html">ABOUT</a><a href="shipping.html">SHIPPING</a><a href="returns.html">RETURNS</a><a href="contact.html">CONTACT</a><a href="sell-to-us.html">SELL TO US</a><a href="live-shows.html">LIVE SHOWS</a></nav><div class="footer-note">Questions? <a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></div><div class="footer-copy">© Pop &amp; Lock</div></footer>
-<script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script><script id="homepage-event-spotlight-loader">
-(async function(){
-  try{
-    const r=await fetch("events.json?v="+Date.now(),{cache:"no-store"});
-    if(!r.ok)return;
-    const events=await r.json();
-    const event=Array.isArray(events)?events.find(function(e){return e&&e.visible===true}):null;
-    if(!event)return;
-    const section=document.getElementById("eventSpotlight");
-    const bg=document.getElementById("eventSpotlightBg");
-    const title=document.getElementById("eventSpotlightTitle");
-    const copy=document.getElementById("eventSpotlightCopy");
-    const link=document.getElementById("eventSpotlightLink");
-    if(!section||!bg||!title||!copy||!link)return;
-    title.textContent=event.title||event.name||"EVENT";
-    copy.textContent=(event.title||event.name||"This event")+" is now live at Pop & Lock. Explore the collection and discover the pieces selected for this event.";
-    link.href=event.link||("event.html?event="+encodeURIComponent(event.id||""));
-    if(event.image){
-      bg.src=event.image;
-      bg.alt=event.title||event.name||"Pop & Lock event";
-      bg.addEventListener("error",function(){bg.style.display="none"},{once:true});
-    }else bg.style.display="none";
-    section.classList.add("is-live");
-  }catch(e){}
-})();
-</script></body>
+<script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script></body>
 </html>
 
 <style id="pl-banner-nav-fix">@media(min-width:761px){.hero-reel{width:50%!important;margin-left:auto!important;margin-right:auto!important}}@media(max-width:760px){.hero-reel{width:100%!important}}.category.signed .label{width:100%!important;max-width:100%!important;padding:0 24px!important;white-space:nowrap!important;overflow:visible!important;text-align:center!important;font-size:clamp(34px,6vw,76px)!important}</style>
