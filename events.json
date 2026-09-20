@@ -53,7 +53,12 @@
     "title": "HALLOWEEN",
     "link": "event.html?event=halloween",
     "visible": true,
-    "image": "event-banners/halloween.jpg"
+    "image": "event-banners/halloween.jpg",
+    "products": [
+      "la-llorona-wb-mystery-horror-chase-2061",
+      "pazuzu-nft-1900pcs-the-exorcist-291",
+      "ethan-hawke-signed-the-grabber-black-phone-1488"
+    ]
   },
   {
     "id": "bonfire",
