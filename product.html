@@ -319,10 +319,20 @@ z-index:5!important;pointer-events:none!important
     document.getElementById('zoomProduct').addEventListener('click',function(){
       var w=document.querySelector('.image-wrap');w.classList.toggle('is-zoomed');this.textContent=w.classList.contains('is-zoomed')?'−':'+';
     });
-    document.getElementById('add').addEventListener('click',function(){
+    var addButton=document.getElementById('add');
+    var existingBagItem=bag().find(function(x){return x.id===p.id;});
+    if(existingBagItem&&Number(existingBagItem.qty)>0)addButton.textContent='REMOVE FROM BAG';
+    addButton.addEventListener('click',function(){
       var b=bag(),item=b.find(function(x){return x.id===p.id;});
-      if(item)item.qty=Math.min((Number(item.qty)||0)+1,stock);else b.push({id:p.id,qty:1});
-      localStorage.setItem('popandlock-bag',JSON.stringify(b));updateBag();location.href='bag.html';
+      if(item&&Number(item.qty)>0){
+        b=b.filter(function(x){return x.id!==p.id});
+        addButton.textContent='ADD TO BAG';
+      }else{
+        b.push({id:p.id,qty:1});
+        addButton.textContent='REMOVE FROM BAG';
+      }
+      localStorage.setItem('popandlock-bag',JSON.stringify(b));
+      updateBag();
     });
     document.getElementById('wishlistBtn').addEventListener('click',function(){
       var w=wishlist(),i=w.indexOf(p.id);
