@@ -155,17 +155,20 @@ html,body{max-width:100%;overflow-x:hidden}
 }
 </style>
 <style id="shop-entrance-css">
-.shop-entrance{position:fixed;inset:0;z-index:9999;background:#080808;color:#fff;display:flex;align-items:center;justify-content:center;pointer-events:none;animation:shopEntranceExit .7s cubic-bezier(.7,0,.2,1) 1.15s forwards}
-.shop-entrance-inner{text-align:center;opacity:0;transform:translateY(8px) scale(.98);animation:shopEntranceIn .65s cubic-bezier(.2,.85,.2,1) .08s forwards}
+.shop-entrance{position:fixed;inset:0;z-index:99999;background:#080808;color:#fff;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:1;visibility:visible}
+.shop-entrance-inner{text-align:center;opacity:0;transform:translateY(10px) scale(.98)}
+.shop-entrance-active .shop-entrance-inner{animation:shopEntranceIn .65s cubic-bezier(.2,.85,.2,1) .05s forwards}
 .shop-entrance-logo{width:72px;height:72px;object-fit:contain;margin:0 auto 22px;filter:brightness(0) invert(1);opacity:.95}
 .shop-entrance-kicker{font-size:10px;font-weight:800;letter-spacing:.48em;opacity:.62;margin-bottom:15px}
 .shop-entrance-title{margin:0;font-size:clamp(32px,6vw,68px);font-weight:900;letter-spacing:.12em;line-height:1;text-transform:uppercase}
-.shop-entrance-line{width:0;height:1px;background:#fff;margin:20px auto 0;opacity:.7;animation:shopEntranceLine .55s ease-out .48s forwards}
+.shop-entrance-line{width:0;height:1px;background:#fff;margin:20px auto 0;opacity:.7}
+.shop-entrance-active .shop-entrance-line{animation:shopEntranceLine .55s ease-out .48s forwards}
+.shop-entrance-active{animation:shopEntranceExit .65s cubic-bezier(.7,0,.2,1) 1.25s forwards}
 @keyframes shopEntranceIn{to{opacity:1;transform:none}}
 @keyframes shopEntranceLine{to{width:min(230px,45vw)}}
-@keyframes shopEntranceExit{from{opacity:1}to{opacity:0;visibility:hidden}}
+@keyframes shopEntranceExit{from{opacity:1;visibility:visible}to{opacity:0;visibility:hidden}}
 @media(max-width:600px){.shop-entrance-logo{width:58px;height:58px;margin-bottom:18px}.shop-entrance-kicker{font-size:8px;letter-spacing:.34em}.shop-entrance-title{font-size:clamp(28px,10vw,48px)}}
-@media(prefers-reduced-motion:reduce){.shop-entrance{animation:none!important;display:none!important}}
+@media(prefers-reduced-motion:reduce){.shop-entrance{display:none!important}}
 </style></head>
 <body><div class="shop-entrance" id="shopEntrance" aria-hidden="true"><div class="shop-entrance-inner"><img class="shop-entrance-logo" src="logo.png?v=4" alt=""><div class="shop-entrance-kicker">WELCOME TO</div><h1 class="shop-entrance-title">POP &amp; LOCK</h1><div class="shop-entrance-line"></div></div></div>
 <header class="top"><div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon wishlist-header" href="wishlist.html" aria-label="Wishlist" title="Wishlist"><span class="wishlist-count" aria-label="Saved wishlist items">0</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40S7 29 7 17c0-6 4-10 10-10 4 0 6 2 7 5 1-3 3-5 7-5 6 0 10 4 10 10 0 12-17 23-17 23z"></path></svg></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><nav class="menu" aria-label="Main navigation"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header>
@@ -203,7 +206,7 @@ function updateBagCount(){
 document.addEventListener('DOMContentLoaded',updateBagCount);
 window.addEventListener('storage',updateBagCount);
 
-function runShopEntrance(){var intro=document.getElementById('shopEntrance');if(!intro)return;document.documentElement.classList.add('shop-opening');requestAnimationFrame(function(){intro.classList.add('shop-entrance-active')});setTimeout(function(){intro.remove();document.documentElement.classList.remove('shop-opening')},1900)}
+function runShopEntrance(){var intro=document.getElementById('shopEntrance');if(!intro)return;document.documentElement.classList.add('shop-opening');intro.classList.add('shop-entrance-active');setTimeout(function(){if(intro.parentNode)intro.remove();document.documentElement.classList.remove('shop-opening')},2000)}
 let products=[];
 let productOrder=[];
 let category=new URLSearchParams(location.search).get('category')||decodeURIComponent(location.hash.slice(1)).replace(/-/g,' ')||'All';
