@@ -30,7 +30,7 @@
 <div class="field"><label>Stock</label><input id="stock" type="number" min="0" step="1" value="1" required></div>
 <div class="field"><label>Condition</label><select id="condition"><option>New</option><option>Used</option><option>Vaulted</option></select></div>
 <div class="field"><label>Box condition</label><select id="boxCondition"><option>Mint</option><option>Near Mint</option><option>Good</option><option>Fair</option><option>Damaged</option><option>No Box</option></select></div>
-<div class="field full"><label>Product photo</label><input id="image" type="file" accept="image/*" required></div>
+<div class="field full"><label>Product photo</label><input id="image" type="file" accept="image/*" multiple required><div class="help">Add one or several photos. The first photo is the main product image.</div></div>
 <div class="field full"><label>Description</label><textarea id="description"></textarea></div>
 <div class="field"><label>Featured?</label><select id="featured"><option value="false">No</option><option value="true">Yes</option></select></div>
 </div>
@@ -73,7 +73,7 @@
 <div class="field"><label>Stock</label><input id="editStock" type="number" min="0" step="1" required></div>
 <div class="field"><label>Condition</label><select id="editCondition"><option>New</option><option>Used</option><option>Vaulted</option></select></div>
 <div class="field"><label>Box condition</label><select id="editBoxCondition"><option>Mint</option><option>Near Mint</option><option>Good</option><option>Fair</option><option>Damaged</option><option>No Box</option></select></div>
-<div class="field full"><label>Replace photo (optional)</label><input id="editImage" type="file" accept="image/*"></div>
+<div class="field full"><label>Add / replace product photos (optional)</label><input id="editImage" type="file" accept="image/*" multiple><div class="help">Select one or several photos. If you select photos here, they become the product gallery.</div></div>
 <div class="field full"><label>Description</label><textarea id="editDescription"></textarea></div>
 <div class="field"><label>Featured?</label><select id="editFeatured"><option value="false">No</option><option value="true">Yes</option></select></div>
 </div>
@@ -143,8 +143,8 @@ document.getElementById('search').oninput=render;
 document.getElementById('editForm').onsubmit=async function(e){
   e.preventDefault();var b=document.getElementById('editSubmit');b.disabled=true;
   try{
-    var f=document.getElementById('editImage').files[0],imageBase64='';if(f)imageBase64=await resizeImage(f);
-    var d=await api('/admin/update-product',{password:password(),id:document.getElementById('editId').value,name:document.getElementById('editName').value.trim(),category:(Array.from(document.querySelectorAll('#editCategoryChoices input:checked')).map(x=>x.value)[0]||'Other'),categories:Array.from(document.querySelectorAll('#editCategoryChoices input:checked')).map(x=>x.value),price:Number(document.getElementById('editPrice').value),salePrice:Number(document.getElementById('editSalePrice').value)||0,stock:Number(document.getElementById('editStock').value),condition:document.getElementById('editCondition').value,boxCondition:document.getElementById('editBoxCondition').value,description:document.getElementById('editDescription').value.trim(),featured:document.getElementById('editFeatured').value==='true',imageBase64:imageBase64});
+    var files=Array.from(document.getElementById('editImage').files||[]),imagesBase64=[];for(var fi=0;fi<files.length;fi++)imagesBase64.push(await resizeImage(files[fi]));var imageBase64=imagesBase64[0]||'';
+    var d=await api('/admin/update-product',{password:password(),id:document.getElementById('editId').value,name:document.getElementById('editName').value.trim(),category:(Array.from(document.querySelectorAll('#editCategoryChoices input:checked')).map(x=>x.value)[0]||'Other'),categories:Array.from(document.querySelectorAll('#editCategoryChoices input:checked')).map(x=>x.value),price:Number(document.getElementById('editPrice').value),salePrice:Number(document.getElementById('editSalePrice').value)||0,stock:Number(document.getElementById('editStock').value),condition:document.getElementById('editCondition').value,boxCondition:document.getElementById('editBoxCondition').value,description:document.getElementById('editDescription').value.trim(),featured:document.getElementById('editFeatured').value==='true',imageBase64:imageBase64,imagesBase64:imagesBase64});
     products=products.map(function(p){return String(p.id)===String(d.product.id)?d.product:p});updateDashboard();render();show(document.getElementById('editStatus'),'Product updated successfully.','ok');setTimeout(function(){document.getElementById('editCard').style.display='none'},700)
   }catch(e){show(document.getElementById('editStatus'),e.message,'error')}finally{b.disabled=false}
 };
@@ -275,8 +275,8 @@ document.querySelectorAll('#categoryChoices input').forEach(function(x){x.addEve
 form.onsubmit=async function(e){
   e.preventDefault();submit.disabled=true;status.className='status';status.textContent='Adding product...';
   try{
-    var imageBase64=await resizeImage(file.files[0]);
-    await api('/admin/add-product',{password:password(),name:document.getElementById('name').value.trim(),category:(Array.from(document.querySelectorAll('#categoryChoices input:checked')).map(x=>x.value)[0]||'Other'),categories:Array.from(document.querySelectorAll('#categoryChoices input:checked')).map(x=>x.value),price:Number(document.getElementById('price').value),salePrice:Number(document.getElementById('salePrice').value)||0,stock:Number(document.getElementById('stock').value),condition:document.getElementById('condition').value,boxCondition:document.getElementById('boxCondition').value,description:document.getElementById('description').value.trim(),featured:document.getElementById('featured').value==='true',imageBase64:imageBase64});
+    var selectedFiles=Array.from(file.files||[]);if(!selectedFiles.length)throw new Error('Please choose at least one product photo.');var imagesBase64=[];for(var fi=0;fi<selectedFiles.length;fi++)imagesBase64.push(await resizeImage(selectedFiles[fi]));var imageBase64=imagesBase64[0];
+    await api('/admin/add-product',{password:password(),name:document.getElementById('name').value.trim(),category:(Array.from(document.querySelectorAll('#categoryChoices input:checked')).map(x=>x.value)[0]||'Other'),categories:Array.from(document.querySelectorAll('#categoryChoices input:checked')).map(x=>x.value),price:Number(document.getElementById('price').value),salePrice:Number(document.getElementById('salePrice').value)||0,stock:Number(document.getElementById('stock').value),condition:document.getElementById('condition').value,boxCondition:document.getElementById('boxCondition').value,description:document.getElementById('description').value.trim(),featured:document.getElementById('featured').value==='true',imageBase64:imageBase64,imagesBase64:imagesBase64});
     show(status,'Product added successfully.','ok');form.reset();document.getElementById('password').value=password();await loadProducts()
   }catch(e){show(status,e.message,'error')}finally{submit.disabled=false}
 };
