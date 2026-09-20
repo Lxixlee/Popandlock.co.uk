@@ -22,7 +22,7 @@
 .event-intro{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;pointer-events:none;background:#020204;color:#fff}
 .event-intro.is-done{animation:introExit .65s cubic-bezier(.7,0,.2,1) forwards}
 .intro-layer{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
-.intro-title-wrap{position:absolute;z-index:100;left:50%;top:27%;width:min(92vw,1100px);padding:0 20px;box-sizing:border-box;text-align:center;opacity:1;visibility:visible;transform:translateX(-50%)}
+.intro-title-wrap{position:absolute;z-index:100;left:50%;top:23%;width:min(92vw,1100px);padding:0 20px;box-sizing:border-box;text-align:center;opacity:1;visibility:visible;transform:translateX(-50%)}
 .intro-kicker{display:block;position:relative;z-index:101;font-size:clamp(9px,1vw,12px);letter-spacing:.5em;font-weight:800;opacity:0;margin-bottom:20px;animation:introKickerIn .55s ease-out .25s forwards}
 .intro-title{position:relative;z-index:101;margin:0;font-size:clamp(40px,8vw,112px);font-weight:900;letter-spacing:.1em;line-height:.95;color:#fff!important;opacity:0;visibility:visible;transform:scale(.94);filter:blur(2px);animation:introTitleIn .85s cubic-bezier(.16,.8,.25,1) .55s forwards;text-shadow:0 0 14px currentColor,0 0 45px currentColor}
 .intro-message{display:block!important;position:relative;z-index:102;margin:20px auto 0;max-width:min(820px,88vw);font-size:clamp(14px,2vw,22px);font-weight:800;letter-spacing:.18em;line-height:1.4;text-transform:uppercase;color:#fff!important;opacity:0!important;visibility:visible!important;transform:none!important;animation:introMessageIn .65s ease-out 1.5s forwards;text-shadow:0 0 12px currentColor,0 0 28px currentColor}
@@ -63,6 +63,19 @@
 .intro-lamp-row span{font-size:clamp(24px,4vw,54px);opacity:0;text-shadow:0 0 16px #ffb52e,0 0 35px #ff7a00;animation:lampGlow .9s ease var(--delay) forwards}
 .intro-sun-rays{position:absolute;inset:0;background:repeating-conic-gradient(from 0deg at 50% 38%,rgba(255,221,100,.08) 0 3deg,transparent 3deg 18deg);opacity:0;animation:introFadeIn 1.5s ease .4s forwards}
 @media(prefers-reduced-motion:reduce){.event-intro{animation:introExit .3s ease .4s forwards}.intro-title-wrap{animation:none;opacity:1;transform:none;filter:none}.intro-message{animation:none;opacity:.9;transform:none}.intro-layer *{animation:none!important}.intro-countdown{display:none}}
+.event-intro.intro-theme-halloween{background:radial-gradient(circle at 50% 35%,rgba(255,72,0,.28),transparent 28%),radial-gradient(circle at 15% 70%,rgba(115,0,190,.25),transparent 34%),linear-gradient(135deg,#050208,#180914 55%,#050308)}
+.event-intro.intro-theme-christmas{background:radial-gradient(circle at 50% 25%,rgba(220,40,55,.2),transparent 30%),linear-gradient(135deg,#03140e,#0a3325 55%,#03100b)}
+.event-intro.intro-theme-newyear{background:radial-gradient(circle at 50% 25%,rgba(92,67,220,.35),transparent 34%),linear-gradient(135deg,#030719,#171034 58%,#05050d)}
+.event-intro.intro-theme-valentines{background:radial-gradient(circle at 50% 30%,rgba(255,55,120,.3),transparent 34%),linear-gradient(135deg,#210611,#4a1029 55%,#10050c)}
+.event-intro.intro-theme-easter{background:radial-gradient(circle at 50% 25%,rgba(210,125,255,.2),transparent 32%),linear-gradient(135deg,#171025,#38204a 55%,#0d0915)}
+.event-intro.intro-theme-stpatricks{background:radial-gradient(circle at 50% 25%,rgba(40,190,95,.24),transparent 32%),linear-gradient(135deg,#03150b,#0b3520 55%,#020b06)}
+.event-intro.intro-theme-mothersday{background:radial-gradient(circle at 50% 28%,rgba(255,120,170,.25),transparent 32%),linear-gradient(135deg,#210915,#4b1730 55%,#10050d)}
+.event-intro.intro-theme-fathersday{background:radial-gradient(circle at 50% 28%,rgba(70,150,255,.22),transparent 32%),linear-gradient(135deg,#06101f,#102d4d 55%,#03070d)}
+.event-intro.intro-theme-bonfire{background:radial-gradient(circle at 50% 70%,rgba(255,75,0,.38),transparent 42%),linear-gradient(135deg,#050711,#281006 55%,#070405)}
+.event-intro.intro-theme-diwali{background:radial-gradient(circle at 50% 25%,rgba(255,180,35,.3),transparent 34%),linear-gradient(135deg,#1b0a05,#421524 55%,#0e0608)}
+.event-intro.intro-theme-summer{background:radial-gradient(circle at 50% 22%,rgba(60,220,255,.3),transparent 34%),linear-gradient(135deg,#04242c,#0b4b54 55%,#041319)}
+.event-intro.intro-theme-blackfriday{background:radial-gradient(circle at 50% 30%,rgba(255,205,80,.12),transparent 30%),linear-gradient(135deg,#030303,#1b1b1b 55%,#020202)}
+.event-intro.intro-theme-default{background:radial-gradient(circle at 50% 30%,rgba(255,101,0,.18),transparent 30%),linear-gradient(135deg,#08060b,#17101d 55%,#050407)}
 </style><style id="pl-mobile-app-css">
 .pl-mobile-nav,.pl-persistent-bag{display:none}
 @media(max-width:760px){.icons{grid-template-columns:1fr auto auto auto!important;gap:18px!important}.wishlist-header svg{width:34px!important;height:34px!important}.wishlist-count{top:-3px!important;right:-7px!important}}@media(max-width:760px){
@@ -103,7 +116,7 @@
 }
 </style><script src="site-features.js"></script><style>
 @media(max-width:760px){
-  .intro-title-wrap{top:21%!important;width:94vw!important;padding:0 14px!important}
+  .intro-title-wrap{top:18%!important;width:94vw!important;padding:0 14px!important}
   .intro-kicker{margin-bottom:16px!important;letter-spacing:.38em!important}
   .intro-title{font-size:clamp(34px,12vw,64px)!important;letter-spacing:.07em!important}
   .intro-message{margin-top:20px!important;font-size:clamp(12px,3.6vw,17px)!important;letter-spacing:.12em!important;line-height:1.5!important}
@@ -138,7 +151,7 @@ p.style.setProperty('--spin',(-180+Math.random()*360)+'deg');p.style.setProperty
 
 
 function runEventIntro(title,theme){
-var intro=document.createElement('div');intro.className='event-intro';intro.setAttribute('aria-hidden','true');
+var intro=document.createElement('div');intro.className='event-intro intro-theme-'+theme;intro.setAttribute('aria-hidden','true');
 var layer=document.createElement('div');layer.className='intro-layer';intro.appendChild(layer);
 var fade=document.createElement('div');fade.className='intro-fade';layer.appendChild(fade);
 var wrap=document.createElement('div');wrap.className='intro-title-wrap';
