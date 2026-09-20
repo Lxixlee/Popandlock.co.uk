@@ -95,7 +95,89 @@
  .filter-tools select,.clear-filters{flex:0 0 auto!important;height:38px!important;font-size:11px!important;border-radius:20px!important}
  .filters{overflow-x:auto!important;flex-wrap:nowrap!important;justify-content:flex-start!important;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{flex:0 0 auto!important;border-radius:20px!important}
 }
-</style><script src="site-features.js"></script></head>
+</style><script src="site-features.js"></script><style id="pl-final-mobile-header-fix">
+@media(max-width:760px){
+  .top .icons{
+    position:relative!important;
+    display:block!important;
+    width:100%!important;
+    height:72px!important;
+    padding:0!important;
+    margin:0!important;
+  }
+  .top .icons>a.icon:first-child{
+    position:absolute!important;
+    left:16px!important;
+    right:auto!important;
+    top:50%!important;
+    width:34px!important;
+    height:34px!important;
+    margin:0!important;
+    padding:0!important;
+    transform:translateY(-50%)!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+  .top .icons>a.icon:first-child svg{
+    width:34px!important;height:34px!important;
+  }
+  .top .icons .brand{
+    position:absolute!important;
+    left:50%!important;
+    right:auto!important;
+    top:50%!important;
+    width:58px!important;
+    height:58px!important;
+    margin:0!important;
+    padding:0!important;
+    transform:translate(-50%,-50%)!important;
+    display:block!important;
+    justify-self:auto!important;
+  }
+  .top .icons .brand img{
+    width:58px!important;height:58px!important;
+    margin:0!important;
+  }
+  .top .icons .wishlist-header{
+    position:absolute!important;
+    left:auto!important;
+    right:58px!important;
+    top:50%!important;
+    width:34px!important;
+    height:34px!important;
+    margin:0!important;
+    padding:0!important;
+    transform:translateY(-50%)!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    justify-self:auto!important;
+  }
+  .top .icons .wishlist-header svg{
+    width:34px!important;height:34px!important;
+  }
+  .top .icons>a.icon:last-child{
+    position:absolute!important;
+    left:auto!important;
+    right:16px!important;
+    top:50%!important;
+    width:34px!important;
+    height:34px!important;
+    margin:0!important;
+    padding:0!important;
+    transform:translateY(-50%)!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    justify-self:auto!important;
+  }
+  .top .icons>a.icon:last-child svg{
+    width:34px!important;height:34px!important;
+  }
+}
+</style>
+</head>
 <body id="page">
 <header class="top"><div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon wishlist-header" href="wishlist.html" aria-label="Wishlist" title="Wishlist"><span class="wishlist-count" aria-label="Saved wishlist items">0</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40S7 29 7 17c0-6 4-10 10-10 4 0 6 2 7 5 1-3 3-5 7-5 6 0 10 4 10 10 0 12-17 23-17 23z"></path></svg></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div><nav class="menu" id="mainMenu"><a href="shop.html">SHOP</a><a href="thrilljoy.html">THRILLJOY</a><a href="live-shows.html">LIVE SHOWS</a><a href="sell-to-us.html">SELL TO US</a><a href="contact.html">CONTACT</a></nav></header>
 <div class="wrap">
