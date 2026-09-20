@@ -43,7 +43,7 @@ html,body{max-width:100%;overflow-x:hidden}
 
 <div class="shopbar" id="shop-search">
 <label class="search" aria-label="Search products"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M16 16l5 5"></path></svg><input id="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></label>
-<select class="sort" id="sort" aria-label="Sort products"><option value="featured">Sort: Featured</option><option value="az">Name: A–Z</option><option value="za">Name: Z–A</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select>
+<select class="sort" id="sort" aria-label="Sort products"><option value="featured">Sort: Featured</option><option value="az">Name: A–Z</option><option value="za">Name: Z–A</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option><option value="newest">Newest</option><option value="oldest">Oldest</option></select>
 </div>
 
 <div class="filters" aria-label="Categories" id="categoryFilters">
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded',updateBagCount);
 window.addEventListener('storage',updateBagCount);
 
 let products=[];
+let productOrder=[];
 let category=new URLSearchParams(location.search).get('category')||decodeURIComponent(location.hash.slice(1)).replace(/-/g,' ')||'All';
 if(category.toLowerCase()==='tv & film') category='TV & Film';
 if(category.toLowerCase()==='thrilljoy') category='Thrilljoy';
@@ -80,6 +81,8 @@ const search=document.getElementById('search'),sort=document.getElementById('sor
 const availability=document.getElementById('availability'),conditionFilter=document.getElementById('conditionFilter'),priceFilter=document.getElementById('priceFilter'),activeSummary=document.getElementById('activeSummary');
 const categoryNames=['Marvel','DC','Disney','Horror','TV & Film','Music','Signed','Grails','Anime','Other','Sale'];
 function productCategories(p){return Array.isArray(p.categories)&&p.categories.length?p.categories:[p.category]}
+function isSigned(p){return productCategories(p).some(function(x){return String(x).toLowerCase()==='signed'})}
+function isGrail(p){return productCategories(p).some(function(x){return String(x).toLowerCase()==='grails'||String(x).toLowerCase()==='grail'})}
 function isSale(p){return p.sale===true||String(p.sale).toLowerCase()==='true'||productCategories(p).some(function(x){return String(x).toLowerCase()==='sale'})}
 function salePrice(p){var n=Number(p.salePrice);return n>0&&n<Number(p.price)?n:Number(p.price)}
 function money(n){return '£'+Number(n).toFixed(2)}
@@ -112,10 +115,12 @@ function render(){
  if(sort.value==='za')list.sort(function(a,b){return b.name.localeCompare(a.name)});
  if(sort.value==='low')list.sort(function(a,b){return salePrice(a)-salePrice(b)});
  if(sort.value==='high')list.sort(function(a,b){return salePrice(b)-salePrice(a)});
+if(sort.value==='newest')list.sort(function(a,b){return (Number(b.dateAdded||b.createdAt||0)-Number(a.dateAdded||a.createdAt||0))||(productOrder.indexOf(a.id)-productOrder.indexOf(b.id))});
+if(sort.value==='oldest')list.sort(function(a,b){return (Number(a.dateAdded||a.createdAt||0)-Number(b.dateAdded||b.createdAt||0))||(productOrder.indexOf(b.id)-productOrder.indexOf(a.id))});
  let bag=[];try{bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]')}catch(e){}
  grid.innerHTML=list.map(function(p){
    var stock=Math.max(0,Number(p.stock)||0),sold=stock<=0,bagItem=bag.find(function(x){return x.id===p.id}),bagQty=bagItem?Math.max(0,Number(bagItem.qty)||0):0,atLimit=bagQty>=stock,disabled=sold||atLimit,label=sold?'SOLD OUT':(atLimit?'IN BAG':'ADD TO BAG'),sp=salePrice(p),onSale=sp<Number(p.price);
-   return '<div class="card"><div class="pic-link"><a href="product.html?id='+encodeURIComponent(p.id)+'"><div class="pic">'+(p.image?'<img src="'+p.image+'" alt="'+String(p.name).replace(/"/g,'&quot;')+'">':'<span class="placeholder">Product photo</span>')+(sold?'<span class="sold-badge">SOLD OUT</span>':(stock===1?'<span class="stock-badge">1 LEFT</span>':'') )+(onSale?'<span class="sale-badge">SALE</span>':'')+'<button class="heart '+(PLWishlist.has(p.id)?'saved':'')+'" data-wishlist-id="'+String(p.id).replace(/"/g,'&quot;')+'" aria-label="Add to wishlist" aria-pressed="'+(PLWishlist.has(p.id)?'true':'false')+'">'+(PLWishlist.has(p.id)?'♥':'♡')+'</button></div></a></div><div class="body"><div class="tag">'+productCategories(p).join(' · ')+'</div><h2><a href="product.html?id='+encodeURIComponent(p.id)+'">'+p.name+'</a></h2><div class="price '+(sold?'sold-price':'')+'">'+(onSale?'<span class="sale-old">'+money(p.price)+'</span><span class="sale-price">'+money(sp)+'</span>':money(p.price))+'</div><button class="add-bag" type="button" '+(disabled?'disabled':'')+' data-add="'+p.id+'">'+label+'</button></div></div>'
+   return '<div class="card"><div class="pic-link"><a href="product.html?id='+encodeURIComponent(p.id)+'"><div class="pic">'+(p.image?'<img src="'+p.image+'" alt="'+String(p.name).replace(/"/g,'&quot;')+'">':'<span class="placeholder">Product photo</span>')+(sold?'<span class="sold-badge">SOLD OUT</span>':(stock===1?'<span class="stock-badge">ONLY 1 LEFT</span>':(stock<=3?'<span class="stock-badge">LOW STOCK</span>':'')))+(onSale?'<span class="sale-badge">SALE</span>':'')+(isSigned(p)?'<span class="signed-badge">SIGNED</span>':'')+(isGrail(p)?'<span class="grail-badge">GRAIL</span>':'')+'<button class="heart '+(PLWishlist.has(p.id)?'saved':'')+'" data-wishlist-id="'+String(p.id).replace(/"/g,'&quot;')+'" aria-label="Add to wishlist" aria-pressed="'+(PLWishlist.has(p.id)?'true':'false')+'">'+(PLWishlist.has(p.id)?'♥':'♡')+'</button></div></a></div><div class="body"><div class="tag">'+productCategories(p).join(' · ')+'</div><h2><a href="product.html?id='+encodeURIComponent(p.id)+'">'+p.name+'</a></h2><div class="price '+(sold?'sold-price':'')+'">'+(onSale?'<span class="sale-old">'+money(p.price)+'</span><span class="sale-price">'+money(sp)+'</span>':money(p.price))+'</div><button class="add-bag" type="button" '+(disabled?'disabled':'')+' data-add="'+p.id+'">'+label+'</button></div></div>'
  }).join('');
  count.textContent=list.length?list.length+' product'+(list.length===1?'':'s'):'No products found';
  empty.style.display=list.length?'none':'block';
@@ -131,7 +136,7 @@ function renderRecent(){
 search.addEventListener('input',render);sort.addEventListener('change',render);availability.addEventListener('change',render);conditionFilter.addEventListener('change',render);priceFilter.addEventListener('change',render);
 document.getElementById('clearFilters').addEventListener('click',function(){search.value='';sort.value='featured';availability.value='all';conditionFilter.value='all';priceFilter.value='all';category='All';subcategory='All';document.querySelectorAll('#categoryFilters .filter').forEach(function(x){x.classList.toggle('active',x.dataset.category==='All')});renderSubcategories();render()});
 grid.addEventListener('click',function(e){var btn=e.target.closest('.add-bag');if(!btn)return;e.preventDefault();e.stopPropagation();var id=btn.dataset.add,product=products.find(function(p){return p.id===id});if(!product||Number(product.stock)<=0)return;var bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]'),item=bag.find(function(x){return x.id===id}),currentQty=item?Math.max(0,Number(item.qty)||0):0;if(currentQty>=Number(product.stock)){btn.textContent='OUT OF STOCK';btn.disabled=true;return}if(item)item.qty=currentQty+1;else bag.push({id:id,qty:1});localStorage.setItem('popandlock-bag',JSON.stringify(bag));updateBagCount();render()});
-async function loadProducts(){try{var response=await fetch('products.json?v='+Date.now());if(!response.ok)throw new Error();products=await response.json();renderSubcategories();renderRecent();render()}catch(e){count.textContent='Unable to load products';empty.style.display='block'}}
+async function loadProducts(){try{var response=await fetch('products.json?v='+Date.now());if(!response.ok)throw new Error();products=await response.json();productOrder=products.map(function(p){return p.id});renderSubcategories();renderRecent();render()}catch(e){count.textContent='Unable to load products';empty.style.display='block'}}
 loadProducts();</script>
 <script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script><script id="event-nav-loader">
 (function(){
