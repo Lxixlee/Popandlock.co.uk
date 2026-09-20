@@ -16,7 +16,7 @@
     if(document.getElementById('pl-wishlist-header-style'))return;
     var s=document.createElement('style');
     s.id='pl-wishlist-header-style';
-    s.textContent='.wishlist-header{position:relative}.wishlist-header svg{fill:none!important;stroke:#fff!important}.wishlist-header.has-wishlist svg{fill:#111!important;stroke:#111!important}.wishlist-header .wishlist-count{position:absolute!important;top:50%!important;left:50%!important;right:auto!important;transform:translate(-50%,-50%)!important;min-width:0!important;width:auto!important;height:auto!important;padding:0!important;border-radius:0!important;background:transparent!important;color:#fff!important;border:0!important;font-size:10px!important;font-weight:800!important;line-height:1!important;display:none;align-items:center;justify-content:center;pointer-events:none;text-align:center}';
+    s.textContent='.wishlist-header{position:relative}.wishlist-header svg{fill:none!important;stroke:#fff!important;filter:drop-shadow(0 0 1.5px #111)}.wishlist-header.has-wishlist svg{fill:#111!important;stroke:#111!important}.wishlist-header .wishlist-count{position:absolute!important;top:50%!important;left:50%!important;right:auto!important;transform:translate(-50%,-50%)!important;min-width:0!important;width:auto!important;height:auto!important;padding:0!important;border-radius:0!important;background:transparent!important;color:#fff!important;border:0!important;font-size:10px!important;font-weight:800!important;line-height:1!important;display:none;align-items:center;justify-content:center;pointer-events:none;text-align:center}';
     document.head.appendChild(s);
   }
   function update(){
