@@ -52,7 +52,7 @@
     "id": "halloween",
     "title": "HALLOWEEN",
     "link": "event.html?event=halloween",
-    "visible": true,
+    "visible": false,
     "image": "event-banners/halloween.jpg"
   },
   {
