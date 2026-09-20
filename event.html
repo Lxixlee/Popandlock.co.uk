@@ -157,7 +157,7 @@ var fade=document.createElement('div');fade.className='intro-fade';layer.appendC
 var wrap=document.createElement('div');wrap.className='intro-title-wrap';
 var kicker=document.createElement('span');kicker.className='intro-kicker';kicker.textContent='POP & LOCK PRESENTS';wrap.appendChild(kicker);
 var h=document.createElement('h1');h.className='intro-title';h.textContent=title;wrap.appendChild(h);
-var message=document.createElement('div');message.className='intro-message';message.textContent=(theme==='halloween'?'ENTER IF YOU DARE':eventCopy(theme,title)[0]);wrap.appendChild(message);
+var message=document.createElement('div');message.className='intro-message';message.textContent=(theme==='halloween'?'ENTER IF YOU DARE':eventCopy(theme,title)[0]);message.style.opacity='0';message.style.visibility='visible';message.style.transform='translateY(4px)';message.style.animation='introMessageIn .65s ease-out 1.5s forwards';wrap.appendChild(message);
 var line=document.createElement('div');line.className='intro-line';wrap.appendChild(line);intro.appendChild(wrap);
 document.body.appendChild(intro);
 var symbols={halloween:['🦇','🎃'],christmas:['❄','🎁'],newyear:['✦','✨'],valentines:['♥','♡'],easter:['🌸','🥚'],stpatricks:['☘','🍀'],mothersday:['🌸','💐'],fathersday:['★','🎁'],bonfire:['•','🔥'],diwali:['🪔','✦'],summer:['✦','☀'],blackfriday:['★','$'],default:['✦','•']}[theme]||['✦','•'];
