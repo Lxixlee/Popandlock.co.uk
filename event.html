@@ -139,7 +139,91 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return
 function themeFor(name){var n=String(name||'').toLowerCase();if(n.includes('christmas')||n.includes('boxing'))return'christmas';if(n.includes('halloween'))return'halloween';if(n.includes('valentine'))return'valentines';if(n.includes('easter'))return'easter';if(n.includes('patrick'))return'stpatricks';if(n.includes('mother'))return'mothersday';if(n.includes('father'))return'fathersday';if(n.includes('bonfire'))return'bonfire';if(n.includes('black friday'))return'blackfriday';if(n.includes('new year'))return'newyear';if(n.includes('summer'))return'summer';if(n.includes('diwali'))return'diwali';return'default'}
 function eventCopy(theme,title){var m={halloween:['ENTER IF YOU DARE','THE SPOOKY COLLECTION','THE NIGHT ISN’T OVER…'],christmas:['CHRISTMAS COLLECTION','MERRY POPMAS','KEEP THE MAGIC GOING'],newyear:['THE NEW YEAR COLLECTION','NEW YEAR, NEW GRAILS','SEE YOU IN THE NEXT YEAR'],valentines:['LOVE AT FIRST POP','THE VALENTINE’S COLLECTION','MORE POPS TO LOVE'],easter:['HOP INTO THE COLLECTION','THE EASTER COLLECTION','MORE TO DISCOVER'],stpatricks:["LUCKY FINDS AHEAD","ST PATRICK’S COLLECTION","KEEP THE LUCK GOING"],mothersday:["FOR THE MUM WHO LOVES POPS","MOTHER’S DAY COLLECTION","MORE TO DISCOVER"],fathersday:["FOR THE DAD WHO COLLECTS","FATHER’S DAY COLLECTION","MORE TO DISCOVER"],bonfire:['LIGHT UP THE COLLECTION','BONFIRE NIGHT','KEEP THE NIGHT BURNING'],diwali:['LIGHT UP YOUR COLLECTION','THE DIWALI COLLECTION','MORE TO DISCOVER'],summer:['THE SUMMER COLLECTION','SUMMER POPS','KEEP EXPLORING'],blackfriday:['BLACK FRIDAY COLLECTION','THE BIGGEST POP PICKS','MORE DEALS TO DISCOVER'],holiday:[title||'HOLIDAY COLLECTION','THE HOLIDAY COLLECTION','MORE TO DISCOVER'],default:[title||'THE COLLECTION','THE EVENT COLLECTION','MORE TO DISCOVER']};return m[theme]||m.default}
 function makeParticles(theme){
-var box=document.getElementById('particles'),g={halloween:['🦇','👻','🎃','🕷','💀'],christmas:['❄','❄','🎁','✦'],newyear:['✦','✧','🎆','✨'],valentines:['♥','♡','💌'],easter:['🌸','🐰','🥚'],stpatricks:['☘️','🍀','☘️','🍀','✦'],bonfire:['🔥','✦','•'],diwali:['🪔','✨','✦'],summer:['☀','🌊','✦'],blackfriday:['}[theme]||['✦','•'];
+var box=document.getElementById('particles'),g={halloween:['🦇','👻','🎃','🕷','💀'],christmas:['❄','❄','🎁','✦'],newyear:['✦','✧','🎆','✨'],valentines:['♥','♡','💌'],easter:['🌸','🐰','🥚'],stpatricks:['☘','🍀','☘','🍀','✦'],bonfire:['🔥','✦','•'],diwali:['🪔','✨','✦'],summer:['☀','🌊','✦'],blackfriday:['
+for(var i=0;i<42;i++){
+var p=document.createElement('span');p.className='event-particle glyph';p.textContent=g[i%g.length];
+p.style.setProperty('--start-left',(Math.random()*100)+'%');p.style.setProperty('--start-top',(5+Math.random()*85)+'%');
+p.style.fontSize=(12+Math.random()*20)+'px';p.style.animationDuration=(7+Math.random()*10)+'s';p.style.animationDelay=(-Math.random()*12)+'s';
+p.style.setProperty('--drift',(-110+Math.random()*220)+'px');p.style.setProperty('--drift-mid',(-55+Math.random()*110)+'px');
+p.style.setProperty('--float-y',(-35+Math.random()*70)+'px');p.style.setProperty('--float-y-end',(-120-Math.random()*180)+'px');
+p.style.setProperty('--spin',(-180+Math.random()*360)+'deg');p.style.setProperty('--spin2',(-360+Math.random()*720)+'deg');box.appendChild(p);
+}}
+
+
+function runEventIntro(title,theme){
+var intro=document.createElement('div');intro.className='event-intro intro-theme-'+theme;intro.setAttribute('aria-hidden','true');
+var layer=document.createElement('div');layer.className='intro-layer';intro.appendChild(layer);
+var fade=document.createElement('div');fade.className='intro-fade';layer.appendChild(fade);
+var wrap=document.createElement('div');wrap.className='intro-title-wrap';
+var kicker=document.createElement('span');kicker.className='intro-kicker';kicker.textContent='POP & LOCK PRESENTS';wrap.appendChild(kicker);
+var h=document.createElement('h1');h.className='intro-title';h.textContent=title;wrap.appendChild(h);
+var message=document.createElement('div');message.className='intro-message';message.textContent=(theme==='halloween'?'ENTER IF YOU DARE':eventCopy(theme,title)[0]);message.style.opacity='0';message.style.visibility='visible';message.style.transform='translateY(4px)';message.style.animation='introMessageIn .65s ease-out 1.5s forwards';wrap.appendChild(message);
+var line=document.createElement('div');line.className='intro-line';wrap.appendChild(line);intro.appendChild(wrap);
+document.body.appendChild(intro);
+var symbols={halloween:['🦇','🎃'],christmas:['❄','🎁'],newyear:['✦','✨'],valentines:['♥','♡'],easter:['🌸','🥚'],stpatricks:['☘','🍀'],mothersday:['🌸','💐'],fathersday:['★','🎁'],bonfire:['•','🔥'],diwali:['🪔','✦'],summer:['✦','☀'],blackfriday:['★','$'],default:['✦','•']}[theme]||['✦','•'];
+for(var i=0;i<18;i++){var p=document.createElement('span');p.textContent=symbols[i%symbols.length];p.style.cssText='position:absolute;left:'+(8+Math.random()*84)+'%;top:'+(14+Math.random()*62)+'%;font-size:'+(10+Math.random()*16)+'px;opacity:0;z-index:8;pointer-events:none;filter:drop-shadow(0 0 7px currentColor);';p.style.animation='introParticleIn 1.35s ease-out '+(0.35+Math.random()*1.35)+'s forwards';layer.appendChild(p);}
+setTimeout(function(){intro.classList.add('is-done');setTimeout(function(){intro.remove()},650)},2950);
+}
+
+(async function(){
+try{
+var id=new URLSearchParams(location.search).get('event');if(!id){location.replace('index.html');return}
+var events=[];try{var er=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(er.ok)events=await er.json()}catch(fetchErr){} var e=events.find(function(x){return String(x.id)===String(id)});if(!e){var fallbackTitles={'christmas':'CHRISTMAS','new-year':'NEW YEAR','valentines':"VALENTINE'S DAY",'mothers-day':"MOTHER'S DAY",'st-patricks':"ST PATRICK'S DAY",'easter':'EASTER','fathers-day':"FATHER'S DAY",'summer':'SUMMER SALE','halloween':'HALLOWEEN','bonfire':'BONFIRE NIGHT','diwali':'DIWALI','black-friday':'BLACK FRIDAY','boxing-day':'BOXING DAY SALE'};if(!fallbackTitles[id]){location.replace('index.html');return}e={id:id,title:fallbackTitles[id],visible:true,products:[]}}
+var title=e.title||e.name||'EVENT',theme=themeFor(title);window.currentTheme=theme;document.getElementById('page').className='event-page theme-'+theme;runEventIntro(title,theme);document.title=title+' | Pop & Lock';
+
+var copy=eventCopy(theme,title);document.getElementById('eventHeading').textContent=copy[1];document.getElementById('eventEndTitle').textContent=copy[2];document.getElementById('eventShopIntro').textContent='';
+makeParticles(theme);
+var pr=await fetch('products.json?v='+Date.now(),{cache:'no-store'});if(!pr.ok)throw new Error();var products=await pr.json();var chosen=Array.isArray(e.products)&&e.products.length?products.filter(function(p){return e.products.map(String).includes(String(p.id))}):products;chosen=chosen.filter(function(p){return Number(p.stock||0)>0});
+var shop=document.getElementById('eventProducts');if(!chosen.length){shop.innerHTML='<div class="event-empty">The event collection is being refreshed. Check back soon.</div>'}else{shop.innerHTML=chosen.map(function(p){var badge=theme==='halloween'?'SPOOKY PICK':theme==='christmas'?'CHRISTMAS PICK':theme==='newyear'?'NEW YEAR PICK':theme==='valentines'?'LOVE PICK':theme==='bonfire'?'NIGHT PICK':'EVENT PICK';return '<article class="event-product" data-product-link="product.html?id='+encodeURIComponent(p.id)+'"><div class="product-art"><img src="'+esc(p.image||'')+'" alt="'+esc(p.name||'')+'"></div><div class="product-info"><span class="event-badge">'+badge+'</span><h3>'+esc(p.name||'')+'</h3><div class="event-price">£'+Number(p.price||0).toFixed(2)+'</div><div class="event-actions"><button class="event-add" type="button" data-event-add="'+esc(p.id)+'">ADD TO CART</button></div></div></article>'}).join('');
+shop.querySelectorAll('[data-product-link]').forEach(function(card){card.addEventListener('click',function(e){if(e.target.closest('[data-event-add]'))return;location.href=card.getAttribute('data-product-link')})});
+shop.querySelectorAll('[data-event-add]').forEach(function(btn){btn.addEventListener('click',function(){var productId=btn.getAttribute('data-event-add'),bag=[];try{bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]');if(!Array.isArray(bag))bag=[]}catch(err){bag=[]}var product=products.find(function(x){return String(x.id)===String(productId)});if(!product)return;var stock=Math.max(0,Number(product.stock)||0),idx=bag.findIndex(function(x){return String(x.id)===String(productId)}),current=idx>=0?Math.max(0,Number(bag[idx].qty)||0):0;if(!stock||current>=stock){btn.textContent='SOLD OUT';btn.disabled=true;return}if(idx>=0)bag[idx].qty=current+1;else bag.push({id:product.id,qty:1});localStorage.setItem('popandlock-bag',JSON.stringify(bag));var total=idx>=0?current+1:1;btn.textContent=total>=stock?'ADDED · SOLD OUT':'ADDED TO CART';btn.classList.add('added');if(window.updateBagCount)window.updateBagCount();setTimeout(function(){if(document.body.contains(btn)){btn.textContent='ADD TO CART';btn.classList.remove('added');btn.disabled=false}},1400)})})}
+}catch(err){location.replace('index.html')}
+})();
+(async function(){try{var r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;var events=await r.json(),menu=document.getElementById('mainMenu');events.filter(function(e){return e&&e.visible===true}).forEach(function(e){var a=document.createElement('a');a.href=e.link||('event.html?event='+encodeURIComponent(e.id));a.textContent=e.title||e.name||'EVENT';var live=Array.from(menu.querySelectorAll('a')).find(function(x){return x.textContent.trim()==='LIVE SHOWS'});if(live)live.insertAdjacentElement('afterend',a);else menu.appendChild(a)})}catch(e){}})();
+</script>
+</body></html>,'★','✦'],holiday:['🎁','✦','✨']}[theme]||['✦','•'];
+for(var i=0;i<42;i++){
+var p=document.createElement('span');p.className='event-particle glyph';p.textContent=g[i%g.length];
+p.style.setProperty('--start-left',(Math.random()*100)+'%');p.style.setProperty('--start-top',(5+Math.random()*85)+'%');
+p.style.fontSize=(12+Math.random()*20)+'px';p.style.animationDuration=(7+Math.random()*10)+'s';p.style.animationDelay=(-Math.random()*12)+'s';
+p.style.setProperty('--drift',(-110+Math.random()*220)+'px');p.style.setProperty('--drift-mid',(-55+Math.random()*110)+'px');
+p.style.setProperty('--float-y',(-35+Math.random()*70)+'px');p.style.setProperty('--float-y-end',(-120-Math.random()*180)+'px');
+p.style.setProperty('--spin',(-180+Math.random()*360)+'deg');p.style.setProperty('--spin2',(-360+Math.random()*720)+'deg');box.appendChild(p);
+}}
+
+
+function runEventIntro(title,theme){
+var intro=document.createElement('div');intro.className='event-intro intro-theme-'+theme;intro.setAttribute('aria-hidden','true');
+var layer=document.createElement('div');layer.className='intro-layer';intro.appendChild(layer);
+var fade=document.createElement('div');fade.className='intro-fade';layer.appendChild(fade);
+var wrap=document.createElement('div');wrap.className='intro-title-wrap';
+var kicker=document.createElement('span');kicker.className='intro-kicker';kicker.textContent='POP & LOCK PRESENTS';wrap.appendChild(kicker);
+var h=document.createElement('h1');h.className='intro-title';h.textContent=title;wrap.appendChild(h);
+var message=document.createElement('div');message.className='intro-message';message.textContent=(theme==='halloween'?'ENTER IF YOU DARE':eventCopy(theme,title)[0]);message.style.opacity='0';message.style.visibility='visible';message.style.transform='translateY(4px)';message.style.animation='introMessageIn .65s ease-out 1.5s forwards';wrap.appendChild(message);
+var line=document.createElement('div');line.className='intro-line';wrap.appendChild(line);intro.appendChild(wrap);
+document.body.appendChild(intro);
+var symbols={halloween:['🦇','🎃'],christmas:['❄','🎁'],newyear:['✦','✨'],valentines:['♥','♡'],easter:['🌸','🥚'],stpatricks:['☘','🍀'],mothersday:['🌸','💐'],fathersday:['★','🎁'],bonfire:['•','🔥'],diwali:['🪔','✦'],summer:['✦','☀'],blackfriday:['★','$'],default:['✦','•']}[theme]||['✦','•'];
+for(var i=0;i<18;i++){var p=document.createElement('span');p.textContent=symbols[i%symbols.length];p.style.cssText='position:absolute;left:'+(8+Math.random()*84)+'%;top:'+(14+Math.random()*62)+'%;font-size:'+(10+Math.random()*16)+'px;opacity:0;z-index:8;pointer-events:none;filter:drop-shadow(0 0 7px currentColor);';p.style.animation='introParticleIn 1.35s ease-out '+(0.35+Math.random()*1.35)+'s forwards';layer.appendChild(p);}
+setTimeout(function(){intro.classList.add('is-done');setTimeout(function(){intro.remove()},650)},2950);
+}
+
+(async function(){
+try{
+var id=new URLSearchParams(location.search).get('event');if(!id){location.replace('index.html');return}
+var events=[];try{var er=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(er.ok)events=await er.json()}catch(fetchErr){} var e=events.find(function(x){return String(x.id)===String(id)});if(!e){var fallbackTitles={'christmas':'CHRISTMAS','new-year':'NEW YEAR','valentines':"VALENTINE'S DAY",'mothers-day':"MOTHER'S DAY",'st-patricks':"ST PATRICK'S DAY",'easter':'EASTER','fathers-day':"FATHER'S DAY",'summer':'SUMMER SALE','halloween':'HALLOWEEN','bonfire':'BONFIRE NIGHT','diwali':'DIWALI','black-friday':'BLACK FRIDAY','boxing-day':'BOXING DAY SALE'};if(!fallbackTitles[id]){location.replace('index.html');return}e={id:id,title:fallbackTitles[id],visible:true,products:[]}}
+var title=e.title||e.name||'EVENT',theme=themeFor(title);window.currentTheme=theme;document.getElementById('page').className='event-page theme-'+theme;runEventIntro(title,theme);document.title=title+' | Pop & Lock';
+
+var copy=eventCopy(theme,title);document.getElementById('eventHeading').textContent=copy[1];document.getElementById('eventEndTitle').textContent=copy[2];document.getElementById('eventShopIntro').textContent='';
+makeParticles(theme);
+var pr=await fetch('products.json?v='+Date.now(),{cache:'no-store'});if(!pr.ok)throw new Error();var products=await pr.json();var chosen=Array.isArray(e.products)&&e.products.length?products.filter(function(p){return e.products.map(String).includes(String(p.id))}):products;chosen=chosen.filter(function(p){return Number(p.stock||0)>0});
+var shop=document.getElementById('eventProducts');if(!chosen.length){shop.innerHTML='<div class="event-empty">The event collection is being refreshed. Check back soon.</div>'}else{shop.innerHTML=chosen.map(function(p){var badge=theme==='halloween'?'SPOOKY PICK':theme==='christmas'?'CHRISTMAS PICK':theme==='newyear'?'NEW YEAR PICK':theme==='valentines'?'LOVE PICK':theme==='bonfire'?'NIGHT PICK':'EVENT PICK';return '<article class="event-product" data-product-link="product.html?id='+encodeURIComponent(p.id)+'"><div class="product-art"><img src="'+esc(p.image||'')+'" alt="'+esc(p.name||'')+'"></div><div class="product-info"><span class="event-badge">'+badge+'</span><h3>'+esc(p.name||'')+'</h3><div class="event-price">£'+Number(p.price||0).toFixed(2)+'</div><div class="event-actions"><button class="event-add" type="button" data-event-add="'+esc(p.id)+'">ADD TO CART</button></div></div></article>'}).join('');
+shop.querySelectorAll('[data-product-link]').forEach(function(card){card.addEventListener('click',function(e){if(e.target.closest('[data-event-add]'))return;location.href=card.getAttribute('data-product-link')})});
+shop.querySelectorAll('[data-event-add]').forEach(function(btn){btn.addEventListener('click',function(){var productId=btn.getAttribute('data-event-add'),bag=[];try{bag=JSON.parse(localStorage.getItem('popandlock-bag')||'[]');if(!Array.isArray(bag))bag=[]}catch(err){bag=[]}var product=products.find(function(x){return String(x.id)===String(productId)});if(!product)return;var stock=Math.max(0,Number(product.stock)||0),idx=bag.findIndex(function(x){return String(x.id)===String(productId)}),current=idx>=0?Math.max(0,Number(bag[idx].qty)||0):0;if(!stock||current>=stock){btn.textContent='SOLD OUT';btn.disabled=true;return}if(idx>=0)bag[idx].qty=current+1;else bag.push({id:product.id,qty:1});localStorage.setItem('popandlock-bag',JSON.stringify(bag));var total=idx>=0?current+1:1;btn.textContent=total>=stock?'ADDED · SOLD OUT':'ADDED TO CART';btn.classList.add('added');if(window.updateBagCount)window.updateBagCount();setTimeout(function(){if(document.body.contains(btn)){btn.textContent='ADD TO CART';btn.classList.remove('added');btn.disabled=false}},1400)})})}
+}catch(err){location.replace('index.html')}
+})();
+(async function(){try{var r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;var events=await r.json(),menu=document.getElementById('mainMenu');events.filter(function(e){return e&&e.visible===true}).forEach(function(e){var a=document.createElement('a');a.href=e.link||('event.html?event='+encodeURIComponent(e.id));a.textContent=e.title||e.name||'EVENT';var live=Array.from(menu.querySelectorAll('a')).find(function(x){return x.textContent.trim()==='LIVE SHOWS'});if(live)live.insertAdjacentElement('afterend',a);else menu.appendChild(a)})}catch(e){}})();
+</script>
+</body></html>,'★','✦'],holiday:['🎁','✦','✨']}[theme]||['✦','•'];
 for(var i=0;i<42;i++){
 var p=document.createElement('span');p.className='event-particle glyph';p.textContent=g[i%g.length];
 p.style.setProperty('--start-left',(Math.random()*100)+'%');p.style.setProperty('--start-top',(5+Math.random()*85)+'%');
