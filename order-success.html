@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Order Confirmed | Pop &amp; Lock</title>
-</head>
+<style>.card{max-width:620px;margin:30px auto 0;border:1px solid #eee;padding:24px;text-align:left}.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #eee;font-size:14px}.email{margin-top:18px;padding:13px;background:#f7f7f7;font-size:13px;color:#555}.links{margin-top:28px}.links a{display:inline-block;margin:5px;padding:13px 20px;background:#111;color:#fff;text-decoration:none;font-size:12px;font-weight:700}.links a.alt{background:#fff;color:#111;border:1px solid #111}</style></head>
 <body style="margin:0;background:#ffffff;color:#111111;font-family:Arial,Helvetica,sans-serif;">
 <div style="max-width:760px;margin:0 auto;padding:80px 24px;text-align:center;">
   <div style="font-size:56px;line-height:1;margin-bottom:24px;">✓</div>
@@ -12,6 +12,5 @@
   <p style="font-size:18px;line-height:1.6;color:#555555;margin:0 auto 12px;max-width:620px;">Your payment has been received by Stripe.</p>
   <p style="font-size:16px;line-height:1.6;color:#555555;margin:0 auto;max-width:620px;">We'll process your Pop &amp; Lock order and use the details provided at checkout to arrange delivery.</p>
   <a href="shop.html" style="display:inline-block;margin-top:32px;padding:16px 28px;background:#111111;color:#ffffff;text-decoration:none;font-size:13px;font-weight:700;">CONTINUE SHOPPING</a>
-</div>
-</body>
+</div><div id="orderDetails"></div><script>(function(){try{var o=JSON.parse(localStorage.getItem("popandlock-last-order")||"null"),e=document.getElementById("orderDetails");if(!o||!e)return;e.innerHTML="<div class=\"card\"><strong>Order details</strong>"+o.items.map(function(x){return "<div class=\"row\"><span>"+x.qty+" × "+x.name+"</span><span>£"+(Number(x.price)*Number(x.qty)).toFixed(2)+"</span></div>"}).join("")+"<div class=\"row\"><strong>Total</strong><strong>£"+o.total+"</strong></div><div class=\"email\">Checkout email: <strong>"+o.email+"</strong><br>Your email was passed to Stripe with the payment session.</div></div>"}catch(x){}})();</script></body>
 </html>
