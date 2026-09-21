@@ -89,5 +89,20 @@
     "boxCondition": "Near Mint",
     "stock": 1,
     "featured": false
+  },
+  {
+    "id": "phyllis-vance-eb-exclusive-the-office-1189",
+    "name": "Phyllis Vance EB Exclusive - The Office #1189",
+    "category": "TV & Film",
+    "categories": [
+      "TV & Film"
+    ],
+    "price": 16.99,
+    "image": "product-images/phyllis-vance-eb-exclusive-the-office-1189.jpg",
+    "description": "",
+    "condition": "Used",
+    "boxCondition": "Near Mint",
+    "stock": 1,
+    "featured": false
   }
 ]
