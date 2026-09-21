@@ -282,16 +282,16 @@ window.addEventListener('storage',updateBagCount);
 
 (async function(){
   const fallback=[
-    ["marvel","MARVEL","MARVEL.jpg","shop.html#marvel"],
-    ["dc","DC","DC.jpg","shop.html#dc"],
-    ["disney","DISNEY","DISNEY.jfif","shop.html#disney"],
-    ["horror","HORROR","HORROR.jfif","shop.html#horror"],
-    ["tv-film","TV & FILM","TV & FILM.jpg","shop.html#tv-film"],
-    ["music","MUSIC","MUSIC.jpg","shop.html#music"],
-    ["anime","ANIME","ANIME.jpg","shop.html#anime"],
-    ["grails","GRAILS","GRAILS.jpg","shop.html#grails"],
-    ["signed","SIGNED","SIGNED.jpg","shop.html#signed"],
-    ["other","OTHER","OTHER.jpg","shop.html#other"]
+    ["marvel","MARVEL","MARVEL.jpg","shop.html?category=Marvel"],
+    ["dc","DC","DC.jpg","shop.html?category=DC"],
+    ["disney","DISNEY","DISNEY.jfif","shop.html?category=Disney"],
+    ["horror","HORROR","HORROR.jfif","shop.html?category=Horror"],
+    ["tv-film","TV & FILM","TV & FILM.jpg","shop.html?category=TV%20%26%20Film"],
+    ["music","MUSIC","MUSIC.jpg","shop.html?category=Music"],
+    ["anime","ANIME","ANIME.jpg","shop.html?category=Anime"],
+    ["grails","GRAILS","GRAILS.jpg","shop.html?category=Grails"],
+    ["signed","SIGNED","SIGNED.jpg","shop.html?category=Signed"],
+    ["other","OTHER","OTHER.jpg","shop.html?category=Other"]
   ];
   function render(items){
     const root=document.getElementById("homepageCategories");
