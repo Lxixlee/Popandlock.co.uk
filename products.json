@@ -11,7 +11,8 @@
     "stock": 1,
     "featured": true,
     "categories": [
-      "Horror"
+      "Horror",
+      "Sale"
     ]
   },
   {
