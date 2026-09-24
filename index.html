@@ -296,10 +296,10 @@ z-index:5!important;pointer-events:none!important
 
 <style id="pl-marvel-energy-lights">
 .category.marvel .pl-marvel-lights{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
-.category.marvel .pl-marvel-light{position:absolute;width:28px;height:28px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,255,255,1) 0 24%,rgba(185,235,255,.95) 25% 42%,rgba(70,190,255,.55) 43% 58%,rgba(70,190,255,0) 72%);filter:drop-shadow(0 0 5px rgba(130,220,255,.95));animation:plMarvelLightPulse 2.8s ease-in-out infinite;opacity:.82}
-.category.marvel .pl-marvel-light:nth-child(1){animation-delay:-.15s}.category.marvel .pl-marvel-light:nth-child(2){animation-delay:-1.35s}.category.marvel .pl-marvel-light:nth-child(3){animation-delay:-2.15s}.category.marvel .pl-marvel-light:nth-child(4){animation-delay:-.85s}
-@keyframes plMarvelLightPulse{0%,100%{transform:translate(-50%,-50%) scale(.72);opacity:.62;filter:drop-shadow(0 0 4px rgba(130,220,255,.75))}45%{transform:translate(-50%,-50%) scale(1.12);opacity:1;filter:drop-shadow(0 0 13px rgba(110,220,255,1)) drop-shadow(0 0 28px rgba(70,180,255,.7))}58%{transform:translate(-50%,-50%) scale(.94);opacity:.9} }
-@media(max-width:760px){.category.marvel .pl-marvel-light{width:22px;height:22px}}
+.category.marvel .pl-marvel-light{position:absolute;width:54px;height:54px;border-radius:50%;transform:translate(-50%,-50%) scale(.7);background:radial-gradient(circle,rgba(255,255,255,.98) 0 9%,rgba(180,235,255,.7) 12%,rgba(80,190,255,.32) 30%,rgba(60,170,255,.14) 48%,rgba(60,170,255,0) 72%);filter:blur(.2px);opacity:.72;mix-blend-mode:screen;animation:plMarvelLightGlow 2.6s ease-in-out infinite}
+.category.marvel .pl-marvel-light:nth-child(1){animation-delay:-.2s}.category.marvel .pl-marvel-light:nth-child(2){animation-delay:-1.45s}.category.marvel .pl-marvel-light:nth-child(3){animation-delay:-.8s}.category.marvel .pl-marvel-light:nth-child(4){animation-delay:-2s}
+@keyframes plMarvelLightGlow{0%,100%{transform:translate(-50%,-50%) scale(.65);opacity:.5}42%{transform:translate(-50%,-50%) scale(1.25);opacity:1}58%{transform:translate(-50%,-50%) scale(1);opacity:.86}}
+@media(max-width:760px){.category.marvel .pl-marvel-light{width:42px;height:42px}}
 </style></head>
 <body>
 <header class="top">
@@ -447,6 +447,33 @@ window.addEventListener('storage',updateBagCount);
         el.style.top=(oy+nh*y*scale)+'px';
         const d=Math.max(18,Math.min(42,Math.min(rw,rh)*.055*size));
         el.style.width=d+'px';el.style.height=d+'px';
+      });
+    }
+    if(img.complete)place();else img.addEventListener('load',place,{once:true});
+    new ResizeObserver(place).observe(card);
+  }
+  function scan(){root.querySelectorAll('.category.marvel').forEach(setup)}
+  scan();new MutationObserver(scan).observe(root,{childList:true});
+})();
+</script><script id="pl-marvel-energy-script">
+(function(){
+  const root=document.getElementById('homepageCategories');if(!root)return;
+  // These are fixed over the four existing white light sources in the Marvel artwork.
+  const points=[[0.423,0.359],[0.569,0.342],[0.363,0.499],[0.568,0.532]];
+  function setup(card){
+    if(!card||card.dataset.marvelLights)return;
+    const img=card.querySelector(':scope>img');if(!img)return;
+    card.dataset.marvelLights='1';
+    const wrap=document.createElement('span');wrap.className='pl-marvel-lights';wrap.setAttribute('aria-hidden','true');
+    points.forEach(()=>{const s=document.createElement('i');s.className='pl-marvel-light';wrap.appendChild(s)});
+    card.appendChild(wrap);
+    function place(){
+      if(!img.naturalWidth||!img.naturalHeight)return;
+      const cw=card.clientWidth,ch=card.clientHeight,nw=img.naturalWidth,nh=img.naturalHeight;
+      const scale=Math.max(cw/nw,ch/nh),rw=nw*scale,rh=nh*scale,ox=(cw-rw)/2,oy=(ch-rh)/2;
+      wrap.querySelectorAll('.pl-marvel-light').forEach((el,i)=>{
+        el.style.left=(ox+nw*points[i][0]*scale)+'px';
+        el.style.top=(oy+nh*points[i][1]*scale)+'px';
       });
     }
     if(img.complete)place();else img.addEventListener('load',place,{once:true});
