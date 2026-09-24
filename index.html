@@ -291,47 +291,9 @@ z-index:5!important;pointer-events:none!important
 }
 </style>
 
-<style id="pl-category-led-trails">
-/* Vibrant colour-matched LED trails over the artwork. The tile itself does not move. */
-.category:not(.sale)::before{
-  content:"";
-  position:absolute;
-  z-index:1;
-  pointer-events:none;
-  inset:-10%;
-  border:4px solid var(--led,#fff);
-  border-radius:44%;
-  box-shadow:0 0 7px var(--led,#fff),0 0 18px var(--led,#fff),0 0 38px color-mix(in srgb,var(--led,#fff) 72%,transparent);
-  opacity:.95;
-  clip-path:polygon(0 0,100% 0,100% 17%,0 17%,0 31%,100% 31%,100% 48%,0 48%,0 66%,100% 66%,100% 83%,0 83%);
-  animation:plLedOrbit 2.7s linear infinite;
-}
-.category:not(.sale)::after{
-  z-index:2;
-  background:linear-gradient(to top,rgba(0,0,0,.3),rgba(0,0,0,.03) 55%,rgba(0,0,0,.12));
-}
-.category.marvel{--led:#ef172d}.category.dc{--led:#168cff}.category.disney{--led:#ff3fb4}.category.horror{--led:#7cff00}.category.tv-film{--led:#b46cff}.category.music{--led:#00eaff}.category.anime{--led:#ff3bd4}.category.grails{--led:#ffd21a}.category.signed{--led:#ff7a18}.category.other{--led:#00ff9d}
-@media (prefers-reduced-motion:no-preference){
-  @keyframes plLedOrbit{
-    0%{transform:rotate(0deg) scale(.94);filter:brightness(1.1);}
-    50%{transform:rotate(180deg) scale(1.02);filter:brightness(1.65);}
-    100%{transform:rotate(360deg) scale(.94);filter:brightness(1.1);}
-  }
-  .category:not(.sale)::before{animation-duration:2.15s}
-  .category.marvel::before{animation-duration:1.75s}.category.dc::before{animation-duration:2.4s}.category.disney::before{animation-duration:2.05s}.category.horror::before{animation-duration:1.55s}.category.tv-film::before{animation-duration:2.6s}.category.music::before{animation-duration:1.9s}.category.anime::before{animation-duration:1.7s}.category.grails::before{animation-duration:2.8s}.category.signed::before{animation-duration:2s}.category.other::before{animation-duration:2.3s}
-}
-@supports not (color:color-mix(in srgb,red 50%,transparent)){
-  .category:not(.sale)::before{box-shadow:0 0 7px var(--led,#fff),0 0 18px var(--led,#fff),0 0 32px var(--led,#fff)}
-}
-</style>
 
-<style id="pl-character-neon-outline">
-/* Character-silhouette LED system: no rectangular border, no tile movement. */
-.category:not(.sale)::before{display:none!important}
-.category:not(.sale)>img{animation:none!important;transform:none!important;filter:none!important}
-.category-neon-canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:3!important;pointer-events:none!important;display:block!important}
-.category:not(.sale)>.label{z-index:4!important}
-</style>
+
+
 </head>
 <body>
 <header class="top">
@@ -452,113 +414,7 @@ window.addEventListener('storage',updateBagCount);
 </script>
 <footer><div class="footer-info"><div><h3>Pop &amp; Lock</h3><p>UK-based Funko Pop collectibles, exclusives, grails and signed pieces.</p></div><div><h3>Customer Care</h3><p><a href="contact.html">Contact us</a> for order questions, collection enquiries and general help.</p></div><div><h3>Delivery &amp; Payments</h3><p>Standard UK delivery £3.27 · Tracked UK delivery £5.95 · Secure checkout.</p></div></div><nav class="footer-links"><a href="about.html">ABOUT</a><a href="shipping.html">SHIPPING</a><a href="returns.html">RETURNS</a><a href="contact.html">CONTACT</a><a href="sell-to-us.html">SELL TO US</a><a href="live-shows.html">LIVE SHOWS</a></nav><div class="footer-note">Questions? <a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></div><div class="footer-copy">© Pop &amp; Lock</div></footer>
 <script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script>
-<script id="pl-character-neon-script">
-(function(){
-  const root=document.getElementById('homepageCategories'); if(!root)return;
-  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const palette={marvel:'#ff1738',dc:'#168cff',disney:'#ff3fc7',horror:'#42ff3b','tv-film':'#b56cff',music:'#00eaff',anime:'#ff32d8',grails:'#ffd21a',signed:'#ff7b18',other:'#00ff9d'};
-  const jobs=new Map();
-  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
-  const colourFor=card=>palette[[...card.classList].find(x=>palette[x])]||'#00f6ff';
 
-  function traceBoundary(mask,W,H,component){
-    const set=new Set(component);
-    let start=-1;
-    for(const p of component){const x=p%W,y=(p/W)|0;if(y>1&&y<H-2&&x>1&&x<W-2){start=p;break}}
-    if(start<0)return [];
-    const dirs=[[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]];
-    let cur=start,prevDir=4,path=[],guard=0;
-    do{
-      const x=cur%W,y=(cur/W)|0; path.push({x,y});
-      let found=-1;
-      for(let k=0;k<8;k++){
-        const d=(prevDir+1+k)%8,nx=x+dirs[d][0],ny=y+dirs[d][1],np=ny*W+nx;
-        if(nx>=0&&nx<W&&ny>=0&&ny<H&&set.has(np)){found=d;break}
-      }
-      if(found<0)break;
-      const nx=x+dirs[found][0],ny=y+dirs[found][1];
-      cur=ny*W+nx;prevDir=(found+4)%8;guard++;
-    }while(cur!==start&&guard<component.length*3);
-    return path;
-  }
-
-  function process(card,img,canvas){
-    if(!img.complete||!img.naturalWidth)return;
-    const W=220,H=280,off=document.createElement('canvas');off.width=W;off.height=H;
-    const ctx=off.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,W,H);
-    let data;try{data=ctx.getImageData(0,0,W,H).data}catch(e){return}
-
-    // Estimate the image background from its perimeter, then isolate strong foreground pixels.
-    const samples=[];
-    for(let x=0;x<W;x+=3){samples.push(x*4);samples.push(((H-1)*W+x)*4)}
-    for(let y=0;y<H;y+=3){samples.push((y*W)*4);samples.push((y*W+W-1)*4)}
-    let br=0,bg=0,bb=0;for(const i of samples){br+=data[i];bg+=data[i+1];bb+=data[i+2]}br/=samples.length;bg/=samples.length;bb/=samples.length;
-    const dist=new Float32Array(W*H);let mean=0;
-    for(let p=0;p<W*H;p++){const i=p*4,d=Math.hypot(data[i]-br,data[i+1]-bg,data[i+2]-bb);dist[p]=d;mean+=d}mean/=W*H;
-    let variance=0;for(let p=0;p<W*H;p++)variance+=(dist[p]-mean)**2;variance/=W*H;
-    const threshold=clamp(mean+Math.sqrt(variance)*.6,38,95);
-    let mask=new Uint8Array(W*H);
-    for(let p=0;p<W*H;p++){const x=p%W,y=(p/W)|0;const central=1-Math.hypot((x-W/2)/(W/2),(y-H/2)/(H/2))*.28;mask[p]=(dist[p]>threshold*central)?1:0}
-
-    // Remove tiny texture/noise while preserving the main character.
-    for(let pass=0;pass<3;pass++){
-      const next=new Uint8Array(mask);
-      for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
-        let n=0;for(let yy=-1;yy<=1;yy++)for(let xx=-1;xx<=1;xx++)n+=mask[(y+yy)*W+x+xx];
-        if(n>=6)next[y*W+x]=1;else if(n<=2)next[y*W+x]=0;
-      } mask=next;
-    }
-
-    const seen=new Uint8Array(W*H),comps=[];
-    for(let p=0;p<W*H;p++)if(mask[p]&&!seen[p]){
-      const q=[p],pts=[];seen[p]=1;
-      for(let qi=0;qi<q.length;qi++){const cur=q[qi],x=cur%W,y=(cur/W)|0;pts.push(cur);
-        for(let yy=-1;yy<=1;yy++)for(let xx=-1;xx<=1;xx++){if(!xx&&!yy)continue;const nx=x+xx,ny=y+yy,np=ny*W+nx;if(nx>=0&&nx<W&&ny>=0&&ny<H&&!seen[np]&&mask[np]){seen[np]=1;q.push(np)}}}
-      if(pts.length>W*H*.025)comps.push(pts);
-    }
-    comps.sort((a,b)=>b.length-a.length);
-    // Choose one dominant, central, character-sized foreground component.
-    let chosen=null,best=-Infinity;
-    for(const comp of comps.slice(0,8)){
-      let cx=0,cy=0;comp.forEach(p=>{cx+=p%W;cy+=(p/W)|0});cx/=comp.length;cy/=comp.length;
-      const area=comp.length/(W*H),central=1-Math.hypot((cx-W/2)/(W/2),(cy-H/2)/(H/2));
-      const score=area*2.2+central*1.5;
-      if(score>best){best=score;chosen=comp}
-    }
-    if(!chosen)return;
-    const path=traceBoundary(mask,W,H,chosen); if(path.length<40)return;
-
-    const rect=card.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);
-    canvas.width=Math.max(1,Math.round(rect.width*dpr));canvas.height=Math.max(1,Math.round(rect.height*dpr));
-    jobs.set(card,{canvas,path,colour:colourFor(card),w:rect.width,h:rect.height});
-  }
-
-  function draw(job,t){
-    const c=job.canvas.getContext('2d');c.clearRect(0,0,job.w,job.h);
-    const sx=job.w/220,sy=job.h/280,p=job.path,phase=(t*.00024)%1;
-    c.save();c.lineJoin='round';c.lineCap='round';
-    c.beginPath();p.forEach((q,i)=>{const x=q.x*sx,y=q.y*sy;i?c.lineTo(x,y):c.moveTo(x,y)});c.closePath();
-    c.strokeStyle=job.colour;c.globalAlpha=.22;c.lineWidth=2.5;c.shadowColor=job.colour;c.shadowBlur=13;c.stroke();
-    // Slow travelling neon segment.
-    c.setLineDash([Math.max(16,p.length*.075),Math.max(30,p.length*.925)]);
-    c.lineDashOffset=-(phase*p.length);
-    c.strokeStyle=job.colour;c.globalAlpha=.98;c.lineWidth=4;c.shadowBlur=24;c.stroke();
-    c.strokeStyle='#fff';c.globalAlpha=.95;c.lineWidth=1.25;c.shadowBlur=7;c.stroke();
-    c.restore();
-  }
-  function animate(t){jobs.forEach(j=>draw(j,t));if(!reduceMotion)requestAnimationFrame(animate)}
-  function setup(card){
-    if(card.classList.contains('sale')||card.dataset.neonReady)return;
-    const img=card.querySelector(':scope>img');if(!img)return;
-    card.dataset.neonReady='1';const canvas=document.createElement('canvas');canvas.className='category-neon-canvas';canvas.setAttribute('aria-hidden','true');card.appendChild(canvas);
-    const go=()=>process(card,img,canvas);if(img.complete)go();else img.addEventListener('load',go,{once:true});
-    new ResizeObserver(()=>{if(img.complete)process(card,img,canvas)}).observe(card);
-  }
-  function scan(){root.querySelectorAll('.category:not(.sale)').forEach(setup)}
-  scan();new MutationObserver(scan).observe(root,{childList:true});
-  if(!reduceMotion)requestAnimationFrame(animate);
-})();
-</script>
 </body>
 </html>
 
