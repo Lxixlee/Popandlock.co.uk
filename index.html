@@ -262,7 +262,35 @@ z-index:5!important;pointer-events:none!important
     to{transform:scale(1.055)}
   }
 }
-</style></head>
+</style>
+<style id="pl-category-image-animation">
+/* Animate the artwork inside category tiles — the tile/container itself stays still. */
+.category:not(.sale) > img{
+  transform:scale(1.01);
+  transform-origin:center center;
+  will-change:transform,filter;
+}
+@media (prefers-reduced-motion:no-preference){
+  .category:not(.sale) > img{animation:plCategoryImageMotion 7s ease-in-out infinite alternate;}
+  .category.marvel > img{animation-duration:6.2s;animation-delay:-1.4s;}
+  .category.dc > img{animation-duration:7.4s;animation-delay:-3.1s;}
+  .category.disney > img{animation-duration:8s;animation-delay:-4.7s;}
+  .category.horror > img{animation-duration:5.8s;animation-delay:-2.2s;}
+  .category.tv-film > img{animation-duration:7.8s;animation-delay:-5.3s;}
+  .category.music > img{animation-duration:6.8s;animation-delay:-.8s;}
+  .category.anime > img{animation-duration:6s;animation-delay:-3.8s;}
+  .category.grails > img{animation-duration:8.6s;animation-delay:-6.2s;}
+  .category.signed > img{animation-duration:7.1s;animation-delay:-1.9s;}
+  .category.other > img{animation-duration:8.2s;animation-delay:-4.1s;}
+  @keyframes plCategoryImageMotion{
+    0%{transform:scale(1.01) translate3d(-.4%,.2%,0);filter:saturate(1) brightness(1);}
+    50%{transform:scale(1.045) translate3d(.45%,-.3%,0);filter:saturate(1.08) brightness(1.025);}
+    100%{transform:scale(1.075) translate3d(-.25%,.45%,0);filter:saturate(1.04) brightness(1.01);}
+  }
+  .category:not(.sale):hover > img{animation-duration:2.6s;transform:scale(1.09);filter:saturate(1.16) brightness(1.06);}
+}
+</style>
+</head>
 <body>
 <header class="top">
 <div class="icons"><a class="icon" href="#" aria-label="Search" id="searchToggle"><svg viewBox="0 0 48 48"><circle cx="20" cy="20" r="12"></circle><path d="M29 29l11 11"></path></svg></a><a class="brand" href="index.html" aria-label="Pop &amp; Lock"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="icon wishlist-header" href="wishlist.html" aria-label="Wishlist" title="Wishlist"><span class="wishlist-count" aria-label="Saved wishlist items">0</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 40S7 29 7 17c0-6 4-10 10-10 4 0 6 2 7 5 1-3 3-5 7-5 6 0 10 4 10 10 0 12-17 23-17 23z"></path></svg></a><a class="icon" href="bag.html" aria-label="Bag"><span class="bag-count" aria-label="Items in bag">0</span><svg viewBox="0 0 48 48"><path d="M11 17h26l2 24H9z"></path><path d="M17 17v-5c0-5 3-8 7-8s7 3 7 8v5"></path></svg></a></div><div class="header-search" id="headerSearch"><form action="shop.html" method="get"><input id="headerSearchInput" name="search" type="search" placeholder="Search Funko Pops..." autocomplete="off"></form></div>
