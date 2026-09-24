@@ -294,12 +294,22 @@ z-index:5!important;pointer-events:none!important
 
 
 
-<style id="pl-marvel-energy-lights">
-.category.marvel .pl-marvel-lights{position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden}
-.category.marvel .pl-marvel-light{position:absolute;width:54px;height:54px;border-radius:50%;transform:translate(-50%,-50%) scale(.7);background:radial-gradient(circle,rgba(255,255,255,.98) 0 9%,rgba(180,235,255,.7) 12%,rgba(80,190,255,.32) 30%,rgba(60,170,255,.14) 48%,rgba(60,170,255,0) 72%);filter:blur(.2px);opacity:.72;mix-blend-mode:screen;animation:plMarvelLightGlow 2.6s ease-in-out infinite}
-.category.marvel .pl-marvel-light:nth-child(1){animation-delay:-.2s}.category.marvel .pl-marvel-light:nth-child(2){animation-delay:-1.45s}.category.marvel .pl-marvel-light:nth-child(3){animation-delay:-.8s}.category.marvel .pl-marvel-light:nth-child(4){animation-delay:-2s}
-@keyframes plMarvelLightGlow{0%,100%{transform:translate(-50%,-50%) scale(.65);opacity:.5}42%{transform:translate(-50%,-50%) scale(1.25);opacity:1}58%{transform:translate(-50%,-50%) scale(1);opacity:.86}}
-@media(max-width:760px){.category.marvel .pl-marvel-light{width:42px;height:42px}}
+<style id="pl-category-cinematic-animation">
+#homepageCategories .category:not(.sale){position:relative;overflow:hidden;isolation:isolate;transform:translateZ(0);transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s ease;animation:plCategoryFloat 5s ease-in-out infinite}
+#homepageCategories .category:not(.sale):nth-child(2n){animation-delay:-1.2s}
+#homepageCategories .category:not(.sale):nth-child(3n){animation-delay:-2.4s}
+#homepageCategories .category:not(.sale)>.label{position:relative;z-index:5}
+#homepageCategories .category:not(.sale)>img{position:relative;z-index:1;transform:scale(1.015);transition:transform 1.2s cubic-bezier(.2,.8,.2,1),filter 1.2s ease;animation:plCategoryImage 7s ease-in-out infinite}
+#homepageCategories .category:not(.sale)::after{content:"";position:absolute;inset:-35%;z-index:2;pointer-events:none;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,0) 43%,rgba(255,255,255,.28) 49%,rgba(255,255,255,0) 55%,transparent 60%);transform:translateX(-75%) rotate(0deg);animation:plCategorySweep 5.5s ease-in-out infinite;mix-blend-mode:screen}
+#homepageCategories .category:not(.sale)::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 -45px 70px rgba(0,0,0,.22);opacity:.9}
+#homepageCategories .category:not(.sale):hover{transform:translateY(-7px) scale(1.018);box-shadow:0 18px 45px rgba(0,0,0,.38),0 0 28px rgba(255,255,255,.08)}
+#homepageCategories .category:not(.sale):hover>img{transform:scale(1.08);filter:saturate(1.2) contrast(1.04) brightness(1.06)}
+#homepageCategories .category:not(.sale):hover::after{animation-duration:2.2s}
+@keyframes plCategoryFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes plCategoryImage{0%,100%{transform:scale(1.015)}50%{transform:scale(1.035)}}
+@keyframes plCategorySweep{0%,22%{transform:translateX(-75%)}52%,100%{transform:translateX(75%)}}
+@media (prefers-reduced-motion:reduce){#homepageCategories .category:not(.sale),#homepageCategories .category:not(.sale)>img,#homepageCategories .category:not(.sale)::after{animation:none!important}#homepageCategories .category:not(.sale):hover{transform:none}}
+@media (hover:none){#homepageCategories .category:not(.sale):hover{transform:none;box-shadow:none}}
 </style></head>
 <body>
 <header class="top">
@@ -424,40 +434,6 @@ window.addEventListener('storage',updateBagCount);
 <script id="pl-marvel-energy-script">
 (function(){
   const root=document.getElementById('homepageCategories');if(!root)return;
-  const points=[
-    [0.423,0.359,0.86], // left eye
-    [0.569,0.342,0.86], // right eye
-    [0.363,0.499,0.78], // palm
-    [0.568,0.532,0.72]  // chest
-  ];
-  function setup(card){
-    if(!card||card.dataset.marvelLights)return;
-    const img=card.querySelector(':scope>img');if(!img)return;
-    card.dataset.marvelLights='1';
-    const wrap=document.createElement('span');wrap.className='pl-marvel-lights';wrap.setAttribute('aria-hidden','true');
-    points.forEach(()=>{const s=document.createElement('i');s.className='pl-marvel-light';wrap.appendChild(s)});
-    card.appendChild(wrap);
-    function place(){
-      if(!img.naturalWidth||!img.naturalHeight)return;
-      const cw=card.clientWidth,ch=card.clientHeight,nw=img.naturalWidth,nh=img.naturalHeight;
-      const scale=Math.max(cw/nw,ch/nh),rw=nw*scale,rh=nh*scale,ox=(cw-rw)/2,oy=(ch-rh)/2;
-      wrap.querySelectorAll('.pl-marvel-light').forEach((el,i)=>{
-        const [x,y,size]=points[i];
-        el.style.left=(ox+nw*x*scale)+'px';
-        el.style.top=(oy+nh*y*scale)+'px';
-        const d=Math.max(18,Math.min(42,Math.min(rw,rh)*.055*size));
-        el.style.width=d+'px';el.style.height=d+'px';
-      });
-    }
-    if(img.complete)place();else img.addEventListener('load',place,{once:true});
-    new ResizeObserver(place).observe(card);
-  }
-  function scan(){root.querySelectorAll('.category.marvel').forEach(setup)}
-  scan();new MutationObserver(scan).observe(root,{childList:true});
-})();
-</script><script id="pl-marvel-energy-script">
-(function(){
-  const root=document.getElementById('homepageCategories');if(!root)return;
   // These are fixed over the four existing white light sources in the Marvel artwork.
   const points=[[0.423,0.359],[0.569,0.342],[0.363,0.499],[0.568,0.532]];
   function setup(card){
@@ -481,6 +457,25 @@ window.addEventListener('storage',updateBagCount);
   }
   function scan(){root.querySelectorAll('.category.marvel').forEach(setup)}
   scan();new MutationObserver(scan).observe(root,{childList:true});
+})();
+</script><script id="pl-category-cinematic-script">
+(function(){
+ const root=document.getElementById('homepageCategories');if(!root)return;
+ const colors={marvel:'#ff1738',dc:'#168cff',disney:'#ff3fc7',horror:'#ff5b21','tv-film':'#b56cff',music:'#00d9ff',anime:'#ff32d8',grails:'#ffd21a',signed:'#ff7b18',other:'#00ff9d'};
+ function setup(card){
+   if(card.dataset.cinematicReady||card.classList.contains('sale'))return;
+   card.dataset.cinematicReady='1';
+   const key=[...card.classList].find(x=>colors[x]);
+   if(key){card.style.setProperty('--pl-cat-accent',colors[key]);}
+   if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+   card.addEventListener('pointermove',e=>{
+     const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+     card.style.transform='perspective(700px) rotateX('+(-y*4).toFixed(2)+'deg) rotateY('+(x*5).toFixed(2)+'deg) translateY(-5px) scale(1.018)';
+   });
+   card.addEventListener('pointerleave',()=>{card.style.transform='';});
+ }
+ function scan(){root.querySelectorAll('.category').forEach(setup)}
+ scan();new MutationObserver(scan).observe(root,{childList:true});
 })();
 </script></body>
 </html>
