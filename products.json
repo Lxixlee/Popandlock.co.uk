@@ -105,5 +105,20 @@
     "boxCondition": "Near Mint",
     "stock": 1,
     "featured": false
+  },
+  {
+    "id": "lex-luthor-chase-superman-the-movie-540",
+    "name": "Lex Luthor Chase - Superman The Movie #540",
+    "category": "DC",
+    "categories": [
+      "DC"
+    ],
+    "price": 26.99,
+    "image": "product-images/lex-luthor-chase-superman-the-movie-540.jpg",
+    "description": "",
+    "condition": "Used",
+    "boxCondition": "Near Mint",
+    "stock": 1,
+    "featured": false
   }
 ]
