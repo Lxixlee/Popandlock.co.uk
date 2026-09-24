@@ -324,6 +324,14 @@ z-index:5!important;pointer-events:none!important
   .category:not(.sale)::before{box-shadow:0 0 7px var(--led,#fff),0 0 18px var(--led,#fff),0 0 32px var(--led,#fff)}
 }
 </style>
+
+<style id="pl-character-neon-outline">
+/* Character-silhouette LED system: no rectangular border, no tile movement. */
+.category:not(.sale)::before{display:none!important}
+.category:not(.sale)>img{animation:none!important;transform:none!important;filter:none!important}
+.category-neon-canvas{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:3!important;pointer-events:none!important;display:block!important}
+.category:not(.sale)>.label{z-index:4!important}
+</style>
 </head>
 <body>
 <header class="top">
@@ -443,7 +451,108 @@ window.addEventListener('storage',updateBagCount);
 (async function(){try{const r=await fetch("events.json?v="+Date.now(),{cache:"no-store"});if(!r.ok)return;const events=await r.json();const menu=document.getElementById("mainMenu");events.filter(e=>e&&e.visible===true).forEach(e=>{const a=document.createElement("a");a.href=e.link||("event.html?event="+encodeURIComponent(e.id));a.textContent=e.title||e.name||"EVENT";const live=Array.from(menu.querySelectorAll("a")).find(x=>x.textContent.trim()==="LIVE SHOWS");if(live)live.insertAdjacentElement("afterend",a);else menu.appendChild(a);});}catch(e){}})();
 </script>
 <footer><div class="footer-info"><div><h3>Pop &amp; Lock</h3><p>UK-based Funko Pop collectibles, exclusives, grails and signed pieces.</p></div><div><h3>Customer Care</h3><p><a href="contact.html">Contact us</a> for order questions, collection enquiries and general help.</p></div><div><h3>Delivery &amp; Payments</h3><p>Standard UK delivery £3.27 · Tracked UK delivery £5.95 · Secure checkout.</p></div></div><nav class="footer-links"><a href="about.html">ABOUT</a><a href="shipping.html">SHIPPING</a><a href="returns.html">RETURNS</a><a href="contact.html">CONTACT</a><a href="sell-to-us.html">SELL TO US</a><a href="live-shows.html">LIVE SHOWS</a></nav><div class="footer-note">Questions? <a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></div><div class="footer-copy">© Pop &amp; Lock</div></footer>
-<script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script></body>
+<script>(function(){const t=document.getElementById("searchToggle"),b=document.getElementById("headerSearch"),i=document.getElementById("headerSearchInput");if(t&&b){t.addEventListener("click",function(e){e.preventDefault();b.classList.toggle("open");if(b.classList.contains("open")){i.focus();i.scrollIntoView({block:"nearest"});}});}})();</script>
+<script id="pl-character-neon-script">
+(function(){
+  const root=document.getElementById('homepageCategories');
+  if(!root) return;
+  const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const palette={marvel:'#ff1738',dc:'#168cff',disney:'#ff3fc7',horror:'#42ff3b','tv-film':'#b56cff',music:'#00eaff',anime:'#ff32d8',grails:'#ffd21a',signed:'#ff7b18',other:'#00ff9d'};
+  const jobs=new Map();
+  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+  function colourFor(card,img){
+    const cls=[...card.classList].find(x=>palette[x]);
+    return palette[cls]||'#00f6ff';
+  }
+  function process(card,img,canvas){
+    if(!img.complete||!img.naturalWidth) return;
+    const W=180,H=240;
+    const off=document.createElement('canvas');off.width=W;off.height=H;
+    const ctx=off.getContext('2d',{willReadFrequently:true});
+    ctx.drawImage(img,0,0,W,H);
+    let data;
+    try{data=ctx.getImageData(0,0,W,H).data}catch(e){return;}
+    const bg=[];
+    for(let y=0;y<8;y++)for(let x=0;x<W;x++)bg.push((y*W+x)*4);
+    for(let y=H-8;y<H;y++)for(let x=0;x<W;x++)bg.push((y*W+x)*4);
+    for(let y=0;y<H;y++)for(let x=0;x<8;x++)bg.push((y*W+x)*4);
+    for(let y=0;y<H;y++)for(let x=W-8;x<W;x++)bg.push((y*W+x)*4);
+    let br=0,bgC=0,bb=0;bg.forEach(i=>{br+=data[i];bgC+=data[i+1];bb+=data[i+2]});br/=bg.length;bgC/=bg.length;bb/=bg.length;
+    const dist=new Float32Array(W*H);let mean=0;
+    for(let p=0;p<W*H;p++){const i=p*4;const d=Math.hypot(data[i]-br,data[i+1]-bgC,data[i+2]-bb);dist[p]=d;mean+=d}
+    mean/=W*H;
+    let variance=0;for(let p=0;p<W*H;p++)variance+=(dist[p]-mean)**2;variance/=W*H;
+    const threshold=clamp(mean+Math.sqrt(variance)*.45,32,82);
+    const mask=new Uint8Array(W*H);
+    for(let p=0;p<W*H;p++)mask[p]=dist[p]>threshold?1:0;
+    // Light cleanup so textured backgrounds do not dominate the silhouette.
+    for(let pass=0;pass<2;pass++){
+      const next=new Uint8Array(mask);
+      for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
+        let n=0;for(let yy=-1;yy<=1;yy++)for(let xx=-1;xx<=1;xx++)n+=mask[(y+yy)*W+x+xx];
+        if(n>=5)next[y*W+x]=1;else if(n<=2)next[y*W+x]=0;
+      }
+      mask.set(next);
+    }
+    // Connected components: retain the strongest visible character-sized regions.
+    const seen=new Uint8Array(W*H), comps=[];
+    for(let p=0;p<W*H;p++){
+      if(!mask[p]||seen[p])continue;
+      const q=[p];seen[p]=1;const pts=[];
+      for(let qi=0;qi<q.length;qi++){
+        const cur=q[qi];pts.push(cur);const x=cur%W,y=(cur/W)|0;
+        const ns=[cur-1,cur+1,cur-W,cur+W];
+        for(const n of ns){if(n>=0&&n<W*H&&!seen[n]&&mask[n]){const nx=n%W;const ny=(n/W)|0;if(Math.abs(nx-x)<=1&&Math.abs(ny-y)<=1){seen[n]=1;q.push(n)}}}
+      }
+      if(pts.length>W*H*.012)comps.push(pts);
+    }
+    comps.sort((a,b)=>b.length-a.length);
+    const selected=comps.slice(0,3);
+    const paths=[];
+    selected.forEach(pts=>{
+      let cx=0,cy=0;pts.forEach(p=>{cx+=p%W;cy+=(p/W)|0});cx/=pts.length;cy/=pts.length;
+      const bins=Array.from({length:240},()=>null);
+      pts.forEach(p=>{const x=p%W,y=(p/W)|0;let boundary=false;for(let yy=-1;yy<=1&&!boundary;yy++)for(let xx=-1;xx<=1;xx++){if(!xx&&!yy)continue;const nx=x+xx,ny=y+yy;if(nx<0||nx>=W||ny<0||ny>=H||!mask[ny*W+nx]){boundary=true;break}}if(boundary){let a=Math.atan2(y-cy,x-cx);if(a<0)a+=Math.PI*2;const b=Math.floor(a/(Math.PI*2)*240);const r=Math.hypot(x-cx,y-cy);if(!bins[b]||r>bins[b].r)bins[b]={x,y,r}}});
+      const pts2=[];for(let i=0;i<bins.length;i++)if(bins[i])pts2.push(bins[i]);
+      if(pts2.length>30)paths.push(pts2);
+    });
+    const rect=card.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(rect.width*dpr));canvas.height=Math.max(1,Math.round(rect.height*dpr));
+    const c=canvas.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,rect.width,rect.height);
+    const colour=colourFor(card,img);
+    jobs.set(card,{canvas,paths,colour,last:performance.now(),w:rect.width,h:rect.height});
+  }
+  function draw(job,t){
+    const c=job.canvas.getContext('2d');c.clearRect(0,0,job.w,job.h);if(!job.paths.length)return;
+    const sx=job.w/180,sy=job.h/240,phase=(t*.00075);
+    job.paths.forEach((path,pi)=>{
+      if(path.length<2)return;
+      c.save();c.lineJoin='round';c.lineCap='round';
+      // Faint permanent silhouette glow.
+      c.beginPath();path.forEach((p,i)=>{const x=p.x*sx,y=p.y*sy;if(i)c.lineTo(x,y);else c.moveTo(x,y)});c.closePath();
+      c.strokeStyle=job.colour;c.globalAlpha=.20;c.lineWidth=2.2;c.shadowColor=job.colour;c.shadowBlur=12;c.stroke();
+      // Travelling LED dash around the real detected silhouette.
+      c.shadowColor=job.colour;c.shadowBlur=22;c.lineWidth=4.2;c.strokeStyle=job.colour;
+      const dash=Math.max(10,path.length*.14),gap=Math.max(18,path.length*.86);
+      c.setLineDash([dash,gap]);c.lineDashOffset=-(phase*path.length*(pi%2?-1:1));c.globalAlpha=.98;
+      c.beginPath();path.forEach((p,i)=>{const x=p.x*sx,y=p.y*sy;if(i)c.lineTo(x,y);else c.moveTo(x,y)});c.closePath();c.stroke();
+      // Hot white core.
+      c.shadowBlur=8;c.lineWidth=1.35;c.strokeStyle='#fff';c.globalAlpha=.95;c.stroke();c.restore();
+    });
+  }
+  function animate(t){jobs.forEach(j=>draw(j,t));if(!reduceMotion)requestAnimationFrame(animate)}
+  function setup(card){
+    if(card.classList.contains('sale')||card.dataset.neonReady)return;
+    const img=card.querySelector(':scope>img');if(!img)return;
+    card.dataset.neonReady='1';const canvas=document.createElement('canvas');canvas.className='category-neon-canvas';canvas.setAttribute('aria-hidden','true');card.appendChild(canvas);
+    const go=()=>process(card,img,canvas);if(img.complete)go();else img.addEventListener('load',go,{once:true});
+    new ResizeObserver(()=>{if(img.complete)process(card,img,canvas)}).observe(card);
+  }
+  function scan(){root.querySelectorAll('.category:not(.sale)').forEach(setup)}
+  scan();new MutationObserver(scan).observe(root,{childList:true});
+  if(!reduceMotion)requestAnimationFrame(animate);else jobs.forEach(j=>draw(j,0));
+})();
+</script>
+</body>
 </html>
 
 <style id="pl-banner-nav-fix">
