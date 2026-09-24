@@ -312,6 +312,28 @@ z-index:5!important;pointer-events:none!important
  text-align:center!important;
  text-shadow:0 2px 8px rgba(0,0,0,.8)!important;
 }
+</style><style id="pl-category-ambient-light">
+#homepageCategories .category:not(.sale){isolation:isolate;overflow:hidden}
+#homepageCategories .category:not(.sale)::after{
+ content:"";position:absolute;inset:-30%;z-index:0;pointer-events:none;
+ background:radial-gradient(circle at 35% 45%,var(--pl-ambient,rgba(255,255,255,.16)) 0,transparent 46%),
+            radial-gradient(circle at 72% 65%,var(--pl-ambient2,rgba(255,255,255,.10)) 0,transparent 42%);
+ filter:blur(24px);opacity:.7;transform:scale(1);animation:plAmbientDrift 9s ease-in-out infinite;
+}
+#homepageCategories .category:not(.sale)>img{position:relative;z-index:1}
+#homepageCategories .category:not(.sale)>.label{z-index:5}
+#homepageCategories .category.marvel{--pl-ambient:rgba(255,25,55,.30);--pl-ambient2:rgba(255,180,30,.16)}
+#homepageCategories .category.dc{--pl-ambient:rgba(25,125,255,.28);--pl-ambient2:rgba(120,40,255,.14)}
+#homepageCategories .category.disney{--pl-ambient:rgba(255,55,190,.25);--pl-ambient2:rgba(65,145,255,.16)}
+#homepageCategories .category.horror{--pl-ambient:rgba(255,65,25,.25);--pl-ambient2:rgba(120,0,0,.18)}
+#homepageCategories .category.tv-film{--pl-ambient:rgba(170,75,255,.25);--pl-ambient2:rgba(30,110,255,.15)}
+#homepageCategories .category.music{--pl-ambient:rgba(0,220,255,.25);--pl-ambient2:rgba(0,90,255,.14)}
+#homepageCategories .category.anime{--pl-ambient:rgba(255,35,215,.25);--pl-ambient2:rgba(80,60,255,.14)}
+#homepageCategories .category.grails{--pl-ambient:rgba(255,205,25,.25);--pl-ambient2:rgba(255,95,0,.13)}
+#homepageCategories .category.signed{--pl-ambient:rgba(255,105,20,.25);--pl-ambient2:rgba(255,25,25,.14)}
+#homepageCategories .category.other{--pl-ambient:rgba(0,255,165,.22);--pl-ambient2:rgba(0,135,255,.13)}
+@keyframes plAmbientDrift{0%,100%{transform:translate3d(-3%,-2%,0) scale(1);opacity:.58}50%{transform:translate3d(4%,3%,0) scale(1.08);opacity:.82}}
+@media(prefers-reduced-motion:reduce){#homepageCategories .category:not(.sale)::after{animation:none}}
 </style></head>
 <body>
 <header class="top">
