@@ -290,6 +290,40 @@ z-index:5!important;pointer-events:none!important
   .category:not(.sale):hover > img{animation-duration:2.6s;transform:scale(1.09);filter:saturate(1.16) brightness(1.06);}
 }
 </style>
+
+<style id="pl-category-led-trails">
+/* Vibrant colour-matched LED trails over the artwork. The tile itself does not move. */
+.category:not(.sale)::before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+  inset:-10%;
+  border:4px solid var(--led,#fff);
+  border-radius:44%;
+  box-shadow:0 0 7px var(--led,#fff),0 0 18px var(--led,#fff),0 0 38px color-mix(in srgb,var(--led,#fff) 72%,transparent);
+  opacity:.95;
+  clip-path:polygon(0 0,100% 0,100% 17%,0 17%,0 31%,100% 31%,100% 48%,0 48%,0 66%,100% 66%,100% 83%,0 83%);
+  animation:plLedOrbit 2.7s linear infinite;
+}
+.category:not(.sale)::after{
+  z-index:2;
+  background:linear-gradient(to top,rgba(0,0,0,.3),rgba(0,0,0,.03) 55%,rgba(0,0,0,.12));
+}
+.category.marvel{--led:#ef172d}.category.dc{--led:#168cff}.category.disney{--led:#ff3fb4}.category.horror{--led:#7cff00}.category.tv-film{--led:#b46cff}.category.music{--led:#00eaff}.category.anime{--led:#ff3bd4}.category.grails{--led:#ffd21a}.category.signed{--led:#ff7a18}.category.other{--led:#00ff9d}
+@media (prefers-reduced-motion:no-preference){
+  @keyframes plLedOrbit{
+    0%{transform:rotate(0deg) scale(.94);filter:brightness(1.1);}
+    50%{transform:rotate(180deg) scale(1.02);filter:brightness(1.65);}
+    100%{transform:rotate(360deg) scale(.94);filter:brightness(1.1);}
+  }
+  .category:not(.sale)::before{animation-duration:2.15s}
+  .category.marvel::before{animation-duration:1.75s}.category.dc::before{animation-duration:2.4s}.category.disney::before{animation-duration:2.05s}.category.horror::before{animation-duration:1.55s}.category.tv-film::before{animation-duration:2.6s}.category.music::before{animation-duration:1.9s}.category.anime::before{animation-duration:1.7s}.category.grails::before{animation-duration:2.8s}.category.signed::before{animation-duration:2s}.category.other::before{animation-duration:2.3s}
+}
+@supports not (color:color-mix(in srgb,red 50%,transparent)){
+  .category:not(.sale)::before{box-shadow:0 0 7px var(--led,#fff),0 0 18px var(--led,#fff),0 0 32px var(--led,#fff)}
+}
+</style>
 </head>
 <body>
 <header class="top">
