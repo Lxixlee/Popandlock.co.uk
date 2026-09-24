@@ -39,8 +39,16 @@ html,body{max-width:100%;overflow-x:hidden}
 /* Final banner sizing */
 .hero-slide{min-height:215px!important}
 .hero-content{padding:28px 20px!important}
-.hero-logo{width:70px!important;height:70px!important}
-.hero h1{font-size:clamp(30px,4vw,48px)!important}
+.hero-logo{width:150px!important;height:150px!important;position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;opacity:.18!important;filter:drop-shadow(0 0 28px rgba(255,255,255,.45))!important;animation:plMainLogoFloat 7s ease-in-out infinite,plMainLogoGlow 4s ease-in-out infinite!important;z-index:-1!important}
+.hero h1{font-size:clamp(30px,4vw,48px)!important;position:relative!important;z-index:3!important}
+.hero p,.hero-actions{position:relative!important;z-index:3!important}
+.hero-content{position:relative!important;isolation:isolate!important}
+.hero-content:before{content:"";position:absolute!important;inset:-35%!important;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.13),transparent 48%)!important;animation:plMainBannerPulse 5s ease-in-out infinite!important;z-index:-2!important;pointer-events:none!important}
+@keyframes plMainLogoFloat{0%,100%{transform:translate(-50%,-50%) scale(1) rotate(-3deg)}50%{transform:translate(-50%,-50%) scale(1.08) rotate(3deg)}}
+@keyframes plMainLogoGlow{0%,100%{opacity:.13;filter:drop-shadow(0 0 18px rgba(255,255,255,.28))}50%{opacity:.28;filter:drop-shadow(0 0 42px rgba(255,255,255,.72))}}
+@keyframes plMainBannerPulse{0%,100%{transform:scale(.9);opacity:.45}50%{transform:scale(1.12);opacity:1}}
+@media(max-width:760px){.hero-logo{width:115px!important;height:115px!important;opacity:.2!important}.hero-content:before{inset:-50%!important}}
+@media(prefers-reduced-motion:reduce){.hero-logo,.hero-content:before{animation:none!important}}
 .arrival-inner{gap:28px!important}.arrival-product{margin-left:auto!important}
 .arrival-product{width:min(195px,20vw)!important}
 @media(max-width:760px){
