@@ -120,5 +120,21 @@
     "boxCondition": "Near Mint",
     "stock": 1,
     "featured": false
+  },
+  {
+    "id": "freddy-funko-as-the-batman-who-laughs-1000pcs",
+    "name": "Freddy Funko as the Batman Who Laughs 1000pcs",
+    "category": "DC",
+    "categories": [
+      "DC",
+      "Other"
+    ],
+    "price": 67.99,
+    "image": "product-images/freddy-funko-as-the-batman-who-laughs-1000pcs.jpg",
+    "description": "",
+    "condition": "New",
+    "boxCondition": "Mint",
+    "stock": 1,
+    "featured": true
   }
 ]
