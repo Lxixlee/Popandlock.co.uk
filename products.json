@@ -151,5 +151,20 @@
     "boxCondition": "Mint",
     "stock": 1,
     "featured": false
+  },
+  {
+    "id": "testing-pop",
+    "name": "Testing Pop",
+    "category": "Anime",
+    "categories": [
+      "Anime"
+    ],
+    "price": 0.29,
+    "image": "product-images/testing-pop.jpg",
+    "description": "",
+    "condition": "New",
+    "boxCondition": "Mint",
+    "stock": 1,
+    "featured": false
   }
 ]
