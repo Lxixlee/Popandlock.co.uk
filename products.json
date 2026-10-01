@@ -161,7 +161,7 @@
     ],
     "price": 0.29,
     "image": "product-images/testing-pop.jpg",
-    "description": "",
+    "description": "Funko Pop collectible added for checkout testing.",
     "condition": "New",
     "boxCondition": "Mint",
     "stock": 1,
