@@ -10,7 +10,7 @@
 .homeitem{border:1px solid #ddd;padding:14px;margin:10px 0;display:grid;grid-template-columns:90px 1fr;gap:14px}.homeitem img{width:90px;height:90px;object-fit:cover;border:1px solid #eee}.homefields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.homefields .wide{grid-column:1/-1}.homeactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.category-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.category-choices label{border:1px solid #ddd;padding:10px;font-size:12px;font-weight:500}.category-choices .sale-choice{border-color:#d22;background:#fff1f1;color:#b00000;font-weight:700}.category-choices input{width:auto;margin-right:6px}.check{display:flex;align-items:center;gap:7px;font-size:13px}.check input{width:auto}.preview{font-size:12px;color:#777;margin-top:4px}@media(max-width:700px){.homeitem{grid-template-columns:1fr}.homefields{grid-template-columns:1fr}.homefields .wide{grid-column:auto}.homeitem img{width:100%;height:150px}}
 
 .dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}.stat{background:#fff;border:1px solid #ddd;padding:16px}.stat b{display:block;font-size:25px;margin-top:5px}.stat span{font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.08em}.quicklinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.quicklinks a{display:inline-block;background:#111;color:#fff;padding:10px 13px;font-size:11px;font-weight:700;text-decoration:none}@media(max-width:700px){.dashboard{grid-template-columns:1fr 1fr}}
-.eventitem{border:1px solid #ddd;padding:14px;margin:10px 0}.eventfields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.eventfields .wide{grid-column:1/-1}.eventpreview{width:100%;height:150px;object-fit:cover;background:#f2f2f2;border:1px solid #eee}.eventactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.event-add{background:#f7f7f7;border:1px dashed #bbb;padding:14px;margin-bottom:15px}.event-picker{margin-top:10px;border:1px solid #ddd;background:#fff;padding:10px;max-height:240px;overflow:auto}.event-picker-title{font-size:12px;font-weight:700;margin-bottom:8px}.event-picker label{display:flex;align-items:center;gap:8px;padding:7px;border-bottom:1px solid #eee;font-weight:400}.event-picker input{width:auto}.event-picker img{width:38px;height:38px;object-fit:contain;border:1px solid #eee}.event-picker small{color:#777}@media(max-width:700px){.eventfields{grid-template-columns:1fr}.eventfields .wide{grid-column:auto}.eventpreview{height:120px}}
+.orderitem{border:1px solid #ddd;padding:14px;margin:10px 0}.ordermain{display:flex;justify-content:space-between;gap:15px}.ordermain h3{font-size:16px;margin:0 0 6px}.ordertotal{font-size:20px;font-weight:700;white-space:nowrap}.orderbody{display:grid;grid-template-columns:1.2fr 1fr 180px;gap:15px;margin-top:12px;padding-top:12px;border-top:1px solid #eee;font-size:13px;line-height:1.5}.orderbody select{margin-top:4px}@media(max-width:700px){.ordermain{display:block}.ordertotal{margin-top:8px}.orderbody{grid-template-columns:1fr}}.eventitem{border:1px solid #ddd;padding:14px;margin:10px 0}.eventfields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.eventfields .wide{grid-column:1/-1}.eventpreview{width:100%;height:150px;object-fit:cover;background:#f2f2f2;border:1px solid #eee}.eventactions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}.event-add{background:#f7f7f7;border:1px dashed #bbb;padding:14px;margin-bottom:15px}.event-picker{margin-top:10px;border:1px solid #ddd;background:#fff;padding:10px;max-height:240px;overflow:auto}.event-picker-title{font-size:12px;font-weight:700;margin-bottom:8px}.event-picker label{display:flex;align-items:center;gap:8px;padding:7px;border-bottom:1px solid #eee;font-weight:400}.event-picker input{width:auto}.event-picker img{width:38px;height:38px;object-fit:contain;border:1px solid #eee}.event-picker small{color:#777}@media(max-width:700px){.eventfields{grid-template-columns:1fr}.eventfields .wide{grid-column:auto}.eventpreview{height:120px}}
 </style>
 </head>
 <body>
@@ -19,6 +19,13 @@
 
 <div class="dashboard" id="dashboard"><div class="stat"><span>Products</span><b id="statProducts">—</b></div><div class="stat"><span>Units in stock</span><b id="statStock">—</b></div><div class="stat"><span>Inventory value</span><b id="statValue">—</b></div><div class="stat"><span>Sale items</span><b id="statSale">—</b></div></div>
 <div class="card"><h2>Dashboard</h2><div style="font-size:13px;color:#666">Live inventory overview from your Pop &amp; Lock product catalogue.</div><div class="quicklinks"><a href="shop.html">VIEW SHOP</a><a href="wishlist.html">VIEW WISHLIST</a><a href="sell-to-us.html">SELL TO US</a></div></div>
+<div class="card" id="ordersCard">
+<h2>Orders</h2>
+<p style="font-size:13px;color:#666">Paid orders from Stripe. Customer and order information is read securely through the payments Worker.</p>
+<div class="toolbar"><input id="orderSearch" placeholder="Search orders..."><button class="small" id="refreshOrders" type="button">REFRESH ORDERS</button></div>
+<div id="orders"></div>
+<div id="ordersStatus" class="status"></div>
+</div>
 <div class="card">
 <h2>Add Product</h2>
 <form id="form">
@@ -108,6 +115,56 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 function resizeImage(f){return new Promise(function(resolve,reject){var img=new Image(),url=URL.createObjectURL(f);img.onload=function(){var max=1200,scale=Math.min(1,max/img.width,max/img.height),c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);c.toBlob(function(blob){URL.revokeObjectURL(url);if(!blob)return reject(new Error('Could not process image'));var r=new FileReader();r.onload=function(){resolve(r.result.split(',')[1])};r.onerror=reject;r.readAsDataURL(blob)},'image/jpeg',.82)};img.onerror=reject;img.src=url})}
 async function api(path,data){var r=await fetch(API+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});var d=await r.json().catch(function(){return {}});if(!r.ok)throw new Error(d.error||'Request failed');return d}
 
+async function loadOrders(){
+  var el=document.getElementById('orders'),st=document.getElementById('ordersStatus');
+  if(!password()){el.innerHTML='<div class="empty">Enter your admin password first.</div>';return}
+  el.innerHTML='<div class="empty">Loading orders...</div>';
+  try{
+    var d=await api('/admin/list-orders',{password:password()});
+    renderOrders(d.orders||[]);
+    st.className='status';
+  }catch(e){el.innerHTML='';show(st,e.message,'error')}
+}
+function renderOrders(list){
+  var el=document.getElementById('orders');
+  var q=(document.getElementById('orderSearch').value||'').toLowerCase().trim();
+  var a=list.filter(function(o){
+    var hay=[o.id,o.stripeSessionId,o.customer&&o.customer.name,o.customer&&o.customer.email,o.orderStatus,o.paymentStatus].join(' ').toLowerCase();
+    return !q||hay.indexOf(q)>=0;
+  });
+  if(!a.length){el.innerHTML='<div class="empty">No orders found.</div>';return}
+  el.innerHTML=a.map(function(o){
+    var items=(o.items||[]).map(function(i){
+      return esc(i.name||'Funko Pop')+' × '+Number(i.quantity||1);
+    }).join('<br>');
+    var customer=o.customer||{};
+    var address=o.address||'';
+    var status=o.orderStatus||'Processing';
+    return '<div class="orderitem">'+
+      '<div class="ordermain"><div><h3>'+esc(o.id||'Order')+'</h3>'+
+      '<div class="meta">'+esc(o.createdAt||'')+' · '+esc(o.paymentStatus||'')+'<br>'+
+      '<strong>'+esc(customer.name||'No name')+'</strong> · '+esc(customer.email||'No email')+
+      (customer.phone?' · '+esc(customer.phone):'')+'</div></div>'+
+      '<div class="ordertotal">£'+Number(o.total||0).toFixed(2)+'</div></div>'+
+      '<div class="orderbody"><div><strong>Items</strong><br>'+items+'</div>'+
+      '<div><strong>Delivery</strong><br>'+esc(o.delivery||'')+'<br>'+address+'</div>'+
+      '<div><strong>Status</strong><br><select data-order-status="'+esc(o.id)+'">'+
+      ['Processing','Dispatched','Completed','Cancelled'].map(function(x){return '<option '+(x===status?'selected':'')+'>'+x+'</option>'}).join('')+
+      '</select><button class="small" type="button" data-save-order="'+esc(o.id)+'" style="margin-top:8px">SAVE STATUS</button></div></div></div>';
+  }).join('');
+  el.querySelectorAll('[data-save-order]').forEach(function(btn){
+    btn.onclick=async function(){
+      var id=btn.getAttribute('data-save-order'),sel=el.querySelector('[data-order-status="'+CSS.escape(id)+'"]');
+      btn.disabled=true;
+      try{
+        await api('/admin/update-order-status',{password:password(),id:id,status:sel.value});
+        show(document.getElementById('ordersStatus'),'Order status updated.','ok');
+        await loadOrders();
+      }catch(e){show(document.getElementById('ordersStatus'),e.message,'error')}
+      finally{btn.disabled=false}
+    };
+  });
+}
 async function loadProducts(){
   var ls=document.getElementById('listStatus');
   if(!password()){show(ls,'Enter your admin password first.','error');return}
@@ -138,6 +195,8 @@ async function deleteProduct(id){
 }
 document.getElementById('cancelEdit').onclick=function(){document.getElementById('editCard').style.display='none'};
 document.getElementById('refresh').onclick=loadProducts;
+document.getElementById('refreshOrders').onclick=loadOrders;
+document.getElementById('orderSearch').oninput=function(){loadOrders()};
 document.getElementById('search').oninput=render;
 
 document.getElementById('editForm').onsubmit=async function(e){
@@ -269,8 +328,8 @@ document.getElementById('addEvent').onclick=async function(){
     show(document.getElementById('eventStatus'),'Event banner added.','ok');renderEvents();
   }catch(e){show(document.getElementById('eventStatus'),e.message,'error')}finally{btn.disabled=false}
 };
-document.getElementById('password').addEventListener('change',function(){loadHomepage();loadEvents();loadProducts()});
-document.getElementById('password').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();loadHomepage();loadEvents();loadProducts()}});
+document.getElementById('password').addEventListener('change',function(){loadHomepage();loadEvents();loadProducts();loadOrders()});
+document.getElementById('password').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();loadHomepage();loadEvents();loadProducts();loadOrders()}});
 document.querySelectorAll('#categoryChoices input').forEach(function(x){x.addEventListener('change',function(){if(!document.querySelector('#categoryChoices input:checked'))x.checked=true})});
 form.onsubmit=async function(e){
   e.preventDefault();submit.disabled=true;status.className='status';status.textContent='Adding product...';
