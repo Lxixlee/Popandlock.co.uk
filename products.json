@@ -136,5 +136,20 @@
     "boxCondition": "Mint",
     "stock": 1,
     "featured": true
+  },
+  {
+    "id": "lotso-hero-toy-story",
+    "name": "Lotso Hero - Toy Story",
+    "category": "Thrilljoy",
+    "categories": [
+      "Thrilljoy"
+    ],
+    "price": 21.99,
+    "image": "product-images/lotso-hero-toy-story.jpg",
+    "description": "Limited 9999pcs",
+    "condition": "Used",
+    "boxCondition": "Mint",
+    "stock": 1,
+    "featured": false
   }
 ]
