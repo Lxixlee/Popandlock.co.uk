@@ -82,6 +82,21 @@ footer{background:#111216;color:#fff;padding:28px 24px;text-align:center}.footer
 @media(max-width:390px){.categories{grid-template-columns:1fr}.category{min-height:120px;flex-direction:row;align-items:flex-end;padding:18px}.cat-symbol{width:42px;height:42px;flex-basis:42px}.cat-copy strong{font-size:15px}.cat-copy small{font-size:11px}.step{grid-template-columns:82px 1fr}.step-art i{width:42px;height:42px}.final-cta-inner{grid-template-columns:1fr}.final-stamp{display:none}.final-cta .button{grid-column:1}}
 @media(prefers-reduced-motion:reduce){.category,.faq summary span{transition:none}}
 
+
+/* TikTok, eBay and Whatnot banners replacing the old collection-category section */
+.platforms-section{background:#f5f3ef}
+.platform-banners{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.platform-banner{min-height:190px;position:relative;display:flex;align-items:flex-end;gap:14px;padding:22px;background:#17181c;color:#fff;overflow:hidden;border-radius:8px;isolation:isolate}
+.platform-banner:before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(105deg,#111216 5%,#24262d 100%);transition:transform .35s ease}
+.platform-banner:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(12,13,16,.82),rgba(12,13,16,.28))}
+.platform-banner:hover:before{transform:scale(1.04)}
+.platform-banner img{position:absolute;z-index:-1;right:10px;top:10px;width:58%;height:70%;object-fit:contain;opacity:.48}
+.platform-banner-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.platform-banner-copy strong{font-size:clamp(18px,2vw,25px);line-height:1.1;letter-spacing:-.03em}
+.platform-banner-copy small{font-size:12px;color:#dedee2}
+.platform-banner-action{margin-left:auto;align-self:flex-end;flex-shrink:0;font-size:9px;font-weight:800;letter-spacing:.08em;color:#171717;background:#f0b45f;padding:10px 11px;white-space:nowrap}
+@media(max-width:760px){.platform-banners{grid-template-columns:1fr;gap:12px}.platform-banner{min-height:145px;padding:19px}.platform-banner img{width:48%;height:80%;right:8px;top:0}.platform-banner-copy strong{font-size:22px}.platform-banner-action{font-size:8px;padding:9px 8px}}
+@media(prefers-reduced-motion:reduce){.platform-banner:before{transition:none}}
 </style>
 </head>
 <body>
@@ -90,7 +105,30 @@ footer{background:#111216;color:#fff;padding:28px 24px;text-align:center}.footer
 <section class="hero"><div class="hero-inner"><div class="hero-copy"><div class="eyebrow">UK-wide Funko Pop buyers</div><h1>YOUR COLLECTION.<br><span>OUR NEXT FIND.</span></h1><p>Thinking of selling your Funko Pops? From everyday favourites to rare, vaulted and signed grails, we’re interested in collections from across the UK.</p><div class="actions"><a class="button" href="sell-to-us.html">SELL YOUR COLLECTION</a><a class="button secondary" href="#how-it-works">HOW IT WORKS</a></div><div class="hero-proof">Free to enquire · No obligation to accept an offer</div></div><div class="hero-mark"><img src="logo.png?v=4" alt="" aria-hidden="true"></div></div></section>
 <section class="trust"><div class="trust-inner"><div class="trust-item"><b>01</b><div>COLLECTIONS OF ANY SIZE<span>From a few Pops to a full room</span></div></div><div class="trust-item"><b>✦</b><div>SIGNED &amp; RARE FIGURES<span>Vaulted, exclusive and grail pieces</span></div></div><div class="trust-item"><b>UK</b><div>NATIONWIDE BUYING<span>Enquiries welcome across Britain</span></div></div></div></section>
 <section class="section how-section" id="how-it-works"><div class="section-heading"><div class="kicker">THREE SIMPLE STEPS</div><h2>Turn your collection into cash.</h2><p>No complicated process. Just tell us what you have and we’ll take it from there.</p></div><div class="steps"><article class="step"><div class="step-art art-one"><span>01</span><i>▤</i></div><div class="step-content"><div class="step-num">STEP 01</div><h3>Show us your Pops</h3><p>Tell us roughly how many you have and upload clear photos of your collection.</p></div></article><article class="step"><div class="step-art art-two"><span>02</span><i>⌕</i></div><div class="step-content"><div class="step-num">STEP 02</div><h3>We take a look</h3><p>We review every enquiry personally and may get in touch for more details.</p></div></article><article class="step"><div class="step-art art-three"><span>03</span><i>£</i></div><div class="step-content"><div class="step-num">STEP 03</div><h3>Get an offer</h3><p>If it’s right for us, we’ll make an offer. It’s completely up to you whether to accept.</p></div></article></div></section>
-<section class="section buy-section" id="what-we-buy"><div class="section-heading"><div class="kicker">WHAT’S IN YOUR COLLECTION?</div><h2>We’re looking for the good stuff.</h2><p>From popular favourites to the rare ones you’ve been holding onto for years.</p></div><div class="categories"><a class="category cat-signed" href="sell-to-us.html"><span class="cat-symbol">✍</span><span class="cat-copy"><strong>Signed &amp; authenticated</strong><small>Autographs and verified pieces</small></span><b>↗</b></a><a class="category cat-rare" href="sell-to-us.html"><span class="cat-symbol">✦</span><span class="cat-copy"><strong>Rare &amp; vaulted</strong><small>Hard-to-find grails and retired Pops</small></span><b>↗</b></a><a class="category cat-exclusive" href="sell-to-us.html"><span class="cat-symbol">★</span><span class="cat-copy"><strong>Exclusives</strong><small>Conventions and retailer editions</small></span><b>↗</b></a><a class="category cat-comics" href="sell-to-us.html"><span class="cat-symbol">⚡</span><span class="cat-copy"><strong>Marvel &amp; DC</strong><small>Heroes, villains and comic icons</small></span><b>↗</b></a><a class="category cat-screen" href="sell-to-us.html"><span class="cat-symbol">▶</span><span class="cat-copy"><strong>TV, film &amp; horror</strong><small>From cult classics to new favourites</small></span><b>↗</b></a><a class="category cat-worlds" href="sell-to-us.html"><span class="cat-symbol">✺</span><span class="cat-copy"><strong>Anime, gaming &amp; music</strong><small>All your other fandoms too</small></span><b>↗</b></a></div><div class="section-link"><a class="button" href="sell-to-us.html">TELL US WHAT YOU HAVE <span>↗</span></a></div></section>
+<section class="section platforms-section" id="find-us-live">
+  <div class="section-heading">
+    <div class="kicker">FOLLOW POP &amp; LOCK</div>
+    <h2>Find us live.</h2>
+    <p>Follow our live shows, auctions and latest Funko finds across our selling platforms.</p>
+  </div>
+  <div class="platform-banners">
+    <a class="platform-banner platform-whatnot" href="https://www.whatnot.com/user/popandlock31" target="_blank" rel="noopener noreferrer" aria-label="Visit Pop and Lock on Whatnot">
+      <img src="WHATNOT.webp" alt="Whatnot">
+      <span class="platform-banner-copy"><strong>WHATNOT</strong><small>Join our live auctions</small></span>
+      <span class="platform-banner-action">VISIT PROFILE</span>
+    </a>
+    <a class="platform-banner platform-ebay" href="https://www.ebay.co.uk/usr/popandlock31" target="_blank" rel="noopener noreferrer" aria-label="Visit Pop and Lock on eBay">
+      <img src="EBAY.avif" alt="eBay">
+      <span class="platform-banner-copy"><strong>EBAY LIVE</strong><small>Browse our collectibles</small></span>
+      <span class="platform-banner-action">VISIT PROFILE</span>
+    </a>
+    <a class="platform-banner platform-tiktok" href="https://www.tiktok.com/@popandlock31" target="_blank" rel="noopener noreferrer" aria-label="Visit Pop and Lock on TikTok">
+      <img src="TIKTOK.jpg" alt="TikTok">
+      <span class="platform-banner-copy"><strong>TIKTOK</strong><small>Follow our live streams</small></span>
+      <span class="platform-banner-action">FOLLOW US</span>
+    </a>
+  </div>
+</section>
 <section class="nationwide"><div class="nationwide-art"><span>POP<br>COLLECTORS</span><b>UK</b></div><div class="nationwide-inner"><div><div class="kicker">BASED ANYWHERE IN THE UK</div><h2>Your collection. Wherever you are.</h2><p>We welcome enquiries from across the UK. Tell us your postcode and preferred handover method, and we’ll discuss practical next steps if we’re interested.</p></div><a class="button" href="sell-to-us.html">START YOUR ENQUIRY</a></div></section>
 <section class="section faq-section"><div class="section-heading"><div class="kicker">GOOD TO KNOW</div><h2>A few things you might be wondering.</h2></div><div class="faq"><details><summary>Do you buy signed and rare Funko Pops?<span>＋</span></summary><p>Yes. Include clear photos and details of any certificates or third-party authentication you have.</p></details><details><summary>Do I have to accept an offer?<span>＋</span></summary><p>Not at all. Enquiring is free and there’s no obligation to sell.</p></details><details><summary>Do you buy collections from anywhere in the UK?<span>＋</span></summary><p>Yes, we welcome enquiries nationwide. We’ll discuss postage, courier or collection arrangements if we decide to proceed.</p></details><details><summary>Will I get an automatic valuation?<span>＋</span></summary><p>No. We review each enquiry manually and contact you if we’d like to make an offer.</p></details></div></section>
 <section class="final-cta"><div class="final-cta-inner"><div class="final-stamp">POP<br>&amp; LOCK</div><div><div class="kicker">READY WHEN YOU ARE</div><h2>Make room for your next chapter.</h2><p>Send us your collection details and a few photos. Let’s see if we’re a match.</p></div><a class="button" href="sell-to-us.html">SELL YOUR COLLECTION</a></div></section>
