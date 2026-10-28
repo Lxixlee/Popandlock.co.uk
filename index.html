@@ -11,7 +11,7 @@
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font-family:Arial,Helvetica,sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
 header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}.header-inner{max-width:1180px;margin:auto;min-height:86px;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:22px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.04em}.brand img{width:66px;height:66px;object-fit:contain}.brand span{font-size:17px}.nav{display:flex;align-items:center;gap:26px;font-size:13px;font-weight:700;letter-spacing:.06em}.nav a:hover{text-decoration:underline;text-underline-offset:5px}.nav .nav-cta{padding:12px 17px;background:var(--ink);color:#fff}
 
-.hero{background:linear-gradient(115deg,#101114 0%,#17191e 58%,#22252b 100%);color:#fff;position:relative;overflow:hidden;isolation:isolate}
+.hero{background:radial-gradient(ellipse at 78% 35%,rgba(255,65,130,.22),transparent 34%),radial-gradient(ellipse at 18% 82%,rgba(240,162,58,.22),transparent 32%),radial-gradient(ellipse at 52% 0%,rgba(117,78,255,.12),transparent 38%),linear-gradient(115deg,#101114 0%,#17191e 58%,#22252b 100%);background-size:180% 180%;color:#fff;position:relative;overflow:hidden;isolation:isolate}
 .hero:before{content:"";position:absolute;z-index:-1;width:600px;height:600px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-170px;top:-280px;box-shadow:0 0 0 55px rgba(255,255,255,.018),0 0 0 110px rgba(255,255,255,.018),0 0 0 165px rgba(255,255,255,.012)}
 .hero:after{content:"";position:absolute;z-index:-1;left:0;bottom:0;width:38%;height:4px;background:linear-gradient(90deg,#f0a23a,rgba(240,162,58,0))}
 .hero-inner{position:relative;max-width:1180px;margin:auto;padding:78px 24px 82px;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:56px;min-height:510px}
@@ -111,7 +111,7 @@ footer{background:#111216;color:#fff;padding:28px 24px;text-align:center}.footer
   .nav .nav-cta{padding:9px 6px;font-size:7px}
 }
 
-/* Fun, polished motion throughout the homepage */
+/* Funky Pop & Lock motion: playful colour, polished movement, no decorative character symbols */
 :root{--motion-ease:cubic-bezier(.2,.75,.25,1)}
 body{overflow-x:hidden}
 header{transition:box-shadow .25s ease}
@@ -178,38 +178,14 @@ header:hover{box-shadow:0 5px 22px #1111110b}
 .platform-banners .platform-banner:nth-child(3){transition-delay:.16s}
 @media(prefers-reduced-motion:reduce){.motion-ready .motion-reveal{opacity:1;transform:none}}
 
-/* Collector-inspired accents: original vinyl-toy silhouettes, comic sparkles and playful transitions */
-.hero-mark{perspective:800px}
-.collector-orbit{position:absolute;z-index:2;display:grid;place-items:center;color:#17181c;background:var(--gold,#f0b45f);border:2px solid #17181c;box-shadow:4px 5px 0 #0005;font-size:20px;line-height:1}
-.orbit-left{width:43px;height:43px;left:7%;top:18%;border-radius:14px 14px 18px 18px;transform:rotate(-13deg);animation:comicFloat 4.2s ease-in-out infinite}
-.orbit-right{width:36px;height:36px;right:7%;top:18%;border-radius:50%;transform:rotate(12deg);animation:comicFloat 4.8s ease-in-out infinite reverse}
-.mini-vinyl{position:absolute;z-index:1;width:49px;height:55px;background:linear-gradient(145deg,#f8f8f8,#bfc2ca);border:2px solid #111;border-radius:17px 17px 13px 13px;box-shadow:5px 6px 0 #0005;transform:rotate(-12deg);animation:toyHover 5.2s ease-in-out infinite}
-.mini-vinyl:before{content:"";position:absolute;left:7px;top:14px;width:8px;height:10px;background:#17181c;border-radius:50%;box-shadow:20px 0 #17181c}
-.mini-vinyl:after{content:"";position:absolute;left:15px;top:31px;width:14px;height:5px;border-bottom:2px solid #17181c;border-radius:50%}
-.mini-vinyl i{position:absolute;left:15px;top:-8px;width:15px;height:13px;background:#f0b45f;border:2px solid #111;border-radius:7px 7px 2px 2px}
-.vinyl-one{left:8%;bottom:15%;background:linear-gradient(145deg,#e5f1ff,#7c9bc4);transform:rotate(-13deg)}
-.vinyl-two{right:8%;bottom:13%;background:linear-gradient(145deg,#ffe9d0,#d98a4b);transform:rotate(12deg);animation-delay:-2.1s}
-.hero-mark .mini-vinyl{filter:drop-shadow(0 4px 3px #0002)}
-.step-art i{border-radius:20px 20px 16px 16px;box-shadow:0 7px 0 #0002}
-.step-art i:after{content:"";position:absolute;top:14px;width:7px;height:8px;border-radius:50%;background:currentColor;box-shadow:18px 0 currentColor;opacity:.9}
-.step-art i{position:relative}
-.step-art i{font-size:30px}
-.step:hover .step-art i{border-radius:16px 16px 22px 22px}
-.step-art:before{animation:artOrbit 14s linear infinite}
-.category:after{transition:transform .45s ease,right .45s ease}
-.category:hover:after{transform:scale(1.3) rotate(18deg);right:-15px}
-@keyframes comicFloat{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -10px;rotate:7deg}}
-@keyframes toyHover{0%,100%{translate:0 0;rotate:-8deg}50%{translate:0 -9px;rotate:4deg}}
-@keyframes artOrbit{to{transform:rotate(360deg)}}
-@media(max-width:760px){.collector-orbit{font-size:14px}.orbit-left{width:29px;height:29px;left:calc(50% - 91px);top:8px}.orbit-right{width:25px;height:25px;right:calc(50% - 91px);top:12px}.mini-vinyl{width:29px;height:34px;border-radius:10px 10px 8px 8px;border-width:1px}.mini-vinyl:before{left:4px;top:9px;width:5px;height:6px;box-shadow:13px 0 #17181c}.mini-vinyl:after{left:9px;top:20px;width:9px;height:3px;border-bottom-width:1px}.mini-vinyl i{left:9px;top:-5px;width:9px;height:8px;border-width:1px}.vinyl-one{left:calc(50% - 76px);bottom:3px}.vinyl-two{right:calc(50% - 76px);bottom:2px}}
-@media(prefers-reduced-motion:reduce){.collector-orbit,.mini-vinyl,.step-art:before{animation:none!important}}
+
 
 </style>
 </head>
 <body>
 <header><div class="header-inner"><a class="brand" href="index.html" aria-label="Pop & Lock home"><img src="logo.png?v=4" alt="Pop & Lock logo"><span>POP &amp; LOCK</span></a><nav class="nav" aria-label="Main navigation"><a class="nav-optional" href="#find-us-live">WHAT WE BUY</a><a class="nav-optional" href="#how-it-works">HOW IT WORKS</a><a class="nav-optional" href="contact.html">CONTACT</a><a class="nav-live" href="live-shows.html">FIND US LIVE</a><a class="nav-cta" href="sell-to-us.html">SELL YOUR COLLECTION</a></nav></div></header>
 <main>
-<section class="hero"><div class="hero-inner"><div class="hero-copy"><div class="eyebrow">UK-wide Funko Pop buyers</div><h1>YOUR COLLECTION.<br><span>OUR NEXT FIND.</span></h1><p>Thinking of selling your Funko Pops? From everyday favourites to rare, vaulted and signed grails, we’re interested in collections from across the UK.</p><div class="actions"><a class="button" href="sell-to-us.html">SELL YOUR COLLECTION</a><a class="button secondary" href="#how-it-works">HOW IT WORKS</a></div><div class="hero-proof">Free to enquire · No obligation to accept an offer</div></div><div class="hero-mark"><span class="collector-orbit orbit-left" aria-hidden="true">✦</span><span class="collector-orbit orbit-right" aria-hidden="true">★</span><span class="mini-vinyl vinyl-one" aria-hidden="true"><i></i></span><span class="mini-vinyl vinyl-two" aria-hidden="true"><i></i></span><img src="logo.png?v=4" alt="" aria-hidden="true"></div></div></section>
+<section class="hero"><div class="hero-inner"><div class="hero-copy"><div class="eyebrow">UK-wide Funko Pop buyers</div><h1>YOUR COLLECTION.<br><span>OUR NEXT FIND.</span></h1><p>Thinking of selling your Funko Pops? From everyday favourites to rare, vaulted and signed grails, we’re interested in collections from across the UK.</p><div class="actions"><a class="button" href="sell-to-us.html">SELL YOUR COLLECTION</a><a class="button secondary" href="#how-it-works">HOW IT WORKS</a></div><div class="hero-proof">Free to enquire · No obligation to accept an offer</div></div><div class="hero-mark"><img src="logo.png?v=4" alt="" aria-hidden="true"></div></div></section>
 <section class="trust"><div class="trust-inner"><div class="trust-item"><b>01</b><div>COLLECTIONS OF ANY SIZE<span>From a few Pops to a full room</span></div></div><div class="trust-item"><b>✦</b><div>SIGNED &amp; RARE FIGURES<span>Vaulted, exclusive and grail pieces</span></div></div><div class="trust-item"><b>UK</b><div>NATIONWIDE BUYING<span>Enquiries welcome across Britain</span></div></div></div></section>
 <section class="section how-section" id="how-it-works"><div class="section-heading"><div class="kicker">THREE SIMPLE STEPS</div><h2>Turn your collection into cash.</h2><p>No complicated process. Just tell us what you have and we’ll take it from there.</p></div><div class="steps"><article class="step"><div class="step-art art-one"><span>01</span><i>▤</i></div><div class="step-content"><div class="step-num">STEP 01</div><h3>Show us your Pops</h3><p>Tell us roughly how many you have and upload clear photos of your collection.</p></div></article><article class="step"><div class="step-art art-two"><span>02</span><i>⌕</i></div><div class="step-content"><div class="step-num">STEP 02</div><h3>We take a look</h3><p>We review every enquiry personally and may get in touch for more details.</p></div></article><article class="step"><div class="step-art art-three"><span>03</span><i>£</i></div><div class="step-content"><div class="step-num">STEP 03</div><h3>Get an offer</h3><p>If it’s right for us, we’ll make an offer. It’s completely up to you whether to accept.</p></div></article></div></section>
 <section class="section platforms-section" id="find-us-live">
