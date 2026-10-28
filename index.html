@@ -252,9 +252,53 @@ footer{background:#1b1033;border-top:5px solid var(--funky-pink)}
 }
 @media(prefers-reduced-motion:reduce){.hero{animation:none}}
 
+
+/* BIG, COMIC-BOOK ENERGY: explosive intro + lively hero motion */
+.pop-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#21103d;isolation:isolate;animation:intro-screen-out .48s cubic-bezier(.7,0,.9,.4) 1.42s forwards;pointer-events:none}
+.pop-intro:before,.pop-intro:after{content:"";position:absolute;inset:-45%;background:repeating-conic-gradient(from 0deg at 50% 50%,#ff3d9a 0deg 9deg,#ffe34d 9deg 18deg,#7047ff 18deg 27deg,#43e7e7 27deg 36deg);animation:intro-rays .7s linear infinite;z-index:-2}
+.pop-intro:after{inset:-25%;background:radial-gradient(circle,#fff 0 2%,transparent 2.5% 100%);background-size:19px 19px;opacity:.23;transform:rotate(9deg);z-index:-1}
+.pop-intro-burst{position:absolute;width:min(86vw,720px);aspect-ratio:1;background:#ffe34d;clip-path:polygon(50% 0%,59% 18%,75% 5%,76% 25%,97% 21%,85% 41%,100% 53%,80% 63%,91% 83%,68% 80%,60% 100%,47% 81%,29% 96%,28% 75%,5% 78%,17% 58%,0 46%,21% 37%,10% 16%,34% 22%);filter:drop-shadow(0 0 0 #21103c);transform:scale(.05) rotate(-30deg);animation:intro-burst .65s cubic-bezier(.16,1.4,.35,1) .08s forwards}
+.pop-intro-word{font-size:clamp(5.5rem,24vw,15rem);line-height:.8;font-weight:1000;letter-spacing:-.1em;color:#ff3d9a;-webkit-text-stroke:clamp(3px,.65vw,8px) #21103c;text-shadow:8px 10px 0 #fff,14px 17px 0 #21103c;transform:scale(.1) rotate(-18deg);animation:intro-word .55s cubic-bezier(.15,1.55,.35,1) .34s forwards}
+.pop-intro-word span{color:#7047ff}
+.pop-intro-brand{position:absolute;bottom:13%;font-size:clamp(1rem,4vw,2rem);font-weight:1000;letter-spacing:.16em;color:#fff;background:#21103c;border:3px solid #fff;padding:.45em .8em;box-shadow:6px 6px 0 #ff3d9a;transform:translateY(40px) rotate(-4deg);opacity:0;animation:intro-brand .3s ease-out .78s forwards}
+@keyframes intro-rays{to{transform:rotate(18deg)}}
+@keyframes intro-burst{0%{transform:scale(.05) rotate(-30deg)}75%{transform:scale(1.12) rotate(8deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes intro-word{0%{transform:scale(.1) rotate(-18deg)}72%{transform:scale(1.12) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes intro-brand{to{opacity:1;transform:translateY(0) rotate(-4deg)}}
+@keyframes intro-screen-out{to{opacity:0;visibility:hidden}}
+.hero{animation:hero-colour-charge 7s ease-in-out infinite alternate}
+.hero .hero-copy{animation:hero-copy-slam .75s cubic-bezier(.16,1.25,.35,1) both}
+.hero .hero-mark{animation:hero-logo-bounce .9s cubic-bezier(.16,1.3,.35,1) .18s both}
+.hero .eyebrow{animation:hero-detail-pop .45s ease-out .3s both}
+.hero h1{animation:hero-detail-pop .6s cubic-bezier(.16,1.2,.35,1) .42s both}
+.hero .actions .button{animation:hero-button-pop .45s cubic-bezier(.16,1.35,.35,1) .72s both}
+.hero .actions .button:nth-child(2){animation-delay:.86s}
+.hero .button{transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.hero .button:hover{transform:translate(-3px,-4px) scale(1.055) rotate(-1deg);box-shadow:7px 9px 0 var(--funky-pink)}
+.hero .button.secondary:hover{box-shadow:7px 9px 0 var(--funky-yellow)}
+@keyframes hero-colour-charge{from{background-position:0% 40%}to{background-position:100% 60%}}
+@keyframes hero-copy-slam{from{opacity:0;transform:translateX(-55px) scale(.94)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes hero-logo-bounce{0%{opacity:0;transform:scale(.35) rotate(-18deg)}70%{opacity:1;transform:scale(1.08) rotate(5deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes hero-detail-pop{from{opacity:0;transform:translateY(24px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes hero-button-pop{from{opacity:0;transform:translateY(22px) scale(.7)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){
+ .pop-intro{display:none!important}
+ .hero,.hero .hero-copy,.hero .hero-mark,.hero .eyebrow,.hero h1,.hero .actions .button{animation:none!important;opacity:1!important;transform:none!important}
+}
+@media(max-width:760px){
+ .pop-intro-word{font-size:clamp(5rem,25vw,9rem);text-shadow:5px 7px 0 #fff,9px 12px 0 #21103c}
+ .pop-intro-brand{bottom:19%}
+ .hero .hero-copy{animation-duration:.55s}
+}
+
 </style>
 </head>
 <body>
+<div class="pop-intro" id="pop-intro" aria-hidden="true">
+  <div class="pop-intro-burst"></div>
+  <div class="pop-intro-word">POP<span>!</span></div>
+  <div class="pop-intro-brand">POP &amp; LOCK</div>
+</div>
 <header><div class="header-inner"><a class="brand" href="index.html" aria-label="Pop & Lock home"><img src="logo.png?v=4" alt="Pop & Lock logo"><span>POP &amp; LOCK</span></a><nav class="nav" aria-label="Main navigation"><a class="nav-optional" href="#find-us-live">WHAT WE BUY</a><a class="nav-optional" href="#how-it-works">HOW IT WORKS</a><a class="nav-optional" href="contact.html">CONTACT</a><a class="nav-live" href="live-shows.html">FIND US LIVE</a><a class="nav-cta" href="sell-to-us.html">SELL YOUR COLLECTION</a></nav></div></header>
 <main>
 <section class="hero"><div class="hero-inner"><div class="hero-copy"><div class="eyebrow">UK-wide Funko Pop buyers</div><h1>YOUR COLLECTION.<br><span>OUR NEXT FIND.</span></h1><p>Thinking of selling your Funko Pops? From everyday favourites to rare, vaulted and signed grails, we’re interested in collections from across the UK.</p><div class="actions"><a class="button" href="sell-to-us.html">SELL YOUR COLLECTION</a><a class="button secondary" href="#how-it-works">HOW IT WORKS</a></div><div class="hero-proof">Free to enquire · No obligation to accept an offer</div></div><div class="hero-mark"><img src="logo.png?v=4" alt="" aria-hidden="true"></div></div></section>
@@ -290,6 +334,19 @@ footer{background:#1b1033;border-top:5px solid var(--funky-pink)}
 </main>
 <footer><nav class="footer-links"><a href="index.html">HOME</a><a href="sell-to-us.html">SELL YOUR COLLECTION</a><a href="contact.html">CONTACT</a><a href="about.html">ABOUT POP &amp; LOCK</a><a href="privacy.html">PRIVACY</a></nav><div class="footer-note">Questions? <a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></div><div class="copyright">© Pop &amp; Lock</div></footer>
 
+<script>
+/* Show the comic-book intro once per browser tab; never trap the visitor. */
+(function(){
+  const intro=document.getElementById('pop-intro');
+  if(!intro) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){intro.remove();return;}
+  try{
+    if(sessionStorage.getItem('popLockIntroSeen')){intro.remove();return;}
+    sessionStorage.setItem('popLockIntroSeen','1');
+  }catch(e){}
+  window.setTimeout(function(){if(intro.isConnected)intro.remove();},2050);
+})();
+</script>
 <script>
 /* Gentle scroll reveals, with a safe fallback when motion is reduced or JS is unavailable. */
 (function(){
