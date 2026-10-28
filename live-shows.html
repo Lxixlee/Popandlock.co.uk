@@ -36,6 +36,76 @@ h2{font-size:30px;letter-spacing:-.04em;margin:0 0 10px}
 footer{text-align:center;border-top:1px solid #ffffff18;padding:22px;color:#92939a;font-size:11px}
 @media(max-width:760px){.top{height:70px;padding:8px 15px}.brand img{width:50px;height:50px}main{padding:38px 15px 48px}.intro{margin-bottom:27px}.intro p{font-size:14px}.cards{grid-template-columns:1fr;gap:15px}.card{min-height:310px}.card-content{padding:22px}h2{font-size:28px}}
 @media(prefers-reduced-motion:reduce){.card:before{transition:none}}
+
+/* FIND US LIVE page — match the colourful Pop & Lock comic-book homepage */
+:root{--pink:#ff3d9a;--purple:#7047ff;--cyan:#43e7e7;--yellow:#ffe34d;--orange:#ff8a35;--comic:#21103d}
+html,body{background:#fff8ef!important;color:var(--comic)!important}
+body{background:linear-gradient(180deg,#fff8ef 0%,#f8eaff 52%,#fff5fb 100%)!important;overflow-x:hidden}
+.top{position:relative;height:84px!important;padding:10px clamp(16px,4vw,48px)!important;border-bottom:4px solid var(--comic)!important;background:#fff!important;box-shadow:0 5px 0 var(--pink)!important}
+.top:after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:4px;background:repeating-linear-gradient(90deg,var(--yellow) 0 18px,var(--cyan) 18px 36px,var(--purple) 36px 54px,var(--pink) 54px 72px)}
+.brand img{width:62px!important;height:62px!important;filter:drop-shadow(3px 3px 0 #ff3d9a)}
+.home{color:var(--comic)!important;background:var(--yellow)!important;border:3px solid var(--comic)!important;box-shadow:4px 4px 0 var(--pink)!important;font-weight:1000!important;transition:transform .2s ease,box-shadow .2s ease}
+.home:hover{transform:translate(2px,2px) rotate(-1deg);box-shadow:2px 2px 0 var(--comic)!important}
+main{position:relative;max-width:1240px!important;padding:clamp(48px,7vw,84px) 22px 74px!important}
+main:before{content:"";position:absolute;z-index:0;top:22px;left:-110px;width:320px;height:320px;border-radius:50%;border:5px solid #ff3d9a;box-shadow:0 0 0 15px #7047ff18,0 0 0 33px #43e7e72b;pointer-events:none;animation:live-page-orbit 24s linear infinite}
+main:after{content:"";position:absolute;z-index:0;right:-100px;top:250px;width:280px;height:280px;background:repeating-conic-gradient(from 0deg,var(--yellow) 0deg 10deg,var(--orange) 10deg 20deg);clip-path:polygon(50% 0,60% 20%,80% 5%,80% 27%,100% 30%,84% 48%,100% 64%,77% 70%,82% 94%,59% 83%,46% 100%,38% 79%,14% 91%,21% 67%,0 54%,20% 42%,5% 21%,31% 26%);opacity:.23;pointer-events:none}
+.intro,.cards,.note{position:relative;z-index:1}
+.intro{margin-bottom:46px!important}
+.kicker{display:inline-block!important;padding:8px 12px!important;background:var(--cyan)!important;color:var(--comic)!important;border:3px solid var(--comic);box-shadow:5px 5px 0 var(--pink);font-weight:1000!important;letter-spacing:.15em!important;transform:rotate(-2deg);animation:live-kicker-pop .65s cubic-bezier(.16,1.3,.3,1) both}
+h1{margin:25px 0 20px!important;font-size:clamp(3.2rem,8vw,6.8rem)!important;line-height:.88!important;letter-spacing:-.075em!important;font-weight:1000!important;color:#fff!important;-webkit-text-stroke:2px var(--comic);text-shadow:5px 6px 0 var(--pink),10px 11px 0 var(--comic);animation:live-title-slam .75s cubic-bezier(.16,1.3,.3,1) both}
+.intro p{max-width:680px!important;margin:auto!important;color:#47365f!important;font-size:clamp(14px,1.8vw,17px)!important;font-weight:650!important}
+.cards{gap:24px!important}
+.card{min-height:410px!important;border:4px solid var(--comic)!important;border-radius:12px!important;background:var(--purple)!important;box-shadow:9px 10px 0 var(--comic)!important;clip-path:polygon(0 0,93% 0,100% 7%,100% 100%,7% 100%,0 93%);transition:transform .28s cubic-bezier(.16,1.3,.3,1),box-shadow .28s ease,filter .28s ease!important}
+.card:nth-child(1){transform:rotate(-1deg)}
+.card:nth-child(2){transform:translateY(12px) rotate(1deg)}
+.card:nth-child(3){transform:rotate(-.7deg)}
+.card:before{inset:-20%!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:50% 15%!important;opacity:1!important;transform:scale(.83);transition:transform .45s cubic-bezier(.16,1.3,.3,1),filter .3s ease!important}
+.whatnot{background:linear-gradient(145deg,#ff3d9a 0%,#7047ff 100%)!important}
+.ebay{background:linear-gradient(145deg,#43e7e7 0%,#3277ff 100%)!important}
+.tiktok{background:linear-gradient(145deg,#ffe34d 0%,#ff8a35 100%)!important}
+.whatnot:before{background-image:url('WHATNOT.webp')!important}
+.ebay:before{background-image:url('EBAY.avif')!important}
+.tiktok:before{background-image:url('TIKTOK.jpg')!important}
+.card:after{background:linear-gradient(180deg,rgba(33,16,61,.04) 0%,rgba(33,16,61,.08) 25%,rgba(33,16,61,.9) 67%,rgba(33,16,61,.98) 100%)!important}
+.card-content{padding:25px!important}
+.platform{background:var(--yellow)!important;color:var(--comic)!important;border:2px solid var(--comic);box-shadow:3px 3px 0 var(--pink);padding:6px 8px;margin-bottom:14px!important;font-weight:1000!important;letter-spacing:.12em!important}
+h2{font-size:clamp(27px,3vw,36px)!important;color:#fff!important;font-weight:1000!important;letter-spacing:-.055em!important;text-shadow:3px 3px 0 var(--pink),5px 5px 0 var(--comic)!important}
+.card p{color:#fff!important;font-size:13px!important;line-height:1.65!important;font-weight:600!important;text-shadow:0 2px 5px #21103d}
+.cta{position:relative;overflow:hidden;min-height:52px!important;background:var(--yellow)!important;color:var(--comic)!important;border:3px solid var(--comic)!important;box-shadow:5px 5px 0 var(--pink)!important;font-size:10px!important;font-weight:1000!important;letter-spacing:.1em!important;transition:transform .2s ease,box-shadow .2s ease,background .2s ease!important}
+.cta:after{content:"";position:absolute;top:-50%;bottom:-50%;left:-70%;width:35%;transform:rotate(25deg);background:linear-gradient(90deg,transparent,#ffffffb8,transparent);transition:left .55s ease}
+.card:hover{transform:translateY(-8px) rotate(0) scale(1.025)!important;box-shadow:12px 14px 0 var(--pink)!important;filter:saturate(1.12)}
+.card:hover:before{transform:scale(.95)!important;filter:drop-shadow(5px 5px 0 #21103d55)}
+.card:hover .cta{background:#fff!important;transform:translateY(-3px)!important;box-shadow:7px 7px 0 var(--cyan)!important}
+.card:hover .cta:after{left:150%}
+.note{display:table;margin:38px auto 0!important;padding:12px 18px!important;background:var(--yellow)!important;color:var(--comic)!important;border:3px solid var(--comic);box-shadow:5px 5px 0 var(--pink);font-size:12px!important}
+.note strong{font-weight:1000}
+footer{background:var(--comic)!important;color:#fff!important;border-top:7px solid var(--pink)!important;padding:24px!important;font-weight:700}
+@keyframes live-page-orbit{to{transform:rotate(360deg)}}
+@keyframes live-kicker-pop{0%{opacity:0;transform:translateY(-15px) rotate(-10deg) scale(.7)}100%{opacity:1;transform:translateY(0) rotate(-2deg) scale(1)}}
+@keyframes live-title-slam{0%{opacity:0;transform:translateY(24px) scale(.75) rotate(-3deg)}75%{opacity:1;transform:translateY(-3px) scale(1.03) rotate(1deg)}100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@media(max-width:760px){
+ .top{height:70px!important;padding:8px 15px!important}
+ .brand img{width:49px!important;height:49px!important}
+ .home{font-size:9px!important;padding:9px 10px!important;box-shadow:3px 3px 0 var(--pink)!important}
+ main{padding:45px 17px 48px!important}
+ main:before{width:200px;height:200px;top:10px;left:-125px}
+ main:after{width:170px;height:170px;right:-70px;top:270px}
+ .intro{margin-bottom:35px!important}
+ h1{font-size:clamp(3rem,13vw,4.8rem)!important;-webkit-text-stroke:1.5px var(--comic);text-shadow:3px 4px 0 var(--pink),6px 7px 0 var(--comic)!important}
+ .cards{grid-template-columns:1fr!important;gap:22px!important}
+ .card,.card:nth-child(1),.card:nth-child(2),.card:nth-child(3){min-height:330px!important;transform:none!important}
+ .card:hover{transform:translateY(-3px) scale(1.01)!important}
+ .card:before{background-position:50% 12%!important;background-size:contain!important}
+ .card-content{padding:22px!important}
+ h2{font-size:30px!important}
+ .note{display:block;text-align:center;line-height:1.5}
+}
+@media(prefers-reduced-motion:reduce){
+ main:before,.kicker,h1{animation:none!important}
+ .card,.card:before,.cta,.home{transition:none!important}
+ .card:nth-child(1),.card:nth-child(2),.card:nth-child(3){transform:none!important}
+}
+
 </style>
 </head>
 <body>
