@@ -253,6 +253,55 @@ footer{background:#1b1033;border-top:5px solid var(--funky-pink)}
 @media(prefers-reduced-motion:reduce){.hero{animation:none}}
 
 
+
+/* LOUD SCROLL REVEALS: comic-book entrances, bursts and colour wipes */
+.motion-ready .motion-reveal{opacity:0;transform:translateY(55px) scale(.9) rotate(-1.5deg);transition:opacity .2s ease,transform .75s cubic-bezier(.16,1.25,.3,1);transition-delay:var(--reveal-delay,0ms)}
+.motion-ready .motion-reveal.motion-visible{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+.motion-ready .step.motion-reveal:nth-child(2){--reveal-delay:100ms}
+.motion-ready .step.motion-reveal:nth-child(3){--reveal-delay:200ms}
+.motion-ready .platform-banner.motion-reveal:nth-child(2){--reveal-delay:110ms}
+.motion-ready .platform-banner.motion-reveal:nth-child(3){--reveal-delay:220ms}
+.motion-ready .trust-item.motion-reveal:nth-child(2){--reveal-delay:90ms}
+.motion-ready .trust-item.motion-reveal:nth-child(3){--reveal-delay:180ms}
+.motion-ready .motion-reveal.motion-visible{animation:comic-entry .65s cubic-bezier(.16,1.25,.3,1) both}
+@keyframes comic-entry{0%{filter:saturate(1.8)}58%{filter:saturate(1.5)}100%{filter:saturate(1)}}
+.section-heading.motion-reveal{transform:translateX(-45px) scale(.92);transform-origin:left center}
+.section-heading.motion-reveal.motion-visible{transform:translateX(0) scale(1)}
+.step{position:relative;overflow:visible;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.step:after{content:"";position:absolute;inset:-8px;border:4px solid var(--funky-yellow);clip-path:polygon(50% 0,60% 12%,75% 4%,78% 20%,96% 18%,88% 36%,100% 50%,87% 63%,96% 82%,76% 80%,68% 100%,51% 87%,33% 98%,29% 80%,8% 83%,17% 64%,0 50%,16% 36%,5% 17%,27% 21%,35% 3%);opacity:0;transform:scale(.45) rotate(-16deg);pointer-events:none;z-index:-1}
+.step.motion-visible:after{animation:comic-burst .55s cubic-bezier(.16,1.35,.35,1) .12s both}
+.step:hover{transform:translateY(-7px) rotate(-1deg) scale(1.025)}
+.platform-banner{transition:transform .3s cubic-bezier(.16,1.2,.3,1),box-shadow .3s ease;transform-origin:center}
+.platform-banner:hover{transform:translateY(-7px) scale(1.025) rotate(-.6deg)}
+.platform-banner:before{background-size:200% 200%;animation:banner-colour-drift 4s ease-in-out infinite alternate}
+.platform-banner:nth-child(2):before{animation-delay:.4s}
+.platform-banner:nth-child(3):before{animation-delay:.8s}
+@keyframes banner-colour-drift{from{background-position:0% 50%;filter:saturate(1)}to{background-position:100% 50%;filter:saturate(1.5)}}
+.nationwide.motion-reveal{position:relative;isolation:isolate}
+.nationwide.motion-reveal:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(110deg,transparent 20%,rgba(255,61,154,.4) 42%,rgba(255,227,77,.42) 50%,rgba(67,231,231,.35) 58%,transparent 78%);transform:translateX(-120%);pointer-events:none}
+.nationwide.motion-reveal.motion-visible:after{animation:colour-wipe 1.05s ease-out .08s both}
+@keyframes colour-wipe{to{transform:translateX(120%)}}
+.faq details{transition:background .25s ease,border-color .25s ease,transform .25s ease}
+.faq details:hover{transform:translateX(4px);border-color:var(--funky-pink)}
+.final-cta-inner{position:relative;overflow:hidden}
+.final-cta-inner:after{content:"";position:absolute;top:-60%;bottom:-60%;left:-45%;width:24%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);transform:rotate(20deg) translateX(-300%);pointer-events:none}
+.final-cta-inner.motion-visible:after{animation:final-shine .9s ease-out .3s both}
+@keyframes final-shine{to{transform:rotate(20deg) translateX(900%)}}
+@keyframes comic-burst{0%{opacity:0;transform:scale(.45) rotate(-16deg)}35%{opacity:1}100%{opacity:0;transform:scale(1.15) rotate(8deg)}}
+@media(max-width:760px){
+ .motion-ready .motion-reveal{transform:translateY(30px) scale(.96) rotate(0)}
+ .section-heading.motion-reveal{transform:translateY(25px) scale(.96)}
+ .step:hover,.platform-banner:hover{transform:translateY(-3px) scale(1.01)}
+ .nationwide.motion-reveal:after{opacity:.7}
+}
+@media(prefers-reduced-motion:reduce){
+ .motion-ready .motion-reveal,.motion-ready .motion-reveal.motion-visible{opacity:1;transform:none;animation:none;transition:none}
+ .step:after{display:none}
+ .platform-banner:before{animation:none}
+ .nationwide.motion-reveal:after,.final-cta-inner:after{display:none}
+ .step,.platform-banner,.faq details{transition:none}
+}
+
 /* BIG, COMIC-BOOK ENERGY: explosive intro + lively hero motion */
 .pop-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#21103d;isolation:isolate;opacity:1;visibility:visible;transition:opacity .65s cubic-bezier(.7,0,.9,1),visibility 0s linear .65s;pointer-events:none}
 .pop-intro.is-fading{opacity:0;visibility:hidden}
