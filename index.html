@@ -110,6 +110,73 @@ footer{background:#111216;color:#fff;padding:28px 24px;text-align:center}.footer
   .nav .nav-live{font-size:7px;padding:7px 3px}
   .nav .nav-cta{padding:9px 6px;font-size:7px}
 }
+
+/* Fun, polished motion throughout the homepage */
+:root{--motion-ease:cubic-bezier(.2,.75,.25,1)}
+body{overflow-x:hidden}
+header{transition:box-shadow .25s ease}
+header:hover{box-shadow:0 5px 22px #1111110b}
+.brand img{transition:transform .35s var(--motion-ease)}
+.brand:hover img{transform:rotate(-7deg) scale(1.06)}
+.hero{background-size:180% 180%;animation:heroGlow 14s ease-in-out infinite alternate}
+.hero:before{animation:orbitGlow 24s linear infinite}
+.hero:after{width:48%;animation:goldSweep 5s ease-in-out infinite alternate}
+.hero-mark:before{animation:haloPulse 4.5s ease-in-out infinite}
+.hero-mark img{animation:floatPop 4.8s ease-in-out infinite}
+.hero-mark:after{animation:badgeWiggle 7s ease-in-out infinite}
+.eyebrow:before{animation:eyebrowLine 2.8s ease-in-out infinite alternate}
+.button{position:relative;overflow:hidden;transition:transform .25s var(--motion-ease),box-shadow .25s ease,background .25s ease}
+.button:after{content:"";position:absolute;top:-60%;left:-70%;width:45%;height:220%;transform:rotate(25deg);background:linear-gradient(90deg,transparent,#ffffff70,transparent);transition:left .65s ease}
+.button:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 10px 24px #0002}
+.button:hover:after{left:140%}
+.trust-item>b{transition:transform .3s var(--motion-ease),background .3s ease}
+.trust-item:hover>b{transform:rotate(-8deg) scale(1.1);background:#292a30}
+.step{transition:transform .3s var(--motion-ease),box-shadow .3s ease,border-color .3s ease}
+.step:hover{transform:translateY(-7px);box-shadow:0 18px 36px #14141412;border-color:#e0b46f}
+.step-art span{transition:transform .35s var(--motion-ease)}
+.step:hover .step-art span{transform:translateY(-5px) rotate(-5deg)}
+.step-art i{transition:transform .35s var(--motion-ease)}
+.step:hover .step-art i{transform:scale(1.12) rotate(8deg)}
+.platform-banner{transition:transform .3s var(--motion-ease),box-shadow .3s ease}
+.platform-banner:hover{transform:translateY(-6px);box-shadow:0 16px 32px #1112}
+.platform-banner img{transition:opacity .3s ease,transform .45s var(--motion-ease)}
+.platform-banner:hover img{opacity:.68;transform:scale(1.07) rotate(-2deg)}
+.platform-banner-action{transition:background .2s ease,transform .2s ease}
+.platform-banner:hover .platform-banner-action{background:#ffd18a;transform:translateX(3px)}
+.category{transition:transform .28s var(--motion-ease),box-shadow .28s ease}
+.category:hover{transform:translateY(-5px);box-shadow:0 14px 30px #11111110}
+.nationwide-art b{animation:badgeBob 3.5s ease-in-out infinite}
+.final-stamp{animation:stampBob 5s ease-in-out infinite}
+.faq details{transition:border-color .25s ease,background .25s ease}
+.faq details[open]{background:#fffdf9;border-color:#e8d4b4}
+.faq summary span{transition:transform .25s ease}
+.faq details[open] summary span{transform:rotate(45deg)}
+.footer-links a{transition:color .2s ease}
+.footer-links a:hover{color:#b77824}
+@keyframes heroGlow{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+@keyframes orbitGlow{to{transform:rotate(360deg)}}
+@keyframes goldSweep{0%{width:24%}100%{width:62%}}
+@keyframes haloPulse{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.035);opacity:1}}
+@keyframes floatPop{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-11px) rotate(1.5deg)}}
+@keyframes badgeWiggle{0%,88%,100%{transform:rotate(-4deg)}92%{transform:rotate(-7deg)}96%{transform:rotate(-1deg)}}
+@keyframes eyebrowLine{from{width:18px}to{width:34px}}
+@keyframes badgeBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-7px) rotate(3deg)}}
+@keyframes stampBob{0%,100%{transform:rotate(-8deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-7px)}}
+@media(max-width:760px){
+ .hero{animation-duration:20s}
+ .hero-mark:before{animation-duration:5.5s}
+ .hero-mark img{animation-duration:5.5s}
+ .platform-banner:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+
+.motion-ready .motion-reveal{opacity:0;transform:translateY(18px);transition:opacity .65s var(--motion-ease),transform .65s var(--motion-ease)}
+.motion-ready .motion-reveal.motion-visible{opacity:1;transform:translateY(0)}
+.platform-banners .platform-banner:nth-child(2){transition-delay:.08s}
+.platform-banners .platform-banner:nth-child(3){transition-delay:.16s}
+@media(prefers-reduced-motion:reduce){.motion-ready .motion-reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -147,4 +214,23 @@ footer{background:#111216;color:#fff;padding:28px 24px;text-align:center}.footer
 <section class="final-cta"><div class="final-cta-inner"><div class="final-stamp">POP<br>&amp; LOCK</div><div><div class="kicker">READY WHEN YOU ARE</div><h2>Make room for your next chapter.</h2><p>Send us your collection details and a few photos. Let’s see if we’re a match.</p></div><a class="button" href="sell-to-us.html">SELL YOUR COLLECTION</a></div></section>
 </main>
 <footer><nav class="footer-links"><a href="index.html">HOME</a><a href="sell-to-us.html">SELL YOUR COLLECTION</a><a href="contact.html">CONTACT</a><a href="about.html">ABOUT POP &amp; LOCK</a><a href="privacy.html">PRIVACY</a></nav><div class="footer-note">Questions? <a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></div><div class="copyright">© Pop &amp; Lock</div></footer>
+
+<script>
+/* Gentle scroll reveals, with a safe fallback when motion is reduced or JS is unavailable. */
+(function(){
+  if(!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('motion-ready');
+  const targets = document.querySelectorAll('.section-heading,.step,.platform-banner,.trust-item,.nationwide-inner,.faq details,.final-cta-inner');
+  targets.forEach(function(el){el.classList.add('motion-reveal')});
+  const observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('motion-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -24px 0px'});
+  targets.forEach(function(el){observer.observe(el)});
+})();
+</script>
 </body></html>
