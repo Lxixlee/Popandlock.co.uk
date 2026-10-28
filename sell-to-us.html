@@ -160,21 +160,22 @@ footer{margin-top:28px!important;background:var(--pl-ink)!important;border-top:5
 <iframe
   id="JotFormIFrame-263003529471049"
   title="Sell Your Funko Pop Collection"
-  onload="window.parent.scrollTo(0,0)"
   allowtransparency="true"
   allow="geolocation; microphone; camera; fullscreen; payment"
-  src="https://form.jotform.com/263003529471049"
+  src="https://form.jotform.com/263003529471049?isIframeEmbed=1"
   frameborder="0"
-  style="width:100%;min-width:100%;max-width:100%;height:1050px;border:0;display:block;background:transparent"
-  scrolling="no">
+  style="width:1px;min-width:100%;height:1000px;border:0;display:block;background:transparent"
+  scrolling="yes">
 </iframe>
 <script src="https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js"></script>
-<script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-263003529471049']","https://form.jotform.com/");</script>
+<script>
+window.jotformEmbedHandler("iframe[id='JotFormIFrame-263003529471049']","https://form.jotform.com/");
+</script>
 </div>
 <style>
-.jotform-wrap{padding:clamp(10px,2vw,24px)!important;overflow:hidden!important}
-.jotform-wrap iframe{width:100%!important;min-width:100%!important;border:0!important;display:block!important}
-@media(max-width:700px){.jotform-wrap{padding:8px!important}.jotform-wrap iframe{height:1250px!important}}
+.jotform-wrap{padding:clamp(10px,2vw,24px)!important;overflow:visible!important}
+.jotform-wrap iframe{width:1px!important;min-width:100%!important;border:0!important;display:block!important;overflow:auto!important}
+@media(max-width:700px){.jotform-wrap{padding:8px!important}.jotform-wrap iframe{min-width:100%!important}}
 </style></main>
 <footer><div class="footer-info"><div><h3>Pop &amp; Lock</h3><p>We buy standard, exclusive, rare, vaulted and signed Funko Pops from collectors across the UK.</p></div><div><h3>Collection enquiries</h3><p>Submit your collection details and photographs. We will review your enquiry manually.</p></div><div><h3>Contact</h3><p><a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></p></div></div><nav class="footer-links"><a href="index.html">HOME</a><a href="sell-to-us.html">SELL YOUR COLLECTION</a><a href="contact.html">CONTACT</a><a href="privacy.html">PRIVACY</a></nav><div class="footer-copy">© Pop &amp; Lock</div></footer>
 <script>document.getElementById('photos').addEventListener('change',function(){var files=Array.from(this.files);var total=files.reduce(function(sum,file){return sum+file.size},0);if(files.length>10){alert('Please select no more than 10 images.');this.value='';return}if(total>10*1024*1024){alert('Please keep the total image upload below 10MB.');this.value='';}});</script>
