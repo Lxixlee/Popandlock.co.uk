@@ -50,6 +50,10 @@ html,body{max-width:100%;overflow-x:hidden}
     transform:translateY(-50%) !important;
   }
 }
+
+.tally-formbox{padding:clamp(12px,2.5vw,24px)!important;overflow:hidden}
+.tally-formbox iframe{display:block;min-height:900px}
+@media(max-width:600px){.tally-formbox{padding:8px!important}.tally-formbox iframe{min-height:1100px}}
 </style><meta name="description" content="Sell your Funko Pop collection to Pop & Lock. Submit your collection details for review."><link rel="canonical" href="https://www.popandlock.co.uk/sell-to-us.html"><link rel="icon" type="image/png" href="/logo.png"><link rel="apple-touch-icon" href="/logo.png"><meta property="og:type" content="website"><meta property="og:title" content="Sell Your Funko Pop Collection | Pop & Lock"><meta property="og:description" content="Sell your Funko Pop collection to Pop & Lock. Submit your collection details and photos for review."><meta property="og:url" content="https://www.popandlock.co.uk/sell-to-us.html"><meta property="og:image" content="https://www.popandlock.co.uk/logo.png"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Sell Your Funko Pop Collection | Pop & Lock"><meta name="twitter:description" content="Sell your Funko Pop collection to Pop & Lock. Submit your collection details and photos for review."><style id="pl-final-mobile-header-fix">
 @media(max-width:760px){
 .top .icons{position:relative!important;display:block!important;width:100%!important;height:72px!important;padding:0!important;margin:0!important}
@@ -156,29 +160,18 @@ footer{margin-top:28px!important;background:var(--pl-ink)!important;border-top:5
 <body>
 <header class="top"><div class="icons"><a class="brand" href="index.html" aria-label="Pop &amp; Lock home"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="home-link" href="index.html" aria-label="Home" title="Home"><svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19.5z" fill="#111"/><path d="M9 21v-7h6v7" fill="#fff"/></svg></a></div><nav class="menu" aria-label="Main navigation"><a href="index.html">HOME</a><a href="index.html#what-we-buy">WHAT WE BUY</a><a href="index.html#how-it-works">HOW IT WORKS</a><a href="contact.html">CONTACT</a></nav></header>
 <main class="page"><section class="heading"><h1>Sell Your Funko Pop Collection</h1><p>Tell us about your collection and let us review it. We buy standard, exclusive, rare, vaulted and signed Funko Pops from sellers across the UK.</p></section>
-<div class="formbox native-formbox">
-<p class="intro-note">Complete the form below with details about your collection. We review every submission manually.</p>
-<form id="collectionForm" action="https://formspree.io/f/xvkkrzod" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="_subject" value="New Pop &amp; Lock Collection Submission">
-<input type="hidden" name="_replyto" value="">
-<div class="form-grid">
-<div class="field"><label for="customer-name">Full name *</label><input id="customer-name" name="name" autocomplete="name" required maxlength="120"></div>
-<div class="field"><label for="customer-email">Email address *</label><input id="customer-email" name="email" type="email" autocomplete="email" required maxlength="200"></div>
-<div class="field"><label for="customer-phone">Phone number</label><input id="customer-phone" name="phone" type="tel" autocomplete="tel" maxlength="40"></div>
-<div class="field"><label for="customer-postcode">Postcode / town *</label><input id="customer-postcode" name="postcode_or_town" autocomplete="postal-code" required maxlength="150" placeholder="e.g. M1 1AE"></div>
-<div class="field"><label for="pop-count">Approximate number of Pops *</label><input id="pop-count" name="approximate_number_of_pops" type="number" min="1" max="100000" required></div>
-<div class="field"><label for="collection-condition">Overall collection condition *</label><select id="collection-condition" name="collection_condition" required><option value="">Choose condition</option><option>Mint / near mint</option><option>Good — light wear</option><option>Mixed condition</option><option>Fair / damaged boxes</option><option>Not sure</option></select></div>
-<div class="field"><label for="collection-category">What does your collection include? *</label><select id="collection-category" name="collection_category" required><option value="">Choose a category</option><option>Standard Funko Pops</option><option>Exclusives / limited editions</option><option>Rare / vaulted Pops</option><option>Signed / authenticated Pops</option><option>A mixture of types</option><option>Other collectibles</option></select></div>
-<div class="field"><label for="handover">Preferred handover *</label><select id="handover" name="preferred_handover" required><option value="">Choose an option</option><option>Collection / local handover</option><option>Postage / courier</option><option>Open to either</option></select></div>
-<div class="field"><label for="asking-price">Asking price (£)</label><input id="asking-price" name="asking_price_gbp" type="number" min="0" step="0.01" placeholder="Optional"></div>
-
-<div class="field full"><label for="collection-notes">Additional details</label><textarea id="collection-notes" name="additional_details" maxlength="5000" placeholder="Tell us about rare, vaulted, exclusive or signed Pops, box damage, collection size, or anything else we should know."></textarea></div>
-<div class="field full"><label class="check"><input type="checkbox" name="consent_to_contact" value="Yes" required><span>I agree that Pop &amp; Lock can use these details to review my collection and contact me about this enquiry. *</span></label></div>
-</div>
-<div class="submit-row"><button class="submit" id="collectionSubmit" type="submit">SUBMIT YOUR COLLECTION</button></div>
-<p class="smallprint">Submitting this form does not guarantee an offer. We will review your details and contact you if we are interested.</p>
-<div id="formStatus" class="form-status" role="status" aria-live="polite" hidden></div>
-</form>
+<div class="formbox native-formbox tally-formbox">
+<iframe
+  src="https://tally.so/r/aOOl8B?alignLeft=1&hideTitle=1&transparentBackground=1"
+  title="Pop &amp; Lock — Sell Your Collection"
+  loading="lazy"
+  width="100%"
+  height="1200"
+  frameborder="0"
+  marginheight="0"
+  marginwidth="0"
+  style="width:100%;border:0;border-radius:12px;background:transparent;"
+></iframe>
 </div>
 <style>
 .native-formbox{background:#fff;border:3px solid #171323!important;border-radius:16px!important;padding:clamp(16px,3vw,30px)!important;box-shadow:8px 8px 0 #171323!important}
@@ -200,38 +193,7 @@ footer{margin-top:28px!important;background:var(--pl-ink)!important;border-top:5
 .form-status.success{background:#dcfff0}.form-status.error{background:#fff0f3}
 @media(max-width:700px){.native-formbox .form-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}.native-formbox .field.full{grid-column:auto}.native-formbox .submit{width:100%}}
 </style>
-<script>
-(function(){
- const form=document.getElementById('collectionForm');
- if(!form)return;
- const email=form.querySelector('[name="email"]');
- const replyTo=form.querySelector('[name="_replyto"]');
- const status=document.getElementById('formStatus');
- const button=document.getElementById('collectionSubmit');
- email.addEventListener('input',function(){replyTo.value=email.value;});
 
- form.addEventListener('submit',async function(event){
-   event.preventDefault();
-   status.hidden=true;status.className='form-status';button.disabled=true;button.textContent='SENDING…';
-   try{
-     const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}});
-     if(response.ok){
-       form.reset();replyTo.value='';
-       status.textContent='Thank you! Your collection enquiry has been submitted. We will review the details and contact you if we are interested.';
-       status.className='form-status success';status.hidden=false;
-     }else{
-       let detail='Please try again in a moment. If the problem continues, email popandlock31@gmail.com.';
-       try{const data=await response.json();if(data&&data.errors&&data.errors.length)detail=data.errors.map(e=>e.message).join(' ');}catch(_){}
-       status.textContent='We could not submit your enquiry. '+detail;
-       status.className='form-status error';status.hidden=false;
-     }
-   }catch(error){
-     status.textContent='We could not reach the submission service. Please check your connection and try again, or email popandlock31@gmail.com.';
-     status.className='form-status error';status.hidden=false;
-   }finally{button.disabled=false;button.textContent='SUBMIT YOUR COLLECTION';}
- });
-})();
-</script>
 </main>
 <footer><div class="footer-info"><div><h3>Pop &amp; Lock</h3><p>We buy standard, exclusive, rare, vaulted and signed Funko Pops from collectors across the UK.</p></div><div><h3>Collection enquiries</h3><p>Submit your collection details. We will review your enquiry manually.</p></div><div><h3>Contact</h3><p><a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></p></div></div><nav class="footer-links"><a href="index.html">HOME</a><a href="sell-to-us.html">SELL YOUR COLLECTION</a><a href="contact.html">CONTACT</a><a href="privacy.html">PRIVACY</a></nav><div class="footer-copy">© Pop &amp; Lock</div></footer>
 </body></html>
