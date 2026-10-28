@@ -473,6 +473,93 @@ footer{background:#1b1033;border-top:5px solid var(--funky-pink)}
  .hero .hero-copy{animation-duration:.55s}
 }
 
+
+/* FIND US LIVE — bring the platform cards into the same loud comic-book world */
+.platforms-section{
+  position:relative;isolation:isolate;overflow:hidden;
+  background:linear-gradient(135deg,#21103d 0%,#442080 48%,#21103d 100%)!important;
+  color:#fff!important;padding-top:clamp(58px,8vw,100px)!important;padding-bottom:clamp(58px,8vw,100px)!important
+}
+.platforms-section:before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.17;
+  background:radial-gradient(circle,#fff 1.5px,transparent 2px);background-size:19px 19px;
+  mask-image:linear-gradient(90deg,#000,transparent 90%)
+}
+.platforms-section:after{
+  content:"";position:absolute;z-index:-1;width:440px;height:440px;right:-190px;top:-180px;border-radius:50%;
+  border:5px solid #ffe34d;box-shadow:0 0 0 15px #ff3d9a35,0 0 0 34px #43e7e735;
+  animation:live-orbit 18s linear infinite;pointer-events:none
+}
+.platforms-section .section-heading{position:relative;z-index:1;margin-bottom:36px!important}
+.platforms-section .section-heading .kicker{
+  display:inline-block!important;background:#ffe34d!important;color:#21103d!important;border:3px solid #130923;
+  padding:8px 12px!important;box-shadow:5px 5px 0 #ff3d9a;transform:rotate(-2deg);font-weight:1000!important
+}
+.platforms-section .section-heading h2{
+  color:#fff!important;font-size:clamp(2.5rem,6vw,4.6rem)!important;line-height:.92!important;
+  letter-spacing:-.065em!important;font-weight:1000!important;text-transform:uppercase;
+  text-shadow:4px 5px 0 #ff3d9a,8px 9px 0 #130923!important
+}
+.platforms-section .section-heading p{color:#f0e8ff!important;font-weight:600!important}
+.platforms-section .platform-banners{position:relative;z-index:1;gap:22px!important}
+.platforms-section .platform-banner{
+  min-height:245px!important;align-items:flex-end!important;padding:24px!important;
+  border:4px solid #130923!important;border-radius:12px!important;color:#fff!important;
+  box-shadow:8px 9px 0 #130923!important;
+  clip-path:polygon(0 0,94% 0,100% 9%,100% 100%,6% 100%,0 91%);
+  transition:transform .25s cubic-bezier(.16,1.3,.3,1),box-shadow .25s ease,filter .25s ease!important
+}
+.platforms-section .platform-whatnot{background:linear-gradient(140deg,#ff3d9a 0%,#8c27dd 100%)!important}
+.platforms-section .platform-ebay{background:linear-gradient(140deg,#43e7e7 0%,#3277ff 100%)!important}
+.platforms-section .platform-tiktok{background:linear-gradient(140deg,#ffe34d 0%,#ff8a35 100%)!important}
+.platforms-section .platform-banner:before{
+  inset:-25%!important;z-index:-2!important;opacity:.65;
+  background:repeating-conic-gradient(from 8deg at 80% 15%,#fff0 0deg 12deg,#ffffff30 12deg 17deg,#fff0 17deg 28deg)!important;
+  background-size:100% 100%!important;animation:live-rays 12s linear infinite!important
+}
+.platforms-section .platform-banner:after{
+  inset:0!important;z-index:-1!important;
+  background:linear-gradient(0deg,rgba(17,8,34,.88) 0%,rgba(17,8,34,.48) 45%,rgba(17,8,34,.02) 100%)!important
+}
+.platforms-section .platform-banner img{
+  z-index:-1!important;right:3%!important;top:1%!important;width:82%!important;height:78%!important;
+  object-fit:contain!important;opacity:.95!important;filter:drop-shadow(5px 6px 0 #13092380)!important;
+  transition:transform .4s cubic-bezier(.16,1.3,.3,1),filter .3s ease!important
+}
+.platforms-section .platform-banner-copy{position:relative;z-index:2;gap:7px!important}
+.platforms-section .platform-banner-copy strong{
+  color:#fff!important;font-size:clamp(1.5rem,2.4vw,2.15rem)!important;font-weight:1000!important;
+  line-height:.95!important;letter-spacing:-.045em!important;text-shadow:3px 3px 0 #130923!important
+}
+.platforms-section .platform-banner-copy small{color:#fff!important;font-size:13px!important;font-weight:750!important;text-shadow:0 2px 5px #130923}
+.platforms-section .platform-banner-action{
+  position:relative;z-index:2;margin-left:auto!important;align-self:flex-end!important;
+  color:#21103d!important;background:#ffe34d!important;border:2px solid #130923!important;border-radius:5px;
+  padding:11px 12px!important;font-size:10px!important;font-weight:1000!important;
+  box-shadow:3px 4px 0 #130923!important;transition:transform .2s ease,background .2s ease!important
+}
+.platforms-section .platform-banner:hover{
+  transform:translateY(-8px) rotate(-1deg) scale(1.025)!important;box-shadow:11px 13px 0 #130923!important;filter:saturate(1.15)
+}
+.platforms-section .platform-banner:hover img{transform:scale(1.12) rotate(-4deg)!important;filter:drop-shadow(8px 9px 0 #13092380)!important}
+.platforms-section .platform-banner:hover .platform-banner-action{background:#fff!important;transform:translateY(-4px) rotate(2deg)!important}
+.platforms-section .platform-ebay .platform-banner-copy strong{color:#fff!important}
+@keyframes live-orbit{to{transform:rotate(360deg)}}
+@keyframes live-rays{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+ .platforms-section{padding-top:54px!important;padding-bottom:58px!important}
+ .platforms-section .section-heading h2{text-shadow:3px 4px 0 #ff3d9a,5px 6px 0 #130923!important}
+ .platforms-section .platform-banners{gap:18px!important}
+ .platforms-section .platform-banner{min-height:205px!important;padding:18px!important}
+ .platforms-section .platform-banner img{width:68%!important;height:72%!important;right:0!important;top:0!important}
+ .platforms-section .platform-banner-copy strong{font-size:25px!important}
+ .platforms-section .platform-banner-action{font-size:9px!important;padding:9px 8px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .platforms-section:after,.platforms-section .platform-banner:before{animation:none!important}
+ .platforms-section .platform-banner,.platforms-section .platform-banner img,.platforms-section .platform-banner-action{transition:none!important}
+}
+
 </style>
 </head>
 <body>
