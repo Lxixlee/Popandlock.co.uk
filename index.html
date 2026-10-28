@@ -254,7 +254,8 @@ footer{background:#1b1033;border-top:5px solid var(--funky-pink)}
 
 
 /* BIG, COMIC-BOOK ENERGY: explosive intro + lively hero motion */
-.pop-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#21103d;isolation:isolate;animation:intro-screen-out .48s cubic-bezier(.7,0,.9,.4) 1.42s forwards;pointer-events:none}
+.pop-intro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;overflow:hidden;background:#21103d;isolation:isolate;opacity:1;visibility:visible;transition:opacity .65s cubic-bezier(.7,0,.9,1),visibility 0s linear .65s;pointer-events:none}
+.pop-intro.is-fading{opacity:0;visibility:hidden}
 .pop-intro:before,.pop-intro:after{content:"";position:absolute;inset:-45%;background:repeating-conic-gradient(from 0deg at 50% 50%,#ff3d9a 0deg 9deg,#ffe34d 9deg 18deg,#7047ff 18deg 27deg,#43e7e7 27deg 36deg);animation:intro-rays .7s linear infinite;z-index:-2}
 .pop-intro:after{inset:-25%;background:radial-gradient(circle,#fff 0 2%,transparent 2.5% 100%);background-size:19px 19px;opacity:.23;transform:rotate(9deg);z-index:-1}
 .pop-intro-burst{position:absolute;width:min(86vw,720px);aspect-ratio:1;background:#ffe34d;clip-path:polygon(50% 0%,59% 18%,75% 5%,76% 25%,97% 21%,85% 41%,100% 53%,80% 63%,91% 83%,68% 80%,60% 100%,47% 81%,29% 96%,28% 75%,5% 78%,17% 58%,0 46%,21% 37%,10% 16%,34% 22%);filter:drop-shadow(0 0 0 #21103c);transform:scale(.05) rotate(-30deg);animation:intro-burst .65s cubic-bezier(.16,1.4,.35,1) .08s forwards}
@@ -335,7 +336,7 @@ footer{background:#1b1033;border-top:5px solid var(--funky-pink)}
 <footer><nav class="footer-links"><a href="index.html">HOME</a><a href="sell-to-us.html">SELL YOUR COLLECTION</a><a href="contact.html">CONTACT</a><a href="about.html">ABOUT POP &amp; LOCK</a><a href="privacy.html">PRIVACY</a></nav><div class="footer-note">Questions? <a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></div><div class="copyright">© Pop &amp; Lock</div></footer>
 
 <script>
-/* Show the comic-book intro once per browser tab; never trap the visitor. */
+/* Fade the intro away cleanly to reveal the homepage beneath it. */
 (function(){
   const intro=document.getElementById('pop-intro');
   if(!intro) return;
@@ -344,7 +345,11 @@ footer{background:#1b1033;border-top:5px solid var(--funky-pink)}
     if(sessionStorage.getItem('popLockIntroSeen')){intro.remove();return;}
     sessionStorage.setItem('popLockIntroSeen','1');
   }catch(e){}
-  window.setTimeout(function(){if(intro.isConnected)intro.remove();},2050);
+  window.setTimeout(function(){
+    if(!intro.isConnected) return;
+    intro.classList.add('is-fading');
+    window.setTimeout(function(){if(intro.isConnected)intro.remove();},700);
+  },1450);
 })();
 </script>
 <script>
