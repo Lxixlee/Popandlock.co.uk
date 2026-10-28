@@ -52,8 +52,8 @@ html,body{max-width:100%;overflow-x:hidden}
 }
 
 .tally-formbox{padding:clamp(12px,2.5vw,24px)!important;overflow:hidden}
-.tally-formbox iframe{display:block;min-height:900px}
-@media(max-width:600px){.tally-formbox{padding:8px!important}.tally-formbox iframe{min-height:1100px}}
+.tally-formbox iframe{display:block;min-height:1600px;height:1600px;max-width:100%;overflow:hidden}
+@media(max-width:600px){.tally-formbox{padding:6px!important}.tally-formbox iframe{min-height:1800px;height:1800px}}
 </style><meta name="description" content="Sell your Funko Pop collection to Pop & Lock. Submit your collection details for review."><link rel="canonical" href="https://www.popandlock.co.uk/sell-to-us.html"><link rel="icon" type="image/png" href="/logo.png"><link rel="apple-touch-icon" href="/logo.png"><meta property="og:type" content="website"><meta property="og:title" content="Sell Your Funko Pop Collection | Pop & Lock"><meta property="og:description" content="Sell your Funko Pop collection to Pop & Lock. Submit your collection details and photos for review."><meta property="og:url" content="https://www.popandlock.co.uk/sell-to-us.html"><meta property="og:image" content="https://www.popandlock.co.uk/logo.png"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Sell Your Funko Pop Collection | Pop & Lock"><meta name="twitter:description" content="Sell your Funko Pop collection to Pop & Lock. Submit your collection details and photos for review."><style id="pl-final-mobile-header-fix">
 @media(max-width:760px){
 .top .icons{position:relative!important;display:block!important;width:100%!important;height:72px!important;padding:0!important;margin:0!important}
@@ -161,17 +161,15 @@ footer{margin-top:28px!important;background:var(--pl-ink)!important;border-top:5
 <header class="top"><div class="icons"><a class="brand" href="index.html" aria-label="Pop &amp; Lock home"><img src="logo.png?v=4" alt="Pop &amp; Lock"></a><a class="home-link" href="index.html" aria-label="Home" title="Home"><svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19.5z" fill="#111"/><path d="M9 21v-7h6v7" fill="#fff"/></svg></a></div><nav class="menu" aria-label="Main navigation"><a href="index.html">HOME</a><a href="index.html#what-we-buy">WHAT WE BUY</a><a href="index.html#how-it-works">HOW IT WORKS</a><a href="contact.html">CONTACT</a></nav></header>
 <main class="page"><section class="heading"><h1>Sell Your Funko Pop Collection</h1><p>Tell us about your collection and let us review it. We buy standard, exclusive, rare, vaulted and signed Funko Pops from sellers across the UK.</p></section>
 <div class="formbox native-formbox tally-formbox">
-<iframe
-  src="https://tally.so/r/aOOl8B?alignLeft=1&hideTitle=1&transparentBackground=1"
-  title="Pop &amp; Lock — Sell Your Collection"
-  loading="lazy"
-  width="100%"
-  height="1200"
-  frameborder="0"
-  marginheight="0"
-  marginwidth="0"
-  style="width:100%;border:0;border-radius:12px;background:transparent;"
-></iframe>
+<iframe data-tally-src="https://tally.so/r/aOOl8B?alignLeft=1&hideTitle=1&transparentBackground=1" title="Pop &amp; Lock — Sell Your Collection" loading="lazy" width="100%" height="1600" frameborder="0" marginheight="0" marginwidth="0" style="width:100%;border:0;border-radius:12px;background:transparent;margin:0;"></iframe>
+<script>
+(function(){
+  var d=document,w="https://tally.so/widgets/embed.js";
+  function loadTally(){if(typeof Tally!=="undefined"){Tally.loadEmbeds();return;}d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc;});}
+  if(typeof Tally!=="undefined"){loadTally();}
+  else if(!d.querySelector('script[src="'+w+'"]')){var s=d.createElement("script");s.src=w;s.async=true;s.onload=loadTally;s.onerror=loadTally;d.body.appendChild(s);}
+})();
+</script>
 </div>
 <style>
 .native-formbox{background:#fff;border:3px solid #171323!important;border-radius:16px!important;padding:clamp(16px,3vw,30px)!important;box-shadow:8px 8px 0 #171323!important}
