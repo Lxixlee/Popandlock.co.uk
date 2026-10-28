@@ -255,6 +255,46 @@ footer{background:#1b1033;border-top:5px solid var(--funky-pink)}
 
 
 
+
+/* LIVE PLATFORM PANELS: oversized, animated, high-impact banners */
+.platforms-section{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(145deg,#fff1f8 0%,#f0edff 48%,#e7ffff 100%)}
+.platforms-section:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.28;background-image:radial-gradient(#7047ff 1.7px,transparent 1.7px);background-size:21px 21px;mask-image:linear-gradient(180deg,black,transparent 92%);pointer-events:none}
+.platforms-section .section-heading h2{font-size:clamp(2.6rem,6vw,5rem);line-height:.92;letter-spacing:-.075em;font-weight:1000;text-shadow:3px 4px 0 #ffb8dd}
+.platforms-section .section-heading .kicker{display:inline-block;background:var(--funky-yellow);color:#21113c;border:2px solid #21113c;padding:5px 10px;box-shadow:3px 3px 0 var(--funky-pink);transform:rotate(-2deg)}
+.platform-banners{gap:22px!important}
+.platform-banner{min-height:230px!important;border:3px solid #21113c!important;border-radius:17px!important;box-shadow:8px 9px 0 #21113c!important;isolation:isolate;transform:rotate(-1deg);overflow:hidden!important}
+.platform-banner:nth-child(2){transform:translateY(17px) rotate(1deg)}
+.platform-banner:nth-child(3){transform:rotate(-.7deg)}
+.platform-banner:before{inset:0!important;opacity:1!important;background-size:240% 240%!important;animation:platform-colour-surge 3.5s ease-in-out infinite alternate!important}
+.platform-whatnot:before{background-image:linear-gradient(125deg,#ff3d9a,#7047ff,#ff3d9a)!important}
+.platform-ebay:before{background-image:linear-gradient(125deg,#ff8a35,#ffe34d,#ff3d9a)!important}
+.platform-tiktok:before{background-image:linear-gradient(125deg,#13cbd0,#7047ff,#ff3d9a)!important}
+.platform-banner:after{background:linear-gradient(90deg,rgba(19,10,43,.88),rgba(19,10,43,.42) 58%,rgba(19,10,43,.08))!important}
+.platform-banner img{opacity:.78!important;mix-blend-mode:screen;transform:scale(1.04);transition:transform .5s cubic-bezier(.16,1.2,.3,1),opacity .3s ease;filter:drop-shadow(0 7px 0 #21113c)}
+.platform-banner-copy strong{font-size:clamp(2rem,4vw,3.6rem)!important;font-weight:1000!important;letter-spacing:-.06em!important;text-shadow:3px 4px 0 #21113c!important}
+.platform-banner-copy small{font-size:14px!important;font-weight:800!important;color:#fff!important}
+.platform-banner-action{font-size:12px!important;font-weight:1000!important;padding:11px 14px!important;background:var(--funky-yellow)!important;color:#21113c!important;border:2px solid #21113c!important;box-shadow:4px 4px 0 #21113c!important;transition:transform .2s ease,box-shadow .2s ease!important}
+.platform-banner:hover{transform:translateY(-9px) rotate(0) scale(1.025)!important;box-shadow:11px 13px 0 var(--funky-pink)!important}
+.platform-banner:nth-child(2):hover{transform:translateY(7px) rotate(0) scale(1.025)!important}
+.platform-banner:hover img{transform:scale(1.18) rotate(-3deg);opacity:1!important}
+.platform-banner:hover .platform-banner-action{transform:translate(-2px,-3px) rotate(-2deg);box-shadow:6px 7px 0 #21113c!important}
+.platform-banner.motion-visible:before{animation:platform-colour-surge 1.2s ease-in-out 2,platform-colour-surge 3.5s ease-in-out 2.4s infinite alternate!important}
+.platform-banner.motion-visible:after{animation:platform-light-sweep .85s ease-out .15s both}
+@keyframes platform-colour-surge{from{background-position:0% 50%;filter:saturate(1)}to{background-position:100% 50%;filter:saturate(1.6)}}
+@keyframes platform-light-sweep{0%{background-position:-180% 0}100%{background-position:180% 0}}
+@media(max-width:760px){
+ .platform-banners{gap:19px!important}
+ .platform-banner,.platform-banner:nth-child(2),.platform-banner:nth-child(3){min-height:190px!important;transform:none!important}
+ .platform-banner-copy strong{font-size:clamp(1.9rem,8vw,2.8rem)!important}
+ .platform-banner-action{padding:9px 11px!important}
+ .platform-banner:hover{transform:translateY(-3px) scale(1.01)!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .platform-banner:before,.platform-banner.motion-visible:before,.platform-banner.motion-visible:after{animation:none!important}
+ .platform-banner img,.platform-banner-action{transition:none!important}
+ .platform-banner,.platform-banner:nth-child(2),.platform-banner:nth-child(3){transform:none!important}
+}
+
 /* HOW IT WORKS: oversized comic-book instruction panels */
 .how-section{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(180deg,#fff5fb 0%,#fff 45%,#f2edff 100%)}
 .how-section:before{content:"";position:absolute;z-index:-1;inset:0;opacity:.24;background-image:radial-gradient(#7047ff 1.6px,transparent 1.6px);background-size:18px 18px;mask-image:linear-gradient(180deg,black,transparent 85%);pointer-events:none}
