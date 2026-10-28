@@ -73,25 +73,5 @@ z-index:5!important;pointer-events:none!important
 </form></div></main>
 <footer><div class="footer-info"><div><h3>Pop &amp; Lock</h3><p>We buy standard, exclusive, rare, vaulted and signed Funko Pops from collectors across the UK.</p></div><div><h3>Collection enquiries</h3><p>Submit your collection details and photographs. We will review your enquiry manually.</p></div><div><h3>Contact</h3><p><a href="mailto:popandlock31@gmail.com">popandlock31@gmail.com</a></p></div></div><nav class="footer-links"><a href="index.html">HOME</a><a href="sell-to-us.html">SELL YOUR COLLECTION</a><a href="contact.html">CONTACT</a><a href="privacy.html">PRIVACY</a></nav><div class="footer-copy">© Pop &amp; Lock</div></footer>
 <script>document.getElementById('photos').addEventListener('change',function(){var files=Array.from(this.files);var total=files.reduce(function(sum,file){return sum+file.size},0);if(files.length>10){alert('Please select no more than 10 images.');this.value='';return}if(total>10*1024*1024){alert('Please keep the total image upload below 10MB.');this.value='';}});</script>
-\n<script>function updateBagCount(){try{const bag=JSON.parse(localStorage.getItem("popandlock-bag")||"[]");const count=bag.reduce((n,x)=>n+Math.max(0,Number(x.qty)||0),0);document.querySelectorAll(".bag-count").forEach(el=>{el.textContent=count;el.style.display=count?"block":"none"});}catch(e){}}document.addEventListener("DOMContentLoaded",updateBagCount);window.addEventListener("storage",updateBagCount);</script><script id="event-nav-loader">
-(function(){
-  try{
-    fetch('events.json?v='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():[]}).then(function(events){
-      var menu=document.querySelector('.menu');
-      if(!menu||!Array.isArray(events))return;
-      var live=Array.from(menu.querySelectorAll('a')).find(function(a){return a.textContent.trim()==='LIVE SHOWS'});
-      if(!live)return;
-      events.filter(function(e){return e&&e.visible===true}).forEach(function(e){
-        if(Array.from(menu.querySelectorAll('a')).some(function(a){return a.getAttribute('href')===(e.link||('event.html?event='+encodeURIComponent(e.id)))}))return;
-        var a=document.createElement('a');
-        a.href=e.link||('event.html?event='+encodeURIComponent(e.id));
-        a.textContent=e.title||e.name||'EVENT';
-        live.insertAdjacentElement('afterend',a);
-        live=a;
-      });
-    }).catch(function(){});
-  }catch(e){}
-})();
-</script><script id="event-navigation">
-(async function(){try{var r=await fetch('events.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;var events=await r.json(),menu=document.querySelector('.menu');if(!menu)return;var live=Array.from(menu.querySelectorAll('a')).find(function(x){return x.textContent.trim().replace(/^(FUNKO )?SHOP$/,'SHOP')==='LIVE SHOWS'});events.filter(function(e){return e&&e.visible===true}).forEach(function(e){if(Array.from(menu.querySelectorAll('a')).some(function(x){return x.textContent.trim()===String(e.title||e.name||'EVENT')}))return;var a=document.createElement('a');a.href=e.link||('event.html?event='+encodeURIComponent(e.id));a.textContent=e.title||e.name||'EVENT';if(live)live.insertAdjacentElement('afterend',a);else menu.appendChild(a)})}catch(e){}})();
-</script></body></html>
+
+</body></html>
