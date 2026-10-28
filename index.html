@@ -97,10 +97,23 @@ footer{background:#111216;color:#fff;padding:28px 24px;text-align:center}.footer
 .platform-banner-action{margin-left:auto;align-self:flex-end;flex-shrink:0;font-size:9px;font-weight:800;letter-spacing:.08em;color:#171717;background:#f0b45f;padding:10px 11px;white-space:nowrap}
 @media(max-width:760px){.platform-banners{grid-template-columns:1fr;gap:12px}.platform-banner{min-height:145px;padding:19px}.platform-banner img{width:48%;height:80%;right:8px;top:0}.platform-banner-copy strong{font-size:22px}.platform-banner-action{font-size:8px;padding:9px 8px}}
 @media(prefers-reduced-motion:reduce){.platform-banner:before{transition:none}}
+
+/* Keep the Find Us Live link visible in the top navigation on mobile. */
+.nav .nav-live{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;font-size:11px;font-weight:800;letter-spacing:.03em}
+@media(max-width:760px){
+  .nav{gap:8px}
+  .nav .nav-live{font-size:8px;letter-spacing:0;padding:8px 5px}
+  .nav .nav-cta{padding:10px 8px;font-size:8px}
+}
+@media(max-width:360px){
+  .nav{gap:5px}
+  .nav .nav-live{font-size:7px;padding:7px 3px}
+  .nav .nav-cta{padding:9px 6px;font-size:7px}
+}
 </style>
 </head>
 <body>
-<header><div class="header-inner"><a class="brand" href="index.html" aria-label="Pop & Lock home"><img src="logo.png?v=4" alt="Pop & Lock logo"><span>POP &amp; LOCK</span></a><nav class="nav" aria-label="Main navigation"><a class="nav-optional" href="#what-we-buy">WHAT WE BUY</a><a class="nav-optional" href="#how-it-works">HOW IT WORKS</a><a class="nav-optional" href="contact.html">CONTACT</a><a class="nav-optional" href="live-shows.html">FIND US LIVE</a><a class="nav-cta" href="sell-to-us.html">SELL YOUR COLLECTION</a></nav></div></header>
+<header><div class="header-inner"><a class="brand" href="index.html" aria-label="Pop & Lock home"><img src="logo.png?v=4" alt="Pop & Lock logo"><span>POP &amp; LOCK</span></a><nav class="nav" aria-label="Main navigation"><a class="nav-optional" href="#what-we-buy">WHAT WE BUY</a><a class="nav-optional" href="#how-it-works">HOW IT WORKS</a><a class="nav-optional" href="contact.html">CONTACT</a><a class="nav-live" href="live-shows.html">FIND US LIVE</a><a class="nav-cta" href="sell-to-us.html">SELL YOUR COLLECTION</a></nav></div></header>
 <main>
 <section class="hero"><div class="hero-inner"><div class="hero-copy"><div class="eyebrow">UK-wide Funko Pop buyers</div><h1>YOUR COLLECTION.<br><span>OUR NEXT FIND.</span></h1><p>Thinking of selling your Funko Pops? From everyday favourites to rare, vaulted and signed grails, we’re interested in collections from across the UK.</p><div class="actions"><a class="button" href="sell-to-us.html">SELL YOUR COLLECTION</a><a class="button secondary" href="#how-it-works">HOW IT WORKS</a></div><div class="hero-proof">Free to enquire · No obligation to accept an offer</div></div><div class="hero-mark"><img src="logo.png?v=4" alt="" aria-hidden="true"></div></div></section>
 <section class="trust"><div class="trust-inner"><div class="trust-item"><b>01</b><div>COLLECTIONS OF ANY SIZE<span>From a few Pops to a full room</span></div></div><div class="trust-item"><b>✦</b><div>SIGNED &amp; RARE FIGURES<span>Vaulted, exclusive and grail pieces</span></div></div><div class="trust-item"><b>UK</b><div>NATIONWIDE BUYING<span>Enquiries welcome across Britain</span></div></div></div></section>
