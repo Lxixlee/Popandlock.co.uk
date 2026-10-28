@@ -171,7 +171,7 @@ footer{margin-top:28px!important;background:var(--pl-ink)!important;border-top:5
 <div class="field"><label for="collection-category">What does your collection include? *</label><select id="collection-category" name="collection_category" required><option value="">Choose a category</option><option>Standard Funko Pops</option><option>Exclusives / limited editions</option><option>Rare / vaulted Pops</option><option>Signed / authenticated Pops</option><option>A mixture of types</option><option>Other collectibles</option></select></div>
 <div class="field"><label for="handover">Preferred handover *</label><select id="handover" name="preferred_handover" required><option value="">Choose an option</option><option>Collection / local handover</option><option>Postage / courier</option><option>Open to either</option></select></div>
 <div class="field"><label for="asking-price">Asking price (£)</label><input id="asking-price" name="asking_price_gbp" type="number" min="0" step="0.01" placeholder="Optional"></div>
-<div class="field full"><label for="photos">Collection photos</label><input id="photos" name="photos" type="file" accept="image/*" multiple><span class="hint">Choose clear JPG, PNG or HEIC images. For best results, select up to 10 photos and keep the total upload below 10 MB. Photo upload availability depends on your Formspree plan.</span></div>
+<div class="field full"><label for="photo-followup">Collection photos</label><p class="hint">Photo attachments are not currently enabled on this form. Submit your enquiry first, then email your collection photos to <a href="mailto:popandlock31@gmail.com?subject=Collection%20photos">popandlock31@gmail.com</a>. Please include the name and email address you used on this form so we can match your photos to your enquiry.</p><input id="photo-followup" name="photos_to_follow" type="hidden" value="I will email collection photos separately."></div>
 <div class="field full"><label for="collection-notes">Additional details</label><textarea id="collection-notes" name="additional_details" maxlength="5000" placeholder="Tell us about rare, vaulted, exclusive or signed Pops, box damage, collection size, or anything else we should know."></textarea></div>
 <div class="field full"><label class="check"><input type="checkbox" name="consent_to_contact" value="Yes" required><span>I agree that Pop &amp; Lock can use these details to review my collection and contact me about this enquiry. *</span></label></div>
 </div>
@@ -206,16 +206,10 @@ footer{margin-top:28px!important;background:var(--pl-ink)!important;border-top:5
  if(!form)return;
  const email=form.querySelector('[name="email"]');
  const replyTo=form.querySelector('[name="_replyto"]');
- const photos=document.getElementById('photos');
  const status=document.getElementById('formStatus');
  const button=document.getElementById('collectionSubmit');
  email.addEventListener('input',function(){replyTo.value=email.value;});
- photos.addEventListener('change',function(){
-   const files=Array.from(photos.files||[]);
-   const total=files.reduce((sum,file)=>sum+file.size,0);
-   if(files.length>10){alert('Please select no more than 10 photos.');photos.value='';return;}
-   if(total>10*1024*1024){alert('Please keep the total photo upload below 10 MB.');photos.value='';}
- });
+
  form.addEventListener('submit',async function(event){
    event.preventDefault();
    status.hidden=true;status.className='form-status';button.disabled=true;button.textContent='SENDING…';
